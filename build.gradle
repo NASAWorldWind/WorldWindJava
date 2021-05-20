@@ -13,19 +13,16 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.artifactory'
 
 group = 'earth.worldwind'
-version = '2.2.0' + (project.hasProperty('snapshot') ? '-SNAPSHOT' : '')
-
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+version = '2.3.0' + (project.hasProperty('snapshot') ? '-SNAPSHOT' : '')
 
 ant {
-    property(file: 'build.properties')
+    property(file: 'release-build.properties')
     property(file: "gdal.${org.gradle.internal.os.OperatingSystem.current().isWindows() ? 'win' : 'unix'}.properties")
 }
 
 ext {
-    joglVersion = '2.3.2'
-    gdalVersion = '2.4.0'
+    joglVersion = '2.4.0-rc-20200202'
+    gdalVersion = '3.3.0'
     jacksonVersion = '1.9.13'
     junitVersion = '4.5'
 }
@@ -37,8 +34,8 @@ repositories {
 }
 
 dependencies {
-    compile "org.jogamp.jogl:jogl-all-main:$project.joglVersion"
-    compile "org.jogamp.gluegen:gluegen-rt-main:$project.joglVersion"
+    compile "com.metsci.ext.org.jogamp.jogl:jogl-all-main:$project.joglVersion"
+    compile "com.metsci.ext.org.jogamp.gluegen:gluegen-rt-main:$project.joglVersion"
     
     if (project.hasProperty('systemGDAL')) {
         compile files("${ant.properties['gdal.jar.dir']}/gdal.jar")

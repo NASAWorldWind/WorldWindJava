@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -769,7 +791,7 @@ public class PointPlacemark extends WWObjectImpl
      * Determines whether the placemark image intersects the view frustum.
      *
      * @param dc the current draw context.
-     * @param opm the ordered placemark to test.
+     * @param opm The placemark to check.
      *
      * @return true if the image intersects the frustum, otherwise false.
      */
@@ -866,7 +888,7 @@ public class PointPlacemark extends WWObjectImpl
      * Draws the path as an ordered renderable.
      *
      * @param dc the current draw context.
-     * @param opm the ordered placemark to draw.
+     * @param opm The object to draw.
      */
     protected void drawOrderedRenderable(DrawContext dc, OrderedPlacemark opm)
     {
@@ -929,14 +951,14 @@ public class PointPlacemark extends WWObjectImpl
     }
 
     /**
-     * Draw this placemark as an ordered renderable. If in picking mode, add it to the picked object list of specified
-     * {@link PickSupport}. The <code>PickSupport</code> may not be the one associated with this instance. During batch
+     * Draw this placemark as an ordered renderable.If in picking mode, add it to the picked object list of specified
+    {@link PickSupport}. The <code>PickSupport</code> may not be the one associated with this instance. During batch
      * picking the <code>PickSupport</code> of the instance initiating the batch picking is used so that all shapes
      * rendered in batch are added to the same pick list.
      *
      * @param dc             the current draw context.
      * @param pickCandidates a pick support holding the picked object list to add this shape to.
-     * @param opm the ordered placemark to draw.
+     * @param opm The placemark to draw.
      */
     protected void doDrawOrderedRenderable(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -977,24 +999,9 @@ public class PointPlacemark extends WWObjectImpl
                     (byte) color.getAlpha());
             }
 
-            // Compute the scale
-            double xscale;
-            Double scale = this.getActiveAttributes().getScale();
-            if (scale != null)
-                xscale = scale * this.activeTexture.getWidth(dc);
-            else
-                xscale = this.activeTexture.getWidth(dc);
-
-            double yscale;
-            if (scale != null)
-                yscale = scale * this.activeTexture.getHeight(dc);
-            else
-                yscale = this.activeTexture.getHeight(dc);
-            double maxwh = Math.max(xscale, yscale);
-
             // The image is drawn using a parallel projection.
             osh.pushProjectionIdentity(gl);
-            gl.glOrtho(0d, dc.getView().getViewport().width, 0d, dc.getView().getViewport().height, -0.6 * maxwh, 0.6 * maxwh);
+            gl.glOrtho(0d, dc.getView().getViewport().width, 0d, dc.getView().getViewport().height, -1d, 1d);
 
             // Apply the depth buffer but don't change it (for screen-space shapes).
             if ((!dc.isDeepPickingEnabled()))
@@ -1015,6 +1022,20 @@ public class PointPlacemark extends WWObjectImpl
             // Translate to screen point and adjust to align hot spot.
             osh.pushModelviewIdentity(gl);
             gl.glTranslated(opm.screenPoint.x + this.dx, opm.screenPoint.y + this.dy, 0);
+
+            // Compute the scale
+            double xscale;
+            Double scale = this.getActiveAttributes().getScale();
+            if (scale != null)
+                xscale = scale * this.activeTexture.getWidth(dc);
+            else
+                xscale = this.activeTexture.getWidth(dc);
+
+            double yscale;
+            if (scale != null)
+                yscale = scale * this.activeTexture.getHeight(dc);
+            else
+                yscale = this.activeTexture.getHeight(dc);
 
             Double heading = getActiveAttributes().getHeading();
             Double pitch = getActiveAttributes().getPitch();
@@ -1134,8 +1155,8 @@ public class PointPlacemark extends WWObjectImpl
      * Draws the placemark's label if a label is specified.
      *
      * @param dc the current draw context.
-     * @param pickCandidates the pick candidates updated if in picking mode.
-     * @param opm the ordered placemark to label.
+     * @param pickCandidates The list of pick candidates.
+     * @param opm The placemark to label.
      */
     protected void drawLabel(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -1221,7 +1242,7 @@ public class PointPlacemark extends WWObjectImpl
      *
      * @param dc             the current draw context.
      * @param pickCandidates the pick support object to use when adding this as a pick candidate.
-     * @param opm            the ordered placemark to draw.
+     * @param opm The placemark to draw the line for.
      */
     protected void drawLine(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -1256,7 +1277,7 @@ public class PointPlacemark extends WWObjectImpl
      *
      * @param dc             the current draw context.
      * @param pickCandidates the pick support object to use when adding this as a pick candidate.
-     * @param opm            the ordered placemark to draw
+     * @param opm The placemark to draw the point for.
      */
     protected void drawPoint(DrawContext dc, PickSupport pickCandidates, OrderedPlacemark opm)
     {
@@ -1313,7 +1334,7 @@ public class PointPlacemark extends WWObjectImpl
      * Determines whether the placemark's optional line should be drawn and whether it intersects the view frustum.
      *
      * @param dc the current draw context.
-     * @param opm the ordered placemark to test.
+     * @param opm The placemark to check.
      *
      * @return true if the line should be drawn and it intersects the view frustum, otherwise false.
      */
@@ -1569,11 +1590,11 @@ public class PointPlacemark extends WWObjectImpl
 
     /**
      * Computes and stores the placemark's Cartesian location, the Cartesian location of the corresponding point on the
-     * terrain (if the altitude mode requires it), and the screen-space projection of the placemark's point. Applies the
+     * terrain (if the altitude mode requires it), and the screen-space projection of the placemark's point.Applies the
      * placemark's altitude mode when computing the points.
      *
      * @param dc the current draw context.
-     * @param opm the ordered placemark to update.
+     * @param opm The placemark to compute the location of.
      */
     protected void computePlacemarkPoints(DrawContext dc, OrderedPlacemark opm)
     {

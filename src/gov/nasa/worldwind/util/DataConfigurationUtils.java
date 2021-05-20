@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -125,9 +147,7 @@ public class DataConfigurationUtils
     /**
      * Returns the specified data configuration document's display name as a string, or null if the document is not one
      * of the recognized types. This determines the display name for each type of data configuration document as
-     * follows: 
-     * <table><caption>Document Types</caption>
-     * <tr><th>Document Type</th><th>Path to Display Name</th></tr> <tr><td>Layer
+     * follows: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Document Type</th><th>Path to Display Name</th></tr> <tr><td>Layer
      * Configuration</td><td>./DisplayName</td></tr> <tr><td>Elevation Model Configuration</td><td>./DisplayName</td></tr>
      * <tr><td>Installed DataDescriptor</td><td>./property[@name="dataSet"]/property[@name="gov.nasa.worldwind.avkey.DatasetNameKey"]</td></tr>
      * <tr><td>WorldWind .NET LayerSet</td><td>./QuadTileSet/Name</td></tr> <tr><td>Other</td><td>null</td></tr>
@@ -171,9 +191,8 @@ public class DataConfigurationUtils
 
     /**
      * Returns the specified data configuration document's type as a string, or null if the document is not one of the
-     * recognized types. This maps data configuration documents to a type string as follows: 
-     * <table><caption>Document Types</caption>
-     * <tr><th>Document Type</th><th>Type String</th></tr> <tr><td>Layer Configuration</td><td>"Layer"</td></tr> <tr><td>Elevation Model
+     * recognized types. This maps data configuration documents to a type string as follows: <table><caption style="font-weight: bold;">Mapping</caption> <tr><th>Document
+     * Type</th><th>Type String</th></tr> <tr><td>Layer Configuration</td><td>"Layer"</td></tr> <tr><td>Elevation Model
      * Configuration</td><td>"Elevation Model"</td></tr> <tr><td>Installed DataDescriptor</td><td>"Layer" or
      * "ElevationModel"</td></tr> <tr><td>WorldWind .NET LayerSet</td><td>"Layer"</td></tr>
      * <tr><td>Other</td><td>null</td></tr> </table>
@@ -463,17 +482,14 @@ public class DataConfigurationUtils
 
     /**
      * Appends WMS layer parameters as elements to a specified context. This appends elements for the following
-     * parameters: 
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> 
-     * <tr><td>{@link AVKey#WMS_VERSION}</td><td>Service/@version</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#LAYER_NAMES}</td><td>Service/LayerNames</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#STYLE_NAMES}</td><td>Service/StyleNames</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#GET_MAP_URL}</td><td>Service/GetMapURL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#GET_CAPABILITIES_URL}</td><td>Service/GetCapabilitiesURL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#SERVICE}</td><td>AVKey#GET_MAP_URL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#DATASET_NAME}</td><td>AVKey.LAYER_NAMES</td><td>String</td></tr> 
-     * </table>
+     * parameters: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
+     * AVKey#WMS_VERSION}</td><td>Service/@version</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#LAYER_NAMES}</td><td>Service/LayerNames</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#STYLE_NAMES}</td><td>Service/StyleNames</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#GET_MAP_URL}</td><td>Service/GetMapURL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#GET_CAPABILITIES_URL}</td><td>Service/GetCapabilitiesURL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#SERVICE}</td><td>AVKey#GET_MAP_URL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#DATASET_NAME}</td><td>AVKey.LAYER_NAMES</td><td>String</td></tr> </table>
      *
      * @param params  the key-value pairs which define the WMS layer configuration parameters.
      * @param context the XML document root on which to append WMS layer configuration elements.
@@ -543,16 +559,13 @@ public class DataConfigurationUtils
 
     /**
      * Appends WCS layer parameters as elements to a specified context. This appends elements for the following
-     * parameters: 
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> 
-     * <tr><td>{@link AVKey#WCS_VERSION}</td><td>Service/@version</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#COVERAGE_IDENTIFIERS}</td><td>Service/coverageIdentifiers</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#GET_COVERAGE_URL}</td><td>Service/GetCoverageURL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#GET_CAPABILITIES_URL}</td><td>Service/GetCapabilitiesURL</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#SERVICE}</td><td>AVKey#GET_COVERAGE_URL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#DATASET_NAME}</td><td>AVKey.COVERAGE_IDENTIFIERS</td><td>String</td></tr> 
-     * </table>
+     * parameters: <table><caption style="font-weight: bold;">Mapping</caption> <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
+     * AVKey#WCS_VERSION}</td><td>Service/@version</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#COVERAGE_IDENTIFIERS}</td><td>Service/coverageIdentifiers</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#GET_COVERAGE_URL}</td><td>Service/GetCoverageURL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#GET_CAPABILITIES_URL}</td><td>Service/GetCapabilitiesURL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#SERVICE}</td><td>AVKey#GET_COVERAGE_URL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#DATASET_NAME}</td><td>AVKey.COVERAGE_IDENTIFIERS</td><td>String</td></tr> </table>
      *
      * @param params  the key-value pairs which define the WMS layer configuration parameters.
      * @param context the XML document root on which to append WMS layer configuration elements.
@@ -622,18 +635,14 @@ public class DataConfigurationUtils
     /**
      * Parses WMS layer parameters from the XML configuration document starting at domElement. This writes output as
      * key-value pairs to params. If a parameter from the XML document already exists in params, that parameter is
-     * ignored. Supported key and parameter names are:
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element
-     * Path</th><th>Type</th></tr> 
-     * <tr><td>{@link AVKey#WMS_VERSION}</td><td>Service/@version</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#LAYER_NAMES}</td><td>Service/LayerNames</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#STYLE_NAMES}</td><td>Service/StyleNames</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#GET_MAP_URL}</td><td>Service/GetMapURL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#GET_CAPABILITIES_URL}</td><td>Service/GetCapabilitiesURL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#SERVICE}</td><td>AVKey#GET_MAP_URL</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#DATASET_NAME}</td><td>AVKey.LAYER_NAMES</td><td>String</td></tr> 
-     * </table>
+     * ignored. Supported key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Parameter</th><th>Element
+     * Path</th><th>Type</th></tr> <tr><td>{@link AVKey#WMS_VERSION}</td><td>Service/@version</td><td>String</td></tr>
+     * <tr><td>{@link AVKey#LAYER_NAMES}</td><td>Service/LayerNames</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#STYLE_NAMES}</td><td>Service/StyleNames</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#GET_MAP_URL}</td><td>Service/GetMapURL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#GET_CAPABILITIES_URL}</td><td>Service/GetCapabilitiesURL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#SERVICE}</td><td>AVKey#GET_MAP_URL</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#DATASET_NAME}</td><td>AVKey.LAYER_NAMES</td><td>String</td></tr> </table>
      *
      * @param domElement the XML document root to parse for WMS layer parameters.
      * @param params     the output key-value pairs which receive the WMS layer parameters. A null reference is
@@ -766,9 +775,8 @@ public class DataConfigurationUtils
                 WMSLayerCapabilities layerCaps = caps.getLayerByName(name);
                 if (layerCaps == null)
                 {
-                    String msg = Logging.getMessage("WMS.LayerNameMissing", name);
-                    Logging.logger().warning(msg);
-                    throw new WWRuntimeException(msg);
+                    Logging.logger().warning(Logging.getMessage("WMS.LayerNameMissing", name));
+                    continue;
                 }
 
                 if (layerCaps.hasCoordinateSystem("EPSG:4326"))
@@ -913,13 +921,6 @@ public class DataConfigurationUtils
         if (coverage == null)
         {
             String message = Logging.getMessage("nullValue.WCSDescribeCoverage");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
-        }
-
-        if (coverage.getCoverageOfferings().size() == 0)
-        {
-            String message = Logging.getMessage("AbsentResourceList.WCSDescribeCoverage");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -1156,11 +1157,6 @@ public class DataConfigurationUtils
 
             String layerName = lNames[i];
             WMSLayerCapabilities layer = caps.getLayerByName(layerName);
-            if (layer == null)
-            {
-                continue; // layer not found
-            }
-
             String layerTitle = layer.getTitle();
             sb.append(layerTitle != null ? layerTitle : layerName);
 
@@ -1244,23 +1240,20 @@ public class DataConfigurationUtils
 
     /**
      * Appends LevelSet configuration parameters as elements to the specified context. This appends elements for the
-     * following parameters: 
-     * <table><caption>Parameters</caption>
-     * <tr><th>Key</th><th>Name</th><th>Path</th></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>DatasetName</td><td>String</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td>DataCacheName</td><td>String</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SERVICE}</td><td>Service/URL</td><td>String</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#EXPIRY_TIME}</td><td>ExpiryTime</td><td>Long</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#EXPIRY_TIME}</td><td>LastUpdate</td><td>Long</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FORMAT_SUFFIX}</td><td>FormatSuffix</td><td>String</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#NUM_LEVELS}</td><td>NumLevels/@count</td><td>Integer</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#NUM_EMPTY_LEVELS}</td><td>NumLevels/@numEmpty</td><td>Integer</td></tr>
+     * following parameters: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Key</th><th>Name</th><td>Path</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>DatasetName</td><td>String</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td>DataCacheName</td><td>String</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#SERVICE}</td><td>Service/URL</td><td>String</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#EXPIRY_TIME}</td><td>ExpiryTime</td><td>Long</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#EXPIRY_TIME}</td><td>LastUpdate</td><td>Long</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#FORMAT_SUFFIX}</td><td>FormatSuffix</td><td>String</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#NUM_LEVELS}</td><td>NumLevels/@count</td><td>Integer</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#NUM_EMPTY_LEVELS}</td><td>NumLevels/@numEmpty</td><td>Integer</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#INACTIVE_LEVELS}</td><td>NumLevels/@inactive</td><td>String</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SECTOR}</td><td>Sector</td><td>{@link gov.nasa.worldwind.geom.Sector}</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SECTOR_RESOLUTION_LIMITS}</td><td>SectorResolutionLimit</td>
-     * <td>{@link LevelSet.SectorResolution}</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#TILE_ORIGIN}</td><td>TileOrigin/LatLon</td><td>{@link gov.nasa.worldwind.geom.LatLon}</td></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#TILE_WIDTH}</td><td>TileSize/Dimension/@width</td><td>Integer</td></tr>
+     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SECTOR}</td><td>Sector</td><td>{@link
+     * gov.nasa.worldwind.geom.Sector}</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SECTOR_RESOLUTION_LIMITS}</td><td>SectorResolutionLimit</td>
+     * <td>{@link LevelSet.SectorResolution}</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#TILE_ORIGIN}</td><td>TileOrigin/LatLon</td><td>{@link
+     * gov.nasa.worldwind.geom.LatLon}</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#TILE_WIDTH}</td><td>TileSize/Dimension/@width</td><td>Integer</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#TILE_HEIGHT}</td><td>TileSize/Dimension/@height</td><td>Integer</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#LEVEL_ZERO_TILE_DELTA}</td><td>LastUpdate</td><td>LatLon</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#MAX_ABSENT_TILE_ATTEMPTS}</td><td>MaxAbsentTileAttempts</td><td>Integer</td></tr>
@@ -1367,7 +1360,7 @@ public class DataConfigurationUtils
     /**
      * Parses LevelSet configuration parameters from the specified DOM document. This writes output as key-value pairs
      * to params. If a parameter from the XML document already exists in params, that parameter is ignored. Supported
-     * key and parameter names are: <table><caption>Parameters</caption>
+     * key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption>
      * <tr><th>Parameter</th><th>Element path</th><th>Type</th></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>DatasetName</td><td>String</td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td>DataCacheName</td><td>String</td></tr> <tr><td>{@link
@@ -1451,9 +1444,9 @@ public class DataConfigurationUtils
     /**
      * Gathers LevelSet configuration parameters from a specified LevelSet reference. This writes output as key-value
      * pairs params. If a parameter from the XML document already exists in params, that parameter is ignored. Supported
-     * key and parameter names are: 
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
+     * key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>First Level's dataset</td><td>String</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td>First Level's
      * cacheName</td><td>String</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SERVICE}</td><td>First Level's
@@ -1970,10 +1963,9 @@ public class DataConfigurationUtils
     /**
      * Parses WorldWind .NET LayerSet configuration parameters from the specified document. This writes output as
      * key-value pairs to params. If a parameter from the LayerSet document already exists in params, that parameter is
-     * ignored. Supported key and parameter names are: 
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> 
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>QuadTileSet/Name<td></td><td>String</td></tr>
+     * ignored. Supported key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Parameter</th><th>Element
+     * Path</th><th>Type</th></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>QuadTileSet/Name<td></td><td>String</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>QuadTileSet/Name<td></td><td>String</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#OPACITY}</td><td>QuadTileSet/Opacity<td></td><td>Double</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SERVICE_NAME}</td><td>"Offline" (string
@@ -1991,8 +1983,7 @@ public class DataConfigurationUtils
      * constant)<td></td><td>Boolean</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#TEXTURE_FORMAT}</td><td>"image/dds"<td></td><td>String</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#USE_MIP_MAPS}</td><td>true (boolean
      * constant)<td></td><td>Boolean</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#USE_TRANSPARENT_TEXTURES}</td><td>true
-     * (boolean constant)<td></td><td>Boolean</td></tr>
-     * </table>
+     * (boolean constant)<td></td><td>Boolean</td></tr> </table>
      *
      * @param domElement the XML document root to parse for LayerSet configuration parameters.
      * @param params     the output key-value pairs which receive the LayerSet configuration parameters. A null

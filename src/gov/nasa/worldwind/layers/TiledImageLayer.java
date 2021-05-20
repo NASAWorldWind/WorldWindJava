@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.layers;
 
@@ -483,7 +505,7 @@ public abstract class TiledImageLayer extends AbstractLayer
     {
         return this.detailHintOrigin + this.getDetailHint();
     }
-    
+
     protected boolean needToSplit(DrawContext dc, Sector sector, Level level)
     {
         // Compute the height in meters of a texel from the specified level. Take care to convert from the radians to
@@ -827,26 +849,25 @@ public abstract class TiledImageLayer extends AbstractLayer
 
     /**
      * Appends TiledImageLayer configuration parameters as elements to the specified context. This appends elements for
-     * the following parameters:
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
-     * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
-     * <tr><td>{@link AVKey#FORCE_LEVEL_ZERO_LOADS}</td><td>ForceLevelZeroLoads</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#RETAIN_LEVEL_ZERO_TILES}</td><td>RetainLevelZeroTiles</td><td>Boolean</td></tr> 
-     * <tr><td>{@link AVKey#TEXTURE_FORMAT}</td><td>TextureFormat</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#USE_MIP_MAPS}</td><td>UseMipMaps</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#USE_TRANSPARENT_TEXTURES}</td><td>UseTransparentTextures</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#URL_CONNECT_TIMEOUT}</td><td>RetrievalTimeouts/ConnectTimeout/Time</td><td>Integer milliseconds</td></tr>
-     * <tr><td>{@link AVKey#URL_READ_TIMEOUT}</td><td>RetrievalTimeouts/ReadTimeout/Time</td><td>Integer milliseconds</td></tr>
-     * <tr><td>{@link AVKey#RETRIEVAL_QUEUE_STALE_REQUEST_LIMIT}</td><td>RetrievalTimeouts/StaleRequestLimit/Time</td><td>Integer milliseconds</td></tr>
-     * </table>
-     * This also writes common layer and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.layers.AbstractLayer#createLayerConfigElements(gov.nasa.worldwind.avlist.AVList,
+     * the following parameters: <table> <caption style="font-weight: bold;">Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
+     * AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
+     * <tr><td>{@link AVKey#FORCE_LEVEL_ZERO_LOADS}</td><td>ForceLevelZeroLoads</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#RETAIN_LEVEL_ZERO_TILES}</td><td>RetainLevelZeroTiles</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#TEXTURE_FORMAT}</td><td>TextureFormat</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#USE_MIP_MAPS}</td><td>UseMipMaps</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#USE_TRANSPARENT_TEXTURES}</td><td>UseTransparentTextures</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#URL_CONNECT_TIMEOUT}</td><td>RetrievalTimeouts/ConnectTimeout/Time</td><td>Integer milliseconds</td></tr>
+     * <tr><td>{@link AVKey#URL_READ_TIMEOUT}</td><td>RetrievalTimeouts/ReadTimeout/Time</td><td>Integer
+     * milliseconds</td></tr> <tr><td>{@link AVKey#RETRIEVAL_QUEUE_STALE_REQUEST_LIMIT}</td>
+     * <td>RetrievalTimeouts/StaleRequestLimit/Time</td><td>Integer milliseconds</td></tr> </table> This also writes
+     * common layer and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.layers.AbstractLayer#createLayerConfigElements(gov.nasa.worldwind.avlist.AVList,
      * org.w3c.dom.Element)} and {@link DataConfigurationUtils#createLevelSetConfigElements(gov.nasa.worldwind.avlist.AVList,
      * org.w3c.dom.Element)}.
      *
-     * @param params the key-value pairs which define the TiledImageLayer configuration parameters.
+     * @param params  the key-value pairs which define the TiledImageLayer configuration parameters.
      * @param context the XML document root on which to append TiledImageLayer configuration elements.
      *
      * @return a reference to context.
@@ -939,32 +960,27 @@ public abstract class TiledImageLayer extends AbstractLayer
     /**
      * Parses TiledImageLayer configuration parameters from the specified DOM document. This writes output as key-value
      * pairs to params. If a parameter from the XML document already exists in params, that parameter is ignored.
-     * Supported key and parameter names are:
-     * <table><caption>Parameters</caption>
+     * Supported key and parameter names are: <table> <caption style="font-weight: bold;">Supported Names</caption>
      * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
-     * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr>
-     * <tr><td>{@link AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String
-     * array</td></tr>
-     * <tr><td>{@link AVKey#FORCE_LEVEL_ZERO_LOADS}</td><td>ForceLevelZeroLoads</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#RETAIN_LEVEL_ZERO_TILES}</td><td>RetainLevelZeroTiles</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#TEXTURE_FORMAT}</td><td>TextureFormat</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#USE_MIP_MAPS}</td><td>UseMipMaps</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#USE_TRANSPARENT_TEXTURES}</td><td>UseTransparentTextures</td><td>Boolean</td></tr>
-     * <tr><td>{@link AVKey#URL_CONNECT_TIMEOUT}</td><td>RetrievalTimeouts/ConnectTimeout/Time</td><td>Integer
-     * milliseconds</td></tr>
+     * <tr><td>{@link AVKey#SERVICE_NAME}</td><td>Service/@serviceName</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#IMAGE_FORMAT}</td><td>ImageFormat</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#AVAILABLE_IMAGE_FORMATS}</td><td>AvailableImageFormats/ImageFormat</td><td>String array</td></tr>
+     * <tr><td>{@link AVKey#FORCE_LEVEL_ZERO_LOADS}</td><td>ForceLevelZeroLoads</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#RETAIN_LEVEL_ZERO_TILES}</td><td>RetainLevelZeroTiles</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#TEXTURE_FORMAT}</td><td>TextureFormat</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#USE_MIP_MAPS}</td><td>UseMipMaps</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#USE_TRANSPARENT_TEXTURES}</td><td>UseTransparentTextures</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#URL_CONNECT_TIMEOUT}</td><td>RetrievalTimeouts/ConnectTimeout/Time</td><td>Integer milliseconds</td></tr>
      * <tr><td>{@link AVKey#URL_READ_TIMEOUT}</td><td>RetrievalTimeouts/ReadTimeout/Time</td><td>Integer
-     * milliseconds</td></tr>
-     * <tr><td>{@link AVKey#RETRIEVAL_QUEUE_STALE_REQUEST_LIMIT}</td><td>RetrievalTimeouts/StaleRequestLimit/Time</td><td>Integer
-     * milliseconds</td></tr>
-     * </table>
-     * This also parses common layer and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.layers.AbstractLayer#getLayerConfigParams(org.w3c.dom.Element,
+     * milliseconds</td></tr> <tr><td>{@link AVKey#RETRIEVAL_QUEUE_STALE_REQUEST_LIMIT}</td>
+     * <td>RetrievalTimeouts/StaleRequestLimit/Time</td><td>Integer milliseconds</td></tr> </table> This also parses
+     * common layer and LevelSet configuration parameters by invoking {@link gov.nasa.worldwind.layers.AbstractLayer#getLayerConfigParams(org.w3c.dom.Element,
      * gov.nasa.worldwind.avlist.AVList)} and {@link gov.nasa.worldwind.util.DataConfigurationUtils#getLevelSetConfigParams(org.w3c.dom.Element,
      * gov.nasa.worldwind.avlist.AVList)}.
      *
      * @param domElement the XML document root to parse for TiledImageLayer configuration parameters.
-     * @param params the output key-value pairs which recieve the TiledImageLayer configuration parameters. A null
-     * reference is permitted.
+     * @param params     the output key-value pairs which recieve the TiledImageLayer configuration parameters. A null
+     *                   reference is permitted.
      *
      * @return a reference to params, or a new AVList if params is null.
      *
@@ -1030,11 +1046,10 @@ public abstract class TiledImageLayer extends AbstractLayer
     /**
      * Parses TiledImageLayer configuration parameters from previous versions of configuration documents. This writes
      * output as key-value pairs to params. If a parameter from the XML document already exists in params, that
-     * parameter is ignored. Supported key and parameter names are:
-     * <table> <caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> 
-     * <tr><td>{@link AVKey#TEXTURE_FORMAT}</td><td>CompressTextures</td><td>"image/dds" if CompressTextures is "true"; null otherwise</td></tr> 
-     * </table>
+     * parameter is ignored. Supported key and parameter names are: <table> <caption style="font-weight: bold;">Supported Names</caption>
+     * <tr><th>Parameter</th><th>Element
+     * Path</th><th>Type</th></tr> <tr><td>{@link AVKey#TEXTURE_FORMAT}</td><td>CompressTextures</td><td>"image/dds" if
+     * CompressTextures is "true"; null otherwise</td></tr> </table>
      *
      * @param domElement the XML document root to parse for legacy TiledImageLayer configuration parameters.
      * @param params     the output key-value pairs which recieve the TiledImageLayer configuration parameters. A null
@@ -1252,9 +1267,9 @@ public abstract class TiledImageLayer extends AbstractLayer
     }
 
     /**
-     * Create an image for the portion of this layer lying within a specified sector. The image is created at a
-     * specified aspect ratio within a canvas of a specified size. This returns the specified image if this layer has no
-     * content in the specified sector.
+     * Create an image for the portion of this layer lying within a specified sector.The image is created at a
+ specified aspect ratio within a canvas of a specified size. This returns the specified image if this layer has no
+ content in the specified sector.
      *
      * @param sector       the sector of interest.
      * @param canvasWidth  the width of the canvas.
@@ -1278,11 +1293,11 @@ public abstract class TiledImageLayer extends AbstractLayer
      * is greater than one, a full-width segment along the top of the canvas is blank. If the aspect ratio is less than
      * one, a full-height segment along the right side of the canvase is blank. If the <code>image</code> argument was
      * non-null, that buffered image is returned.
-     * 
-     * @throws java.lang.Exception if uncaught exception is thrown
+     *
      * @throws IllegalArgumentException if <code>sector</code> is null.
+     * @throws java.lang.Exception Other errors.
      * @see ImageUtil#mergeImage(gov.nasa.worldwind.geom.Sector, gov.nasa.worldwind.geom.Sector, double,
-     * java.awt.image.BufferedImage, java.awt.image.BufferedImage)
+     * java.awt.image.BufferedImage, java.awt.image.BufferedImage)  ;
      */
     public BufferedImage composeImageForSector(Sector sector, int canvasWidth, int canvasHeight, double aspectRatio,
         int levelNumber, String mimeType, boolean abortOnError, BufferedImage image, int timeout) throws Exception

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -93,7 +115,9 @@ import java.util.List;
  *
  * @author dcollins
  * @version $Id: AbstractBrowserBalloon.java 2148 2014-07-14 16:27:49Z tgaskins $
+ * @deprecated 
  */
+@Deprecated
 public abstract class AbstractBrowserBalloon extends AbstractBalloon implements HotSpot, Disposable
 {
 
@@ -352,7 +376,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * Returns a list containing the browser balloon's three default browser controls, configured as follows:
-     * <table><caption>Controls</caption>
+     * <table> <caption style="font-weight: bold;">Controls</caption>
      * <tr><th>Control</th><th>Action</th><th>Offset</th><th>Size</th><th>Image Source</th></tr>
      * <tr><td>Close</td><td><code>AVKey.CLOSE</code></td><td>(30, 25) pixels inset from the balloon's upper right
      * corner</td><td>Image source's native size in pixels (16x16)</td><td>images/browser-close-16x16.gif</td></tr>
@@ -438,7 +462,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Computes and stores the balloon's model-coordinate and screen-coordinate points.
      *
      * @param dc the current draw context.
-     * @param obb the ordered browser balloon.
+     * @param obb The balloon.
      */
     protected abstract void computeBalloonPoints(DrawContext dc, OrderedBrowserBalloon obb);
 
@@ -448,6 +472,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Disposes the balloon's internal <code>{@link gov.nasa.worldwind.util.webview.WebView}</code>. This does nothing
      * if the balloon is already disposed.
      */
+    @Override
     public void dispose()
     {
         this.disposeWebView();
@@ -666,11 +691,8 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Specifies a the object to use when resolving relative resource paths in this browser balloon's HTML content. The
      * <code>resourceResolver</code> may be one of the following:
-     * <ul> 
-     * <li>a <code>{@link gov.nasa.worldwind.util.webview.WebResourceResolver}</code></li> 
-     * <li>a <code>{@link java.net.URL}</code></li> 
-     * <li>a <code>{@link String}</code> containing a valid URL description</li> 
-     * </ul>
+     * <ul> <li>a <code>{@link gov.nasa.worldwind.util.webview.WebResourceResolver}</code></li> <li>a <code>{@link
+     * java.net.URL}</code></li> <li>a <code>{@link String}</code> containing a valid URL description</li> </ul>
      * <p>
      * If the <code>resourceResolver</code> is <code>null</code> or is not one of the recognized types, this browser
      * balloon interprets relative resource paths as unresolved references.
@@ -894,14 +916,14 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     }
 
     /**
-     * Update the balloon's active attributes and points, if that hasn't already been done this frame. This updates the
+     * Update the balloon's active attributes and points, if that hasn't already been done this frame.This updates the
      * balloon's rendering state as follows: <ul> <li>Computes the balloon's active attributes by calling
      * <code>determineActiveAttributes</code> and stores the result in <code>activeAttributes</code>.</li> <li>Computes
      * the balloon's model-coordinate and screen-coordinate points by calling <code>computeBalloonPoints</code>.</li>
      * </ul>
      *
      * @param dc the current draw context.
-     * @param obb the ordered browser balloon to update.
+     * @param obb The balloon to update.
      */
     protected void updateRenderStateIfNeeded(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -981,7 +1003,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Indicates whether this balloon's screen-coordinate geometry must be recomputed as a result of a balloon attribute
      * changing.
      *
-     * @param obb the ordered browser balloon
+     * @param obb The balloon to check.
      * @return <code>true</code> if this balloon's geometry must be recomputed, otherwise <code>false</code>.
      */
     protected boolean mustRegenerateGeometry(OrderedBrowserBalloon obb)
@@ -1002,7 +1024,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Updates the balloon's screen-coordinate geometry in <code>frameInfo</code> according to the current screen
      * bounds, screen offset, and active attributes.
-     * @param obb the ordered browser balloon.
+     * @param obb The balloon to update.
      */
     protected void computeGeometry(OrderedBrowserBalloon obb)
     {
@@ -1029,7 +1051,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     /**
      * Creates the balloon's frame vertex buffer according to the active attributes.
      *
-     * @param obb the ordered browser balloon.
+     * @param obb The balloon.
      * @return a buffer containing the frame's x and y locations.
      */
     protected FloatBuffer createFrameVertices(OrderedBrowserBalloon obb)
@@ -1122,7 +1144,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * Determines whether the balloon intersects the view frustum.
      *
      * @param dc the current draw context.
-     * @param obb the ordered browser balloon.
+     * @param obb The balloon to check.
      *
      * @return <code>true</code> If the balloon intersects the frustum, otherwise <code>false</code>.
      */
@@ -1314,7 +1336,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
     /**
      * Draws this browser balloon's interior geometry in screen-coordinates, with the <code>WebView's</code> texture
-     * representation applied as an OpenGL decal. OpenGL's texture decal mode uses the texture color where the texture's
+     * representation applied as an OpenGL decal.OpenGL's texture decal mode uses the texture color where the texture's
      * alpha is 1, and uses the balloon's background color where it's 0. The texture's internal format must be RGBA to
      * work correctly, and this assumes that the WebView's texture format is RGBA.
      * <p>
@@ -1326,7 +1348,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
      * and does not apply the <code>WebView's</code> texture.
      *
      * @param dc the current draw context.
-     * @param obb the ordered browser balloon.
+     * @param obb The balloon to draw.
      */
     protected void drawFrameInterior(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -1695,10 +1717,10 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
     }
 
     /**
-     * Draw pickable regions for the resize controls. A pickable region is drawn along the frame outline.
+     * Draw pickable regions for the resize controls.A pickable region is drawn along the frame outline.
      *
      * @param dc Draw context.
-     * @param obb the ordered browser balloon.
+     * @param obb The balloon.
      */
     protected void drawResizeControl(DrawContext dc, OrderedBrowserBalloon obb)
     {
@@ -2172,7 +2194,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         if (event instanceof MouseWheelEvent)
         {
             this.webView.sendEvent(
-                new MouseWheelEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiers(),
+                new MouseWheelEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiersEx(),
                     webViewPoint.x, webViewPoint.y, event.getClickCount(), event.isPopupTrigger(),
                     ((MouseWheelEvent) event).getScrollType(), ((MouseWheelEvent) event).getScrollAmount(),
                     ((MouseWheelEvent) event).getWheelRotation()));
@@ -2180,7 +2202,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
         else
         {
             this.webView.sendEvent(
-                new MouseEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiers(),
+                new MouseEvent((Component) event.getSource(), event.getID(), event.getWhen(), event.getModifiersEx(),
                     webViewPoint.x, webViewPoint.y, event.getClickCount(), event.isPopupTrigger(), event.getButton()));
         }
     }

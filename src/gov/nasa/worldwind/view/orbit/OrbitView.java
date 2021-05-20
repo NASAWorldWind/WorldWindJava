@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.view.orbit;
 
@@ -54,7 +76,7 @@ public interface OrbitView extends View
      * Sets the center position of the OrbitView. The center position is used as the point about which the
      * heading and pitch rotate.  It is defined by the intersection of a ray from the eye position through the
      * center of the viewport with the surface of the globe.
-     * @param center the center position.
+     * @param center The desired center position.
      */
     void setCenterPosition(Position center);
 
@@ -68,7 +90,7 @@ public interface OrbitView extends View
     /**
      * Set the zoom value for the OrbitVeiw. The zoom value is the distance between the eye
      * position and the center position.
-     * @param zoom the zoom value.
+     * @param zoom The desired zoom value.
      */
     void setZoom(double zoom);
 
@@ -85,7 +107,7 @@ public interface OrbitView extends View
      * Set the limits for this OrbitView.  OrbitView has state values that augment the state values of a {@link View}.
      * Specifically, zoom and center position.  {@link OrbitViewLimits} enables the limiting of those values in addition
      * the the derived {@link gov.nasa.worldwind.view.BasicViewPropertyLimits} state.
-     * @param limits the limits to set.
+     * @param limits The desired limits.
      */
     void setOrbitViewLimits(OrbitViewLimits limits);
 

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -41,14 +63,14 @@ import java.util.List;
  * renderables during the preRender phase, then draw those surface tiles during the render phase. For example, a
  * renderable can use SurfaceObjectTileBuilder to draw a set of surface renderables as follows:
  * <pre>
- * {@code 
+ * <code>
  * class MyRenderable implements Renderable, PreRenderable
  * {
  *     protected SurfaceObjectTileBuilder tileBuilder = new SurfaceObjectTileBuilder();
  *
  *     public void preRender(DrawContext dc)
  *     {
- *         List<?> surfaceRenderables = Arrays.asList(
+ *         List&lt;?&gt; surfaceRenderables = Arrays.asList(
  *             new SurfaceCircle(LatLon.fromDegrees(0, 100), 10000),
  *             new SurfaceSquare(LatLon.fromDegrees(0, 101), 10000));
  *         this.tileBuilder.buildSurfaceTiles(dc, surfaceRenderables);
@@ -59,7 +81,7 @@ import java.util.List;
  *         dc.getGeographicSurfaceTileRenderer().renderTiles(dc, this.tileBuilder.getTiles(dc));
  *     }
  * }
- * }
+ * </code>
  * </pre>
  *
  * @author dcollins
@@ -201,9 +223,7 @@ public class SurfaceObjectTileBuilder
 
     /**
      * Specifies the surface tile's OpenGL texture format. A value of 0 indicates that the default format should be
-     * used. Otherwise, the texture format may be one of the following: 
-     * <ul> 
-     * <li>GL_ALPHA</li> <li>GL_ALPHA4</li>
+     * used. Otherwise, the texture format may be one of the following: <ul> <li>GL_ALPHA</li> <li>GL_ALPHA4</li>
      * <li>GL_ALPHA8</li> <li>GL_ALPHA12</li> <li>GL_ALPHA16</li> <li>GL_COMPRESSED_ALPHA</li>
      * <li>GL_COMPRESSED_LUMINANCE</li> <li>GL_COMPRESSED_LUMINANCE_ALPHA</li> <li>GL_COMPRESSED_INTENSITY</li>
      * <li>GL_COMPRESSED_RGB</li> <li>GL_COMPRESSED_RGBA</li> <li>GL_DEPTH_COMPONENT</li> <li>GL_DEPTH_COMPONENT16</li>
@@ -624,19 +644,14 @@ public class SurfaceObjectTileBuilder
      * The returned texture's internal format is specified by <code>tilePixelFormat</code>. If
      * <code>tilePixelFormat</code> is zero, this returns a texture with internal format <code>GL_RGBA8</code>.
      * <p>
-     * The returned texture's parameters are configured as follows: 
-     * <table> <caption>Parameters</caption>
-     * <tr><th>Parameter Name</th><th>Value</th></tr> 
-     * <tr><td><code>GL.GL_TEXTURE_MIN_FILTER</code></td><td><code>GL_LINEAR_MIPMAP_LINEAR</code>
+     * The returned texture's parameters are configured as follows: <table> <caption style="font-weight: bold;">Parameters</caption><tr><th>Parameter
+     * Name</th><th>Value</th></tr> <tr><td><code>GL.GL_TEXTURE_MIN_FILTER</code></td><td><code>GL_LINEAR_MIPMAP_LINEAR</code>
      * if <code>useLinearFilter</code> and <code>useMipmaps</code> are both true, <code>GL_LINEAR</code> if
      * <code>useLinearFilter</code> is true and <code>useMipmaps</code> is false, and <code>GL_NEAREST</code> if
-     * <code>useLinearFilter</code> is false.</td></tr> 
-     * <tr><td><code>GL.GL_TEXTURE_MAG_FILTER</code></td><td><code>GL_LINEAR</code>
+     * <code>useLinearFilter</code> is false.</td></tr> <tr><td><code>GL.GL_TEXTURE_MAG_FILTER</code></td><td><code>GL_LINEAR</code>
      * if <code>useLinearFilter</code> is true, <code>GL_NEAREST</code> if <code>useLinearFilter</code> is
-     * false.</td></tr> 
-     * <tr><td><code>GL.GL_TEXTURE_WRAP_S</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr>
-     * <tr><td><code>GL.GL_TEXTURE_WRAP_T</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr>
-     * </table>
+     * false.</td></tr> <tr><td><code>GL.GL_TEXTURE_WRAP_S</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr>
+     * <tr><td><code>GL.GL_TEXTURE_WRAP_T</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr></table>
      *
      * @param dc     the draw context to create a texture for.
      * @param width  the texture's width, in pixels.
@@ -1358,8 +1373,8 @@ public class SurfaceObjectTileBuilder
         }
 
         /**
-         * Returns the tile's size in bytes. Overridden to append the size of the {@link #cacheName} and the {@link
-         * #lastUpdateStateKey} to the superclass' computed size.
+         * Returns the tile's size in bytes. Overridden to append the size of the {@link #lastUpdateStateKey} to the
+         * superclass' computed size.
          *
          * @return The tile's size in bytes.
          */

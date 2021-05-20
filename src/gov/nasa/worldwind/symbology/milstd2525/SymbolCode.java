@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology.milstd2525;
@@ -21,26 +43,15 @@ import gov.nasa.worldwind.util.Logging;
  * field in the code is unrecognized SymbolCode throws an exception and indicates the problematic fields in the
  * exception's message. After parsing, each field can be accessed by calling the appropriate accessor methods (for
  * example: getScheme/setScheme). SymbolCodes supports the following fields:
- * <ul> 
- * <li>Coding Scheme</li> 
- * <li>Standard Identity</li> 
- * <li>Battle Dimension</li> 
- * <li>Category</li> 
- * <li>Function ID</li> 
- * <li>Symbol Modifier</li> 
- * <li>Echelon</li> 
- * <li>Status</li> 
- * <li>Country Code</li> 
- * <li>Order of Battle</li>
+ * <ul> <li>Coding Scheme</li> <li>Standard Identity</li> <li>Battle Dimension</li> <li>Category</li> <li>Function
+ * ID</li> <li>Symbol Modifier</li> <li>Echelon</li> <li>Status</li> <li>Country Code</li> <li>Order of Battle</li>
  * </ul>
  * <p>
  * Which fields are populated after parsing a symbol code depends on the MIL-STD-2525 symbology set the symbol code
  * belongs to:
- * <table border="1"><caption>Symbol Codes</caption> 
- * <tr><th>Symbology Set</th><th>Coding Scheme</th><th>Standard Identity</th><th>Battle
+ * <table border="1"> <caption style="font-weight: bold;">Populated Fields</caption><tr><th>Symbology Set</th><th>Coding Scheme</th><th>Standard Identity</th><th>Battle
  * Dimension</th><th>Category</th><th>Status</th><th>Function ID</th><th>Symbol Modifier</th><th>Echelon</th><th>Country
- * Code</th><th>Order of Battle</th></tr> 
- * <tr><td>Warfighting</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td></tr>
+ * Code</th><th>Order of Battle</th></tr> <tr><td>Warfighting</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td></tr>
  * <tr><td>Tactical Graphics</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td></tr>
  * <tr><td>Signals Intelligence</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>NO</td><td>NO</td><td>YES</td><td>YES</td></tr>
  * <tr><td>Stability Operations</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td><td>YES</td><td>YES</td><td>NO</td><td>YES</td><td>YES</td></tr>
@@ -116,14 +127,8 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Coding Scheme field.  A symbol code's Coding Scheme defines the specific
      * MIL-STD-2525 symbology set that it belongs to. The value must be <code>null</code> or one of the following:
-     * <ul> 
-     * <li>SCHEME_WARFIGHTING</li> 
-     * <li>SCHEME_TACTICAL_GRAPHICS</li> 
-     * <li>SCHEME_METOC</li>
-     * <li>SCHEME_INTELLIGENCE</li> 
-     * <li>SCHEME_STABILITY_OPERATIONS</li> 
-     * <li>SCHEME_EMERGENCY_MANAGEMENT</li> 
-     * </ul>
+     * <ul> <li>SCHEME_WARFIGHTING</li> <li>SCHEME_TACTICAL_GRAPHICS</li> <li>SCHEME_METOC</li>
+     * <li>SCHEME_INTELLIGENCE</li> <li>SCHEME_STABILITY_OPERATIONS</li> <li>SCHEME_EMERGENCY_MANAGEMENT</li> </ul>
      *
      * @param value the new value for the Coding Scheme field. May be <code>null</code>.
      */
@@ -147,14 +152,12 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Standard Identity field. A symbol code's Standard Identity defines the threat posed
      * by the object being represented. The value must be <code>null</code> or one of the following:
-     * <ul> 
-     * <li>STANDARD_IDENTITY_PENDING</li> <li>STANDARD_IDENTITY_UNKNOWN</li> <li>STANDARD_IDENTITY_ASSUMED_FRIEND</li>
+     * <ul> <li>STANDARD_IDENTITY_PENDING</li> <li>STANDARD_IDENTITY_UNKNOWN</li> <li>STANDARD_IDENTITY_ASSUMED_FRIEND</li>
      * <li>STANDARD_IDENTITY_FRIEND</li> <li>STANDARD_IDENTITY_NEUTRAL</li> <li>STANDARD_IDENTITY_SUSPECT</li>
      * <li>STANDARD_IDENTITY_HOSTILE</li> <li>STANDARD_IDENTITY_EXERCISE_PENDING</li>
      * <li>STANDARD_IDENTITY_EXERCISE_UNKNOWN</li> <li>STANDARD_IDENTITY_EXERCISE_ASSUMED_FRIEND</li>
      * <li>STANDARD_IDENTITY_EXERCISE_FRIEND</li> <li>STANDARD_IDENTITY_EXERCISE_NEUTRAL</li>
-     * <li>STANDARD_IDENTITY_JOKER</li> <li>STANDARD_IDENTITY_FAKER</li> 
-     * </ul>
+     * <li>STANDARD_IDENTITY_JOKER</li> <li>STANDARD_IDENTITY_FAKER</li> </ul>
      *
      * @param value the new value for the Standard Identity field. May be <code>null</code>.
      */
@@ -178,11 +181,9 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Battle Dimension field. A symbol code's Battle Dimension defines the primary mission
      * area for the object being represented. The value must be <code>null</code> or one of the following:
-     * <ul> 
-     * <li>BATTLE_DIMENSION_SPACE</li> <li>BATTLE_DIMENSION_AIR</li> <li>BATTLE_DIMENSION_GROUND</li>
+     * <ul> <li>BATTLE_DIMENSION_SPACE</li> <li>BATTLE_DIMENSION_AIR</li> <li>BATTLE_DIMENSION_GROUND</li>
      * <li>BATTLE_DIMENSION_SEA_SURFACE</li> <li>BATTLE_DIMENSION_SEA_SUBSURFACE</li> <li>BATTLE_DIMENSION_SOF</li>
-     * <li>BATTLE_DIMENSION_OTHER</li> 
-     * </ul>
+     * <li>BATTLE_DIMENSION_OTHER</li> </ul>
      *
      * @param value the new value for the Battle Dimension field. May be <code>null</code>.
      */
@@ -208,24 +209,18 @@ public class SymbolCode extends AVListImpl
      * depend on the specific MIL-STD-2525 symbology scheme the symbol code belongs to:
      * <p>
      * <strong>Tactical Graphics</strong>
-     * <ul> 
-     * <li>CATEGORY_TASKS</li> <li>CATEGORY_COMMAND_CONTROL_GENERAL_MANEUVER</li>
+     * <ul> <li>CATEGORY_TASKS</li> <li>CATEGORY_COMMAND_CONTROL_GENERAL_MANEUVER</li>
      * <li>CATEGORY_MOBILITY_SURVIVABILITY</li> <li>CATEGORY_FIRE_SUPPORT</li> <li>CATEGORY_COMBAT_SERVICE_SUPPORT</li>
-     * <li>CATEGORY_OTHER</li> 
-     * </ul>
+     * <li>CATEGORY_OTHER</li> </ul>
      * <p>
      * <strong>Stability Operations</strong>
-     * <ul> 
-     * <li>CATEGORY_VIOLENT_ACTIVITIES</li> <li>CATEGORY_LOCATIONS</li> <li>CATEGORY_OPERATIONS</li>
+     * <ul> <li>CATEGORY_VIOLENT_ACTIVITIES</li> <li>CATEGORY_LOCATIONS</li> <li>CATEGORY_OPERATIONS</li>
      * <li>CATEGORY_ITEMS</li> <li>CATEGORY_INDIVIDUAL</li> <li>CATEGORY_NONMILITARY_GROUP_ORGANIZATION</li>
-     * <li>CATEGORY_RAPE</li> 
-     * </ul>
+     * <li>CATEGORY_RAPE</li> </ul>
      * <p>
      * <strong>Emergency Management</strong>
-     * <ul> 
-     * <li>CATEGORY_INCIDENT</li> <li>CATEGORY_NATURAL_EVENTS</li> <li>CATEGORY_OPERATIONS</li>
-     * <li>CATEGORY_INFRASTRUCTURE</li> 
-     * </ul>
+     * <ul> <li>CATEGORY_INCIDENT</li> <li>CATEGORY_NATURAL_EVENTS</li> <li>CATEGORY_OPERATIONS</li>
+     * <li>CATEGORY_INFRASTRUCTURE</li> </ul>
      *
      * @param value the new value for the Category field. May be <code>null</code>.
      */
@@ -253,20 +248,14 @@ public class SymbolCode extends AVListImpl
      * specific MIL-STD-2525 symbology scheme the symbol code belongs to:
      * <p>
      * <strong>Warfighting, Signals Intelligence, Stability Operations</strong>
-     * <ul> 
-     * <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> <li>STATUS_PRESENT_FULLY_CAPABLE</li>
-     * <li>STATUS_PRESENT_DAMAGED</li> <li>STATUS_PRESENT_DESTROYED</li> <li>STATUS_PRESENT_FULL_TO_CAPACITY</li> 
-     * </ul>
+     * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> <li>STATUS_PRESENT_FULLY_CAPABLE</li>
+     * <li>STATUS_PRESENT_DAMAGED</li> <li>STATUS_PRESENT_DESTROYED</li> <li>STATUS_PRESENT_FULL_TO_CAPACITY</li> </ul>
      * <p>
      * <strong>Tactical Graphics</strong>
-     * <ul> 
-     * <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> 
-     * </ul>
+     * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
      * <p>
      * <strong>Emergency Management</strong>
-     * <ul> 
-     * <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> 
-     * </ul>
+     * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field. May be <code>null</code>.
      */
@@ -290,14 +279,11 @@ public class SymbolCode extends AVListImpl
     /**
      * Specifies this symbol code's Function ID field. The Function IDs are unique to each symbology schemes that uses
      * them, and are defined in each appendix of the MIL-STD-2525C specification:
-     * <ul> 
-     * <li>Warfighting - section A.5.2.1.e (page 51) and table A-I (page 51)</li> 
-     * <li>Tactical Graphics - section B.5.2.1.e (page 304) and table B-I (page 305)</li> 
-     * <li>Meteorological and Oceanographic - section C.5.2.1.d (page 763) and table C-I (page 763)</li> 
-     * <li>Signals Intelligence - section D.5.2.1.e (page 964) and table D-I (page 964)</li> 
-     * <li>Stability Operations - section E.5.2.1.e (page 991) and table E-I (page 991)</li> 
-     * <li>Emergency Management - table G-I (page 1032)</li> 
-     * </ul>
+     * <ul> <li>Warfighting - section A.5.2.1.e (page 51) and table A-I (page 51)</li> <li>Tactical Graphics - section
+     * B.5.2.1.e (page 304) and table B-I (page 305)</li> <li>Meteorological and Oceanographic - section C.5.2.1.d (page
+     * 763) and table C-I (page 763)</li> <li>Signals Intelligence - section D.5.2.1.e (page 964) and table D-I (page
+     * 964)</li> <li>Stability Operations - section E.5.2.1.e (page 991) and table E-I (page 991)</li> <li>Emergency
+     * Management - table G-I (page 1032)</li> </ul>
      *
      * @param value the new value for the Function ID field. May be <code>null</code>.
      */
@@ -324,11 +310,9 @@ public class SymbolCode extends AVListImpl
      * installation, equipment mobility, and auxiliary equipment. The recognized values depend on the specific
      * MIL-STD-2525 symbology scheme the symbol code belongs to, and are defined in each appendix of the MIL-STD-2525C
      * specification:
-     * <ul> 
-     * <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> 
-     * <li>Stability Operations - section E.5.2.1.f (page 991) and table E-II (pages 992-994)</li> 
-     * <li>Emergency Management - section G.5.5 (page 1029) and table EG-II (page 1032)</li> 
-     * </ul>
+     * <ul> <li>Warfighting - section A.5.2.1.f (page 51) and table A-II (pages 52-54)</li> <li>Stability Operations -
+     * section E.5.2.1.f (page 991) and table E-II (pages 992-994)</li> <li>Emergency Management - section G.5.5 (page
+     * 1029) and table EG-II (page 1032)</li> </ul>
      *
      * @param value the new value for the Symbol Modifier field. May be <code>null</code>.
      */
@@ -356,6 +340,7 @@ public class SymbolCode extends AVListImpl
      * <li>ECHELON_PLATOON_DETACHMENT</li> <li>ECHELON_COMPANY_BATTERY_TROOP</li> <li>ECHELON_BATTALION_SQUADRON</li>
      * <li>ECHELON_REGIMENT_GROUP</li> <li>ECHELON_BRIGADE</li> <li>ECHELON_DIVISION</li> <li>ECHELON_CORPS</li>
      * <li>ECHELON_ARMY</li> <li>ECHELON_ARMY_GROUP_FRONT</li> <li>ECHELON_REGION</li> <li>ECHELON_COMMAND</li> </ul>
+     * <p>
      *
      * @param value the new value for the Echelon field. May be <code>null</code>.
      */
@@ -512,23 +497,15 @@ public class SymbolCode extends AVListImpl
      * schemes: echelon, headquarters, task force, feint/dummy, installation, equipment mobility, and auxiliary
      * equipment. This adds modifier keys only for those modifiers present in the SymbolModifier field. Any modifiers
      * not in the SymbolModifier field are ignored. The following key-value pairs are used to indicate each modifier:
-     * <table border="1"><caption>Modifiers</caption>
-     * <tr><th>Modifier</th><th>Key</th><th>Value</th></tr> 
-     * <tr><td>Echelon</td><td>SymbologyConstants.ECHELON</td><td>See
-     * {@link SymbologyConstants#ECHELON}</td></tr> 
-     * <tr><td>Headquarters</td><td>SymbologyConstants.HEADQUARTERS</td><td>Boolean.TRUE
-     * or <code>null</code></td></tr> 
-     * <tr><td>Task Force</td><td>SymbologyConstants.TASK_FORCE</td><td>Boolean.TRUE or
-     * <code>null</code></td></tr> 
-     * <tr><td>Feint/Dummy</td><td>SymbologyConstants.FEINT_DUMMY</td><td>Boolean.TRUE or
-     * <code>null</code></td></tr> 
-     * <tr><td>Installation</td><td>SymbologyConstants.INSTALLATION</td><td>See {@link
-     * SymbologyConstants#INSTALLATION}</td></tr> 
-     * <tr><td>Equipment Mobility</td><td>SymbologyConstants.MOBILITY</td><td>See
-     * {@link SymbologyConstants#MOBILITY}</td></tr> 
-     * <tr><td>Auxiliary Equipment</td><td>SymbologyConstants.AUXILIARY_EQUIPMENT</td><td>See
-     * {@link SymbologyConstants#AUXILIARY_EQUIPMENT}</td></tr> 
-     * </table>
+     * <table border="1"> <caption style="font-weight: bold;">Key Value Pairs</caption> 
+     * <tr><th>Modifier</th><th>Key</th><th>Value</th></tr> <tr><td>Echelon</td><td>SymbologyConstants.ECHELON</td><td>See
+     * {@link SymbologyConstants#ECHELON}</td></tr> <tr><td>Headquarters</td><td>SymbologyConstants.HEADQUARTERS</td><td>Boolean.TRUE
+     * or <code>null</code></td></tr> <tr><td>Task Force</td><td>SymbologyConstants.TASK_FORCE</td><td>Boolean.TRUE or
+     * <code>null</code></td></tr> <tr><td>Feint/Dummy</td><td>SymbologyConstants.FEINT_DUMMY</td><td>Boolean.TRUE or
+     * <code>null</code></td></tr> <tr><td>Installation</td><td>SymbologyConstants.INSTALLATION</td><td>See {@link
+     * SymbologyConstants#INSTALLATION}</td></tr> <tr><td>Equipment Mobility</td><td>SymbologyConstants.MOBILITY</td><td>See
+     * {@link SymbologyConstants#MOBILITY}</td></tr> <tr><td>Auxiliary Equipment</td><td>SymbologyConstants.AUXILIARY_EQUIPMENT</td><td>See
+     * {@link SymbologyConstants#AUXILIARY_EQUIPMENT}</td></tr> </table>
      * <p>
      * Note that the installation modifier code indicates that an installation is either a normal installation or a
      * feint/dummy installation. In the latter case, this also sets the modifier key SymbologyConstants.FEINT_DUMMY to

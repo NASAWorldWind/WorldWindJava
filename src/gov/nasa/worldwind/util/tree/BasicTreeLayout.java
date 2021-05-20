@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util.tree;
@@ -1747,13 +1769,12 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      * Toggles the selection state of the specified <code>node</code>. In order to provide an intuitive tree selection
      * model to the application, this changes the selection state of the <code>node</code>'s ancestors and descendants
      * as follows:
-     * <ul>
-     * <li>The branch beneath the node it also set to the node's new selection state. Toggling an interior node's
-     * selection state causes that entire branch to toggle.</li>
-     * <li>The node's ancestors are set to match the node's new selection state. If the new state is <code>false</code>,
-     * this stops at the first ancestor with another branch that has a selected node. When an interior or leaf node is
-     * toggled, the path to that node is also toggled, except when doing so would clear a selected path to another
-     * interior or leaf node.</li> </ul>
+     * <ul> <li>The branch beneath the node it also set to the node's new selection state. Toggling an interior node's
+     * selection state causes that entire branch to toggle.</li> <li>The node's ancestors are set to match the node's
+     * new selection state. If the new state is <code>false</code>, this stops at the first ancestor with another branch
+     * that has a selected node. When an interior or leaf node is toggled, the path to that node is also toggled, except
+     * when doing so would clear a selected path to another interior or leaf node.</li> </ul>
+     * <p>
      *
      * @param node the <code>TreeNode</code> who's selection state should be toggled.
      */

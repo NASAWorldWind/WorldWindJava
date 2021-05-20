@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.shapebuilder;
@@ -1664,8 +1686,8 @@ public class RigidShapeBuilder extends ApplicationTemplate
                             String[] name = file.getName().split("-");
                             try
                             {
-                                Class c = Class.forName(name[0]);
-                                AbstractShape newShape = (AbstractShape) c.newInstance();
+                                Class<?> c = Class.forName(name[0]);
+                                AbstractShape newShape = (AbstractShape) c.getConstructor().newInstance();
                                 BufferedReader input = new BufferedReader(new FileReader(file));
                                 String s = input.readLine();
                                 newShape.restoreState(s);
@@ -1841,14 +1863,14 @@ public class RigidShapeBuilder extends ApplicationTemplate
             {
                 JMenuItem item = new JMenuItem("Open...");
                 item.setAccelerator(KeyStroke.getKeyStroke(
-                    KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 item.setActionCommand(OPEN);
                 item.addActionListener(controller);
                 menu.add(item);
 
                 item = new JMenuItem("Save...");
                 item.setAccelerator(KeyStroke.getKeyStroke(
-                    KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 item.setActionCommand(SAVE);
                 item.addActionListener(controller);
                 menu.add(item);
@@ -1878,7 +1900,7 @@ public class RigidShapeBuilder extends ApplicationTemplate
                 {
                     JMenuItem item = new JMenuItem(mode.getMode());
                     item.setAccelerator(KeyStroke.getKeyStroke(mode.getShortcut(),
-                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                     item.addActionListener(new ActionListener()
                     {
                         public void actionPerformed(ActionEvent e)
@@ -1914,7 +1936,7 @@ public class RigidShapeBuilder extends ApplicationTemplate
             {
                 JMenuItem item = new JMenuItem("Deselect");
                 item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
                 item.setActionCommand(CLEAR_SELECTION);
                 item.addActionListener(controller);
                 menu.add(item);

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.geom;
@@ -18,6 +40,32 @@ import java.util.*;
  * <code>Box</code> is defined by three orthogonal axes and two positions along each of those axes. Each of the
  * positions specifies the location of a box side along the respective axis. The three axes are named by convention "R",
  * "S" and "T", and are ordered by decreasing length -- R is the longest axis, followed by S and then T.
+ * <p>
+ * The static class field, <code>ProjectionHullTable</code>, defines a table of all possible vertex combinations
+ * representing a <code>Box's</code> 2D convex hull in screen coordinates. The index to this table is a 6-bit code,
+ * where each bit denotes whether one of the <code>Box's</code> six planes faces the <code>View</code>. This code is
+ * organized as follows:
+ * <table border='1'> <caption style="font-weight: bold;">Bit Mapping</caption>
+ * <tr><td><strong>Bit</strong></td><td >5</td><td>4</td><td >3</td><td >2</td><td >1</td><td >0</td></tr>
+ * <tr><td><strong>Code</strong></td><td >left</td><td>right</td><td >back</td><td
+ * >front</td><td>bottom</td><td>top</td></tr>
+ * </table>
+ * <p>
+ * Since at most three of a <code>Box's</code> planes can be visible at one time, there are a total of 26 unique vertex
+ * combinations that define a <code>Box's</code> 2D convex hull in the viewport. Index codes that represent a valid
+ * combination of planes facing the <code>View</code> result in an array of 4 or 6 integers (depending on whether one,
+ * two or three planes face the <code>View</code>), where each element in the array is an index for one of the
+ * <code>Box's</code> eight vertices as follows:
+ * <table border='1'> <caption style="font-weight: bold;">Index Mapping</caption>
+ * <tr><td><strong>Index</strong></td><td>0</td>
+ * <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+ * <tr><td><strong>Vertex</strong></td><td>bottom-lower-left</td><td>bottom-lower-right</td>
+ * <td>bottom-upper-right</td><td>bottom-upper-left</td><td>top-lower-left</td><td>top-lower-right</td>
+ * <td>top-upper-right</td><td>top-upper-left</td></tr>
+ * </table>
+ * <p>
+ * The vertices are organized so that they appear in counter-clockwise order on the screen. Index codes that represent
+ * an invalid combination of planes facing the <code>View</code> map to <code>null</code>.
  *
  * @author tag
  * @version $Id: Box.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -25,63 +73,6 @@ import java.util.*;
 public class Box implements Extent, Renderable
 {
     /**
-     * <code>ProjectionHullTable</code> defines a table of all possible vertex combinations representing a
-     * <code>Box's</code> 2D convex hull in screen coordinates. The index to this table is a 6-bit code, where each bit
-     * denotes whether one of the <code>Box's</code> six planes faces the <code>View</code>. This code is organized as
-     * follows:
-     * <table> <caption>Codes</caption>
-     * <tr>
-     * <td><strong>Bit</strong></td>
-     * <td style="text-align:center;">5</td>
-     * <td style="text-align:center;">4</td>
-     * <td style="text-align:center;">3</td>
-     * <td style="text-align:center;">2</td>
-     * <td style="text-align:center;">1</td>
-     * <td style="text-align:center;">0</td>
-     * </tr>
-     * <tr style="text-align:center;">
-     * <td style="text-align:left;"><strong>Code</strong></td>
-     * <td style="text-align:center;">left</td>
-     * <td style="text-align:center;">right</td>
-     * <td style="text-align:center;">back</td>
-     * <td style="text-align:center;">front</td>
-     * <td style="text-align:center;">bottom</td>
-     * <td style="text-align:center;">top</td>
-     * </tr>
-     * </table>
-     * <p>
-     * Since at most three of a <code>Box's</code> planes can be visible at one time, there are a total of 26 unique
-     * vertex combinations that define a <code>Box's</code> 2D convex hull in the viewport. Index codes that represent a
-     * valid combination of planes facing the <code>View</code> result in an array of 4 or 6 integers (depending on
-     * whether one, two or three planes face the <code>View</code>), where each element in the array is an index for one
-     * of the <code>Box's</code> eight vertices as follows:
-     * <table> <caption>Vertices</caption>
-     * <tr style="text-align:center;">
-     * <td style="text-align:left;"><strong>Index</strong></td>
-     * <td style="text-align:center;">0</td>
-     * <td style="text-align:center;">1</td>
-     * <td style="text-align:center;">2</td>
-     * <td style="text-align:center;">3</td>
-     * <td style="text-align:center;">4</td>
-     * <td style="text-align:center;">5</td>
-     * <td style="text-align:center;">6</td>
-     * <td style="text-align:center;">7</td>
-     * </tr>
-     * <tr style="text-align:center;">
-     * <td style="text-align:left;"><strong>Vertex</strong></td>
-     * <td style="text-align:center;">bottom-lower-left</td>
-     * <td style="text-align:center;">bottom-lower-right</td>
-     * <td style="text-align:center;">bottom-upper-right</td>
-     * <td style="text-align:center;">bottom-upper-left</td>
-     * <td style="text-align:center;">top-lower-left</td>
-     * <td style="text-align:center;">top-lower-right</td>
-     * <td style="text-align:center;">top-upper-right</td>
-     * <td style="text-align:center;">top-upper-left</td>
-     * </tr>
-     * </table>
-     * <p>
-     * The vertices are organized so that they appear in counter-clockwise order on the screen. Index codes that
-     * represent an invalid combination of planes facing the <code>View</code> map to <code>null</code>.
      */
     protected static final int[][] ProjectionHullTable = new int[][]
         {

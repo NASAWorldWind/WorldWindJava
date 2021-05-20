@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -21,7 +43,7 @@ import java.util.regex.*;
  * (MLTR) handles wrapping, measuring and drawing of multiline text strings using Sun's JOGL {@link TextRenderer}. </p>
  * <p> A multiline text string is a character string containing new line characters in between lines. </p> <p> MLTR can
  * handle both regular text with new line separators and a very minimal implementation of HTML. Each type of text has
- * its own methods though. </p> <p><b>Usage:</b></p> <p>Instantiation:</p> <p> The MLTR needs a Font or a
+ * its own methods though. </p>  <p><b>Usage:</b></p>  <p>Instantiation:</p> <p> The MLTR needs a Font or a
  * TextRenderer to be instantiated. This will be the font used for text drawing, wrapping and measuring. For HTML
  * methods this font will be considered as the document default font. </p>
  * <pre>
@@ -33,14 +55,13 @@ import java.util.regex.*;
  * TextRenderer tr = new TextRenderer(Font.decode("Arial-PLAIN-10"));
  * MultiLineTextRenderer mltr = new MultiLineTextRenderer(tr);
  * </pre>
- * <p>Drawing regular text:</p>
+ *  <p>Drawing regular text:</p>
  * <pre>
  * String text = "Line one.\nLine two.\nLine three...";
  * int x = 10;             // Upper left corner of text rectangle.
  * int y = 200;            // Origin at bottom left of screen.
  * int lineHeight = 14;    // Line height in pixels.
  * Color color = Color.RED;
- * 
  * mltr.setTextColor(color);
  * mltr.getTextRenderer().begin3DRendering();
  * mltr.draw(text, x, y, lineHeight);
@@ -53,7 +74,6 @@ import java.util.regex.*;
  * <pre>
  * // Fit inside 300 pixels, no height constraint
  * String wrappedText = mltr.wrap(text, new Dimension(300, 0));
- * 
  * // Fit inside 300x400 pixels, text may be truncated
  * String wrappedText = mltr.wrap(text, new Dimension(300, 400));
  * </pre>
@@ -64,11 +84,10 @@ import java.util.regex.*;
  * <p> The textBounds rectangle returned contains the width and height of the text as it would be drawn with the current
  * font. </p> <p> Note that textBounds.minX is the number of lines found and textBounds.minY is the maximum line height
  * for the font used. This value can be safely used as the lineHeight argument when drawing - or can even be ommited
- * after a getBounds: draw(text, x, y); ... </p> <p><b>HTML support</b></p> <p> Supported tags are: <ul>
+ * after a getBounds: draw(text, x, y); ... </p>  <p><b>HTML support</b></p> <p> Supported tags are: <ul>
  * <li>&lt;p&gt;&lt;/p&gt;, &lt;br&gt; &lt;br /&gt;</li> <li>&lt;b&gt;&lt;/b&gt;</li> <li>&lt;i&gt;&lt;/i&gt;</li>
- * <li>&lt;a href="..."&gt;&lt;/a&gt;</li> <li>&lt;font color="#ffffff"&gt;&lt;/font&gt;</li> </ul> 
- * ... 
- * <p> See {@link AbstractAnnotation}.drawAnnotation() for more usage details. </p>
+ * <li>&lt;a href="..."&gt;&lt;/a&gt;</li> <li>&lt;font color="#ffffff"&gt;&lt;/font&gt;</li> </ul> ... 
+ *  <p> See {@link AbstractAnnotation}.drawAnnotation() for more usage details. </p>
  *
  * @author Patrick Murris
  * @version $Id: MultiLineTextRenderer.java 2053 2014-06-10 20:16:57Z tgaskins $

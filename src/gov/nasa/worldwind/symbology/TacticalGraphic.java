@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology;
@@ -15,31 +37,32 @@ import gov.nasa.worldwind.util.UnitsFormat;
 /**
  * TacticalGraphic provides a common interface for displaying a graphic from a symbology set. A graphic can be an icon
  * that is drawn a geographic position, a vector graphic that is positioned using one or more control points, or a line
- * or polygon that is styled according to the symbol set's specification. See the TacticalGraphic <a href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/"
- * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
+ * or polygon that is styled according to the symbol set's specification. See the TacticalGraphic 
+ * <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a> 
+ * for instructions on using TacticalGraphic in an application.
  * <p>
- * See the {@link gov.nasa.worldwindx.examples.symbology.Symbology} and
- * {@link gov.nasa.worldwindx.examples.symbology.TacticalGraphics} example applications for examples of how to use
- * tactical graphics.
+ * See the {@link gov.nasa.worldwindx.examples.symbology.Symbology} and {@link gov.nasa.worldwindx.examples.symbology.TacticalGraphics}
+ * example applications for examples of how to use tactical graphics.
  * <h1>Construction</h1>
+ * <p>
  * TacticalGraphics are typically created by an instance of {@link TacticalGraphicFactory}. Each graphic within a symbol
  * set is identified by a string identifier. The format of this identifier depends on the symbol set. For example, a
  * MIL-STD-2525 Symbol Identification Code (SIDC) is a string of 15 characters.
  * <p>
- * You will need to instantiate the appropriate factory for the symbol set that you intend to use. For example, {@link
+ * You will need to instantiate the appropriate factory for the symbol set that you intend to use.  For example, {@link
  * gov.nasa.worldwind.symbology.milstd2525.MilStd2525GraphicFactory} creates graphics for the MIL-STD-2525 symbology
  * set.
  * <p>
  * The TacticalGraphic interface provides access to settings common to all tactical graphics. TacticalGraphic extends
  * the {@link Renderable} interface, so you can add a TacticalGraphic directly to a {@link
- * gov.nasa.worldwind.layers.RenderableLayer}. Here's an example of creating a graphic from the MIL-STD-2525 symbol set:
+ * gov.nasa.worldwind.layers.RenderableLayer}. Here's an example of creating a graphic from the MIL-STD-2525 symbol
+ * set:
  * <pre>
- * {@code
  * // Create a graphic factory for MIL-STD-2525
  * TacticalGraphicFactory factory = new MilStd2525GraphicFactory();
  *
  * // Specify the control points for the line
- * List<Position> positions = Arrays.asList(
+ * List&lt;Position&gt; positions = Arrays.asList(
  *     Position.fromDegrees(34.7327, -117.8347, 0),
  *     Position.fromDegrees(34.7328, -117.7305, 0));
  *
@@ -62,13 +85,12 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * WorldWindow wwd = ... // A reference to your application's WorldWind instance.
  * wwd.getModel().getLayers().add(graphicLayer);
  * wwd.redraw();
- * }
  * </pre>
  * <p>
- * The symbol identifier ({@code GHGPGLP----AUSX}) tells the factory what type of graphic to create, and how the graphic
- * should be styled. In the example above we added a text modifier of "Alpha" to identify our shape. These parameters
- * can be specified using a parameter list when the TacticalGraphic is created, as shown above. They can also be set
- * after creation using setters in the TacticalGraphic interface.
+ * The symbol identifier ({@code GHGPGLP----AUSX}) tells the factory what type of graphic to create,  and how the
+ * graphic should be styled. In the example above we added a text modifier of "Alpha" to identify our shape. These
+ * parameters can be specified using a parameter list when the TacticalGraphic is created, as shown above. They can also
+ * be set after creation using setters in the TacticalGraphic interface.
  * <h1>Modifiers</h1>
  * <p>
  * Many graphics support text or graphic modifiers. Each modifier is identified by a String key. The set of possible
@@ -78,35 +100,31 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * For example, a MIL-STD-2525 General Area graphic can have a text modifier that identifies the area. Here's an example
  * of how to specify the modifier when the graphic is created:
  * <pre>
- * {@code
  * AVList modifiers = new AVListImpl();
  * modifiers.setValue(SymbologyConstants.UNIQUE_DESIGNATION, "Boston"); // Text that identifies the area enclosed by
  *                                                                      //  the  graphic.
  *
- * List<Position> positions = ...; // List of positions that define the boundary of the area.
+ * List&lt;Position&gt; positions = ...; // List of positions that define the boundary of the area.
  * TacticalGraphic graphic = milstd2525Factory.createGraphic("GHGPGAG----AUSX", positions, modifiers);
- * }
  * </pre>
  * <p>
  * The modifier can also be set (or changed) after the graphic is created:
  * <pre>
- * {@code
  * // Create the graphic
  * TacticalGraphic graphic = milstd2525Factory.createGraphic("GHGPGAG----AUSX", positions, null);
  * graphic.setModifier(SymbologyConstants.UNIQUE_DESIGNATION, "Boston");
- * }
  * </pre>
  * <h1>Position</h1>
  * <p>
  * Each tactical graphic is positioned by one or more control points. How many points are required depends on the type
- * of graphic. A point graphic will only require one point. A more complex shape may require three or four, and a line
+ * of graphic.  A point graphic will only require one point. A more complex shape may require three or four, and a line
  * or area may allow any number.
  * <p>
  * Here is an example of how to create a point graphic in the MIL-STD-2525 symbol set:
- * <pre> {@code
+ * <pre>
  * Position position = Position.fromDegrees(34.9362, -118.2559, 0);
  * TacticalGraphic graphic = milstd2525Factory.createPoint("GFGPAPD----AUSX", position, null);
- * } </pre>
+ * </pre>
  * <p>
  * More complicated graphics will require more control points. MIL-STD-2525 defines a template for each type of tactical
  * graphic. Each template identifies how many control points are required for the graphic, and how the points are
@@ -114,14 +132,12 @@ import gov.nasa.worldwind.util.UnitsFormat;
  * order as in the specification. For example, in order to create a graphic that requires three control points we need
  * to create a list of positions that specifies the three points in order:
  * <pre>
- * {@code
- * List<Position> positions = Arrays.asList(
+ * List&lt;Position&gt; positions = Arrays.asList(
  *     Position.fromDegrees(34.5073, -117.8380, 0), // PT. 1
  *     Position.fromDegrees(34.8686, -117.5088, 0), // PT. 2
  *     Position.fromDegrees(34.4845, -117.8495, 0)); // PT. 3
  *
  * TacticalGraphic graphic = milstd2525Factory.createGraphic("GFGPSLA----AUSX", positions, null);
- * }
  * </pre>
  * <h1>Sub-interfaces of TacticalGraphic</h1>
  * <p>

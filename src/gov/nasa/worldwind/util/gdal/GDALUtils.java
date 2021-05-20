@@ -1,9 +1,30 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
-
 package gov.nasa.worldwind.util.gdal;
 
 import gov.nasa.worldwind.Configuration;
@@ -34,19 +55,19 @@ import java.util.logging.Level;
  *
  * - The classpath used to build/execute Worldwind must include the location of the gdal.jar file.<br>
  * - On Windows, the 'java.libary.path' property must be set to the location of the JNI shared library.<br>
- * - In addition, if the DLLs are not in the same directory as the launched application, the PATH 
+ * - In addition, if the DLLs are not in the same directory as the launched application, the PATH
  * environment variable should be set to include the location of the shared libraries.  Note that if
  * 'java.library.path' is not explicitly set, the JVM's default includes PATH plus the current directory.<br>
- * - On Linux, the LD_LIBRARY_PATH environment variable should be set to include the location of the 
- * JNI shared library.  The JVM will include the paths in LD_LIBRARY_PATH in the 'java.library.path' 
+ * - On Linux, the LD_LIBRARY_PATH environment variable should be set to include the location of the
+ * JNI shared library.  The JVM will include the paths in LD_LIBRARY_PATH in the 'java.library.path'
  * property.<p>
  *
- * - Unless the GDAL_DATA environment variable is set, the GDAL data directory will be searched for, 
+ * - Unless the GDAL_DATA environment variable is set, the GDAL data directory will be searched for,
  * using the property "user.dir", and then in some standard locations.<p>
  *
- * - Unless the GDAL_DRIVER_PATH environment variable is set, the GDAL plugins direoctory will be 
+ * - Unless the GDAL_DRIVER_PATH environment variable is set, the GDAL plugins direoctory will be
  * searched for, using the property "user.dir", and then in some standard locations.<p>
- * 
+ *
  * @author Lado Garakanidze
  * @version $Id: GDALUtils.java 3031 2015-04-17 14:53:23Z tgaskins $
  */
@@ -80,7 +101,7 @@ public class GDALUtils
                 {
                     searchDirs = new String[] { getCurrentDirectory(), "/usr/share/gdal", "/usr/lib", "/usr/lib/gdal" };
                 }
-				
+
                 // If the environment variables are set, no need to set configuration options.
                 String dataFolder = System.getenv(GDAL_DATA_PATH);
                 if (dataFolder == null)
@@ -102,7 +123,7 @@ public class GDALUtils
                     }
                 } else {
                     String msg = Logging.getMessage("gdal.SharedDataFolderFound", dataFolder, Logging.getMessage("gdal.FolderFromEnv", GDAL_DATA_PATH));
-                    Logging.logger().info(msg);                   
+                    Logging.logger().info(msg);
                 }
 
                 // Try for GDAL_DRIVER_PATH
@@ -125,7 +146,7 @@ public class GDALUtils
                     }
                 } else {
                     String msg = Logging.getMessage("gdal.PluginFolderFound", drvpath, Logging.getMessage("gdal.FolderFromEnv", GDAL_DRIVER_PATH));
-                    Logging.logger().info(msg);                   
+                    Logging.logger().info(msg);
                 }
             }
 
@@ -140,10 +161,10 @@ public class GDALUtils
              */
             String msg = Logging.getMessage("generic.LibraryLoadedOK", gdal.VersionInfo("--version"));
             Logging.logger().info(msg);
-            
+
             // For GDAL 3.x, the PROJ6 library is used, which requires the location of the 'proj.db' file.
             // Future GDAL releases will allow programatic setting of the location of the 'proj.db' file.
-            // For GDAL 3.0.0, the user must set the PROJ_LIB envirnment variable for the location.  
+            // For GDAL 3.0.0, the user must set the PROJ_LIB envirnment variable for the location.
             // For now, just give a warning.
             // References:
             //      https://github.com/OSGeo/gdal/issues/1191
@@ -191,23 +212,23 @@ public class GDALUtils
         }
         return cwd;
     }
-    
+
     // This method only checks the files at the top level; it doesn't do a recursive
-    // search like findGdalDataFolder.  Searching "/usr/lib" takes far too long if a 
+    // search like findGdalDataFolder.  Searching "/usr/lib" takes far too long if a
     // recursive search is performed.
     protected static String findGdalPlugins(String dir)
     {
         FileFilter filter = new FileFilter() {
-            
+
             @Override
             public boolean accept(File pathname)
             {
                 return pathname.isDirectory() && pathname.getName().equalsIgnoreCase("gdalplugins");
             }
         };
-    	File[] filenames = (new File(dir)).listFiles(filter);
-    	
-    	if (filenames != null && filenames.length > 0)
+        File[] filenames = (new File(dir)).listFiles(filter);
+
+        if (filenames != null && filenames.length > 0)
         {
             return filenames[0].getAbsolutePath();
         }
@@ -226,16 +247,14 @@ public class GDALUtils
 
             GDALDataFinder filter = new GDALDataFinder();
             fileTree.asList(filter);
-            String[] folders = filter.getFolders();
+            ArrayList<String> folders = filter.getFolders();
 
-            if (folders != null && folders.length > 0)
-            {
-                if (folders.length > 1)
-                {
-                    String msg = Logging.getMessage("gdal.MultipleDataFoldersFound", buildPathString(folders));
+            if (!folders.isEmpty()) {
+                if (folders.size() > 1) {
+                    String msg = Logging.getMessage("gdal.MultipleDataFoldersFound", folders.get(1));
                     Logging.logger().warning(msg);
                 }
-                return folders[0];
+                return folders.get(0);
             }
         }
         catch (Throwable t)
@@ -308,7 +327,7 @@ public class GDALUtils
      * @throws WWRuntimeException       if GDAL library was not initialized
      */
     public static Dataset open(Object source, boolean isSilentMode)
-        throws FileNotFoundException, IllegalArgumentException, SecurityException, WWRuntimeException
+            throws FileNotFoundException, IllegalArgumentException, SecurityException, WWRuntimeException
     {
         if (!gdalIsAvailable.get())
         {
@@ -399,7 +418,7 @@ public class GDALUtils
      * @throws WWRuntimeException       if GDAL library was not initialized
      */
     public static Dataset open(Object source)
-        throws FileNotFoundException, IllegalArgumentException, SecurityException, WWRuntimeException
+            throws FileNotFoundException, IllegalArgumentException, SecurityException, WWRuntimeException
     {
         return open(source, false);
     }
@@ -466,7 +485,7 @@ public class GDALUtils
      * @throws WWRuntimeException       if GDAL library was not initialized
      */
     protected static DataRaster composeImageDataRaster(Dataset ds, AVList params)
-        throws IllegalArgumentException, SecurityException, WWRuntimeException
+            throws IllegalArgumentException, SecurityException, WWRuntimeException
     {
         if (!gdalIsAvailable.get())
         {
@@ -529,7 +548,7 @@ public class GDALUtils
                 maxValue = (Double) params.getValue(AVKey.RASTER_BAND_MAX_PIXEL_VALUE);
             }
             else if ((bandDataType == gdalconstConstants.GDT_UInt16 || bandDataType == gdalconstConstants.GDT_UInt32)
-                && colorInt != gdalconst.GCI_AlphaBand && colorInt != gdalconst.GCI_Undefined)
+                    && colorInt != gdalconst.GCI_AlphaBand && colorInt != gdalconst.GCI_Undefined)
             {
                 imageBand.GetMaximum(dbls);
                 if (dbls[0] == null)
@@ -545,7 +564,7 @@ public class GDALUtils
             }
 
             int returnVal = imageBand.ReadRaster_Direct(0, 0, imageBand.getXSize(),
-                imageBand.getYSize(), width, height, bandDataType, data);
+                    imageBand.getYSize(), width, height, bandDataType, data);
 
             if (returnVal != gdalconstConstants.CE_None)
             {
@@ -740,7 +759,7 @@ public class GDALUtils
             }
 
             cm = new ComponentColorModel(cs, nBits, hasAlpha, false, transparency, bufferType);
-            
+
             // Work around for
             // Bug ID: JDK-5051418 Grayscale TYPE_CUSTOM BufferedImages are rendered lighter than TYPE_BYTE_GRAY
             BufferedImage tmpImg = new BufferedImage(cm, raster, false, null);
@@ -907,10 +926,10 @@ public class GDALUtils
                 for (int v = 0; v < numVoids; v++)
                 {
                     if (pixel == nodata[v] &&
-                        (scanline0[i - 1] == NODATA_TRANSPARENT || scanline0[i] == NODATA_TRANSPARENT
-                            || scanline0[i + 1] == NODATA_TRANSPARENT || scanline1[i - 1] == NODATA_TRANSPARENT
-                            || scanline1[i + 1] == NODATA_TRANSPARENT || scanline2[i - 1] == NODATA_TRANSPARENT
-                            || scanline2[i] == NODATA_TRANSPARENT || scanline2[i + 1] == NODATA_TRANSPARENT))
+                            (scanline0[i - 1] == NODATA_TRANSPARENT || scanline0[i] == NODATA_TRANSPARENT
+                                    || scanline0[i + 1] == NODATA_TRANSPARENT || scanline1[i - 1] == NODATA_TRANSPARENT
+                                    || scanline1[i + 1] == NODATA_TRANSPARENT || scanline2[i - 1] == NODATA_TRANSPARENT
+                                    || scanline2[i] == NODATA_TRANSPARENT || scanline2[i + 1] == NODATA_TRANSPARENT))
                     {
                         scanline1[i] = NODATA_TRANSPARENT;
                         break;
@@ -1043,7 +1062,7 @@ public class GDALUtils
                 maskData.order(ByteOrder.nativeOrder());
 
                 int returnVal = maskBand.ReadRaster_Direct(0, 0, maskBand.getXSize(),
-                    maskBand.getYSize(), width, height, maskBandDataType, maskData);
+                        maskBand.getYSize(), width, height, maskBandDataType, maskData);
 
                 if (returnVal != gdalconstConstants.CE_None)
                 {
@@ -1244,7 +1263,7 @@ public class GDALUtils
      *                                  RASTER_PIXEL_IS_AREA, and AVKey.RASTER_PIXEL_IS_POINT for elevations
      */
     public static AVList extractRasterParameters(Dataset ds, AVList params, boolean quickReadingMode)
-        throws IllegalArgumentException, WWRuntimeException
+            throws IllegalArgumentException, WWRuntimeException
     {
         if (null == params)
         {
@@ -1332,14 +1351,14 @@ public class GDALUtils
             else if (dataType == gdalconst.GDT_UInt16)
             {
                 params.setValue(AVKey.IMAGE_COLOR_FORMAT,
-                    ((bandCount >= 3) ? AVKey.COLOR : AVKey.GRAYSCALE));
+                        ((bandCount >= 3) ? AVKey.COLOR : AVKey.GRAYSCALE));
                 params.setValue(AVKey.PIXEL_FORMAT, AVKey.IMAGE);
                 params.setValue(AVKey.DATA_TYPE, AVKey.INT16);
             }
             else if (dataType == gdalconst.GDT_UInt32)
             {
                 params.setValue(AVKey.IMAGE_COLOR_FORMAT,
-                    ((bandCount >= 3) ? AVKey.COLOR : AVKey.GRAYSCALE));
+                        ((bandCount >= 3) ? AVKey.COLOR : AVKey.GRAYSCALE));
                 params.setValue(AVKey.PIXEL_FORMAT, AVKey.IMAGE);
                 params.setValue(AVKey.DATA_TYPE, AVKey.INT32);
             }
@@ -1351,9 +1370,9 @@ public class GDALUtils
             }
 
             if( "GTiff".equalsIgnoreCase(ds.GetDriver().getShortName())
-                && params.hasKey(AVKey.FILE)
-                && AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT))
-                && !params.hasKey(AVKey.ELEVATION_UNIT) )
+                    && params.hasKey(AVKey.FILE)
+                    && AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT))
+                    && !params.hasKey(AVKey.ELEVATION_UNIT) )
             {
                 GeotiffReader reader = null;
                 try
@@ -1364,7 +1383,7 @@ public class GDALUtils
                     reader.copyMetadataTo(tiffParams);
 
                     WWUtil.copyValues( tiffParams, params, new String[] { AVKey.ELEVATION_UNIT,
-                        AVKey.ELEVATION_MIN, AVKey.ELEVATION_MAX, AVKey.MISSING_DATA_SIGNAL }, false );
+                            AVKey.ELEVATION_MIN, AVKey.ELEVATION_MAX, AVKey.MISSING_DATA_SIGNAL }, false );
                 }
                 catch (Throwable t)
                 {
@@ -1380,13 +1399,13 @@ public class GDALUtils
             extractMinMaxSampleValues(ds, band, params );
 
             if(      AVKey.ELEVATION.equals(params.getValue(AVKey.PIXEL_FORMAT))
-                  && (     !params.hasKey(AVKey.ELEVATION_MIN)
-                        || !params.hasKey(AVKey.ELEVATION_MAX)
-                        || !params.hasKey(AVKey.MISSING_DATA_SIGNAL)
-                     )
-                  // skip this heavy calculation if the file is opened in Quick Reading Node (when checking canRead())
-                  && !quickReadingMode
-              )
+                    && (     !params.hasKey(AVKey.ELEVATION_MIN)
+                    || !params.hasKey(AVKey.ELEVATION_MAX)
+                    || !params.hasKey(AVKey.MISSING_DATA_SIGNAL)
+            )
+                    // skip this heavy calculation if the file is opened in Quick Reading Node (when checking canRead())
+                    && !quickReadingMode
+            )
             {
                 double[] minmax = new double[2];
                 band.ComputeRasterMinMax(minmax);
@@ -1464,7 +1483,7 @@ public class GDALUtils
             params.setValue(AVKey.COORDINATE_SYSTEM, AVKey.COORDINATE_SYSTEM_SCREEN);
         }
         else if (Angle.isValidLongitude(minX) && Angle.isValidLatitude(maxY)
-            && Angle.isValidLongitude(maxX) && Angle.isValidLatitude(minY))
+                && Angle.isValidLongitude(maxX) && Angle.isValidLatitude(minY))
         {
             if (null == srs)
             {
@@ -1496,7 +1515,7 @@ public class GDALUtils
 //                throw new WWRuntimeException(msg);
             }
 
-            // save area in image's native CS and Projection 
+            // save area in image's native CS and Projection
             GDAL.Area area = new GDAL.Area(srs, ds);
 
             if (null != area)
@@ -1630,7 +1649,7 @@ public class GDALUtils
 
             band.GetNoDataValue(dbls);
             Double missingSignal = (null != dbls[0])
-                ? dbls[0] : convertStringToDouble(ds.GetMetadataItem("TIFFTAG_GDAL_NODATA"));
+                    ? dbls[0] : convertStringToDouble(ds.GetMetadataItem("TIFFTAG_GDAL_NODATA"));
 
             if( ElevationsUtil.isKnownMissingSignal(minValue) )
             {
@@ -1671,7 +1690,7 @@ public class GDALUtils
     }
 
     public static DataRaster composeDataRaster(Dataset ds, AVList params)
-        throws IllegalArgumentException, WWRuntimeException
+            throws IllegalArgumentException, WWRuntimeException
     {
         if (!gdalIsAvailable.get())
         {
@@ -1700,7 +1719,7 @@ public class GDALUtils
     }
 
     public static int[] extractBandOrder(Dataset ds, AVList params)
-        throws IllegalArgumentException, WWRuntimeException
+            throws IllegalArgumentException, WWRuntimeException
     {
         if (!gdalIsAvailable.get())
         {
@@ -1785,7 +1804,7 @@ public class GDALUtils
      *                                  raster)
      */
     protected static DataRaster composeNonImageDataRaster(Dataset ds, AVList params)
-        throws IllegalArgumentException, WWRuntimeException
+            throws IllegalArgumentException, WWRuntimeException
     {
         String pixelFormat = params.getStringValue(AVKey.PIXEL_FORMAT);
         if (!AVKey.ELEVATION.equals(pixelFormat))
@@ -1817,12 +1836,12 @@ public class GDALUtils
         if (params.hasKey(AVKey.BYTE_ORDER))
         {
             byteOrder = AVKey.LITTLE_ENDIAN.equals(params.getStringValue(AVKey.BYTE_ORDER))
-                ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN;
+                    ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN;
         }
         else
         {
             params.setValue(AVKey.BYTE_ORDER,
-                (byteOrder == ByteOrder.BIG_ENDIAN) ? AVKey.BIG_ENDIAN : AVKey.LITTLE_ENDIAN);
+                    (byteOrder == ByteOrder.BIG_ENDIAN) ? AVKey.BIG_ENDIAN : AVKey.LITTLE_ENDIAN);
         }
 
         int width = ds.getRasterXSize();
@@ -1855,7 +1874,7 @@ public class GDALUtils
         data.order(byteOrder);
 
         int returnVal = band.ReadRaster_Direct(0, 0, band.getXSize(), band.getYSize(),
-            width, height, band.getDataType(), data);
+                width, height, band.getDataType(), data);
 
         if (returnVal != gdalconstConstants.CE_None)
         {

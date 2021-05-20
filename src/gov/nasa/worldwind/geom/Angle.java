@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.geom;
 
@@ -195,8 +217,7 @@ public class Angle implements Comparable<Angle>
 
     /**
      * Obtain an angle from a degrees, minute and seconds character string.
-     * <p>eg:
-     * <pre>
+     * <p>eg:</p><pre>
      * 123 34 42
      * -123* 34' 42" (where * stands for the degree symbol)
      * +45* 12' 30" (where * stands for the degree symbol)
@@ -581,13 +602,9 @@ public class Angle implements Comparable<Angle>
     /**
      * Limits a specified angle to be within a specified minimum and maximum.
      * <p>
-     * The returned angle is undefined if {@code min > max}. Otherwise, this method's return value is equivalent to the
+     * The returned angle is undefined if min &gt; max. Otherwise, this method's return value is equivalent to the
      * following:
-     * <ul> 
-     * <li>min - If {@code value < min}</li> 
-     * <li>max - If {@code value > max}</li> 
-     * <li>value - If {@code min <= value <= max}</li> 
-     * </ul>
+     * <ul> <li>min - If value &lt; min</li> <li>max - If value &gt; max</li> <li>value - If min &lt;= value &gt;= max</li> </ul>
      *
      * @param value The angle to clamp.
      * @param min   The minimum angle to clamp to.
@@ -677,7 +694,7 @@ public class Angle implements Comparable<Angle>
         double a = degrees % 360;
         return a > 180 ? a - 360 : a < -180 ? 360 + a : a;
     }
-    
+
     public static double normalizedDegreesLatitude(double degrees)
     {
         double lat = degrees % 180;

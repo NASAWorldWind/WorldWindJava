@@ -7,11 +7,8 @@ language: java
 # Configure the build to using the minimum and the latest stable Oracle JDKs and Open JDKs
 # Consider adding openjdk-ea and/or oraclejdk-ea to test early access JDKs
 jdk:
-  - openjdk8
   - openjdk11
-  - openjdk12
   - oraclejdk11
-  - openjdk-ea
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

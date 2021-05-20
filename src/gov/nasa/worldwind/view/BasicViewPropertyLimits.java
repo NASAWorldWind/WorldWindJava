@@ -1,12 +1,33 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.view;
 
-import gov.nasa.worldwind.*;
-import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.View;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.util.*;
@@ -221,7 +242,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
             throw new IllegalArgumentException(message);
         }
 
-        if (this.is2DGlobe(view.getGlobe()) && !this.allow2DPitch())
+        if (this.is2DGlobe(view.getGlobe()))
         {
             return Angle.ZERO; // keep the view looking straight down on 2D globes
         }
@@ -254,11 +275,6 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     {
         return globe instanceof Globe2D;
     }
-    
-    protected boolean allow2DPitch()
-    {
-        return Configuration.getBooleanValue(AVKey.ALLOW_2D_PITCH, Boolean.FALSE);
-    }
 
     protected boolean isNonContinous2DGlobe(Globe globe)
     {
@@ -270,11 +286,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param angle      angle to clamp to the allowed range.
      * @param viewLimits defines the heading limits.
-     * @return the clamped angle.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitHeading(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Angle)} instead.
      */
+    @Deprecated
     public static Angle limitHeading(Angle angle, ViewPropertyLimits viewLimits)
     {
         if (angle == null)
@@ -310,11 +327,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param angle      angle to clamp to the allowed range.
      * @param viewLimits defines the pitch limits.
-     * @return the clampled angle.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitPitch(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Angle)} instead.
      */
+    @Deprecated
     public static Angle limitPitch(Angle angle, ViewPropertyLimits viewLimits)
     {
         if (angle == null)
@@ -349,11 +367,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param angle      angle to clamp to the allowed range.
      * @param viewLimits defines the roll limits.
-     * @return the clamped angle.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitRoll(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Angle)} instead.
      */
+    @Deprecated
     public static Angle limitRoll(Angle angle, ViewPropertyLimits viewLimits)
     {
         if (angle == null)
@@ -388,11 +407,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      *
      * @param elevation  elevation to clamp to the allowed range.
      * @param viewLimits defines the eye elevation limits.
-     * @return the clamped angle.
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitEyePosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
      */
+    @Deprecated
     public static double limitEyeElevation(double elevation, ViewPropertyLimits viewLimits)
     {
         if (viewLimits == null)
@@ -421,11 +441,12 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
      * @param latitude   latitude angle to clamp to the allowed range.
      * @param longitude  longitude angle to clamp to the allowed range.
      * @param viewLimits defines the eye location limits.
-     * @return the clamped location angles
+     * @return The clamped angle.
      *
      * @throws IllegalArgumentException if any argument is null.
      * @deprecated Use {@link #limitEyePosition(gov.nasa.worldwind.View, gov.nasa.worldwind.geom.Position)} instead.
      */
+    @Deprecated
     public static LatLon limitEyePositionLocation(Angle latitude, Angle longitude, ViewPropertyLimits viewLimits)
     {
         if (latitude == null || longitude == null)
@@ -470,6 +491,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
     //******************** Restorable State  ***********************//
     //**************************************************************//
 
+    @Override
     public void getRestorableState(RestorableSupport rs, RestorableSupport.StateObject context)
     {
         rs.addStateValueAsSector(context, "eyeLocationLimits", this.eyeLocationLimits);
@@ -481,6 +503,7 @@ public class BasicViewPropertyLimits implements ViewPropertyLimits
         rs.addStateValueAsDouble(context, "maxPitchDegrees", this.maxPitch.degrees);
     }
 
+    @Override
     public void restoreState(RestorableSupport rs, RestorableSupport.StateObject context)
     {
         Sector sector = rs.getStateValueAsSector(context, "eyeLocationLimits");

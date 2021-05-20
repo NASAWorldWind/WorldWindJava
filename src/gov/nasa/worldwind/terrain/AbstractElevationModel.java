@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.terrain;
@@ -251,15 +273,14 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
 
     /**
      * Appends elevation model configuration parameters as elements to the specified context. This appends elements for
-     * the following parameters: 
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
-     * <tr><td>{@link AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> 
-     * <tr><td>{@link AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> 
-     * <tr><td>{@link AVKey#MISSING_DATA_SIGNAL}</td><td>MissingData/@signal</td><td>Double</td></tr> 
-     * <tr><td>{@link AVKey#MISSING_DATA_REPLACEMENT}</td><td>MissingData/@replacement</td><td>Double</td></tr> 
-     * <tr><td>{@link AVKey#DETAIL_HINT}</td><td>DataDetailHint</td><td>Double</td></tr> 
-     * </table>
+     * the following parameters: <table> <caption style="font-weight: bold;">Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> 
+     * <tr><td>{@link
+     * AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
+     * AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr> <tr><td>{@link
+     * AVKey#MISSING_DATA_SIGNAL}</td><td>MissingData/@signal</td><td>Double</td></tr> <tr><td>{@link
+     * AVKey#MISSING_DATA_REPLACEMENT}</td><td>MissingData/@replacement</td><td>Double</td></tr> <tr><td>{@link
+     * AVKey#DETAIL_HINT}</td><td>DataDetailHint</td><td>Double</td></tr> </table>
      *
      * @param params  the key-value pairs which define the elevation model configuration parameters.
      * @param context the XML document root on which to append elevation model configuration elements.
@@ -311,11 +332,11 @@ abstract public class AbstractElevationModel extends WWObjectImpl implements Ele
     /**
      * Parses elevation model configuration parameters from the specified DOM document. This writes output as key-value
      * pairs to params. If a parameter from the XML document already exists in params, that parameter is ignored.
-     * Supported parameters are: 
-     * <table><caption>Parameters</caption>
-     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> 
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr>
+     * Supported parameters are: <table> <caption style="font-weight: bold;">Parameters</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> 
+     * <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>DisplayName</td><td>String</td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#NETWORK_RETRIEVAL_ENABLED}</td><td>NetworkRetrievalEnabled</td><td>Boolean</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#MISSING_DATA_SIGNAL}</td><td>MissingData/@signal</td><td>Double</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#MISSING_DATA_REPLACEMENT}</td><td>MissingData/@replacement</td><td>Double</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DETAIL_HINT}</td><td>DataDetailHint</td><td>Double</td></tr>

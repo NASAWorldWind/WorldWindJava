@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.data;
 
@@ -953,13 +975,11 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
      * location, configuration filename, and configuration file contents are derived from the specified parameter list.
      * This throws an exception if the configuration file cannot be installed for any reason.
      * <p>
-     * The parameter list must contain <strong>at least</strong> the following keys: 
-     * <table><caption>Parameter Keys</caption> 
-     * <tr><th>Key</th></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> 
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> 
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> 
-     * </table>
+     * The parameter list must contain <strong>at least</strong> the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
+     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>
      *
      * @param params the parameters which describe the install location, the configuration filename, and the
      *               configuration file contents.
@@ -1031,13 +1051,11 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     /**
      * Returns the location of the configuration file which describes the tiled data produced by this
      * TiledRasterProducer. The install location is derived from the specified parameter list. This returns null if the
-     * parameter list is null, or if it does not contain any of the following keys: 
-     * <table><caption>Parameter Keys</caption>
-     * <tr><th>Key</th></tr>
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> 
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> 
-     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> 
-     * </table>
+     * parameter list is null, or if it does not contain any of the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
+     * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
+     * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>
      *
      * @param params the parameters which describe the install location.
      *

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.util;
@@ -30,22 +52,22 @@ import java.util.List;
 import java.util.Timer;
 
 /**
- * Controller to display a {@link Balloon} and handle balloon events. The controller does the following:
- * <ul>
- * <li>Display a balloon when an object is selected</li>
- * <li>Handle URL selection events in balloons</li>
- * <li>Resize BrowserBalloons</li>
- * <li>Handle close, back, and forward events in BrowserBalloon</li>
- * </ul>
+ * Controller to display a {@link Balloon} and handle balloon events. The controller does the following: <ul>
+ * <li>Display a balloon when an object is selected</li> <li>Handle URL selection events in balloons</li> <li>Resize
+ * BrowserBalloons</li> <li>Handle close, back, and forward events in BrowserBalloon</li> </ul>
  * <h2>Displaying a balloon for a selected object</h2>
+ * <p>
  * When a object is clicked, the controller looks for a Balloon attached to the object. The controller includes special
  * logic for handling balloons attached to KML features.
  * <h3>KML Features</h3>
+ * <p>
  * The KMLAbstractFeature is attached to the top PickedObject under AVKey.CONTEXT. The controller looks for the balloon
  * in the KMLAbstractFeature under key AVKey.BALLOON.
  * <h3>Other objects</h3>
+ * <p>
  * If the top object is an instance of AVList, the controller looks for a Balloon under AVKey.BALLOON.
  * <h2>URL events</h2>
+ * <p>
  * The controller looks for a value under AVKey.URL attached to either the top PickedObject. If the URL refers to a KML
  * or KMZ document, the document is loaded into a new layer. If the link includes a reference to a KML feature,
  * controller will animate the view to that feature and/or open the feature balloon.
@@ -57,9 +79,11 @@ import java.util.Timer;
  * example, a BrowserBalloon will navigate in place when a link is clicked, but it will not if the balloon controller
  * consumes the left press and left click select events. This allows the balloon controller to override the default
  * action for certain URLs.
- * <h2>BrowserBalloon control events</h2> {@link gov.nasa.worldwind.render.AbstractBrowserBalloon} identifies its
- * controls by attaching a value to the PickedObject's AVList under AVKey.ACTION. The controller reads this value and
- * performs the appropriate action. The possible actions are AVKey.RESIZE, AVKey.BACK, AVKey.FORWARD, and AVKey.CLOSE.
+ * <h2>BrowserBalloon control events</h2>
+ * <p>
+ * {@link gov.nasa.worldwind.render.AbstractBrowserBalloon} identifies its controls by attaching a value to the
+ * PickedObject's AVList under AVKey.ACTION. The controller reads this value and performs the appropriate action. The
+ * possible actions are AVKey.RESIZE, AVKey.BACK, AVKey.FORWARD, and AVKey.CLOSE.
  *
  * @author pabercrombie
  * @version $Id: BalloonController.java 1531 2013-08-04 16:19:13Z pabercrombie $
@@ -224,6 +248,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void selected(SelectEvent event)
     {
         if (event == null || event.isConsumed()
@@ -342,6 +367,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      * @param browserBalloon Balloon involved in action.
      * @param action         Identifier for the action that occurred.
      */
+    @SuppressWarnings("deprecation")
     protected void onBalloonAction(AbstractBrowserBalloon browserBalloon, String action)
     {
         if (AVKey.CLOSE.equals(action))
@@ -795,6 +821,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
      *
      * @return New balloon. May return null if the feature should not have a balloon.
      */
+    @SuppressWarnings("deprecation")
     protected Balloon createBalloon(KMLAbstractFeature feature)
     {
         KMLBalloonStyle balloonStyle = (KMLBalloonStyle) feature.getSubStyle(new KMLBalloonStyle(null),

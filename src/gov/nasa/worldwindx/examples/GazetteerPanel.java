@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
@@ -24,6 +46,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.*;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Gazetteer search panel that allows the user to enter a search term in a text field. When a search is performed the
@@ -50,9 +73,11 @@ public class GazetteerPanel extends JPanel
      * @throws IllegalAccessException if the gazetteer class does not expose a publicly accessible no-arg constructor.
      * @throws InstantiationException if an exception occurs while instantiating the the gazetteer class.
      * @throws ClassNotFoundException if the gazetteer class cannot be found.
+     * @throws java.lang.NoSuchMethodException if the gazetteer class doesn't have a default constructor.
+     * @throws java.lang.reflect.InvocationTargetException if the gazetteer class construction fails.
      */
     public GazetteerPanel(final WorldWindow wwd, String gazetteerClassName)
-        throws IllegalAccessException, InstantiationException, ClassNotFoundException
+        throws IllegalAccessException, InstantiationException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException
     {
         super(new BorderLayout());
 
@@ -145,7 +170,7 @@ public class GazetteerPanel extends JPanel
     }
 
     private Gazetteer constructGazetteer(String className)
-        throws ClassNotFoundException, IllegalAccessException, InstantiationException
+        throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException
     {
         if (className == null || className.length() == 0)
         {
@@ -153,7 +178,7 @@ public class GazetteerPanel extends JPanel
         }
 
         Class c = Class.forName(className.trim());
-        Object o = c.newInstance();
+        Object o = c.getConstructor().newInstance();
 
         if (!(o instanceof Gazetteer))
             throw new IllegalArgumentException("Gazetteer class name is null");

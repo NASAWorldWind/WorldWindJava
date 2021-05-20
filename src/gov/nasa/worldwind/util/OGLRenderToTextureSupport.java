@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -27,26 +49,14 @@ import com.jogamp.opengl.*;
  * #clear(gov.nasa.worldwind.render.DrawContext, java.awt.Color)} immediately after any call to {@link
  * #beginRendering(gov.nasa.worldwind.render.DrawContext, int, int, int, int)}.
  * <p>
- * The common usage pattern for OGLRenderToTextureSupport is as follows: 
- * <pre>
- * <code> 
- * DrawContext dc = ...; 
- * // Typically passed in as an argument to the containing method.
- * Texture texture = TextureIO.newTexture(new TextureData(...);
- * // Setup the drawing rectangle to match the texture dimensions, and originate from the
- * texture's lower left corner.
- * OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();
- * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());
- * try {
- *  // Bind the texture as the destination for color pixel writes.
- *  rttSupport.setColorTarget(dc, texture);
- *  // Clear the texture contents with transparent black.
- *  rttSupport.clear(dc, new Color(0, 0, 0, 0));
- *  // Invoke desired GLrendering commands.
- * } finally {
- * rttSupport.endRendering(dc);
- * }
- * </code></pre>
+ * The common usage pattern for OGLRenderToTextureSupport is as follows: <br><code> DrawContext dc = ...; // Typically
+ * passed in as an argument to the containing method.<br> Texture texture = TextureIO.newTexture(new
+ * TextureData(...);<br> <br> // Setup the drawing rectangle to match the texture dimensions, and originate from the
+ * texture's lower left corner.<br> OGLRenderToTextureSupport rttSupport = new OGLRenderToTextureSupport();<br>
+ * rttSupport.beginRendering(dc, 0, 0, texture.getWidth(), texture.getHeight());<br> try<br> {<br> // Bind the
+ * texture as the destination for color pixel writes.<br> rttSupport.setColorTarget(dc, texture);<br> // Clear the
+ * texture contents with transparent black.<br> rttSupport.clear(dc, new Color(0, 0, 0, 0));<br> // Invoke desired GL
+ * rendering commands.<br> }<br> finally<br> {<br> rttSupport.endRendering(dc);<br> }<br> </code>
  *
  * @author dcollins
  * @version $Id: OGLRenderToTextureSupport.java 1676 2013-10-21 18:32:30Z dcollins $

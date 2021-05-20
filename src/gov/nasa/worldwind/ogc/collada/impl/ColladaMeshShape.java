@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.collada.impl;
@@ -227,7 +249,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
-     * @return A triangle mesh shape.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createTriangleMesh(List<ColladaTriangles> geometries,
         ColladaBindMaterial bindMaterial)
@@ -246,7 +268,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *
      * @param geometries   COLLADA elements that defines geometry for this shape. Must contain at least one element.
      * @param bindMaterial Material applied to the mesh. May be null.
-     * @return A Collada mesh shape.
+     * @return The resulting shape.
      */
     public static ColladaMeshShape createLineMesh(List<ColladaLines> geometries,
         ColladaBindMaterial bindMaterial)
@@ -1045,7 +1067,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
     /**
      * Indicates the texture applied to this shape.
      *
-     * @param geometry Geometry to apply.
+     * @param geometry The geometry to set the texture from.
      * @return The texture that must be applied to the shape, or null if there is no texture, or the texture is not
      *         available.
      */
@@ -1195,9 +1217,6 @@ public class ColladaMeshShape extends AbstractGeneralShape
      */
     protected String getTextureSource(ColladaAbstractGeometry geometry)
     {
-        if (this.bindMaterial == null)
-            return null;
-        
         ColladaTechniqueCommon techniqueCommon = this.bindMaterial.getTechniqueCommon();
         if (techniqueCommon == null)
             return null;
@@ -1303,10 +1322,7 @@ public class ColladaMeshShape extends AbstractGeneralShape
      *         available.
      */
     protected ColladaEffect getEffect(ColladaAbstractGeometry geometry)
-    {   
-        if (this.bindMaterial == null)
-            return null;
-            
+    {
         ColladaTechniqueCommon techniqueCommon = this.bindMaterial.getTechniqueCommon();
         if (techniqueCommon == null)
             return null;

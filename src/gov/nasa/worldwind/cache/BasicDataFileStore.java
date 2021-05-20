@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.cache;
 
@@ -54,16 +76,9 @@ public class BasicDataFileStore extends AbstractFileStore
      * list to find the content type matching the cached file.
      * <p>
      * This is initialized to the following list of default content types typically used in WorldWind applications:
-     * <ul> 
-     * <li>application/vnd.google-earth.kml+xml</li> 
-     * <li>application/vnd.google-earth.kmz</li>
-     * <li>model/collada+xml</li> 
-     * <li>image/dds</li> 
-     * <li>image/gif</li> 
-     * <li>image/jpeg</li> 
-     * <li>image/jpg</li>
-     * <li>image/png</li> 
-     * </ul>
+     * <ul> <li>application/vnd.google-earth.kml+xml</li> <li>application/vnd.google-earth.kmz</li>
+     * <li>model/collada+xml</li> <li>image/dds</li> <li>image/gif</li> <li>image/jpeg</li> <li>image/jpg</li>
+     * <li>image/png</li> </ul>
      * <p>
      * This list may be overridden by specifying a comma-delimited list of content types in the WorldWind configuration
      * parameter <code>gov.nasa.worldwind.avkey.CacheContentTypes</code>.
@@ -781,9 +796,7 @@ public class BasicDataFileStore extends AbstractFileStore
      * <p>
      * This removes the key, the value, and any trailing parameter delimiter of all private parameters in the specified
      * query string. Recognized private query parameters are as follows:
-     * <ul> 
-     * <li>CONNECTID</li> 
-     * </ul>
+     * <ul> <li>CONNECTID</li> </ul>
      *
      * @param queryString the query string to examine.
      *

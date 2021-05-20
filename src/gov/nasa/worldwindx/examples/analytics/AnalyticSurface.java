@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.analytics;
 
@@ -37,14 +59,11 @@ import java.util.List;
  * AnalyticSurface's altitude can vary at each grid point. The altitude of each grid point depends on four properties:
  * the altitude mode, the surface altitude, the vertical scale, and the scalar value from GridPointAttributes. The
  * following table outlines how the altitude at each grid point is computed for each altitude mode:
- * <table border="1"><caption>Altitude Computations</caption>
- * <tr><th>Altitude Mode</th><th>Grid Point Altitude</th></tr>
- * <tr><td>WorldWind.ABSOLUTE (default)</td><td>surface altitude + (vertical scale * scalar value from
- * GridPointAttributes)</td></tr>
+ * <table border="1"> <caption style="font-weight: bold;">Altitude Computation</caption><tr><th>Altitude Mode</th><th>Grid Point Altitude</th></tr> <tr><td>WorldWind.ABSOLUTE
+ * (default)</td><td>surface altitude + (vertical scale * scalar value from GridPointAttributes)</td></tr>
  * <tr><td>WorldWind.RELATIVE_TO_GROUND</td><td>terrain height at grid point + surface altitude + (vertical scale *
  * scalar value from GridPointAttributes)</td></tr> <tr><td>WorldWind.CLAMP_TO_GROUND</td><td>terrain height at grid
- * point</td></tr>
- * </table>
+ * point</td></tr> </table>
  * <p>
  * Note that when the altitude mode is WorldWind.CLAMP_TO_GROUND the surface altitude, vertical scale, and the scalar
  * value from GridPointAttributes are ignored. In this altitude mode only the Sector, dimensions, and color from
@@ -501,7 +520,7 @@ public class AnalyticSurface implements Renderable, PreRenderable
     /**
      * {@inheritDoc}
      *
-     * @param dc the draw context.
+     * @param dc The current display context.
      */
     public void preRender(DrawContext dc)
     {

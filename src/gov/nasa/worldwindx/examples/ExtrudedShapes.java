@@ -1,9 +1,30 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.View;
@@ -28,27 +49,25 @@ import java.util.zip.*;
  * @author tag
  * @version $Id: ExtrudedShapes.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ExtrudedShapes extends ApplicationTemplate
-{
+public class ExtrudedShapes extends ApplicationTemplate {
+
     protected static final String DEMO_AIRSPACES_PATH
-        = "gov/nasa/worldwindx/examples/data/AirspaceBuilder-DemoShapes.zip";
+            = "gov/nasa/worldwindx/examples/data/AirspaceBuilder-DemoShapes.zip";
     protected static String DEFAULT_IMAGE_URL = "gov/nasa/worldwindx/examples/images/build123sm.jpg";
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
-            try
-            {
+            try {
                 // Create a layer for the shapes.
                 RenderableLayer layer = new RenderableLayer();
                 layer.setName("Extruded Shapes");
                 layer.setPickEnabled(true);
 
                 // Retrieve the geometry from the WorldWind demo site.
-                List<Airspace> airspaces = new ArrayList<Airspace>();
+                List<Airspace> airspaces = new ArrayList<>();
                 loadAirspacesFromPath(DEMO_AIRSPACES_PATH, airspaces);
 
                 // Define attributes for the shapes.
@@ -61,16 +80,14 @@ public class ExtrudedShapes extends ApplicationTemplate
 
                 // Construct the extruded polygons from the demo data.
                 int n = 0, m = 0;
-                for (Airspace airspace : airspaces)
-                {
+                for (Airspace airspace : airspaces) {
                     if (airspace instanceof Polygon) // only polygons in the demo data are used
                     {
                         Polygon pgonAirspace = (Polygon) airspace;
 
                         // Collect the images to be applied to the shape's sides.
-                        ArrayList<String> textures = new ArrayList<String>();
-                        for (int i = 0; i < pgonAirspace.getLocations().size(); i++)
-                        {
+                        ArrayList<String> textures = new ArrayList<>();
+                        for (int i = 0; i < pgonAirspace.getLocations().size(); i++) {
                             textures.add(DEFAULT_IMAGE_URL);
                         }
 
@@ -83,9 +100,8 @@ public class ExtrudedShapes extends ApplicationTemplate
                         quad.setCapAttributes(capAttributes);
 
                         // Specify a cap for the extruded polygon, specifying its texture coordinates and image.
-                        if (pgonAirspace.getLocations().size() == 4)
-                        {
-                            float[] texCoords = new float[] {0, 0, 1, 0, 1, 1, 0, 1};
+                        if (pgonAirspace.getLocations().size() == 4) {
+                            float[] texCoords = new float[]{0, 0, 1, 0, 1, 1, 0, 1};
                             quad.setCapImageSource("images/32x32-icon-nasa.png", texCoords, 4);
                         }
 
@@ -107,73 +123,61 @@ public class ExtrudedShapes extends ApplicationTemplate
                 view.setEyePosition(Position.fromDegrees(47.656, -122.306, 1e3));
 
                 // This is how a select listener would notice that one of the shapes was picked.
-                getWwd().addSelectListener(new SelectListener()
-                {
-                    public void selected(SelectEvent event)
-                    {
-                        if (event.getTopObject() instanceof ExtrudedPolygon)
-                            System.out.println("EXTRUDED POLYGON");
+                getWwd().addSelectListener((SelectEvent event) -> {
+                    if (event.getTopObject() instanceof ExtrudedPolygon) {
+                        System.out.println("EXTRUDED POLYGON");
                     }
                 });
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    protected static void loadAirspacesFromPath(String path, Collection<Airspace> airspaces)
-    {
+    protected static void loadAirspacesFromPath(String path, Collection<Airspace> airspaces) {
         File file = ExampleUtil.saveResourceToTempFile(path, ".zip");
-        if (file == null)
+        if (file == null) {
             return;
+        }
 
-        try
-        {
+        try {
             ZipFile zipFile = new ZipFile(file);
 
             ZipEntry entry = null;
-            for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements(); entry = e.nextElement())
-            {
-                if (entry == null)
+            for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements(); entry = e.nextElement()) {
+                if (entry == null) {
                     continue;
+                }
 
                 String name = WWIO.getFilename(entry.getName());
 
-                if (!(name.startsWith("gov.nasa.worldwind.render.airspaces") && name.endsWith(".xml")))
+                if (!(name.startsWith("gov.nasa.worldwind.render.airspaces") && name.endsWith(".xml"))) {
                     continue;
+                }
 
                 String[] tokens = name.split("-");
 
-                try
-                {
-                    Class c = Class.forName(tokens[0]);
-                    Airspace airspace = (Airspace) c.newInstance();
+                try {
+                    Class<?> c = Class.forName(tokens[0]);
+                    Airspace airspace = (Airspace) c.getConstructor().newInstance();
                     BufferedReader input = new BufferedReader(new InputStreamReader(zipFile.getInputStream(entry)));
                     String s = input.readLine();
                     airspace.restoreState(s);
                     airspaces.add(airspace);
 
-                    if (tokens.length >= 2)
-                    {
+                    if (tokens.length >= 2) {
                         airspace.setValue(AVKey.DISPLAY_NAME, tokens[1]);
                     }
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ApplicationTemplate.start("WorldWind Extruded Polygons on Ground", AppFrame.class);
     }
 }

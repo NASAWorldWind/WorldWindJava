@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -1470,14 +1492,12 @@ public class WWIO
 
     /**
      * Returns the data type constant corresponding to the specified mime type string. Supported mime types are as
-     * mapped to data types as follows:
-     * <table><caption>Mime Types</caption>
+     * mapped to data types as follows: <table> <caption style="font-weight: bold;">Mapping</caption>
      * <tr><th>Mime Type</th><th>Data Type</th></tr>
      * <tr><td>application/bil32</td><td>{@link gov.nasa.worldwind.avlist.AVKey#FLOAT32}</td></tr>
      * <tr><td>application/bil16</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr>
      * <tr><td>application/bil</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr>
-     * <tr><td>image/bil</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr> 
-     * </table>
+     * <tr><td>image/bil</td><td>{@link gov.nasa.worldwind.avlist.AVKey#INT16}</td></tr> </table>
      *
      * @param mimeType the mime type who's data type is returned.
      *
@@ -2510,7 +2530,7 @@ public class WWIO
      * Determines whether a jar URL is a reference to a local jar file or an entry in a local jar file. See {@link
      * java.net.JarURLConnection} for a description of jar URLs.
      *
-     * @param jarUrl the jar URL, in the form {@code jar:<url>!{entry}}. (Omit {@code <, >, { and }} in the actual URL}
+     * @param jarUrl the jar URL, in the form jar:[url]!{entry}. (Omit [, ], { and } in the actual URL
      *
      * @return true if the URL refers to a local resource, otherwise false.
      */

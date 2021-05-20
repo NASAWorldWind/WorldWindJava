@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.collada;
@@ -228,15 +250,14 @@ public class ColladaRoot extends ColladaAbstractObject implements ColladaRendera
     }
 
     /**
-     * Creates and parses a Collada root for an untyped source. The source must be either a {@link File} or a {@link
-     * String} identifying either a file path or a {@link URL}. Null is returned if the source type is not recognized.
+     * Creates and parses a Collada root for an untyped source.The source must be either a {@link File} or a {@link String} identifying either a file path or a {@link URL}. Null is returned if the source type is not recognized.
      *
      * @param docSource either a {@link File} or a {@link String} identifying a file path or {@link URL}.
      *
      * @return a new {@link ColladaRoot} for the specified source, or null if the source type is not supported.
      *
      * @throws IllegalArgumentException if the source is null.
-     * @throws javax.xml.stream.XMLStreamException if an error occurs reading the source.
+     * @throws javax.xml.stream.XMLStreamException if the XML stream is not readable.
      * @throws IOException              if an error occurs while reading the source.
      */
     public static ColladaRoot createAndParse(Object docSource) throws IOException, XMLStreamException

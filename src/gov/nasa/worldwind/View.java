@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind;
@@ -22,17 +44,15 @@ import gov.nasa.worldwind.view.ViewPropertyLimits;
  * Most of the accessor and computation methods on <code>View</code> will use viewing state computed in the last call to
  * {@link #apply(gov.nasa.worldwind.render.DrawContext) apply}.
  * <p>
- * The following methods return state values <i>updated in the most recent call to apply</i>.<ul>
- * <li><code>getEyePosition</code></li> <li><code>getEyePoint</code></li> 
- * <li><code>getUpVector</code></li> <li><code>getForwardVector</code></li> 
- * <li><code>getModelviewMatrix</code></li> <li><code>getViewport</code></li> 
- * <li><code>getFrustum</code></li> <li><code>getFrustumInModelCoordinates</code></li> 
- * <li><code>getProjectionMatrix</code></li> </ul> 
+ * The following methods return state values <i>updated in the most recent call to apply</i>. <ul>
+ * <li>getEyePosition</li> <li>getEyePoint</li> <li>getUpVector</li> <li>getForwardVector</li>
+ * <li>getModelviewMatrix</li> <li>getViewport</li> <li>getFrustum</li> <li>getFrustumInModelCoordinates</li>
+ * <li>getProjectionMatrix</li> </ul> 
  * <p>
  * The following methods return computed values using state that was updated in the most recent call to
- * <code>apply</code>. <ul> 
- * <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
+ * <code>apply</code>.  <ul> <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
  * <li>computePositionFromScreenPoint</li> <li>computePixelSizeAtDistance</li> <li>computeHorizonDistance</li> </ul>
+ * 
  *
  * @author Paul Collins
  * @version $Id: View.java 1171 2013-02-11 21:45:02Z dcollins $

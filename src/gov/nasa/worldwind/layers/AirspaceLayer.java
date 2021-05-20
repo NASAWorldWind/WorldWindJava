@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.layers;
 
@@ -19,6 +41,7 @@ import gov.nasa.worldwind.util.Logging;
  * @version $Id: AirspaceLayer.java 2231 2014-08-15 19:03:12Z dcollins $
  * @deprecated Use {@link RenderableLayer} instead.
  */
+@Deprecated
 public class AirspaceLayer extends AbstractLayer
 {
     private final java.util.Collection<Airspace> airspaces = new java.util.concurrent.ConcurrentLinkedQueue<Airspace>();
@@ -40,6 +63,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link RenderableLayer} and {@link RenderableLayer#addRenderable(gov.nasa.worldwind.render.Renderable)}
      *             instead.
      */
+    @Deprecated
     public void addAirspace(Airspace airspace)
     {
         if (airspace == null)
@@ -69,6 +93,7 @@ public class AirspaceLayer extends AbstractLayer
      * @throws IllegalStateException    if a custom Iterable has been specified by a call to setRenderables.
      * @deprecated Use {@link RenderableLayer} and {@link RenderableLayer#addRenderables(Iterable)} instead.
      */
+    @Deprecated
     public void addAirspaces(Iterable<Airspace> airspaces)
     {
         if (airspaces == null)
@@ -104,6 +129,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link RenderableLayer} and {@link RenderableLayer#removeRenderable(gov.nasa.worldwind.render.Renderable)}
      *             instead.
      */
+    @Deprecated
     public void removeAirspace(Airspace airspace)
     {
         if (airspace == null)
@@ -129,6 +155,7 @@ public class AirspaceLayer extends AbstractLayer
      * @throws IllegalStateException If a custom Iterable has been specified by a call to <code>setAirspaces</code>.
      * @deprecated Use {@link RenderableLayer} and {@link RenderableLayer#removeAllRenderables()} instead.
      */
+    @Deprecated
     public void removeAllAirspaces()
     {
         if (this.airspacesOverride != null)
@@ -157,6 +184,7 @@ public class AirspaceLayer extends AbstractLayer
      *
      * @deprecated Use {@link RenderableLayer} and {@link RenderableLayer#getRenderables()} instead.
      */
+    @Deprecated
     public Iterable<Airspace> getAirspaces()
     {
         if (this.airspacesOverride != null)
@@ -204,6 +232,7 @@ public class AirspaceLayer extends AbstractLayer
      *
      * @deprecated Use {@link RenderableLayer} and {@link RenderableLayer#setRenderables(Iterable)} instead.
      */
+    @Deprecated
     public void setAirspaces(Iterable<Airspace> airspaceIterable)
     {
         this.airspacesOverride = airspaceIterable;
@@ -219,6 +248,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.ShapeAttributes#isEnableAntialiasing()} on each Airspace
      *             instance in the layer.
      */
+    @Deprecated
     public boolean isEnableAntialiasing()
     {
         return false; // deprecated method
@@ -232,6 +262,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.ShapeAttributes#setEnableAntialiasing(boolean)} on each Airspace
      *             instance in the layer.
      */
+    @Deprecated
     public void setEnableAntialiasing(boolean enable)
     {
         // deprecated method
@@ -245,6 +276,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Control over airspace blending is no longer supported. Airspaces implicitly blend themselves with
      *             other objects in the scene.
      */
+    @Deprecated
     public boolean isEnableBlending()
     {
         return false; // deprecated method
@@ -258,6 +290,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Control over airspace blending is no longer supported. Airspaces implicitly blend themselves with
      *             other objects in the scene.
      */
+    @Deprecated
     public void setEnableBlending(boolean enable)
     {
         // deprecated method
@@ -271,6 +304,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.airspaces.Airspace#isEnableDepthOffset()} on each Airspace
      *             instance in the layer.
      */
+    @Deprecated
     public boolean isEnableDepthOffset()
     {
         return false; // deprecated method
@@ -284,6 +318,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.airspaces.Airspace#setEnableDepthOffset(boolean)} on each
      *             Airspace instance in the layer.
      */
+    @Deprecated
     public void setEnableDepthOffset(boolean enable)
     {
         // deprecated method
@@ -297,6 +332,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.ShapeAttributes#isEnableLighting()} on each Airspace instance in
      *             the layer.
      */
+    @Deprecated
     public boolean isEnableLighting()
     {
         return false; // deprecated method
@@ -310,6 +346,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.ShapeAttributes#isEnableLighting()} on each Airspace instance in
      *             the layer.
      */
+    @Deprecated
     public void setEnableLighting(boolean enable)
     {
         // deprecated method
@@ -322,6 +359,7 @@ public class AirspaceLayer extends AbstractLayer
      *
      * @deprecated Control over drawing Airspace extents is no longer supported.
      */
+    @Deprecated
     public boolean isDrawExtents()
     {
         return false; // deprecated method
@@ -334,6 +372,7 @@ public class AirspaceLayer extends AbstractLayer
      *
      * @deprecated Control over drawing Airspace extents is no longer supported.
      */
+    @Deprecated
     public void setDrawExtents(boolean draw)
     {
         // deprecated method
@@ -346,6 +385,7 @@ public class AirspaceLayer extends AbstractLayer
      *
      * @deprecated Control over drawing Airspace in wireframe mode is no longer supported.
      */
+    @Deprecated
     public boolean isDrawWireframe()
     {
         return false; // deprecated method
@@ -358,6 +398,7 @@ public class AirspaceLayer extends AbstractLayer
      *
      * @deprecated Control over drawing Airspace in wireframe mode is no longer supported.
      */
+    @Deprecated
     public void setDrawWireframe(boolean draw)
     {
         // deprecated method
@@ -371,6 +412,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Control over Airspace depth offset is no longer supported. See {@link
      *             gov.nasa.worldwind.render.airspaces.Airspace#setEnableDepthOffset(boolean)}.
      */
+    @Deprecated
     public Double getDepthOffsetFactor()
     {
         return 0d; // deprecated method
@@ -384,6 +426,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Control over Airspace depth factor is no longer supported. See {@link
      *             gov.nasa.worldwind.render.airspaces.Airspace#setEnableDepthOffset(boolean)}.
      */
+    @Deprecated
     public void setDepthOffsetFactor(Double factor)
     {
         // deprecated method
@@ -397,6 +440,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Control over Airspace depth units is no longer supported. See {@link
      *             gov.nasa.worldwind.render.airspaces.Airspace#setEnableDepthOffset(boolean)}.
      */
+    @Deprecated
     public Double getDepthOffsetUnits()
     {
         return 0d; // deprecated method
@@ -410,6 +454,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Control over Airspace depth units is no longer supported. See {@link
      *             gov.nasa.worldwind.render.airspaces.Airspace#setEnableDepthOffset(boolean)}.
      */
+    @Deprecated
     public void setDepthOffsetUnits(Double units)
     {
         // deprecated method
@@ -423,6 +468,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.airspaces.Airspace#isEnableBatchRendering()} on each Airspace
      *             instance in the layer.
      */
+    @Deprecated
     public boolean isEnableBatchRendering()
     {
         return false; // deprecated method
@@ -436,6 +482,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.airspaces.Airspace#setEnableBatchRendering(boolean)} on each
      *             Airspace instance in the layer.
      */
+    @Deprecated
     public void setEnableBatchRendering(boolean enableBatchRendering)
     {
         // deprecated method
@@ -449,6 +496,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.airspaces.Airspace#isEnableBatchPicking()} on each Airspace
      *             instance in the layer.
      */
+    @Deprecated
     public boolean isEnableBatchPicking()
     {
         return false; // deprecated method
@@ -462,6 +510,7 @@ public class AirspaceLayer extends AbstractLayer
      * @deprecated Use {@link gov.nasa.worldwind.render.airspaces.Airspace#setEnableBatchPicking(boolean)} on each
      *             Airspace instance in the layer.
      */
+    @Deprecated
     public void setEnableBatchPicking(boolean enableBatchPicking)
     {
         // deprecated method

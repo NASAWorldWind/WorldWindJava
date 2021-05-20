@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.util;
 
@@ -54,12 +76,10 @@ public class OpenStreetMapShapefileLoader
      * <p>
      * The returned Layer renders each Shapefile record as a surface circle with an associated screen label. The label
      * text is taken from the Shapefile record attribute key "name". This determines each surface circle's appearance
-     * from the Shapefile record attribute key "type" as follows: 
-     * <table><caption>Types</caption>
+     * from the Shapefile record attribute key "type" as follows: <table> <caption style="font-weight: bold;">Mapping</caption>
      * <tr><th>Type</th><th>Color</th></tr>
      * <tr><td>hamlet</td><td>Black</td></tr> <tr><td>village</td><td>Green</td></tr>
-     * <tr><td>town</td><td>Cyan</td></tr> <tr><td>city</td><td>Yellow</td></tr> 
-     * </table>
+     * <tr><td>town</td><td>Cyan</td></tr> <tr><td>city</td><td>Yellow</td></tr> </table>
      *
      * @param source the source of the OpenStreetMap Shapefile.
      *
@@ -97,12 +117,9 @@ public class OpenStreetMapShapefileLoader
      * <p>
      * The returned Layer renders each Shapefile record as a surface circle with an associated screen label. The label
      * text is taken from the Shapefile record attribute key "name". This determines each surface circle's appearance
-     * from the Shapefile record attribute key "type" as follows: 
-     * <table><caption>Types</caption>
-     * <tr><th>Type</th><th>Color</th></tr>
+     * from the Shapefile record attribute key "type" as follows: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Type</th><th>Color</th></tr>
      * <tr><td>hamlet</td><td>Black</td></tr> <tr><td>village</td><td>Green</td></tr>
-     * <tr><td>town</td><td>Cyan</td></tr> <tr><td>city</td><td>Yellow</td></tr>
-     * </table>
+     * <tr><td>town</td><td>Cyan</td></tr> <tr><td>city</td><td>Yellow</td></tr> </table>
      *
      * @param shp the Shapefile to create a layer for.
      *

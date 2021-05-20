@@ -1,8 +1,6 @@
 .DS_Store
 
-.idea/shelf
-.idea/tasks.xml
-.idea/workspace.xml
+.idea
 
 build
 classes
@@ -10,6 +8,8 @@ testClasses
 
 worldwind.jar
 worldwindx.jar
+/dist/
+/nbproject/private/
 
 gradle
 gradlew

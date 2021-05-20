@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.geom.coords;
 
@@ -260,7 +282,7 @@ class MGRSCoordConverter
         {
             return last_error;
         }
-        
+
         long error_code = MGRS_NO_ERROR;
         if (mgrs.zone != 0)
         {
@@ -826,7 +848,7 @@ class MGRSCoordConverter
      * The function Get_Grid_Values sets the letter range used for the 2nd letter in the MGRS coordinate string, based
      * on the set number of the utm zone. It also sets the false northing using a value of A for the second letter of
      * the grid square, based on the grid pattern and set number of the utm zone.
-     * <p></p>
+     * <p>
      * Key values that are set in this function include:  ltr2_low_value, ltr2_high_value, and false_northing.
      *
      * @param zone Zone number
@@ -1083,10 +1105,10 @@ class MGRSCoordConverter
                 // the range of valid second letter values
                 // Also check that the third letter is valid
                 if ((mgrs.squareLetter1 < ltr2_low_value) || (mgrs.squareLetter1 > ltr2_high_value) ||
-                    ((mgrs.squareLetter1 == LETTER_D) || (mgrs.squareLetter1 == LETTER_E) ||
-                        (mgrs.squareLetter1 == LETTER_M) || (mgrs.squareLetter1 == LETTER_N) ||
-                        (mgrs.squareLetter1 == LETTER_V) || (mgrs.squareLetter1 == LETTER_W)) ||
-                    (mgrs.squareLetter2 > ltr3_high_value))
+                        ((mgrs.squareLetter1 == LETTER_D) || (mgrs.squareLetter1 == LETTER_E) ||
+                                (mgrs.squareLetter1 == LETTER_M) || (mgrs.squareLetter1 == LETTER_N) ||
+                                (mgrs.squareLetter1 == LETTER_V) || (mgrs.squareLetter1 == LETTER_W)) ||
+                        (mgrs.squareLetter2 > ltr3_high_value))
                     error_code = MGRS_STRING_ERROR;
 
                 if (error_code == MGRS_NO_ERROR)

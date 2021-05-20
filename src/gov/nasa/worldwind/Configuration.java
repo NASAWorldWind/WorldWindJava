@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind;
@@ -502,12 +524,10 @@ public class Configuration // Singleton
      * Returns the path to the current user's application data directory. The path returned depends on the operating
      * system on which the Java Virtual Machine is running. The following table provides the path for all supported
      * operating systems:
-     * <table><caption>Returned Paths</caption>
-     * <tr><th>Operating System</th><th>Path</th></tr> 
-     * <tr><td>Mac OS X</td><td>~/Library/Application Support</td></tr> 
-     * <tr><td>Windows</td><td>~\\Application Data</td></tr> 
-     * <tr><td>Linux, Unix, Solaris</td><td>~/</td></tr> 
-     * </table>
+     * <table><caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Operating System</th><th>Path</th></tr> <tr><td>Mac OS X</td><td>~/Library/Application
+     * Support</td></tr> <tr><td>Windows</td><td>~\\Application Data</td></tr> <tr><td>Linux, Unix,
+     * Solaris</td><td>~/</td></tr> </table>
      *
      * @return the absolute path to the current user's application data directory.
      */
@@ -610,7 +630,7 @@ public class Configuration // Singleton
     public static boolean isUnixOS()
     {
         String osName = System.getProperty("os.name");
-        return osName != null && osName.toLowerCase().contains("unix");
+        return osName != null && (osName.toLowerCase().contains("linux") || osName.toLowerCase().contains("unix"));
     }
 
     /**
@@ -649,11 +669,8 @@ public class Configuration // Singleton
      * Returns the highest OpenGL profile available on the current graphics device that is compatible with WorldWind.
      * The returned profile favors hardware acceleration over software acceleration. With JOGL version 2.0, this returns
      * the highest available profile from the following list:
-     * <ul> 
-     * <li>OpenGL compatibility profile 4.x</li> 
-     * <li>OpenGL compatibility profile 3.x</li> 
-     * <li>OpenGL profile 1.x up to 3.0</li> 
-     * </ul>
+     * <ul> <li>OpenGL compatibility profile 4.x</li> <li>OpenGL compatibility profile 3.x</li> <li>OpenGL profile 1.x
+     * up to 3.0</li> </ul>
      *
      * @return the highest compatible OpenGL profile.
      */
@@ -663,7 +680,7 @@ public class Configuration // Singleton
     }
 
     /**
-     * Returns a {@link com.jogamp.opengl.GLCapabilities} identifying graphics features required by World Wind. The
+     * Returns a {@link com.jogamp.opengl.GLCapabilities} identifying graphics features required by WorldWind. The
      * capabilities instance returned requests the maximum OpenGL profile supporting GL fixed function operations, a
      * frame buffer with 8 bits each of red, green, blue and alpha, a 24-bit depth buffer, double buffering, and if the
      * Java property "gov.nasa.worldwind.stereo.mode" is set to "device", device supported stereo.

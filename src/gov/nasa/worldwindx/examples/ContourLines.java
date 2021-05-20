@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
@@ -24,14 +46,13 @@ import java.util.*;
  * @author Patrick Murris
  * @version $Id: ContourLines.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class ContourLines extends ApplicationTemplate
-{
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+public class ContourLines extends ApplicationTemplate {
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected ContourLine contourLine;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             // Create a layer to display the contour lines.
             RenderableLayer layer = new RenderableLayer();
             layer.setName("Contour Lines");
@@ -46,25 +67,23 @@ public class ContourLines extends ApplicationTemplate
             layer.addRenderable(this.contourLine);
 
             // Add a local contour line to the layer.
-            ArrayList<LatLon> positions = new ArrayList<LatLon>();
+            ArrayList<LatLon> positions = new ArrayList<>();
             positions.add(LatLon.fromDegrees(44.16, 6.82));
             positions.add(LatLon.fromDegrees(44.16, 7.09));
             positions.add(LatLon.fromDegrees(44.30, 6.95));
             positions.add(LatLon.fromDegrees(44.16, 6.82));
 
-            for (int elevation = 0; elevation <= 3000; elevation += 250)
-            {
+            for (int elevation = 0; elevation <= 3000; elevation += 250) {
                 ContourLinePolygon cl = new ContourLinePolygon(elevation, positions);
                 cl.setColor(new Color(0.2f, 0.2f, 0.8f));
 
-                if (elevation % 1000 == 0)
-                {
-                    cl.setLineWidth(2);
+                if (elevation % 1000 == 0) {
                     cl.setColor(new Color(0.0f, 0.1f, 0.6f));
                 }
 
-                if (elevation % 500 == 0)
+                if (elevation % 500 == 0) {
                     cl.setLineWidth(2);
+                }
 
                 layer.addRenderable(cl);
             }
@@ -73,29 +92,24 @@ public class ContourLines extends ApplicationTemplate
             this.getControlPanel().add(this.makeContourLineControlPanel(), BorderLayout.SOUTH);
         }
 
-        protected JPanel makeContourLineControlPanel()
-        {
+        protected JPanel makeContourLineControlPanel() {
             JPanel controlPanel = new JPanel();
             controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
             controlPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9),
-                new TitledBorder("Contour Line Elevation")));
+                    new TitledBorder("Contour Line Elevation")));
 
             final JSlider slider = new JSlider(0, 3000, (int) this.contourLine.getElevation());
             slider.setMajorTickSpacing(1000);
             slider.setMinorTickSpacing(250);
             slider.setPaintTicks(true);
             slider.setPaintLabels(true);
-            slider.addChangeListener(new ChangeListener()
-            {
-                public void stateChanged(ChangeEvent event)
-                {
-                    contourLine.setElevation(slider.getValue());
-                    getWwd().redraw();
-                }
+            slider.addChangeListener((ChangeEvent event) -> {
+                contourLine.setElevation(slider.getValue());
+                getWwd().redraw();
             });
             controlPanel.add(slider);
 
-            Hashtable<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
+            Hashtable<Integer, JLabel> labels = new Hashtable<>();
             labels.put(0, new JLabel("0km"));
             labels.put(1000, new JLabel("1km"));
             labels.put(2000, new JLabel("2km"));
@@ -106,8 +120,7 @@ public class ContourLines extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 44.23);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, 6.92);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 30000);

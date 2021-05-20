@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util.webview;
 
@@ -40,18 +62,16 @@ import java.net.URL;
  *
  * @author dcollins
  * @version $Id: WebView.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public interface WebView extends AVList, Disposable
 {
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <ul> 
-     * <li>HTML document</li> 
-     * <li>HTML fragment</li> 
-     * <li>Simple text</li> 
-     * <li><code>null</code></li> 
-     * </ul>
+     * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
+     * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. If the
      * <code>htmlString</code> contains relative paths, they are not resolved and are interpreted as unresolved
      * references.
@@ -67,12 +87,7 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <ul> 
-     * <li>HTML document</li> 
-     * <li>HTML fragment</li> 
-     * <li>Simple text</li> 
-     * <li><code>null</code></li> 
-     * </ul>
+     * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
      * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. The <code>baseURL</code>
      * is used to resolve relative paths in the specified <code>htmlString</code>. If the <code>baseURL</code> is
@@ -93,12 +108,7 @@ public interface WebView extends AVList, Disposable
     /**
      * Specifies this <code>WebView's</code> HTML content as a string. The specified <code>htmlString</code> may be one
      * of the following:
-     * <ul> 
-     * <li>HTML document</li> 
-     * <li>HTML fragment</li> 
-     * <li>Simple text</li> 
-     * <li><code>null</code></li> 
-     * </ul>
+     * <ul> <li>HTML document</li> <li>HTML fragment</li> <li>Simple text</li> <li><code>null</code></li> </ul>
      * <p>
      * The WebView displays nothing if <code>htmlString</code> is <code>null</code> or empty. The
      * <code>WebResourceResolver</code> is used to resolve relative paths in the specified <code>htmlString</code>. If
@@ -189,18 +199,13 @@ public interface WebView extends AVList, Disposable
      * returned iterable has no elements if this <code>WebView</code> has no links, or if none of the links are
      * currently in the <code>WebView's</code> visible area. Each <code>AVList</code> describes the parameters for one
      * link as follows:
-     * <ul> 
-     * <li><code>AVKey.URL</code> - a <code>String</code> containing the link's destination.</li>
+     * <ul> <li><code>AVKey.URL</code> - a <code>String</code> containing the link's destination.</li>
      * <li><code>AVKey.MIME_TYPE</code> - a <code>String</code> mime type describing the content type of the link's
-     * destination.</li> 
-     * <li><code>AVKey.TARGET</code> - the link's target frame, one of the following: <code>_blank,
+     * destination.</li> <li><code>AVKey.TARGET</code> - the link's target frame, one of the following: <code>_blank,
      * _self, _parent, _top</code>. See the <a href="http://www.w3.org/TR/html401/types.html#type-frame-target">W3C
-     * documentation</a> on frame target names.</li> 
-     * <li><code>AVKey.BOUNDS</code> - a <code>java.awt.Rectangle</code>
-     * representing the link's bounding rectangle.</li> 
-     * <li><code>AVKey.RECTANGLES</code> - an array of one or more
-     * <code>java.awt.Rectangle</code> instances representing the link's separate pickable rectangles.</li> 
-     * </ul>
+     * documentation</a> on frame target names.</li> <li><code>AVKey.BOUNDS</code> - a <code>java.awt.Rectangle</code>
+     * representing the link's bounding rectangle.</li> <li><code>AVKey.RECTANGLES</code> - an array of one or more
+     * <code>java.awt.Rectangle</code> instances representing the link's separate pickable rectangles.</li> </ul>
      * <p>
      * The link rectangles are in the <code>WebView</code>'s local coordinate system, and are clipped to the
      * <code>WebView's</code> visible area. The <code>WebView</code>'s coordinate system has its origin in the lower

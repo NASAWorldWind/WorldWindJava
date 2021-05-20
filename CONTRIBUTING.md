@@ -17,8 +17,7 @@
 
 **Please do not file an issue to ask a question.** You will get faster results by using the following resources:
 
-- Check out the [WorldWind Forum](https://forum.worldwindcentral.com/)
-- Email the [Administrative Contact](mailto:patrick.hogan@nasa.gov)
+- Email the [Administrative Contact](mailto:worldwind-info@lists.nasa.gov)
 
 ## Design and Coding Guidelines
 
@@ -27,9 +26,9 @@ WorldWind projects.
 
 ### General
 
-* The project's development IDE is IntelliJ IDEA. The IDEA configuration files for this project are checked in to
+* The project's development IDE is Apache NetBeans. The NetBeans configuration files for this project are checked in to
 the code repository. They define within them global and local library links, formatting rules, etc.
-* Our required target platforms are OS X, Windows XP and Vista, and the most popular versions of Linux. All code
+* Our required target platforms are OS X, Windows, and the most popular versions of Linux. All code
 and all products must run on all those systems.
 * Read the WorldWind API's Overview section for a description of WorldWind architecture, design and usage. Read 
 the overview pages of each WorldWind package for descriptions of those. These descriptions contain critical 
@@ -55,14 +54,13 @@ without losing the ability to recover the default value.
 * Classes such as BasicDataFileStore and the logger are effectively singletons but they are not defined in their
 class definition as such. Their singleton nature comes from their 1:1 association with the truly singleton
 WorldWind class, which provides access to instances of these "singleton" classes.
-* Do not use classes that are not available in the standard 1.6 JRE. Don't incur additional or external
+* Do not use classes that are not available in the standard JRE. Don't incur additional or external
 dependencies. The only 3rd-party library we rely on is JOGL.
 * Constants are defined as String and namespace qualified. This enables easy and non-conflicting extension.
 * Do not use GUI builders to generate interfaces for examples or applications. They prevent others from being able
 to maintain the code.
 * Protect OpenGL state within a rendering unit, such as a layer, by bracketing state changes within try/finally
-clauses. The util.OpenGLStackHandler utility class makes this easy. It manages both attribute state and matrix
-and when it fails.
+clauses. The util.OpenGLStackHandler utility class makes this easy. It manages both attribute state and matrices when it fails.
 * WorldWind never crashes. Always catch exceptions at least at the highest entry point from the runtime, e.g., UI
 listeners, thread run() methods.
 * Within a rendering pass WorldWind does not touch the disk or the network. Always fork off a thread to do that.
@@ -72,23 +70,28 @@ usage to avoid swamping the local machine and the server.
 once things are set up, and the effect of something going wrong is benign. For example, Layers fork off
 Retriever objects to retrieve data from the network. But they don't try to keep track of these. If the retriever
 succeeds then the data will be available the next time the layer looks for it. The fact that it's not there
-because of a timeout or something tells the layer to ask for it again if it needs it.* DOMs are expensive in memory and time. Use an event for any documents that might be large. Use the parser in
+because of a timeout or something tells the layer to ask for it again if it needs it.
+* DOMs are expensive in memory and time. Use an event for any documents that might be large. Use the parser in
 gov.nasa.worldwind.util.xml when appropriate.
 
 ### Exceptions
           
 * WW objects running in the Main thread pass exceptions through to the application unless there's good
-reactive/corrective behavior that can be applied within WW.## Contributing
+reactive/corrective behavior that can be applied within WW.
+
+## Contributing
+
 * Log any exceptions prior to throwing them. Use the same message for the log as for the exception.
 * Ensure all exception messages are generated using the i18n method details below.
 * Public methods validate their arguments and throw the appropriate exception, typically InvalidArgumentException,
 and identify the exception message the parameter name and the problem -- null, out of range, etc. See the
 message resource file, util.MessageStrings.properties, for common messages and their identifiers.
-* In Retriever threads, do not catch Throwable. Catch and react to Exception if there's a good reactive/corrective
+* In Retriever threads, do not catch Throwable. Catch and react to the Exception if there's a good reactive/corrective
 behavior to apply, otherwise allow them to pass up the stack. Retriever threads should have an uncaught
 Exception handler specified for the thread. The method should log the Exception or Throwable and then return.
 * Private and protected methods whose calling client can't be trusted validate their arguments and throw an
-appropriate exception.* The audience for exceptions is not primarily the user of the client program, but the application or WorldWind
+appropriate exception.
+* The audience for exceptions is not primarily the user of the client program, but the application or WorldWind
 developer. Throw exceptions that would let them know immediately that they're using faulty logic or data.
 
 ### Logging
@@ -102,7 +105,7 @@ use any logging system other than that in the JRE.
 * Use level SEVERE for things that prevent the intended action,e.g., file can't be written. Use level WARN for
 things that don't stop the action but seem exceptional, e.g., a file was retrieved or written redundantly. Use
 level FINE for simple notifications. Use FINER for method traces. Using the "FINE"series prevents screen display
-of these when the default JAVA logging settings are used. Since we're a component, we don't communicate such
+of these when the default Java logging settings are used. Since we're a component, we don't communicate such
 things directly to the application's user; the application does.
 
 ### Concurrency
@@ -123,7 +126,7 @@ status prior to attempting retrieval of a resource on the network.
 
 ### Documentation
 
-* Use the appropriate Ant target to generate worldwind.jar and javadoc API documentation. Do not use the IDEA
+* Use the appropriate Ant target to generate worldwind.jar and javadoc API documentation. Do not use the NetBeans
 Tools command because it's not configured appropriately, only the Ant targets are.
 * All public and protected classes, methods and fields should be commented for javadoc documentation generation.
 * Descriptions of classes, methods, etc. should start with a capital letter. Parameter descriptions and
@@ -135,29 +138,13 @@ compared. For <code>toString()</code> that would be the representation returned.
    
 ### Code Formatting
 
-* Use the code formatting and style that's in the IDEA project file. It makes it possible to review previous code
+* Use the code formatting and style that's in the NetBeans project file. It makes it possible to review previous code
 modifications.
-* Use the code formatting rules specified in WorldWindJ.ipr. They are in the project file under (Settings Project 
-Settings Project Code Style). To apply them, simply use Code Auto-indent Lines. You can also just check the box
-at Subversion check-in time and the formatting will be applied before check-in. Be sure the formatting rules are
-not overridden in your IDEA workspace.
-* We generally use the traditional Sun coding conventions. Constants are in all upper case with words separated by
+* We generally use the traditional Java coding conventions. Constants are in all upper case with words separated by
 underscores. Everything else is in camel case. Class names start with an upper case character, variables start
 in lower case.
 * White space is preferred over packing code into a small space. Please use white space liberally.
-* Set up IDEA to automatically place the standard project header in newly created files by putting the following
-as the File Header in the Includes tab of IDEA in the File Templates dialog: <br> <code> <br>/* Copyright (C)
-2001, 2011 United States Government as represented by <br>the Administrator of the National Aeronautics and 
-Space Administration. <br>All Rights Reserved. <br>*/ <br>package ${PACKAGE_NAME}; <br> <br>/** <br> * @author 
-${USER} <br> * @version $Id: Design and Coding Guidelines.html 1171 2013-02-11 21:45:02Z dcollins $ <br> */ 
-</code><br><br> Then remove the package name property from first line of the Class and Interface items of the Templates tab
-in the File Templates dialog. (The package name is in the "include" now, so it gets inserted after the
-copyright.) Test it out by creating a dummy class. Unfortunately this set-up is a personal configuration in
-IDEA, not project specific.
-* When creating a new file, the Id subversion keyword has to be explicitly set via Version Control --> Set
-Property --> Property name: svn:keywords, and the term Id included in the text box. If the property is not
-included in this list then Subversion doesn't replace the property string when updating the file.
-* Resolve all IDEA warnings before checking in a file. If the warning refers to an intentional case, add an
+* Resolve all NetBeans warnings before checking in a file. If the warning refers to an intentional case, add an
 exception statement.
 
 ### Internationalization (i18n)
@@ -191,7 +178,6 @@ WorldWind team and community understand your report, reproduce the behavior, and
 
 #### Before Submitting a Bug Report
 
-* Check the [**WorldWind Forum**](https://forum.worldwindcentral.com/forum/world-wind-java-forums).
 * Check this repository's [**issues**](https://github.com/NASAWorldWind/WorldWindJava/issues) to see if the problem has
 already been reported. If it has and the issue is **still open**, add a comment to the existing issue instead of opening
 a new one.
@@ -256,7 +242,5 @@ in the appropriate repository and provide the following information:
 
 For WorldWind Java tutorials and examples, please check out our website: https://worldwind.arc.nasa.gov/.
 
-For community support and FAQs, check out the WorldWind Forum: https://forum.worldwindcentral.com/.
-
-To reach our Administrative Contact, please email: [patrick.hogan@nasa.gov](mailto:patrick.hogan@nasa.gov).
+To reach our Administrative Contact, please email: [Administrative Contact](mailto:worldwind-info@lists.nasa.gov)
 

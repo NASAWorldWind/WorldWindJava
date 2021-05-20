@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2015 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
@@ -19,10 +41,9 @@ import com.jogamp.opengl.*;
  * @author dcollins
  * @version $Id: DebuggingGLErrors.java 3433 2015-10-01 19:40:46Z dcollins $
  */
-public class DebuggingGLErrors extends ApplicationTemplate
-{
-    static
-    {
+public class DebuggingGLErrors extends ApplicationTemplate {
+
+    static {
         // Modify the configuration to specify our custom WorldWindowGLDrawable. Normally, an application would specify
         // this in a configuration file. For example, via the standard WorldWind XML configuration file:
         //
@@ -47,21 +68,22 @@ public class DebuggingGLErrors extends ApplicationTemplate
      * gov.nasa.worldwind.WorldWindowGLAutoDrawable#init(com.jogamp.opengl.GLAutoDrawable)} to configure the OpenGL
      * error logger.
      */
-    public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable
-    {
-        /** Constructs a new MyGLAutoDrawable, but otherwise does nothing. */
-        public MyGLAutoDrawable()
-        {
+    public static class MyGLAutoDrawable extends WorldWindowGLAutoDrawable {
+
+        /**
+         * Constructs a new MyGLAutoDrawable, but otherwise does nothing.
+         */
+        public MyGLAutoDrawable() {
         }
 
         /**
-         * Overridden to configure the OpenGL features used by the World Wind SDK. See {@link
+         * Overridden to configure the OpenGL features used by the WorldWind SDK. See {@link
          * com.jogamp.opengl.GLEventListener#init(com.jogamp.opengl.GLAutoDrawable)}.
          *
          * @param glAutoDrawable the drawable
          */
-        public void init(GLAutoDrawable glAutoDrawable)
-        {
+        @Override
+        public void init(GLAutoDrawable glAutoDrawable) {
             // Invoked when the GL context changes. The host machine capabilities may have changed, so re-configure the
             // OpenGL features used by the WorldWind SDK.
             super.init(glAutoDrawable);
@@ -74,8 +96,7 @@ public class DebuggingGLErrors extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         start("WorldWind Debugging GL Errors", AppFrame.class);
     }
 }

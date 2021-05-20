@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -125,7 +147,7 @@ public class WWMath
      * @param min the floor.
      * @param max the ceiling
      *
-     * @return the nearest value such that {@code min <= v <= max}.
+     * @return the nearest value such that min &lt;= v &lt;= max.
      */
     public static double clamp(double v, double min, double max)
     {
@@ -139,7 +161,7 @@ public class WWMath
      * @param min the floor.
      * @param max the ceiling
      *
-     * @return the nearest value such that {@code min <= v <= max}.
+     * @return the nearest value such that min &lt;= v &lt;= max.
      */
     public static int clamp(int v, int min, int max)
     {
@@ -151,12 +173,9 @@ public class WWMath
      * after the specified min and max. Returns a linear interpolation of min and max when the value is between the
      * two.
      * <p>
-     * The returned number is undefined if {@code min > max}. Otherwise, the returned number is equivalent to the following:
-     * <ul>
-     * <li>0.0 - If {@code value < min}</li> 
-     * <li>1.0 - If {@code value > max}</li> 
-     * <li>Linear interpolation of min and max - If {@code min <= value <= max}</li> 
-     * </ul>
+     * The returned number is undefined if min &gt; max. Otherwise, the returned number is equivalent to the following:
+     * <ul> <li>0.0 - If value &lt; min</li> <li>1.0 - If value &gt; max</li> <li>Linear interpolation of min and max - If min
+     * &lt;= value &lt;= max</li> </ul>
      *
      * @param value the value to compare to the minimum and maximum.
      * @param min   the minimum value.
@@ -194,12 +213,9 @@ public class WWMath
      * minimum or maximum. This causes the returned number to ease-in and ease-out as the value travels between the
      * minimum and maximum.
      * <p>
-     * The returned number is undefined if {@code min > max}. Otherwise, the returned number is equivalent to the following:
-     * <ul> 
-     * <li>0.0 - If {@code value < min}</li> 
-     * <li>1.0 - If {@code value > max}</li> 
-     * <li>Smooth interpolation of min and max - If {@code min * <= value <= max}</li> 
-     * </ul>
+     * The returned number is undefined if min &gt; max. Otherwise, the returned number is equivalent to the following:
+     * <ul> <li>0.0 - If value &lt; min</li> <li>1.0 - If value &gt; max</li> <li>Smooth interpolation of min and max - If min
+     * &lt;= value &lt;= max</li> </ul>
      *
      * @param value the value to compare to the minimum and maximum.
      * @param min   the minimum value.

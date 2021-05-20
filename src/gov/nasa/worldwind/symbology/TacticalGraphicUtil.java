@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology;
@@ -179,22 +201,24 @@ public class TacticalGraphicUtil
      * Graphics, Second Edition" by Eric Lengyel (equation 15.16, pg. 458).
      * <p>
      * A typical usage looks like this:
-     * <pre>{@code
+     * <pre>
+     * <code>
      * Vec4[] controlPoints = ... // Determine control points appropriate for your curve
      *
-     * List<Position> curvePositions = new ArrayList<Position>();
+     * List&lt;Position&gt; curvePositions = new ArrayList&lt;Position&gt;();
      * int[] coefficients = new int[controlPoints.length];
      *
      * int intervals = 32;
      * double delta = 1.0 / intervals;
-     * for (int i = 0; i < intervals; i++)
+     * for (int i = 0; i &lt; intervals; i++)
      * {
      *     double t = i * delta;
      *     Vec4 pt = TacticalGraphicUtil.bezierCurve(controlPoints, t, coefficients);
      *     Position pos = globe.computePositionFromPoint(p);
      *     curvePositions.add(pos);
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      *
      * @param controlPoints Control points for the curve.
      * @param t             Interpolation parameter in the range [0..1].

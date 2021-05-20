@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -22,8 +44,7 @@ import java.awt.*;
  * ScreenAnnotation sa = new ScreenAnnotation("Message...", new Point(10,10));
  * </pre>
  * <p> Each Annotation refers to an {@link AnnotationAttributes} object which defines how the text will be rendered.
- * </p> 
- * <p>Rendering attributes allow to set: <ul> <li>the size of the bounding rectangle into which the text will be
+ * </p> Rendering attributes allow to set: <ul> <li>the size of the bounding rectangle into which the text will be
  * displayed</li> <li>its frame shape, border color, width and stippling pattern</li> <li>the text font, size, style and
  * color</li> <li>the background color or image</li> <li>how much an annotation scales and fades with distance</li>
  * </ul>
@@ -34,14 +55,14 @@ import java.awt.*;
  * </pre>
  * <p> Annotations are usually handled by an {@link gov.nasa.worldwind.layers.AnnotationLayer}. Although they also
  * implement the {@link Renderable} interface and thus can be handled by a {@link gov.nasa.worldwind.layers.RenderableLayer}
- * too. </p>
+ * too. 
  * <pre>
  * AnnotationLayer layer = new AnnotationLayer();
  * layer.addAnnotation(new GlobeAnnotation("Text...", Position.fromDegrees(0, 0, 0)));
  * </pre>
  * <p> Each Annotation starts its life with a fresh attribute set that can be altered to produce the desired effect.
  * However, <code>AnnotationAttributes</code> can be set and shared between annotations allowing to control the
- * rendering attributes of many annotations from a single <code>AnnotationAttributes</code> object. </p>
+ * rendering attributes of many annotations from a single <code>AnnotationAttributes</code> object. 
  * <pre>
  * AnnotationAttributes attr = new AnnotationAttributes();
  * attr.setTextColor(Color.WHITE);
@@ -50,12 +71,12 @@ import java.awt.*;
  * </pre>
  * <p> In the above example changing the text color of the attributes set will affect all annotations referring it.
  * However, changing the text color of one of those annotations will also affect all others since it will in fact change
- * the common attributes set. </p> <p>To use an attributes object only as default values for a series of annotations use:
+ * the common attributes set. <p> To use an attributes object only as default values for a series of annotations use:
  * </p>
  * <pre>
  * ga.getAttributes().setDefaults(attr);
  * </pre>
- * <p> which can also be done in the Annotation constructor: </p>
+ * <p> which can also be done in the Annotation constructor: 
  * <pre>
  * GlobeAnnotation ga = new GlobeAnnotation(text, position, attr);
  * </pre>
@@ -67,7 +88,6 @@ import java.awt.*;
  * Each <code>AnnotationAttributes</code> object points to a default static attributes set which is the fallback source
  * for attributes with  <code>null</code> or <code>-1</code> values. This default attributes set can be set to any
  * attributes object other than the static one.
- * 
  * <pre>
  * AnnotationAttributes geoFeature = new AnnotationAttributes();
  * geoFeature.setFrameShape(AVKey.SHAPE_ELLIPSE);

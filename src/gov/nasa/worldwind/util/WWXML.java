@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -39,8 +61,6 @@ public class WWXML
 {
     public static final String XLINK_URI = "http://www.w3.org/1999/xlink";
 
-    private static Map<XMLEventReader, InputStream> inputSources = new HashMap<XMLEventReader, InputStream>();
-    
     /**
      * Create a DOM builder.
      *
@@ -58,7 +78,16 @@ public class WWXML
 
         if (Configuration.getJavaVersion() >= 1.6)
         {
-        	docBuilderFactory.setNamespaceAware(true);
+            try
+            {
+                docBuilderFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
+                    false);
+            }
+            catch (ParserConfigurationException e)
+            {   // Note it and continue on. Some Java5 parsers don't support the feature.
+                String message = Logging.getMessage("XML.NonvalidatingNotSupported");
+                Logging.logger().finest(message);
+            }
         }
 
         try
@@ -163,16 +192,9 @@ public class WWXML
             throw new IllegalArgumentException(message);
         }
 
-        try (InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c))
-        {
-            return inputStream != null ? openDocumentStream(inputStream) : null;
-        }
-        catch (IOException e)
-        {
-            String message = Logging.getMessage("generic.ExceptionClosingStream", filePath);
-            Logging.logger().severe(message);
-            return null;
-        }
+        InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c);
+
+        return inputStream != null ? openDocumentStream(inputStream) : null;
     }
 
     /**
@@ -273,8 +295,10 @@ public class WWXML
             throw new IllegalArgumentException(message);
         }
 
-        try (java.io.FileOutputStream outputStream = new java.io.FileOutputStream(filePath))
+        try
         {
+            java.io.FileOutputStream outputStream = new java.io.FileOutputStream(filePath);
+
             saveDocumentToStream(doc, outputStream);
         }
         catch (IOException e)
@@ -354,9 +378,7 @@ public class WWXML
 
         try
         {
-            XMLEventReader reader = inputFactory.createXMLEventReader(inputStream);
-            inputSources.put(reader, inputStream);
-            return reader;
+            return inputFactory.createXMLEventReader(inputStream);
         }
         catch (XMLStreamException e)
         {
@@ -440,9 +462,7 @@ public class WWXML
         try
         {
             InputStream inputStream = url.openStream();
-            XMLEventReader reader = openEventReaderStream(inputStream, isNamespaceAware);
-            inputSources.put(reader, inputStream);
-            return reader;
+            return openEventReaderStream(inputStream, isNamespaceAware);
         }
         catch (IOException e)
         {
@@ -528,28 +548,11 @@ public class WWXML
     public static void closeEventReader(XMLEventReader eventReader, String name)
     {
         if (eventReader == null)
-        {
             return;
-        }
 
         try
         {
             eventReader.close();
-            InputStream is = inputSources.get(eventReader);
-            if (is != null)
-            {
-                try
-                {
-                    is.close();
-                }
-                catch (IOException e)
-                {
-                    String message = Logging.getMessage("generic.ExceptionClosingStream",
-                        name != null ? name : "Unknown");
-                    Logging.logger().severe(message);
-                }
-                inputSources.remove(eventReader);
-            }
         }
         catch (XMLStreamException e)
         {
@@ -3670,12 +3673,8 @@ public class WWXML
 
     /**
      * Returns the byte order constant for a specified string. This performs a mapping between text and an AVKey
-     * constant: 
-     * <table><caption>Key/Values</caption>
-     * <tr><th>Text</th><th>Constant</th></tr> 
-     * <tr><td>LittleEndian</td><td>{@link AVKey#LITTLE_ENDIAN}</td></tr> 
-     * <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> 
-     * </table>
+     * constant: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Text</th><th>Constant</th></tr> <tr><td>LittleEndian</td><td>{@link
+     * AVKey#LITTLE_ENDIAN}</td></tr> <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> </table>
      *
      * @param s the string to parse as a byte order.
      *
@@ -3707,12 +3706,8 @@ public class WWXML
 
     /**
      * Returns the string text for a specified byte order constant. This performs a mapping between text and an AVKey
-     * constant: 
-     * <table><caption>Key/Values</caption>
-     * <tr><th>Text</th><th>Constant</th></tr> 
-     * <tr><td>LittleEndian</td><td>{@link AVKey#LITTLE_ENDIAN}</td></tr> 
-     * <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> 
-     * </table>
+     * constant: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Text</th><th>Constant</th></tr> <tr><td>LittleEndian</td><td>{@link
+     * AVKey#LITTLE_ENDIAN}</td></tr> <tr><td>BigEndian</td><td>{@link AVKey#BIG_ENDIAN}</td></tr> </table>
      *
      * @param byteOrder the byte order constant to encode as a string.
      *
@@ -3743,14 +3738,9 @@ public class WWXML
 
     /**
      * Returns the data type constant for a specified string. This performs a mapping between text and an AVKey
-     * constant: 
-     * <table><caption>Key/Values</caption>
-     * <tr><th>Text</th><th>Constant</th></tr> 
-     * <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
-     * <tr><td>Int32</td><td>{@link AVKey#INT32}</td></tr> 
-     * <tr><td>Int16</td><td>{@link AVKey#INT16}</td></tr>
-     * <tr><td>Int8</td><td>{@link AVKey#INT8}</td></tr> 
-     * </table>
+     * constant: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Text</th><th>Constant</th></tr> <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
+     * <tr><td>Int32</td><td>{@link AVKey#INT32}</td></tr> <tr><td>Int16</td><td>{@link AVKey#INT16}</td></tr>
+     * <tr><td>Int8</td><td>{@link AVKey#INT8}</td></tr> </table>
      *
      * @param s the string to parse as a data type.
      *
@@ -3785,10 +3775,7 @@ public class WWXML
 
     /**
      * Returns the string text for a specified data type constant. This performs a mapping between text and an AVKey
-     * constant: 
-     * <table><caption>Key/Values</caption>
-     * <tr><th>Text</th><th>Constant</th></tr> 
-     * <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
+     * constant: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Text</th><th>Constant</th></tr> <tr><td>Float32</td><td>{@link AVKey#FLOAT32}</td></tr>
      * <tr><td>Int32</td><td>{@link AVKey#INT32}</td></tr> <tr><td>Int16</td><td>{@link AVKey#INT16}</td></tr>
      * <tr><td>Int8</td><td>{@link AVKey#INT8}</td></tr> </table>
      *

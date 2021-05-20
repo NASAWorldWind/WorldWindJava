@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.awt;
 
@@ -57,7 +79,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 {
     /** The drawable to which {@link WorldWindow} methods are delegated. */
     protected final WorldWindowGLDrawable wwd; // WorldWindow interface delegates to wwd
-    
+
     /** Constructs a new <code>WorldWindowGLCanvas</code> on the default graphics device. */
     public WorldWindowGLCanvas()
     {
@@ -65,7 +87,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
-            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -73,6 +94,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -89,19 +111,17 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      *
      * @param shareWith a <code>WorldWindow</code> with which to share graphics resources.
      *
-     * @see "GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
-     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)"
+     * @see GLCanvas#GLCanvas(GLCapabilitiesImmutable, GLCapabilitiesChooser, GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith)
     {
         super(Configuration.getRequiredGLCapabilities(), new BasicGLCapabilitiesChooser(), null);
 
         if (shareWith != null)
-            this.setSharedContext(shareWith.getContext());
+            this.setSharedAutoDrawable((WorldWindowGLCanvas) shareWith);
 
         try
         {
-            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -112,6 +132,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -130,8 +151,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param device    the <code>GraphicsDevice</code> on which to create the window. May be null, in which case the
      *                  default screen device of the local {@link GraphicsEnvironment} is used.
      *
-     * @see "GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
-     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)"
+     * @see GLCanvas#GLCanvas(GLCapabilitiesImmutable, GLCapabilitiesChooser, GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device)
     {
@@ -142,7 +162,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
-            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             this.wwd.addPropertyChangeListener(this);
@@ -153,6 +172,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -175,8 +195,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
      * @param chooser      a chooser object that customizes the specified capabilities. May be null, in which case a
      *                     default chooser is used.
      *
-     * @see "GLCanvas(com.jogamp.opengl.GLCapabilitiesImmutable, com.jogamp.opengl.GLCapabilitiesChooser,
-     *      com.jogamp.opengl.GLContext, java.awt.GraphicsDevice)"
+     * @see GLCanvas#GLCanvas(GLCapabilitiesImmutable, GLCapabilitiesChooser, GraphicsDevice)
      */
     public WorldWindowGLCanvas(WorldWindow shareWith, java.awt.GraphicsDevice device,
         GLCapabilities capabilities, GLCapabilitiesChooser chooser)
@@ -188,7 +207,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
         try
         {
-            initializeSurfaceScale();
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
             this.wwd.initDrawable(this);
             if (shareWith != null)
@@ -198,6 +216,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
+            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -206,12 +225,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             Logging.logger().severe(message);
             throw new WWRuntimeException(message, e);
         }
-    }
-    
-    private void initializeSurfaceScale()
-    {
-        float[] surfaceScale = {1.0f, 1.0f};
-        setSurfaceScale(surfaceScale);
     }
 
     public void propertyChange(PropertyChangeEvent evt)

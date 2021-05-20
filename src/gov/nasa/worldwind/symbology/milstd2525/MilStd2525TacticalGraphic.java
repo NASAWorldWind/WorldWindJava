@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology.milstd2525;
@@ -9,14 +31,12 @@ package gov.nasa.worldwind.symbology.milstd2525;
 import gov.nasa.worldwind.symbology.TacticalGraphic;
 
 /**
- * Interface to describe tactical graphics defined by
- * <a href="http://www.assistdocs.com/search/document_details.cfm?ident_number=114934">MIL-STD-2525</a>. See the
- * TacticalGraphic <a href="https://goworldwind.org/developers-guide/symbology/tactical-graphics/"
- * target="_blank">Usage Guide</a> for instructions on using TacticalGraphic in an application.
+ * Interface to describe tactical graphics defined by <a href="http://www.assistdocs.com/search/document_details.cfm?ident_number=114934">MIL-STD-2525</a>.
+ * See the TacticalGraphic <a href="https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/" target="_blank">Tutorial</a>
+ * for instructions on using TacticalGraphic in an application.
  * <p>
  * The following table lists the modifiers supported by 2525 graphics. Note that not all graphics support all modifiers.
- * <table style="width:100%;"><caption>Modifiers</caption> <tr><th>Field</th><th>Modifier key</th><th>Data
- * type</th><th>Description</th></tr>
+ * <table> <caption style="font-weight: bold;">2525 Graphics Modifiers</caption><tr><th>Field</th><th>Modifier key</th><th>Data type</th><th>Description</th></tr>
  * <tr><td>A</td><td>SymbologyConstants.SYMBOL</td><td>String</td><td>SIDC for a MIL-STD-2525 Tactical Symbol</td></tr>
  * <tr><td>B</td><td>SymbologyConstants.ECHELON</td><td>String</td><td>Echelon</td></tr>
  * <tr><td>C</td><td>SymbologyConstants.QUANTITY</td><td>String</td><td>Quantity</td></tr>
@@ -31,7 +51,6 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
  * <p>
  * Here's an example of setting modifiers during construction of a graphic:
  * <pre>
- * {@code
  * AVList modifiers = new AVListImpl();
  * modifiers.setValue(SymbologyConstants.UNIQUE_DESIGNATION, "X469"); // Field T
  * modifiers.setValue(SymbologyConstants.DATE_TIME_GROUP, "10095900ZJAN92); // Field W
@@ -42,7 +61,6 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
  *
  * // Create the graphic with the modifier list
  * TacticalGraphic graphic = factory.createGraphic("GHMPNEB----AUSX", positions, modifiers);
- * }
  * </pre>
  * <p>
  * Some graphics support multiple instances of a modifier. For example, 2525 uses the field code W for a date/time
@@ -50,12 +68,10 @@ import gov.nasa.worldwind.symbology.TacticalGraphic;
  * application can pass an {@link Iterable} to <code>setModifier</code> if multiple values are required to specify the
  * modifier. Here's an example of how to specify two timestamps:
  * <pre>
- * {@code
  * String startDate = ...
  * String endData = ...
  *
  * graphic.setModifier(SymbologyConstants.DATE_TIME_GROUP, Arrays.asList(startDate, endDate));
- * }
  * </pre>
  *
  * @author pabercrombie
@@ -78,23 +94,13 @@ public interface MilStd2525TacticalGraphic extends TacticalGraphic
      * graphic's Status can define its operational condition. The recognized values depend on the graphic's scheme:
      * <p>
      * <strong>Tactical graphics</strong>
-     * <ul> 
-     * <li>STATUS_ANTICIPATED</li> 
-     * <li>STATUS_SUSPECTED</li> 
-     * <li>STATUS_PRESENT</li> 
-     * <li>STATUS_KNOWN</li> 
-     * </ul>
+     * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_SUSPECTED</li> <li>STATUS_PRESENT</li> <li>STATUS_KNOWN</li> </ul>
      * <p>
      * <strong>Meteorological and Oceanographic</strong>
-     * <ul> 
-     * <li>Not supported</li> 
-     * </ul>
+     * <ul> <li>Not supported</li> </ul>
      * <p>
      * <strong>Emergency Management</strong>
-     * <ul> 
-     * <li>STATUS_ANTICIPATED</li> 
-     * <li>STATUS_PRESENT</li> 
-     * </ul>
+     * <ul> <li>STATUS_ANTICIPATED</li> <li>STATUS_PRESENT</li> </ul>
      *
      * @param value the new value for the Status/Operational Condition field.
      *
