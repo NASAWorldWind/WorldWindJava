@@ -925,7 +925,7 @@ public class GeotiffWriter
                 };
 
             // IMPORTANT!! update count - number of geokeys
-            values[3] = (short) (values.length / 4);
+            values[3] = (short) ((values.length - 4) / 4);
 
             byte[] bytes = this.getBytes(values);
             this.theChannel.write(ByteBuffer.wrap(bytes));
@@ -983,7 +983,7 @@ public class GeotiffWriter
                 };
 
             // IMPORTANT!! update count - number of geokeys
-            values[3] = (short) (values.length / 4);
+            values[3] = (short) ((values.length - 4) / 4);
 
             byte[] bytes = this.getBytes(values);
             this.theChannel.write(ByteBuffer.wrap(bytes));
