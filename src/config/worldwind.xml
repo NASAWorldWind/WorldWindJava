@@ -60,8 +60,15 @@
               value="gov.nasa.worldwind.formats.shapefile.ShapefileLayerFactory"/>
     <Property name="gov.nasa.worldwind.avkey.WebViewFactory"
               value="gov.nasa.worldwind.util.webview.BasicWebViewFactory"/>
+<!--    <Property name="gov.nasa.worldwind.avkey.TessellatorClassName"
+              value="gov.nasa.worldwind.terrain.EllipsoidIcosahedralTessellator"/>    -->
+<!--    <Property name="gov.nasa.worldwind.avkey.TessellatorClassName"
+              value="gov.nasa.worldwind.terrain.EquilateralTessellator"/>    -->
     <Property name="gov.nasa.worldwind.avkey.TessellatorClassName"
-              value="gov.nasa.worldwind.terrain.RectangularTessellator"/>
+              value="gov.nasa.worldwind.terrain.tessellate.icosahedron.IcoSphereTessellator"/>    
+<!--    <Property name="gov.nasa.worldwind.avkey.TessellatorClassName"
+                        value="gov.nasa.worldwind.terrain.RectangularTessellator"/>-->
+
     <Property name="gov.nasa.worldwind.avkey.MemoryCacheSetClassName"
               value="gov.nasa.worldwind.cache.BasicMemoryCacheSet"/>
     <Property name="gov.nasa.worldwind.avkey.SessionCacheClassName" value="gov.nasa.worldwind.cache.BasicSessionCache"/>

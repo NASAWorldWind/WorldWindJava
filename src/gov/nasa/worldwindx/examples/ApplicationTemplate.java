@@ -139,6 +139,8 @@ public class ApplicationTemplate {
             ViewControlsLayer viewControlsLayer = new ViewControlsLayer();
             insertBeforeCompass(getWwd(), viewControlsLayer);
             this.getWwd().addSelectListener(new ViewControlsSelectListener(this.getWwd(), viewControlsLayer));
+            this.getWwd().getModel().setShowWireframeExterior(true);
+            this.getWwd().getModel().setShowWireframeInterior(true);
 
             // Register a rendering exception listener that's notified when exceptions occur during rendering.
             this.wwjPanel.getWwd().addRenderingExceptionListener((Throwable t) -> {
