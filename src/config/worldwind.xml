@@ -116,7 +116,7 @@
     <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyType" value="Proxy.Type.Http"/>-->
 
     <!-- Location of icons for MIL-STD-2525C symbol set. This can be a URL to a web server, to a local zip or jar archive.
-See https://worldwind.arc.nasa.gov/java/tutorials/tactical-graphics/ for more information.
+See the "Tactical Symbols" tutorials in https://worldwind.arc.nasa.gov/java/tutorials/ for more information.
 Examples: http://myserver.com/milstd2525/   (web server)
     jar:file:milstd2525-symbols.zip!  (local zip archive)  -->
     <Property name="gov.nasa.worldwind.avkey.MilStd2525IconRetrieverPath"
