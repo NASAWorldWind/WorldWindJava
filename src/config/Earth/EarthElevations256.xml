@@ -32,9 +32,9 @@
     <ElevationModel version="1">
         <DisplayName>USA 10m, World 30m, Ocean 900m</DisplayName>
         <Service serviceName="OGC:WMS" version="1.3">
-            <GetCapabilitiesURL>https://worldwind26.arc.nasa.gov/elev</GetCapabilitiesURL>
-            <GetMapURL>https://worldwind26.arc.nasa.gov/elev</GetMapURL>
-            <LayerNames>NASA_SRTM30_900m_Tiled,aster_v2,USGS-NED</LayerNames>
+            <GetCapabilitiesURL>https://wms.worldwind.earth/elev</GetCapabilitiesURL>
+            <GetMapURL>https://wms.worldwind.earth/elev</GetMapURL>
+            <LayerNames>SRTM-CGIAR,GEBCO</LayerNames>
         </Service>
         <RetrievePropertiesFromService>true</RetrievePropertiesFromService>
         <!-- day month year hours:minutes:seconds timezone -->
