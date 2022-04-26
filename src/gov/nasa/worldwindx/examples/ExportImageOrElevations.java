@@ -234,8 +234,6 @@ public class ExportImageOrElevations extends ApplicationTemplate {
             return selectDestinationFile(title, filename, fileChooser);
         }
 
-
-
         private File selectDestinationFile(String title, String filename, JFileChooser fileChooser) {
             File destFile = null;
             this.fileChooser.setCurrentDirectory(new File(Configuration.getUserHomeDirectory()));
@@ -250,14 +248,12 @@ public class ExportImageOrElevations extends ApplicationTemplate {
                 destFile = this.fileChooser.getSelectedFile();
                 String extension;
                 FileFilter fc = fileChooser.getFileFilter();
-                try{
+                try {
                     extension = ((FileNameExtensionFilter) fc).getExtensions()[0];
                 } catch (Exception e) {
                     // If the AcceptAllFileFilter was used, then just set extension to .tif
                     extension = ".tif";
                 }
-                
-//                System.out.println("EXTENSION: " + extension);
 
                 if ((extension.isBlank() || extension.equals("Optional.empty")) && this.localImageFileExtensionMap.get(extension) == null) {
                     destFile = new File(destFile.getPath() + ".tif");
@@ -271,7 +267,7 @@ public class ExportImageOrElevations extends ApplicationTemplate {
             }
             return destFile;
         }
-        
+
         public Optional<String> getExtensionByStringHandling(String filename) {
             return Optional.ofNullable(filename)
                     .filter(f -> f.contains("."))
@@ -367,20 +363,13 @@ public class ExportImageOrElevations extends ApplicationTemplate {
             final File saveToFile = this.selectDestinationImage("Select a destination GeoTiff file to save the image",
                     "image");
 
-            if (saveToFile == null ) {
+            if (saveToFile == null) {
                 return;
-            }
-            
-            if (selectedSector == null){
-//                System.out.println("Sector is Null!");
             }
 
             String fileName = saveToFile.getName();
-//            System.out.println("fileName: " + fileName);
             String extension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
-//            System.out.println("ext: " + extension);
             final String mimeType = this.localImageFileExtensionMap.get(extension);
-//            System.out.println("mimeType: " + mimeType);
 
             final TiledImageLayer activeLayer = currentLayer;
 
@@ -484,7 +473,6 @@ public class ExportImageOrElevations extends ApplicationTemplate {
                     }
                 }
             }
-//            System.out.println("MIME TYPE IS: " + mimeType);
             return layer.composeImageForSector(this.selectedSector, width, height, 1d, -1, mimeType, true, null, 30000);
         }
 
