@@ -3,7 +3,7 @@
 # WorldWind Java
 
 ## New version of WorldWind Java released
-WorldWind Java 2.2.1 is now available on GitHub. This version of WorldWind Java is a housekeeping release that addresses small fixes (typos, bad references, etc.) to various areas of the code and removes references to services that are no longer supported by the WorldWind servers.
+WorldWind Java 2.2.1 is now available on GitHub. This version of WorldWind Java is a maintenance release that addresses small fixes (typos, bad references, etc.) to various areas of the code and removes references to services that are no longer supported by the WorldWind servers.
 
 WorldWind's API remains unchanged in this release and we are committed to maintaining a consistent API in future releases.
 More information on the release can be found at this link: [WorldWind Java 2.2.1](https://github.com/NASAWorldWind/WorldWindJava/releases).
