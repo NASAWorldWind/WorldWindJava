@@ -2,9 +2,11 @@
 
 # WorldWind Java
 
-## New versions of WorldWind released
-Web WorldWind 0.10.0 and WorldWind Java 2.2.0 are now available on GitHub. The new version of Web WorldWind addresses potential vulnerabilities in the code and underlying packages.  The new version of WorldWind Java focuses on upgrading to Java 11 and JOGL 2.4 as well as a switch to Apache 2.0 license.  WorldWind's API remains largely unchanged in this release and we are committed to maintaining a consistent API in future releases.
-More information on the release can be found at these links: [Web WorldWind 0.10.0](https://github.com/NASAWorldWind/WebWorldWind/releases) and [WorldWind Java 2.2.0](https://github.com/NASAWorldWind/WorldWindJava/releases).
+## New version of WorldWind Java released
+WorldWind Java 2.2.1 is now available on GitHub. This version of WorldWind Java is a maintenance release that addresses small fixes (typos, bad references, etc.) to various areas of the code and removes references to services that are no longer supported by the WorldWind servers.
+
+WorldWind's API remains unchanged in this release and we are committed to maintaining a consistent API in future releases.
+More information on the release can be found at this link: [WorldWind Java 2.2.1](https://github.com/NASAWorldWind/WorldWindJava/releases).
 
 Please direct questions to our new email address: arc-worldwind@mail.nasa.gov.
 
@@ -25,7 +27,11 @@ Official WorldWind Java releases have the latest stable features, enhancements a
 
 ## Run a Demo
 
-With the deprecation of WebStart/JNLP, the only option for running a Java demo is to clone the SDK, open it with Apache Netbeans and run it via the Netbeans interface. 
+The following options are available to run a WorldWind Java demo:
+
+###### From the Apache NetBeans IDE
+
+Clone the SDK with git, open the WorldWind Java project with Apache Netbeans and run demos via the Netbeans interface. 
 
 ###### From a Windows Development Environment
 
