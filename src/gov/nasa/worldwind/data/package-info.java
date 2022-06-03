@@ -311,7 +311,7 @@
 <h3>Deploying with Java Web Start</h3>
  *
     Instructions for using the WorldWind GDAL libraries with a Java Web Start application are available at
- * <a href="https://goworldwind.org/getting-started/" target="_blank">https://goworldwind.org/getting-started/</a>.
+ * <a href="https://worldwind.arc.nasa.gov/java/get-started/" target="_blank">https://worldwind.arc.nasa.gov/java/get-started/</a>.
  *
  * <!--**************************************************************-->
  * <!--********************  Use Case Examples  *********************-->
