@@ -381,24 +381,4 @@
             </manifest>
         </jar>
     </target>
-
-    <!-- Helper tasks for compiling and linking the WebView native library for the current platform. Output libraries
-         are placed in the WorldWind project root folder and overwrite any existing files of the same name.
-
-         On Mac OS X this compiles the Objective-C sources under the folder 'lib-external/webview/macosx' into
-         'libwebview.jnilib', and requires that the XCode and Java development toolkits for Mac are installed.
-
-         On Windows this compiles the C and C++ sources under 'lib-external/webview/windows' into 'WebView32.dll' and
-         'WebView64.dll', and requires that the Microsoft Visual C++ build tools are avialable on the path. -->
-
-    <target name="help.assembleWebviewLibrary">
-        <exec os="Mac OS X" dir="${basedir}/lib-external/webview/macosx" executable="/bin/sh" failonerror="true">
-            <arg value="build.sh"/>
-        </exec>
-        <exec osfamily="Windows" dir="${basedir}/lib-external/webview/windows" executable="nmake" failonerror="true">
-            <arg value="clean"/>
-            <arg value="all"/>
-        </exec>
-    </target>
-
 </project>

@@ -52,7 +52,11 @@ Official WorldWind Java releases have the latest stable features, enhancements a
 
 ## Run a Demo
 
-With the deprecation of WebStart/JNLP, the only option for running a Java demo is to clone the SDK, open it with Apache Netbeans and run it via the Netbeans interface. 
+The following options are available to run a WorldWind Java demo:
+
+###### From the Apache NetBeans IDE
+
+Clone the SDK with git, open the WorldWind Java project with Apache Netbeans and run demos via the Netbeans interface. 
 
 ###### From a Windows Development Environment
 
