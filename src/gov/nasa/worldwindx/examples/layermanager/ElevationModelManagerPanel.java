@@ -149,6 +149,7 @@ public class ElevationModelManagerPanel extends JPanel
 
         if (!(wwd.getModel().getGlobe().getElevationModel() instanceof CompoundElevationModel))
         {
+            if (this.modelPanels.size() == 0) return false;
             return this.modelPanels.get(0).getElevationModel() == wwd.getModel().getGlobe().getElevationModel();
         }
 
