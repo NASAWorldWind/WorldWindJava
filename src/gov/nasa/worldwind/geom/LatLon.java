@@ -32,6 +32,7 @@ import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.util.*;
 
 import java.util.*;
+import java.util.regex.*;
 
 /**
  * Represents a point on the two-dimensional surface of a globe. Latitude is the degrees North and ranges between [-90,
@@ -45,6 +46,20 @@ import java.util.*;
 public class LatLon
 {
     public static final LatLon ZERO = new LatLon(Angle.ZERO, Angle.ZERO);
+    
+    private static final String SEPARATORS = "(\\s*|,|,\\s*)";
+    
+    public static final Pattern DECIMAL_PATTERN = Pattern.compile(
+        "([-|\\+]?\\d+?(\\.\\d+?)??\\s*[N|n|S|s]??)" +
+        SEPARATORS +
+        "([-|\\+]?\\d+?(\\.\\d+?)??\\s*[E|e|W|w]??)");
+    
+    public static final Pattern DMS_PATTERN = Pattern.compile(
+        "([-|\\+]?\\d{1,3}[d|D|\u00B0|\\s](\\s*\\d{1,2}['|\u2019|\\s])?(\\s*\\d{1,2}(\\.\\d+?)??[\"|\u201d])?\\s*[N|n|S|s]?)" +
+        SEPARATORS +
+        "([-|\\+]?\\d{1,3}[d|D|\u00B0|\\s](\\s*\\d{1,2}['|\u2019|\\s])?(\\s*\\d{1,2}(\\.\\d+?)??[\"|\u201d])?\\s*[E|e|W|w]?)");
+    
+    public static final Pattern PATTERN = Pattern.compile(DECIMAL_PATTERN.pattern() + "|" + DMS_PATTERN.pattern());
 
     /**
      * A near zero threshold used in some of the rhumb line calculations where floating point calculations cause
@@ -1662,15 +1677,14 @@ public class LatLon
      * Parses a string containing latitude and longitude coordinates in either Degrees-minutes-seconds or decimal
      * degrees. The latitude must precede the longitude and the angles must be separated by a comma.
      *
-     * @param latLonString a string containing the comma separated latitude and longitude in either DMS or decimal
-     *                     degrees.
+     * @param latLonString a string containing the comma separated latitude and longitude in either DMS or decimal degrees.
      *
      * @return a <code>LatLon</code> instance with the parsed angles.
      *
      * @throws IllegalArgumentException if <code>latLonString</code> is null.
      * @throws NumberFormatException    if the string does not form a latitude, longitude pair.
      */
-    public LatLon parseLatLon(String latLonString) // TODO
+    public static LatLon parseLatLon(String latLonString)
     {
         if (latLonString == null)
         {
@@ -1679,7 +1693,70 @@ public class LatLon
             throw new IllegalArgumentException(msg);
         }
 
-        throw new UnsupportedOperationException(); // TODO: remove when implemented
+        Angle lat = null;
+        Angle lon = null;
+        latLonString = latLonString.trim();
+
+        // Try to extract a pair of signed decimal values separated by a space, ',' or ', '
+        // Allow E, W, S, N sufixes
+        Matcher matcher = DECIMAL_PATTERN.matcher(latLonString);
+        if (matcher.matches())
+        {
+            String sLat = matcher.group(1).trim();  // Latitude
+            int signLat = 1;
+            char suffix = sLat.toUpperCase().charAt(sLat.length() - 1);
+            if (!Character.isDigit(suffix))
+            {
+                signLat = suffix == 'N' ? 1 : -1;
+                sLat = sLat.substring(0, sLat.length() - 1);
+                sLat = sLat.trim();
+            }
+
+            String sLon = matcher.group(4).trim();  // Longitude
+            int signLon = 1;
+            suffix = sLon.toUpperCase().charAt(sLon.length() - 1);
+            if (!Character.isDigit(suffix))
+            {
+                signLon = suffix == 'E' ? 1 : -1;
+                sLon = sLon.substring(0, sLon.length() - 1);
+                sLon = sLon.trim();
+            }
+
+            lat = Angle.fromDegrees(Double.parseDouble(sLat) * signLat);
+            lon = Angle.fromDegrees(Double.parseDouble(sLon) * signLon);
+        }
+
+        // Try to extract two degrees minute seconds blocks separated by a space, ',' or ', '
+        // Allow S, N, W, E suffixes and signs.
+        // eg: -123° 34' 42" +45° 12' 30"
+        // eg: 123° 34' 42"S 45° 12' 30"W
+        if (lat == null || lon == null)
+        {
+            matcher = DMS_PATTERN.matcher(latLonString);
+            if (matcher.matches())
+            {
+                lat = Angle.fromDMS(matcher.group(1));
+                lon = Angle.fromDMS(matcher.group(6));
+            }
+        }
+
+        if (lat == null || lon == null)
+        {
+            String message = Logging.getMessage("generic.ArgumentOutOfRange", latLonString);
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        if(lat.degrees >= -90 && lat.degrees <= 90 && lon.degrees >= -180 && lon.degrees <= 180)
+        {
+            return new LatLon(lat, lon);
+        }
+        else
+        {
+            String message = Logging.getMessage("generic.ArgumentOutOfRange", latLonString);
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
     }
 
     @Override
