@@ -46,6 +46,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
     protected double majorRadius;
     protected double minorRadius;
     protected Angle heading = Angle.ZERO;
+    protected Angle theta = Angle.POS360;
     private int intervals = DEFAULT_NUM_INTERVALS;
 
     /**
@@ -274,6 +275,38 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         this.intervals = intervals;
     }
+    
+    /**
+     * Constructs a new surface ellipse with the specified normal (as opposed to highlight) attributes, the specified
+     * center location, radii (in meters), heading clockwise from North, and initial number of geometry intervals.
+     * Modifying the attribute reference after calling this constructor causes this shape's appearance to change
+     * accordingly.
+     *
+     * @param normalAttrs the normal attributes. May be null, in which case default attributes are used.
+     * @param center      the ellipse's center location.
+     * @param majorRadius the ellipse's major radius, in meters.
+     * @param minorRadius the ellipse's minor radius, in meters.
+     * @param heading     the ellipse's heading, clockwise from North.
+     * @param intervals   the initial number of intervals (or slices) defining the ellipse's geometry.
+     * @param theta       the angle defining the start and end of the ellipse's geometry.
+     *
+     * @throws IllegalArgumentException if the center or heading are null, if either radii is negative, or if the number
+     *                                  of intervals is less than 8.
+     */
+    public SurfaceEllipse(ShapeAttributes normalAttrs, LatLon center, double majorRadius, double minorRadius,
+        Angle heading, int intervals, Angle theta)
+    {
+        this(normalAttrs, center, majorRadius, minorRadius, heading, intervals);
+
+        if (theta == null)
+        {
+            String message = Logging.getMessage("nullValue.ThetaIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+
+        this.theta = theta;
+    }
 
     public LatLon getCenter()
     {
@@ -370,6 +403,24 @@ public class SurfaceEllipse extends AbstractSurfaceShape
         this.intervals = intervals;
         this.onShapeChanged();
     }
+    
+    public Angle getTheta()
+    {
+        return this.theta;
+    }
+    
+    public void setTheta(Angle theta)
+    {
+        if (theta == null)
+        {
+            String message = Logging.getMessage("nullValue.ThetaIsNull");
+            Logging.logger().severe(message);
+            throw new IllegalArgumentException(message);
+        }
+        
+        this.theta = theta;
+        this.onShapeChanged();
+    }
 
     /**
      * {@inheritDoc}
@@ -430,27 +481,48 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         if (this.majorRadius == 0 && this.minorRadius == 0)
             return null;
+        
+        boolean closed = this.theta.equals(Angle.POS360);
 
-        int numLocations = 1 + Math.max(MIN_NUM_INTERVALS, intervals);
-        double da = (2 * Math.PI) / (numLocations - 1);
+        int numIntervals = Math.max(MIN_NUM_INTERVALS, intervals);
+        int numLocations = 1 + numIntervals;
+        double da = (this.theta.radians) / (numLocations - 1);
         double globeRadius = globe.getRadiusAt(this.center.getLatitude(), this.center.getLongitude());
 
-        LatLon[] locations = new LatLon[numLocations];
+        List<LatLon> locations = new ArrayList<LatLon>(numLocations);
+        
+        // If the ellipse is not closed, start drawing from the center-position.
+        if (!closed) {
+            locations.add(this.center);
+        }
 
         for (int i = 0; i < numLocations; i++)
         {
-            double angle = (i != numLocations - 1) ? i * da : 0;
+            double angle = 0.0;
+            // If the ellipse is closed, snap angle to 0-degrees on final location.
+            if (closed) {
+                angle = (i != numIntervals) ? i * da : 0;
+            } else {
+                angle = (i != numIntervals) ? i * da : this.theta.radians;
+            }
+            
             double xLength = this.majorRadius * Math.cos(angle);
             double yLength = this.minorRadius * Math.sin(angle);
             double distance = Math.sqrt(xLength * xLength + yLength * yLength);
-            // azimuth runs positive clockwise from north and through 360 degrees.
+            
+            // azimuth runs positive clockwise from north and through theta degrees.
             double azimuth = (Math.PI / 2.0) - (Math.acos(xLength / distance) * Math.signum(yLength)
                 - this.heading.radians);
 
-            locations[i] = LatLon.greatCircleEndPosition(this.center, azimuth, distance / globeRadius);
+            locations.add(LatLon.rhumbEndPosition(this.center, Angle.fromRadians(azimuth), Angle.fromRadians(distance / globeRadius)));
+        }
+        
+        // If the ellipse is not closed, end at the center-position.
+        if (!closed) {
+            locations.add(this.center);
         }
 
-        return Arrays.asList(locations);
+        return locations;
     }
 
     protected List<List<LatLon>> createGeometry(Globe globe, double edgeIntervalsPerDegree)
@@ -491,7 +563,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
 
         int numPositions = 1 + Math.max(MIN_NUM_INTERVALS, intervals);
         double radius = Math.max(this.majorRadius, this.minorRadius);
-        double da = (2 * Math.PI) / (numPositions - 1);
+        double da = (this.theta.radians) / (numPositions - 1);
         Angle edgePathLength = Angle.fromRadians(da * radius / globe.getRadiusAt(this.center));
 
         double edgeIntervals = WWMath.clamp(edgeIntervalsPerDegree * edgePathLength.degrees,
@@ -513,6 +585,7 @@ public class SurfaceEllipse extends AbstractSurfaceShape
         rs.addStateValueAsDouble(context, "minorRadius", this.getMinorRadius());
         rs.addStateValueAsDouble(context, "headingDegrees", this.getHeading().degrees);
         rs.addStateValueAsInteger(context, "intervals", this.getIntervals());
+        rs.addStateValueAsDouble(context, "theta", this.getTheta().degrees);
     }
 
     protected void doRestoreState(RestorableSupport rs, RestorableSupport.StateObject context)
@@ -538,6 +611,10 @@ public class SurfaceEllipse extends AbstractSurfaceShape
         Integer i = rs.getStateValueAsInteger(context, "intervals");
         if (d != null)
             this.setIntervals(i);
+        
+        d = rs.getStateValueAsDouble(context, "theta");
+        if (d != null)
+            this.setTheta(Angle.fromDegrees(d));
     }
 
     protected void legacyRestoreState(RestorableSupport rs, RestorableSupport.StateObject context)
