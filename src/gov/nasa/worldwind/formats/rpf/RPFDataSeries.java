@@ -117,7 +117,7 @@ public enum RPFDataSeries
     DATA_SERIES_I5("I5", "---", ".5m", "Imagery, .5 (half) meter resolution", "CIB", 0.5),
     DATA_SERIES_IV("IV", "---", "Various>10m", "Imagery, greater than 10 meter resolution", "CIB", -1),
     DATA_SERIES_D1("D1", "---", "100m", "Elevation Data from DTED level 1", "CDTED", 100.0),
-    DATA_SERIES_D2("D1", "---", "30m", "Elevation Data from DTED level 2", "CDTED", 30.0),
+    DATA_SERIES_D2("D2", "---", "30m", "Elevation Data from DTED level 2", "CDTED", 30.0),
     /* [Chart.php] */
     DATA_SERIES_TF("TF", "---", "1:250000", "Transit Fly (UK)", "CADRG", 250000),
     ;
