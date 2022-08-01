@@ -108,19 +108,29 @@ public class ViewControlsSelectListener implements SelectListener
     /**
      * Set the repeat timer delay in milliseconds.
      *
+     * If the delay <= 0 then the internal timer will be stopped.
+     *
+     * Here are some explaination why stopping the timer could be a good idea :
+     * Some developpers don't uses System.exit() to terminate a java process (the jvm
+     * is terminated automatically if no more (non-deamons) threads are running, this way
+     * it's possible to check that every code is managed correctly when the app is quitting).
+     * The internal timer does not allow this behaviour, because if the timer is not stopped
+     * the jvm will never terminate...
+     * 
      * @param delay the repeat timer delay in milliseconds.
      *
      * @throws IllegalArgumentException if delay is less than or equal to zero.
      */
     public void setRepeatTimerDelay(int delay)
     {
-        if (delay <= 0)
-        {
-            String message = Logging.getMessage("generic.ArgumentOutOfRange", delay);
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
+        if (delay <= 0) {
+            this.repeatTimer.stop();
+            
+        } else {
+            this.repeatTimer.setDelay(delay);
+            this.repeatTimer.restart();
         }
-        this.repeatTimer.setDelay(delay);
+        
     }
 
     /**
