@@ -19,28 +19,28 @@ public class ZebraInputHandler extends AWTInputHandler
     /** All instantiations of this class are stored for internal retrieval. */
     private static List<ZebraInputHandler> instances = new ArrayList<ZebraInputHandler>();
     private static Timer repaintContextsTimer = null;
-    
+
     final static TimerTask repaintContextsTask = new TimerTask()
 	{
-		public void run()        	
+		public void run()
 		{
 			Iterator<ZebraInputHandler> itr = instances.iterator();
 	        while (itr.hasNext())
 	        {
-	            ZebraInputHandler h = itr.next();	           
+	            ZebraInputHandler h = itr.next();
 	            if (h.NeedsRefresh() == true)
 	            {
 	            	h.SetRefresh(false);
 	            	h.getWorldWindow().redraw();
-	            }        		            	
+	            }
 	        }
 		}
 	};
-	
+
 	private long hwnd = 0;
-    private boolean arGL2Present = false;    
+    private boolean arGL2Present = false;
     private boolean refresh = false;
-    
+
     public ZebraInputHandler()
     {
         /**
@@ -49,7 +49,7 @@ public class ZebraInputHandler extends AWTInputHandler
          * (b) Not using the Zebra integration tools.
          */
         try
-        {        	
+        {
             System.loadLibrary("arGL2Integrator");
             arGL2Present = true;
             instances.add(this);
@@ -59,7 +59,7 @@ public class ZebraInputHandler extends AWTInputHandler
         {
             System.out.println("FAILED to load arGL2Integrator.dll");
         }
-        
+
         if (repaintContextsTimer == null)
         {
         	repaintContextsTimer = new Timer();
@@ -68,21 +68,21 @@ public class ZebraInputHandler extends AWTInputHandler
     }
 
     private synchronized void SetRefresh(boolean value)
-    { 
+    {
     	refresh = value;
     }
-    
+
     private synchronized boolean NeedsRefresh()
     {
     	return refresh;
 	}
-    
+
     public void keyPressed(KeyEvent e)
     {
         boolean consumed = false;
         if (arGL2Present)
             consumed = zebraKeyPressed(getGLCanvasHandle(), e.getKeyCode());
-        if (consumed == true)
+        if (consumed)
             e.consume();
         else
             super.keyPressed(e);
@@ -93,7 +93,7 @@ public class ZebraInputHandler extends AWTInputHandler
         boolean consumed = false;
         if (arGL2Present)
             consumed = zebraKeyReleased(getGLCanvasHandle(), e.getKeyCode());
-        if (consumed == true)
+        if (consumed)
             e.consume();
         else
             super.keyReleased(e);
@@ -104,7 +104,7 @@ public class ZebraInputHandler extends AWTInputHandler
         boolean consumed = false;
         if (arGL2Present)
             consumed = zebraMouseReleased(getGLCanvasHandle(), e.getButton(), e.getX(), e.getY());
-        if (consumed == true)
+        if (consumed)
             e.consume();
         else
             super.mouseClicked(e);
@@ -115,7 +115,7 @@ public class ZebraInputHandler extends AWTInputHandler
         boolean consumed = false;
         if (arGL2Present)
             consumed = zebraMousePressed(getGLCanvasHandle(), e.getButton(), e.getX(), e.getY());
-        if (consumed == true)
+        if (consumed)
             e.consume();
         else
             super.mousePressed(e);
@@ -126,7 +126,7 @@ public class ZebraInputHandler extends AWTInputHandler
         boolean consumed = false;
         if (arGL2Present)
             consumed = zebraMouseReleased(getGLCanvasHandle(), e.getButton(), e.getX(), e.getY());
-        if (consumed == true)
+        if (consumed)
             e.consume();
         else
             super.mouseReleased(e);
@@ -143,7 +143,7 @@ public class ZebraInputHandler extends AWTInputHandler
         boolean consumed = false;
         if (arGL2Present)
             consumed = zebraMouseMoved(getGLCanvasHandle(), button, e.getX(), e.getY());
-        if (consumed == true)
+        if (consumed)
             e.consume();
         else
             super.mouseDragged(e);
@@ -154,7 +154,7 @@ public class ZebraInputHandler extends AWTInputHandler
         boolean consumed = false;
         if (arGL2Present)
             consumed = zebraMouseWheel(getGLCanvasHandle(), e.getWheelRotation());
-        if (consumed == true)
+        if (consumed)
             e.consume();
         else
             super.mouseWheelMoved(e);
@@ -198,7 +198,7 @@ public class ZebraInputHandler extends AWTInputHandler
     // Java static methods executed by arGL2Integrator.dll via JNI
 
     public static void forceRepaint(long hwnd)
-    {   
+    {
         /** Force the instance of the ZebraViewInputHandler class to redraw it's associated OpenGL window. */
         ZebraInputHandler h = getInstance(hwnd);
         if (h != null)

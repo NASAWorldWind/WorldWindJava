@@ -268,62 +268,17 @@ public class AWTInputHandler extends WWObjectImpl
 
     public void keyTyped(KeyEvent keyEvent)
     {
-        if (this.wwd == null)
-        {
-            return;
-        }
-
-        if (keyEvent == null)
-        {
-            return;
-        }
-
-        this.callKeyTypedListeners(keyEvent);
-
-        if (!keyEvent.isConsumed())
-        {
-            this.wwd.getView().getViewInputHandler().keyTyped(keyEvent);
-        }
+        keyMethod(keyEvent, 1);
     }
 
     public void keyPressed(KeyEvent keyEvent)
     {
-        if (this.wwd == null)
-        {
-            return;
-        }
-
-        if (keyEvent == null)
-        {
-            return;
-        }
-
-        this.callKeyPressedListeners(keyEvent);
-
-        if (!keyEvent.isConsumed())
-        {
-            this.wwd.getView().getViewInputHandler().keyPressed(keyEvent);
-        }
+        keyMethod(keyEvent, 2);
     }
 
     public void keyReleased(KeyEvent keyEvent)
     {
-        if (this.wwd == null)
-        {
-            return;
-        }
-
-        if (keyEvent == null)
-        {
-            return;
-        }
-
-        this.callKeyReleasedListeners(keyEvent);
-
-        if (!keyEvent.isConsumed())
-        {
-            this.wwd.getView().getViewInputHandler().keyReleased(keyEvent);
-        }
+         keyMethod(keyEvent, 3);
     }
 
     public void mouseClicked(final MouseEvent mouseEvent)
@@ -805,6 +760,44 @@ public class AWTInputHandler extends WWObjectImpl
         for (KeyListener listener : this.eventListeners.getListeners(KeyListener.class))
         {
             listener.keyTyped(event);
+        }
+    }
+
+    private void keyMethod(KeyEvent keyEvent, int caseNumber)
+    {
+        if (this.wwd == null)
+        {
+            return;
+        }
+
+        if (keyEvent == null)
+        {
+            return;
+        }
+
+        switch (caseNumber)
+        {
+            case 1:
+                this.callKeyTypedListeners(keyEvent);
+                if (!keyEvent.isConsumed())
+                {
+                    this.wwd.getView().getViewInputHandler().keyTyped(keyEvent);
+                }
+                break;
+            case 2:
+                this.callKeyPressedListeners(keyEvent);
+                if (!keyEvent.isConsumed())
+                {
+                    this.wwd.getView().getViewInputHandler().keyPressed(keyEvent);
+                }
+                break;
+            case 3:
+                this.callKeyReleasedListeners(keyEvent);
+                if (!keyEvent.isConsumed())
+                {
+                    this.wwd.getView().getViewInputHandler().keyReleased(keyEvent);
+                }
+                break;
         }
     }
 

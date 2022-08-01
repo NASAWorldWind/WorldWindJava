@@ -49,7 +49,7 @@ public interface Restorable
     /**
      * Returns an XML document string describing the object's state. This state can be restored later by calling
      * <code>restoreState</code> and passing the XML document.
-     * 
+     *
      * @return an XML document string describing the object's state.
      */
     String getRestorableState();
