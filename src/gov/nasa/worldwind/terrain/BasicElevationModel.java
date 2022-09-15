@@ -69,6 +69,8 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
     // Model resource properties.
     protected static final int RESOURCE_ID_OGC_CAPABILITIES = 1;
 
+    protected String basicAuthorizationString;
+
     public BasicElevationModel(AVList params)
     {
         if (params == null)
@@ -123,6 +125,8 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         b = (Boolean) params.getValue(AVKey.DELETE_CACHE_ON_EXIT);
         if (b != null)
             this.setValue(AVKey.DELETE_CACHE_ON_EXIT, true);
+
+        basicAuthorizationString = params.getStringValue(AVKey.BASIC_AUTH_ENCODED_STRING);
 
         // Set some fallback values if not already set.
         setFallbacks(params);

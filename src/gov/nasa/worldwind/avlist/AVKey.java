@@ -34,6 +34,7 @@ public interface AVKey // TODO: Eliminate unused constants, if any
     final String BALLOON = "gov.nasa.worldwind.avkey.Balloon";
     final String BALLOON_TEXT = "gov.nasa.worldwind.avkey.BalloonText";
     final String BACK = "gov.nasa.worldwind.avkey.Back";
+    final String BASIC_AUTH_ENCODED_STRING = "gov.nasa.worldwind.avkey.BasicAuthEncodedString";
     final String BEGIN = "gov.nasa.worldwind.avkey.Begin";
     final String BIG_ENDIAN = "gov.nasa.worldwind.avkey.BigEndian";
     final String BOTTOM = "gov.nasa.worldwind.avkey.Bottom";

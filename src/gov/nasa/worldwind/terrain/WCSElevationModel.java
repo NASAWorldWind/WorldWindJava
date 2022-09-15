@@ -365,6 +365,7 @@ public class WCSElevationModel extends BasicElevationModel
 
         Retriever retriever = new HTTPRetriever(url,
             new WMSBasicElevationModel.CompositionRetrievalPostProcessor(tile.getFile()));
+        retriever.setBasicAuthentication(basicAuthorizationString);
         retriever.setConnectTimeout(10000);
         retriever.setReadTimeout(60000);
         retriever.call();
