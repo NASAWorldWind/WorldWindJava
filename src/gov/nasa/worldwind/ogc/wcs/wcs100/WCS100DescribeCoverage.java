@@ -28,7 +28,30 @@ public class WCS100DescribeCoverage extends AbstractXMLEventParser
     protected XMLEventParserContext parserContext;
     protected List<WCS100CoverageOffering> coverageOfferings = new ArrayList<WCS100CoverageOffering>(1);
 
+    /**
+     * Retrieve WCS 100 Coverage
+     *
+     * @param uri uri
+     * @param coverageName name of coverage
+     * @return WCS100DescribeCoverage
+     * @throws URISyntaxException URI Syntax incorrect
+     */
     public static WCS100DescribeCoverage retrieve(URI uri, final String coverageName) throws URISyntaxException
+    {
+        return retrieve(uri, coverageName, null, null);
+    }
+
+    /**
+     * Retrieve WCS 100 Coverage
+     *
+     * @param uri uri
+     * @param coverageName name of coverage
+     * @param basicAuthUsername Basic Authentication Username
+     * @param basicAuthPassword Basic Authentication Password
+     * @return WCS100DescribeCoverage
+     * @throws URISyntaxException URI Syntax incorrect
+     */
+    public static WCS100DescribeCoverage retrieve(URI uri, final String coverageName, String basicAuthUsername, String basicAuthPassword) throws URISyntaxException
     {
         Request request = new Request(uri, "WCS")
         {
@@ -46,6 +69,11 @@ public class WCS100DescribeCoverage extends AbstractXMLEventParser
     }
 
     public WCS100DescribeCoverage(Object docSource)
+    {
+        this(docSource, null, null);
+    }
+
+    public WCS100DescribeCoverage(Object docSource, String basicAuthUsername, String basicAuthPassword)
     {
         super(OGCConstants.WCS_1_0_0_NAMESPACE_URI);
 

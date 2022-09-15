@@ -64,4 +64,6 @@ public interface Retriever extends WWObject, java.util.concurrent.Callable<Retri
     int getStaleRequestLimit();
 
     void setStaleRequestLimit(int staleRequestLimit);
+
+    void setBasicAuthentication(String basicAuthorizationString);
 }
