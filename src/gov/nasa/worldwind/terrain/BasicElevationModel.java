@@ -126,7 +126,12 @@ public class BasicElevationModel extends AbstractElevationModel implements BulkR
         if (b != null)
             this.setValue(AVKey.DELETE_CACHE_ON_EXIT, true);
 
-        basicAuthorizationString = params.getStringValue(AVKey.BASIC_AUTH_ENCODED_STRING);
+        String basicAuthUsername = params.getStringValue(AVKey.BASIC_AUTH_USERNAME);
+        String basicAuthPassword = params.getStringValue(AVKey.BASIC_AUTH_PASSWORD);
+        if(basicAuthUsername != null && basicAuthPassword != null) {
+            basicAuthorizationString = Base64.getEncoder().encodeToString(
+                    (basicAuthUsername + ":" + basicAuthPassword).getBytes());
+        }
 
         // Set some fallback values if not already set.
         setFallbacks(params);

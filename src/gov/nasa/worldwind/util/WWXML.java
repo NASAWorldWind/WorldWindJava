@@ -429,7 +429,7 @@ public class WWXML
      *                                  exception is included in this exception's {@link Throwable#initCause(Throwable)}.
      */
     public static XMLEventReader openEventReaderURL(URL url, boolean isNamespaceAware){
-        return openEventReaderURL(url, isNamespaceAware, null);
+        return openEventReaderURL(url, isNamespaceAware, null, null);
     }
 
     /**
@@ -437,8 +437,8 @@ public class WWXML
      *
      * @param url              the URL to the document.
      * @param isNamespaceAware true to enable namespace-aware processing and false to disable it.
-     * @param basicAuthenticationEncodedStr Base 64 Encoded String holding username/password ("username:password")
-     *                                      for Basic Authentication
+     * @param basicAuthUsername Username for Basic Authentication
+     * @param basicAuthPassword Password for Basic Authentication
      *
      * @return an XMLEventReader for the URL.
      *
@@ -446,7 +446,7 @@ public class WWXML
      * @throws WWRuntimeException       if an exception or error occurs while opening and parsing the url. The causing
      *                                  exception is included in this exception's {@link Throwable#initCause(Throwable)}.
      */
-    public static XMLEventReader openEventReaderURL(URL url, boolean isNamespaceAware, String basicAuthenticationEncodedStr)
+    public static XMLEventReader openEventReaderURL(URL url, boolean isNamespaceAware, String basicAuthUsername, String basicAuthPassword)
     {
         if (url == null)
         {
@@ -460,8 +460,9 @@ public class WWXML
             URLConnection urlConnection = url.openConnection();
 
             // Set optional basic authentication
-            if(basicAuthenticationEncodedStr != null) {
-                urlConnection.setRequestProperty("Authorization", "Basic " + basicAuthenticationEncodedStr);
+            if(basicAuthUsername != null && basicAuthPassword != null) {
+                urlConnection.setRequestProperty("Authorization", "Basic " + Base64.getEncoder().encodeToString(
+                        (basicAuthUsername + ":" + basicAuthPassword).getBytes()));
             }
             InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
             return openEventReaderStream(inputStream, isNamespaceAware);
@@ -485,7 +486,7 @@ public class WWXML
      */
     public static XMLEventReader openEventReader(Object docSource)
     {
-        return openEventReader(docSource, true, null);
+        return openEventReader(docSource, true, null, null);
     }
 
     /**
@@ -494,15 +495,15 @@ public class WWXML
      * description or a file or resource name available on the classpath.</li> </ul>
      *
      * @param docSource the source of the XML document.
-     * @param basicAuthenticationEncodedStr Base 64 Encoded String holding username/password ("username:password")
-     *                                   for Basic Authentication
+     * @param basicAuthPassword Username for Basic Authentication
+     * @param basicAuthUsername Password for Basic Authentication
      *
      * @return the source document as a {@link javax.xml.stream.XMLEventReader}, or null if the source object is a
      *         string that does not identify a URL, a file or a resource available on the classpath.
      */
-    public static XMLEventReader openEventReader(Object docSource, String basicAuthenticationEncodedStr)
+    public static XMLEventReader openEventReader(Object docSource, String basicAuthUsername, String basicAuthPassword)
     {
-        return openEventReader(docSource, true, basicAuthenticationEncodedStr);
+        return openEventReader(docSource, true, basicAuthUsername, basicAuthPassword);
     }
 
     /**
@@ -518,7 +519,7 @@ public class WWXML
      */
     public static XMLEventReader openEventReader(Object docSource, boolean isNamespaceAware)
     {
-        return openEventReader(docSource, isNamespaceAware, null);
+        return openEventReader(docSource, isNamespaceAware, null, null);
     }
 
     /**
@@ -528,13 +529,13 @@ public class WWXML
      *
      * @param docSource        the source of the XML document.
      * @param isNamespaceAware true to enable namespace-aware processing and false to disable it.
-     * @param basicAuthenticationEncodedStr Base 64 Encoded String holding username/password ("username:password")
-     *                                   for Basic Authentication
+     * @param basicAuthUsername Username for Basic Authentication
+     * @param basicAuthPassword Password for Basic Authentication
      *
      * @return the source document as a {@link javax.xml.stream.XMLEventReader}, or null if the source object is a
      *         string that does not identify a URL, a file or a resource available on the classpath.
      */
-    public static XMLEventReader openEventReader(Object docSource, boolean isNamespaceAware, String basicAuthenticationEncodedStr)
+    public static XMLEventReader openEventReader(Object docSource, boolean isNamespaceAware, String basicAuthUsername, String basicAuthPassword)
     {
         if (docSource == null || WWUtil.isEmpty(docSource))
         {
@@ -571,7 +572,7 @@ public class WWXML
 
         URL url = WWIO.makeURL(sourceName);
         if (url != null)
-            return openEventReaderURL(url, isNamespaceAware, basicAuthenticationEncodedStr);
+            return openEventReaderURL(url, isNamespaceAware, basicAuthUsername, basicAuthPassword);
 
         return openEventReaderFile(sourceName, null, isNamespaceAware);
     }

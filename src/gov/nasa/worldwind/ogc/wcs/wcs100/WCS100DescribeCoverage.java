@@ -28,12 +28,29 @@ public class WCS100DescribeCoverage extends AbstractXMLEventParser
     protected XMLEventParserContext parserContext;
     protected List<WCS100CoverageOffering> coverageOfferings = new ArrayList<WCS100CoverageOffering>(1);
 
-    public static WCS100DescribeCoverage retrieve(URI uri, final String coverageName) throws URISyntaxException
-    {
-        return retrieve(uri, coverageName, null);
+    /**
+     * Retrieve WCS 100 Coverage
+     *
+     * @param uri uri
+     * @param coverageName name of coverage
+     * @return WCS100DescribeCoverage
+     * @throws URISyntaxException URI Syntax incorrect
+     */
+    public static WCS100DescribeCoverage retrieve(URI uri, final String coverageName) throws URISyntaxException{
+        return retrieve(uri, coverageName, null, null);
     }
 
-    public static WCS100DescribeCoverage retrieve(URI uri, final String coverageName, String basicAuthenticationEncodedStr) throws URISyntaxException
+    /**
+     * Retrieve WCS 100 Coverage
+     *
+     * @param uri uri
+     * @param coverageName name of coverage
+     * @param basicAuthUsername Basic Authentication Username
+     * @param basicAuthPassword Basic Authentication Password
+     * @return WCS100DescribeCoverage
+     * @throws URISyntaxException URI Syntax incorrect
+     */
+    public static WCS100DescribeCoverage retrieve(URI uri, final String coverageName, String basicAuthUsername, String basicAuthPassword) throws URISyntaxException
     {
         Request request = new Request(uri, "WCS")
         {
@@ -47,19 +64,19 @@ public class WCS100DescribeCoverage extends AbstractXMLEventParser
             }
         };
 
-        return new WCS100DescribeCoverage(request.toString(), basicAuthenticationEncodedStr);
+        return new WCS100DescribeCoverage(request.toString(), basicAuthUsername, basicAuthPassword);
     }
 
     public WCS100DescribeCoverage(Object docSource)
     {
-        this(docSource, null);
+        this(docSource, null, null);
     }
 
-    public WCS100DescribeCoverage(Object docSource, String basicAuthenticationEncodedStr)
+    public WCS100DescribeCoverage(Object docSource, String basicAuthUsername, String basicAuthPassword)
     {
         super(OGCConstants.WCS_1_0_0_NAMESPACE_URI);
 
-        this.eventReader = this.createReader(docSource, basicAuthenticationEncodedStr);
+        this.eventReader = this.createReader(docSource, basicAuthUsername, basicAuthPassword);
 
         this.initialize();
     }
@@ -69,9 +86,9 @@ public class WCS100DescribeCoverage extends AbstractXMLEventParser
         this.parserContext = this.createParserContext(this.eventReader);
     }
 
-    protected XMLEventReader createReader(Object docSource, String basicAuthenticationEncodedStr)
+    protected XMLEventReader createReader(Object docSource, String basicAuthUsername, String basicAuthPassword)
     {
-        return WWXML.openEventReader(docSource, basicAuthenticationEncodedStr);
+        return WWXML.openEventReader(docSource, basicAuthUsername, basicAuthPassword);
     }
 
     protected XMLEventParserContext createParserContext(XMLEventReader reader)
