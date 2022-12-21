@@ -59,61 +59,65 @@ public class Paths extends ApplicationTemplate {
 
             // Create and set an attribute bundle.
             ShapeAttributes attrs = new BasicShapeAttributes();
-            attrs.setOutlineMaterial(new Material(Color.YELLOW));
-            attrs.setOutlineWidth(2d);
+            attrs.setOutlineMaterial(new Material(Color.BLUE));
+            attrs.setOutlineWidth(30);
 
             // Create a path, set some of its properties and set its attributes.
             ArrayList<Position> pathPositions = new ArrayList<>();
-            pathPositions.add(Position.fromDegrees(28, -102, 1e4));
-            pathPositions.add(Position.fromDegrees(35, -100, 1e4));
+            pathPositions.add(Position.fromDegrees(37.43, -122.05, 1e3));
+            pathPositions.add(Position.fromDegrees(37.43, -122.06, 1e3));
+            pathPositions.add(Position.fromDegrees(37.42, -122.06, 1e3));
+            pathPositions.add(Position.fromDegrees(37.41, -122.07, 1e3));
+
             Path path = new Path(pathPositions);
             path.setAttributes(attrs);
             path.setVisible(true);
-            path.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
-            path.setPathType(AVKey.GREAT_CIRCLE);
+            path.setAltitudeMode(WorldWind.ABSOLUTE);
+            path.setPathType(AVKey.LINEAR);
             layer.addRenderable(path);
+            this.getWwd().getView().setEyePosition(Position.fromDegrees(37.42, -122.05, 7000));
 
-            // Create a path that follows the terrain
-            path = new Path(pathPositions);
-            path.setAttributes(attrs);
-            path.setVisible(true);
-            path.setSurfacePath(true);
-            layer.addRenderable(path);
+//            // Create a path that follows the terrain
+//            path = new Path(pathPositions);
+//            path.setAttributes(attrs);
+//            path.setVisible(true);
+//            path.setSurfacePath(true);
+//            layer.addRenderable(path);
 
-            // Create a path that uses all default values.
-            pathPositions = new ArrayList<>();
-            pathPositions.add(Position.fromDegrees(28, -104, 1e4));
-            pathPositions.add(Position.fromDegrees(35, -102, 1e4));
-            path = new Path(pathPositions);
-            layer.addRenderable(path);
+//            // Create a path that uses all default values.
+//            pathPositions = new ArrayList<>();
+//            pathPositions.add(Position.fromDegrees(28, -104, 1e4));
+//            pathPositions.add(Position.fromDegrees(35, -102, 1e4));
+//            path = new Path(pathPositions);
+//            layer.addRenderable(path);
 
             // Create a path with more than two positions and closed.
-            pathPositions = new ArrayList<>();
-            pathPositions.add(Position.fromDegrees(28, -106, 4e4));
-            pathPositions.add(Position.fromDegrees(35, -104, 4e4));
-            pathPositions.add(Position.fromDegrees(35, -107, 4e4));
-            pathPositions.add(Position.fromDegrees(28, -107, 4e4));
-            path = new Path(pathPositions);
-            path.setAltitudeMode(WorldWind.ABSOLUTE);
-            path.setExtrude(true);
-            path.setPathType(AVKey.LINEAR);
-
-            attrs = new BasicShapeAttributes();
-            attrs.setOutlineMaterial(new Material(Color.BLUE));
-            attrs.setInteriorMaterial(new Material(Color.RED));
-            attrs.setOutlineWidth(2);
-            path.setAttributes(attrs);
-
-            layer.addRenderable(path);
+//            pathPositions = new ArrayList<>();
+//            pathPositions.add(Position.fromDegrees(28, -106, 4e4));
+//            pathPositions.add(Position.fromDegrees(35, -104, 4e4));
+//            pathPositions.add(Position.fromDegrees(35, -107, 4e4));
+//            pathPositions.add(Position.fromDegrees(28, -107, 4e4));
+//            path = new Path(pathPositions);
+//            path.setAltitudeMode(WorldWind.ABSOLUTE);
+//            path.setExtrude(true);
+//            path.setPathType(AVKey.LINEAR);
+//
+//            attrs = new BasicShapeAttributes();
+//            attrs.setOutlineMaterial(new Material(Color.BLUE));
+//            attrs.setInteriorMaterial(new Material(Color.RED));
+//            attrs.setOutlineWidth(2);
+//            path.setAttributes(attrs);
+//
+//            layer.addRenderable(path);
 
             // Add the layer to the model.
             insertBeforeCompass(getWwd(), layer);
 
-            List<Marker> markers = new ArrayList<>(1);
-            markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
-            MarkerLayer markerLayer = new MarkerLayer();
-            markerLayer.setMarkers(markers);
-            insertBeforeCompass(getWwd(), markerLayer);
+//            List<Marker> markers = new ArrayList<>(1);
+//            markers.add(new BasicMarker(Position.fromDegrees(90, 0), new BasicMarkerAttributes()));
+//            MarkerLayer markerLayer = new MarkerLayer();
+//            markerLayer.setMarkers(markers);
+//            insertBeforeCompass(getWwd(), markerLayer);
         }
     }
 
