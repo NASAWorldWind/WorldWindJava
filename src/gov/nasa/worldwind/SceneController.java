@@ -128,7 +128,7 @@ public interface SceneController extends WWObject, Disposable
     double getFrameTime();
 
     /**
-     * Specifies the current pick point in AWT screen coordinates, or <code>null</code> to indicate that there is no
+     * Specifies the current pick point in GL surface screen coordinates, or <code>null</code> to indicate that there is no
      * pick point. Each frame, this scene controller determines which objects are drawn at the pick point and places
      * them in a PickedObjectList. This list can be accessed by calling {@link #getPickedObjectList()}.
      * <p>

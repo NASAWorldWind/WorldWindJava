@@ -1046,4 +1046,9 @@ public interface DrawContext extends WWObject, Disposable
     boolean is2DGlobe();
 
     boolean isContinuous2DGlobe();
+    
+    /**
+     * Convert AWT effective screen location to GL surface location using DPI scaling.
+     */
+    int [] awtPointToGLpoint(Point pt);
 }

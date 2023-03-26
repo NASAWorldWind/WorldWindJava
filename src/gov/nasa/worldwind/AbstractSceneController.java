@@ -75,15 +75,15 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     protected double frameTime;
     protected double pickTime;
     /**
-     * The pick point in AWT screen coordinates, or <code>null</code> if the pick point is disabled. Initially
+     * The pick point in GL surface screen coordinates, or <code>null</code> if the pick point is disabled. Initially
      * <code>null</code>.
      */
-    protected Point pickPoint = null;
+    private Point pickPoint = null;
     /**
-     * The pick rectangle in AWT screen coordinates, or <code>null</code> if the pick rectangle is disabled. Initially
+     * The pick rectangle in GL surface screen coordinates, or <code>null</code> if the pick rectangle is disabled. Initially
      * <code>null</code>.
      */
-    protected Rectangle pickRect = null;
+    private Rectangle pickRect = null;
     protected boolean deepPick = false;
     protected GpuResourceCache gpuResourceCache;
     protected TextRendererCache textRendererCache = new TextRendererCache();
@@ -111,7 +111,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.setVerticalExaggeration(Configuration.getDoubleValue(AVKey.VERTICAL_EXAGGERATION, 1d));
     }
 
-    public void reinitialize()
+    @Override
+	public void reinitialize()
     {
         if (this.textRendererCache != null)
             this.textRendererCache.dispose();
@@ -119,7 +120,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     /** Releases resources associated with this scene controller. */
-    public void dispose()
+    @Override
+	public void dispose()
     {
         if (this.lastPickedObjects != null)
             this.lastPickedObjects.clear();
@@ -136,12 +138,14 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             this.textRendererCache.dispose();
     }
 
-    public GpuResourceCache getGpuResourceCache()
+    @Override
+	public GpuResourceCache getGpuResourceCache()
     {
         return this.gpuResourceCache;
     }
 
-    public void setGpuResourceCache(GpuResourceCache gpuResourceCache)
+    @Override
+	public void setGpuResourceCache(GpuResourceCache gpuResourceCache)
     {
         this.gpuResourceCache = gpuResourceCache;
     }
@@ -151,17 +155,20 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         return textRendererCache;
     }
 
-    public Model getModel()
+    @Override
+	public Model getModel()
     {
         return this.model;
     }
 
-    public View getView()
+    @Override
+	public View getView()
     {
         return this.view;
     }
 
-    public void setModel(Model model)
+    @Override
+	public void setModel(Model model)
     {
         if (this.model != null)
             this.model.removePropertyChangeListener(this);
@@ -173,7 +180,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.firePropertyChange(AVKey.MODEL, oldModel, model);
     }
 
-    public void setView(View view)
+    @Override
+	public void setView(View view)
     {
         if (this.view != null)
             this.view.removePropertyChangeListener(this);
@@ -186,44 +194,51 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.firePropertyChange(AVKey.VIEW, oldView, view);
     }
 
-    public void setVerticalExaggeration(double verticalExaggeration)
+    @Override
+	public void setVerticalExaggeration(double verticalExaggeration)
     {
         Double oldVE = this.verticalExaggeration;
         this.verticalExaggeration = verticalExaggeration;
         this.firePropertyChange(AVKey.VERTICAL_EXAGGERATION, oldVE, verticalExaggeration);
     }
 
-    public double getVerticalExaggeration()
+    @Override
+	public double getVerticalExaggeration()
     {
         return this.verticalExaggeration;
     }
 
     /** {@inheritDoc} */
-    public void setPickPoint(Point pickPoint)
+    @Override
+	public void setPickPoint(Point pickPoint)
     {
-        this.pickPoint = pickPoint;
+    	this.pickPoint = pickPoint;
     }
 
     /** {@inheritDoc} */
-    public Point getPickPoint()
+    @Override
+	public Point getPickPoint()
     {
         return this.pickPoint;
     }
 
     /** {@inheritDoc} */
-    public void setPickRectangle(Rectangle pickRect)
+    @Override
+	public void setPickRectangle(Rectangle pickRect)
     {
         this.pickRect = pickRect;
     }
 
     /** {@inheritDoc} */
-    public Rectangle getPickRectangle()
+    @Override
+	public Rectangle getPickRectangle()
     {
         return this.pickRect;
     }
 
     /** {@inheritDoc} */
-    public PickedObjectList getPickedObjectList()
+    @Override
+	public PickedObjectList getPickedObjectList()
     {
         return this.lastPickedObjects;
     }
@@ -234,42 +249,50 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     /** {@inheritDoc} */
-    public PickedObjectList getObjectsInPickRectangle()
+    @Override
+	public PickedObjectList getObjectsInPickRectangle()
     {
         return this.lastObjectsInPickRect;
     }
 
-    public void setDeepPickEnabled(boolean tf)
+    @Override
+	public void setDeepPickEnabled(boolean tf)
     {
         this.deepPick = tf;
     }
 
-    public boolean isDeepPickEnabled()
+    @Override
+	public boolean isDeepPickEnabled()
     {
         return this.deepPick;
     }
 
-    public SectorGeometryList getTerrain()
+    @Override
+	public SectorGeometryList getTerrain()
     {
         return this.dc.getSurfaceGeometry();
     }
 
-    public DrawContext getDrawContext()
+    @Override
+	public DrawContext getDrawContext()
     {
         return this.dc;
     }
 
-    public double getFramesPerSecond()
+    @Override
+	public double getFramesPerSecond()
     {
         return this.framesPerSecond;
     }
 
-    public double getFrameTime()
+    @Override
+	public double getFrameTime()
     {
         return this.frameTime;
     }
 
-    public void setPerFrameStatisticsKeys(Set<String> keys)
+    @Override
+	public void setPerFrameStatisticsKeys(Set<String> keys)
     {
         this.perFrameStatisticsKeys.clear();
         if (keys == null)
@@ -282,34 +305,40 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         }
     }
 
-    public Collection<PerformanceStatistic> getPerFrameStatistics()
+    @Override
+	public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         return perFrameStatistics;
     }
 
-    public Collection<Throwable> getRenderingExceptions()
+    @Override
+	public Collection<Throwable> getRenderingExceptions()
     {
         return this.renderingExceptions;
     }
 
-    public ScreenCreditController getScreenCreditController()
+    @Override
+	public ScreenCreditController getScreenCreditController()
     {
         return screenCreditController;
     }
 
-    public void setScreenCreditController(ScreenCreditController screenCreditController)
+    @Override
+	public void setScreenCreditController(ScreenCreditController screenCreditController)
     {
         this.screenCreditController = screenCreditController;
     }
 
     /** {@inheritDoc} */
-    public GLRuntimeCapabilities getGLRuntimeCapabilities()
+    @Override
+	public GLRuntimeCapabilities getGLRuntimeCapabilities()
     {
         return this.glRuntimeCaps;
     }
 
     /** {@inheritDoc} */
-    public void setGLRuntimeCapabilities(GLRuntimeCapabilities capabilities)
+    @Override
+	public void setGLRuntimeCapabilities(GLRuntimeCapabilities capabilities)
     {
         if (capabilities == null)
         {
@@ -411,7 +440,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.deferOrderedRendering = deferOrderedRendering;
     }
 
-    public int repaint()
+    @Override
+	public int repaint()
     {
         this.frameTime = System.currentTimeMillis();
 
@@ -994,7 +1024,6 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
      *
      * @param dc the relevant <code>DrawContext</code>
      */
-    @SuppressWarnings({"UNUSED_SYMBOL", "UnusedDeclaration"})
     protected void checkGLErrors(DrawContext dc)
     {
         GL gl = dc.getGL();

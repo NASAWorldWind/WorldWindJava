@@ -1043,7 +1043,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     }
 
     /** {@inheritDoc} */
-    public void preRender(DrawContext dc)
+    @Override
+	public void preRender(DrawContext dc)
     {
         Offset screenLocation = this.getScreenLocation();
         if (screenLocation == null)
@@ -1057,8 +1058,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         Point pickPoint = dc.getPickPoint();
         if (pickPoint != null)
         {
-            int glY = dc.getView().getViewport().height - pickPoint.y;
-            this.setHighlighted(this.pickBounds.contains(new Point(pickPoint.x, glY)));
+            this.setHighlighted(this.pickBounds.contains(new Point(pickPoint.x, pickPoint.y)));
         }
 
         this.determineActiveAttributes();
@@ -1078,7 +1078,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     }
 
     /** {@inheritDoc} */
-    public void render(DrawContext dc)
+    @Override
+	public void render(DrawContext dc)
     {
         Offset screenLocation = this.getScreenLocation();
         if (screenLocation == null || this.frameBounds == null)
@@ -1247,9 +1248,9 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         // Compute point in OpenGL coordinates
         Point2D upperLeft = this.screenLocation.computeOffset(viewport.width, viewport.height, 1.0, 1.0);
 
-        this.awtScreenPoint = new Point((int) upperLeft.getX(), (int) (viewport.height - upperLeft.getY()));
+        this.awtScreenPoint = new Point((int) upperLeft.getX(), (int) (upperLeft.getY()));
 
-        this.frameBounds = new Rectangle((int) upperLeft.getX(), (int) upperLeft.getY() - this.frameSize.height,
+        this.frameBounds = new Rectangle((int) upperLeft.getX(), (int) upperLeft.getY(),
             this.frameSize.width, this.frameSize.height);
 
         // Compute the pickable screen extent as the frame extent, plus the width of the frame's pickable outline.
@@ -2274,7 +2275,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         }
     }
 
-    public void drag(Point point)
+    @Override
+	public void drag(Point point)
     {
         if (this.isEnableMove())
         {
@@ -2475,7 +2477,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
          * @return -1 if this tile was accessed less recently than that tile, 0 if the access times are the same, or 1
          *         if this tile was accessed more recently.
          */
-        public int compareTo(TextureTile that)
+        @Override
+		public int compareTo(TextureTile that)
         {
             if (that == null)
             {

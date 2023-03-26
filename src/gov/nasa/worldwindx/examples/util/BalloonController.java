@@ -164,16 +164,31 @@ public class BalloonController extends MouseAdapter implements SelectListener
     //********************************************************************//
 
     /**
+     * Construct a mouse event with GL surface screen coordinates
+     * @param e
+     * @return
+     */
+    private MouseEvent glMouseEvent(MouseEvent awtMouseEvent) {
+        int[] GLmousePt = wwd.getSceneController().getDrawContext().awtPointToGLpoint(awtMouseEvent.getPoint());
+        MouseEvent e = new MouseEvent(awtMouseEvent.getComponent(), awtMouseEvent.getID(),
+        		awtMouseEvent.getWhen(), awtMouseEvent.getModifiersEx(), 
+        		awtMouseEvent.getClickCount(), GLmousePt[0], GLmousePt[1], awtMouseEvent.isPopupTrigger(),
+        		awtMouseEvent.getButton());
+    	return e;
+    }
+    /**
      * Handle a mouse click. If the top picked object has a balloon attached to it the balloon will be made visible. A
      * balloon may be attached to a KML feature, or to any picked object though {@link AVKey#BALLOON}.
      *
      * @param e Mouse event
      */
     @Override
-    public void mouseClicked(MouseEvent e)
+    public void mouseClicked(MouseEvent awtEv)
     {
-        if (e == null || e.isConsumed())
+        if (awtEv == null || awtEv.isConsumed())
             return;
+
+        MouseEvent e = glMouseEvent(awtEv);
 
         // Implementation note: handle the balloon with a mouse listener instead of a select listener so that the balloon
         // can be turned off if the user clicks on the terrain.
@@ -219,6 +234,9 @@ public class BalloonController extends MouseAdapter implements SelectListener
             // Wrap the handler in a try/catch to keep exceptions from bubbling up
             Logging.logger().warning(ex.getMessage() != null ? ex.getMessage() : ex.toString());
         }
+        
+        if (e.isConsumed())
+        	awtEv.consume();
     }
 
     @Override
@@ -248,7 +266,8 @@ public class BalloonController extends MouseAdapter implements SelectListener
         }
     }
 
-    @SuppressWarnings("deprecation")
+    @Override
+	@SuppressWarnings("deprecation")
     public void selected(SelectEvent event)
     {
         if (event == null || event.isConsumed()
@@ -984,8 +1003,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
         Vec4 screenVec4 = this.wwd.getView().project(
             this.wwd.getModel().getGlobe().computePointFromPosition(position));
 
-        Point screenPoint = new Point((int) screenVec4.x,
-            (int) (this.wwd.getView().getViewport().height - screenVec4.y));
+        Point screenPoint = new Point((int) screenVec4.x, (int) screenVec4.y);
 
         // If the balloon is attached to the screen rather than the globe, move it to the
         // current point. Otherwise move it to the position under the current point.
@@ -1327,8 +1345,7 @@ public class BalloonController extends MouseAdapter implements SelectListener
         Rectangle viewport = this.wwd.getView().getViewport();
         Point2D point2D = offset.computeOffset(viewport.width, viewport.height, 1d, 1d);
 
-        int y = (int) point2D.getY();
-        return new Point((int) point2D.getX(), viewport.height - y);
+        return new Point((int) point2D.getX(), (int) point2D.getY());
     }
 
     /**
@@ -1504,7 +1521,8 @@ public class BalloonController extends MouseAdapter implements SelectListener
          * gov.nasa.worldwind.ogc.kml.KMLRoot, String)}. If an exception occurs, or the timeout is exceeded, schedule a
          * callback on the EDT to {@link BalloonController#onDocumentFailed(String, Exception)}
          */
-        public void run()
+        @Override
+		public void run()
         {
             KMLRoot root = null;
 
@@ -1544,7 +1562,8 @@ public class BalloonController extends MouseAdapter implements SelectListener
                     final KMLRoot pinnedRoot = root; // Final ref that can be accessed by anonymous class
                     SwingUtilities.invokeLater(new Runnable()
                     {
-                        public void run()
+                        @Override
+						public void run()
                         {
                             BalloonController.this.onDocumentLoaded(docUrl, pinnedRoot, featureRef);
                         }
@@ -1558,7 +1577,8 @@ public class BalloonController extends MouseAdapter implements SelectListener
                 // Schedule a callback on the EDT to report the error to the BalloonController
                 SwingUtilities.invokeLater(new Runnable()
                 {
-                    public void run()
+                    @Override
+					public void run()
                     {
                         BalloonController.this.onDocumentFailed(docUrl, e);
                     }

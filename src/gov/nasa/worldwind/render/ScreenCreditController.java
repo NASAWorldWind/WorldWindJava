@@ -70,7 +70,8 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
         wwd.addSelectListener(this);
     }
 
-    public void dispose()
+    @Override
+	public void dispose()
     {
         wwd.removeSelectListener(this);
         if (wwd.getSceneController() == this)
@@ -87,7 +88,7 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
         this.enabled = enabled;
     }
 
-    public void pick(DrawContext dc, Point pickPoint)
+    public void pick(DrawContext dc, @SuppressWarnings("unused") Point pickPoint)
     {
         if (dc == null)
         {
@@ -113,13 +114,13 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
             Rectangle viewport = new Rectangle(x, y, creditWidth, creditHeight);
 
             credit.setViewport(viewport);
-            credit.pick(dc, pickPoint);
 
             x += (separation + creditWidth);
         }
     }
 
-    public void render(DrawContext dc)
+    @Override
+	public void render(DrawContext dc)
     {
         if (dc == null)
         {
@@ -136,7 +137,7 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
 
         Set<Map.Entry<ScreenCredit, Long>> credits = dc.getScreenCredits().entrySet();
 
-        int y = dc.getView().getViewport().height - (bottomMargin + creditHeight / 2);
+        int y = bottomMargin + creditHeight / 2;
         int x = leftMargin + creditWidth / 2;
 
         for (Map.Entry<ScreenCredit, Long> entry : credits)
@@ -156,7 +157,8 @@ public class ScreenCreditController implements Renderable, SelectListener, Dispo
         }
     }
 
-    public void selected(SelectEvent event)
+    @Override
+	public void selected(SelectEvent event)
     {
         if (event.getMouseEvent() != null && event.getMouseEvent().isConsumed())
             return;

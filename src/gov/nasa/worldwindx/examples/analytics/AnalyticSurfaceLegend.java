@@ -158,7 +158,8 @@ public class AnalyticSurfaceLegend implements Renderable
         return this.screenImage.getImageHeight(dc);
     }
 
-    public void render(DrawContext dc)
+    @Override
+	public void render(DrawContext dc)
     {
         if (dc == null)
         {
@@ -225,27 +226,32 @@ public class AnalyticSurfaceLegend implements Renderable
     {
         return new AnalyticSurfaceLegend.LabelAttributes()
         {
-            public double getValue()
+            @Override
+			public double getValue()
             {
                 return value;
             }
 
-            public String getText()
+            @Override
+			public String getText()
             {
                 return text;
             }
 
-            public Font getFont()
+            @Override
+			public Font getFont()
             {
                 return font;
             }
 
-            public Color getColor()
+            @Override
+			public Color getColor()
             {
                 return color;
             }
 
-            public Point2D getOffset()
+            @Override
+			public Point2D getOffset()
             {
                 return new Point2D.Double(xOffset, yOffset);
             }
@@ -320,18 +326,16 @@ public class AnalyticSurfaceLegend implements Renderable
         tr.beginRendering(viewport.width, viewport.height);
         try
         {
-            double yInGLCoords = viewport.height - y - 1;
-
             // Draw the text outline, in a contrasting color.
             tr.setColor(WWUtil.computeContrastingColor(color));
-            tr.draw(text, (int) x - 1, (int) yInGLCoords - 1);
-            tr.draw(text, (int) x + 1, (int) yInGLCoords - 1);
-            tr.draw(text, (int) x + 1, (int) yInGLCoords + 1);
-            tr.draw(text, (int) x - 1, (int) yInGLCoords + 1);
+            tr.draw(text, (int) x - 1, (int) y - 1);
+            tr.draw(text, (int) x + 1, (int) y - 1);
+            tr.draw(text, (int) x + 1, (int) y + 1);
+            tr.draw(text, (int) x - 1, (int) y + 1);
 
             // Draw the text over its outline, in the specified color.
             tr.setColor(color);
-            tr.draw(text, (int) x, (int) yInGLCoords);
+            tr.draw(text, (int) x, (int) y);
         }
         finally
         {
@@ -411,7 +415,8 @@ public class AnalyticSurfaceLegend implements Renderable
             this.orderedLabel = new OrderedLabel(legend, attr, x, y, halign, valign);
         }
 
-        public void render(DrawContext dc)
+        @Override
+		public void render(DrawContext dc)
         {
             dc.addOrderedRenderable(this.orderedLabel);
         }
@@ -437,17 +442,20 @@ public class AnalyticSurfaceLegend implements Renderable
             this.valign = valign;
         }
 
-        public double getDistanceFromEye()
+        @Override
+		public double getDistanceFromEye()
         {
             return 0;
         }
 
-        public void render(DrawContext dc)
+        @Override
+		public void render(DrawContext dc)
         {
             this.legend.drawLabel(dc, this.attr, this.x, this.y, this.halign, this.valign);
         }
 
-        public void pick(DrawContext dc, Point pickPoint)
+        @Override
+		public void pick(DrawContext dc, Point pickPoint)
         {
             // Intentionally left blank.
         }

@@ -68,7 +68,8 @@ public class ScreenAnnotationBalloon extends AbstractAnnotationBalloon implement
     }
 
     /** {@inheritDoc} */
-    protected ScreenAnnotation createAnnotation()
+    @Override
+	protected ScreenAnnotation createAnnotation()
     {
         ScreenAnnotation annotation = new ScreenAnnotation(this.getDecodedText(), this.screenPoint);
 
@@ -79,22 +80,22 @@ public class ScreenAnnotationBalloon extends AbstractAnnotationBalloon implement
     }
 
     /** {@inheritDoc} */
-    protected ScreenAnnotation getAnnotation()
+    @Override
+	protected ScreenAnnotation getAnnotation()
     {
         return this.annotation;
     }
 
     /** {@inheritDoc} */
-    protected void computePosition(DrawContext dc)
+    @Override
+	protected void computePosition(DrawContext dc)
     {
-        Rectangle viewport = dc.getView().getViewport();
-
-        int y = (int) viewport.getHeight() - this.screenPoint.y - 1;
-        this.getAnnotation().setScreenPoint(new Point(this.screenPoint.x, y));
+        this.getAnnotation().setScreenPoint(new Point(this.screenPoint));
     }
 
     /** {@inheritDoc} */
-    public void setScreenLocation(Point point)
+    @Override
+	public void setScreenLocation(Point point)
     {
         if (point == null)
         {
@@ -107,7 +108,8 @@ public class ScreenAnnotationBalloon extends AbstractAnnotationBalloon implement
     }
 
     /** {@inheritDoc} */
-    public Point getScreenLocation()
+    @Override
+	public Point getScreenLocation()
     {
         return this.screenPoint;
     }
