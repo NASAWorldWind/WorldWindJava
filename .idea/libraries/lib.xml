@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-transcoder.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-awt-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/xml-apis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/js.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-script.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-svggen.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/xml-apis-ext.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-gui-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-css.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-dom.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-xml.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-svg-dom.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-ext.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/xalan-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/xerces_2_5_0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-extension.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/pdf-transcoder.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-anim.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-codec.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-gvt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-bridge.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib-external/batik/lib/batik-parser.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

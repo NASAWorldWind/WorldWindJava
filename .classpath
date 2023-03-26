@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="gluegen.jar" sourcepath="gluegen-java-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="gluegen-rt.jar" sourcepath="gluegen-java-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry exported="true" kind="lib" path="jogl-all.jar" sourcepath="jogl-java-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="testFunctional"/>
+	<classpathentry kind="lib" path="gdal.jar"/>
+	<classpathentry kind="lib" path="junit-4.5.jar"/>
+	<classpathentry kind="lib" path="vpf-symbols.jar"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

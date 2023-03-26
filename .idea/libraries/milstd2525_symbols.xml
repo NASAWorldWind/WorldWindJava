@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="milstd2525-symbols">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/testData/milstd2525-symbols.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

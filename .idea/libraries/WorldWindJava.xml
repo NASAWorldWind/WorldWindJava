@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="WorldWindJava">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jogl-all.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gluegen-rt-natives-windows-amd64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jogl-java-src.zip!/" />
+      <root url="jar://$PROJECT_DIR$/gdal.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gluegen-rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jogl-all-natives-windows-amd64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/junit-4.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gluegen-java-src.zip!/" />
+      <root url="jar://$PROJECT_DIR$/gluegen.jar!/" />
+      <root url="jar://$PROJECT_DIR$/vpf-symbols.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

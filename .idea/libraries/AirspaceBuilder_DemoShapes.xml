@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="AirspaceBuilder-DemoShapes">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bin/gov/nasa/worldwindx/examples/data/AirspaceBuilder-DemoShapes.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
