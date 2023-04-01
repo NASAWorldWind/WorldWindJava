@@ -349,7 +349,11 @@ public class AWTInputHandler extends WWObjectImpl
         		awtMouseEvent.getWhen(), awtMouseEvent.getModifiersEx(), 
         		GLmousePt[0], GLmousePt[1], awtMouseEvent.getClickCount(), awtMouseEvent.isPopupTrigger(),
         		awtMouseEvent.getButton());
-    	return e;
+        
+        if (awtMouseEvent.isConsumed())		// needed in case this method is overridden by a subclass
+        	e.consume();
+    	
+        return e;
     }
 
     /**
@@ -365,7 +369,11 @@ public class AWTInputHandler extends WWObjectImpl
         		awtEv.getClickCount(), awtEv.isPopupTrigger(),
         		awtEv.getScrollType(), awtEv.getScrollAmount(), 
         		awtEv.getWheelRotation(), awtEv.getPreciseWheelRotation());
-    	return e;
+
+        if (awtEv.isConsumed())		// needed in case this method is overridden by a subclass
+        	e.consume();
+    	
+     	return e;
     }
 
     @Override
@@ -423,9 +431,6 @@ public class AWTInputHandler extends WWObjectImpl
                 this.wwd.getView().getViewInputHandler().mouseClicked(mouseEvent);
             }
         }
-        
-        if (mouseEvent.isConsumed())
-        	awtMouseEvent.consume();
     }
 
     @Override
@@ -495,9 +500,6 @@ public class AWTInputHandler extends WWObjectImpl
         {
             ((GLJPanel) this.wwd).requestFocusInWindow();
         }
-
-        if (mouseEvent.isConsumed())
-        	awtMouseEvent.consume();
     }
 
     @Override
@@ -522,9 +524,6 @@ public class AWTInputHandler extends WWObjectImpl
         }
         this.doHover(true);
         this.cancelDrag();
-
-        if (mouseEvent.isConsumed())
-        	awtMouseEvent.consume();
     }
 
     @Override
@@ -545,9 +544,6 @@ public class AWTInputHandler extends WWObjectImpl
         this.wwd.getView().getViewInputHandler().mouseEntered(mouseEvent);
         this.cancelHover();
         this.cancelDrag();
-
-        if (mouseEvent.isConsumed())
-        	awtMouseEvent.consume();
     }
 
     @Override
@@ -576,9 +572,6 @@ public class AWTInputHandler extends WWObjectImpl
 
         this.cancelHover();
         this.cancelDrag();
-        
-        if (mouseEvent.isConsumed())
-        	awtMouseEvent.consume();
     }
 
     @Override
@@ -629,9 +622,6 @@ public class AWTInputHandler extends WWObjectImpl
             this.wwd.getSceneController().setPickPoint(mouseEvent.getPoint());
             this.wwd.redraw();
         }
-        
-        if (mouseEvent.isConsumed())
-        	awtMouseEvent.consume();
     }
 
     @Override
@@ -662,9 +652,6 @@ public class AWTInputHandler extends WWObjectImpl
             this.wwd.getSceneController().setPickPoint(mouseEvent.getPoint());
             this.wwd.redraw();
         }
-        
-        if (mouseEvent.isConsumed())
-        	awtMouseEvent.consume();
     }
 
     @Override
@@ -685,9 +672,6 @@ public class AWTInputHandler extends WWObjectImpl
 
         if (!mouseWheelEvent.isConsumed())
             this.wwd.getView().getViewInputHandler().mouseWheelMoved(mouseWheelEvent);
-        
-        if (mouseWheelEvent.isConsumed())
-        	awtMouseWheelEvent.consume();
     }
 
     @Override
