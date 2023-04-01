@@ -94,7 +94,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -132,7 +131,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -172,7 +170,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -216,7 +213,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
