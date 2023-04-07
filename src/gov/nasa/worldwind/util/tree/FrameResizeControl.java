@@ -28,13 +28,11 @@
 
 package gov.nasa.worldwind.util.tree;
 
-import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.AbstractResizeHotSpot;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.*;
 
 /**
  * A screen control for resizing a frame. This class handles the resize input events, but does does not actually draw
@@ -89,15 +87,15 @@ public class FrameResizeControl extends AbstractResizeHotSpot
     @Override
     protected Point getScreenPoint()
     {
-        Point2D point2D = this.frame.getScreenPoint();
-        return new Point((int)point2D.getX(), (int)point2D.getY());
+        Point point = this.frame.getScreenLocation();
+        return new Point(point);
     }
 
     /** {@inheritDoc} */
     @Override
     protected void setScreenPoint(Point newPoint)
     {
-        this.frame.setScreenLocation(new Offset(newPoint.getX(), newPoint.getY(), AVKey.PIXELS, AVKey.INSET_PIXELS));
+        this.frame.setScreenLocation(newPoint);
     }
 
     /** {@inheritDoc} */
@@ -113,7 +111,8 @@ public class FrameResizeControl extends AbstractResizeHotSpot
      *
      * @param event The event to handle.
      */
-    public void mouseWheelMoved(MouseWheelEvent event)
+    @Override
+	public void mouseWheelMoved(MouseWheelEvent event)
     {
         if (event == null || event.isConsumed())
             return;

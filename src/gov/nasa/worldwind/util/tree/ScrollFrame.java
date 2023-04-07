@@ -98,7 +98,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     protected Scrollable contents;
 
     /** Indicates the location of the upper left corner of the frame. */
-    protected Offset screenLocation;
+    protected Point screenLocation;
 
     /** Indicates whether or not to draw a title bar in the frame. Default is true. */
     protected boolean drawTitleBar = true;
@@ -209,11 +209,6 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     protected long frameNumber = -1;
     /** Indicates that the frame must be regenerated because the size or attributes have changed. */
     protected boolean mustRecomputeFrameGeometry = true;
-    /**
-     * Indicates the location of the upper left corner of the frame, in AWT coordinates (origin at the upper left corner
-     * of the screen.
-     */
-    protected Point2D awtScreenPoint;
     /** Bounds of the full frame. */
     protected Rectangle frameBounds;
     /** Bounds of the frame inside the frame border. */
@@ -262,7 +257,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      */
     public ScrollFrame(int x, int y)
     {
-        this(new Offset((double) x, (double) y, AVKey.PIXELS, AVKey.INSET_PIXELS));
+        this(new Point(x, y));
     }
 
     /**
@@ -270,7 +265,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
      *
      * @param screenLocation initial location of the upper left corner of the frame.
      */
-    public ScrollFrame(Offset screenLocation)
+    public ScrollFrame(Point screenLocation)
     {
         super(null);
         this.setScreenLocation(screenLocation);
@@ -628,41 +623,30 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     {
         this.updateBounds(dc);
 
-        return new Rectangle((int) this.awtScreenPoint.getX(), (int) this.awtScreenPoint.getY(), this.frameSize.width,
+        return new Rectangle(screenLocation.x, screenLocation.y, this.frameSize.width,
             this.frameSize.height);
     }
 
     /**
-     * Get the location of the upper left corner of the tree, measured in screen coordinates with the origin at the
-     * upper left corner of the screen.
+     * Get the location of the lower left corner of the tree, measured in screen
+     * coordinates with the origin at the lower left corner of the screen.
      *
-     * @return Screen location, measured in pixels from the upper left corner of the screen.
+     * @return Screen location, measured in GL surface pixels from the lower left corner of the screen.
      */
-    public Offset getScreenLocation()
+    public Point getScreenLocation()
     {
         return this.screenLocation;
     }
 
     /**
-     * Set the location of the upper left corner of the tree, measured in screen coordinates with the origin at the
-     * upper left corner of the screen.
+     * Set the location of the lower left corner of the tree, measured in GL surface coordinates
+     * with the origin at the lower left corner of the screen.
      *
      * @param screenLocation New screen location.
      */
-    public void setScreenLocation(Offset screenLocation)
+    public void setScreenLocation(Point screenLocation)
     {
         this.screenLocation = screenLocation;
-    }
-
-    /**
-     * Get the location of the upper left corner of the frame, measured from the upper left corner of the screen.
-     *
-     * @return The location of the upper left corner of the frame. This method will return null until the has been
-     *         rendered.
-     */
-    protected Point2D getScreenPoint()
-    {
-        return this.awtScreenPoint;
     }
 
     /**
@@ -1046,7 +1030,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     @Override
 	public void preRender(DrawContext dc)
     {
-        Offset screenLocation = this.getScreenLocation();
+        Point screenLocation = this.getScreenLocation();
         if (screenLocation == null)
             return;
 
@@ -1058,7 +1042,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         Point pickPoint = dc.getPickPoint();
         if (pickPoint != null)
         {
-            this.setHighlighted(this.pickBounds.contains(new Point(pickPoint.x, pickPoint.y)));
+            this.setHighlighted(this.pickBounds.contains(pickPoint));
         }
 
         this.determineActiveAttributes();
@@ -1081,7 +1065,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     @Override
 	public void render(DrawContext dc)
     {
-        Offset screenLocation = this.getScreenLocation();
+        Point screenLocation = this.getScreenLocation();
         if (screenLocation == null || this.frameBounds == null)
             return;
 
@@ -1245,26 +1229,23 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         if (!this.frameSize.equals(previousFrameSize))
             this.mustRecomputeFrameGeometry = true;
 
-        // Compute point in OpenGL coordinates
-        Point2D upperLeft = this.screenLocation.computeOffset(viewport.width, viewport.height, 1.0, 1.0);
+        // Set frame bounds
+        this.frameBounds = new Rectangle(screenLocation.x, screenLocation.y,
+        								 this.frameSize.width, this.frameSize.height);
 
-        this.awtScreenPoint = new Point((int) upperLeft.getX(), (int) (upperLeft.getY()));
-
-        this.frameBounds = new Rectangle((int) upperLeft.getX(), (int) upperLeft.getY(),
-            this.frameSize.width, this.frameSize.height);
-
-        // Compute the pickable screen extent as the frame extent, plus the width of the frame's pickable outline.
-        // This extent is used during picking to ensure that the frame's outline is pickable when it exceeds the
-        // frame's screen extent.
+        // Compute the pickable screen extent in GL surface coordinates as the frame extent, 
+        // plus the width of the frame's pickable outline.
+        // This extent is used during picking to ensure that the frame's outline is pickable
+        // when it exceeds the frame's screen extent.
         this.pickBounds = new Rectangle(
             this.frameBounds.x - this.borderPickWidth / 2,
             this.frameBounds.y - this.borderPickWidth / 2,
             this.frameBounds.width + this.borderPickWidth,
             this.frameBounds.height + this.borderPickWidth);
 
-        this.innerBounds = new Rectangle((int) upperLeft.getX() + this.frameBorder,
-            (int) upperLeft.getY() - frameSize.height + this.frameBorder, frameSize.width - this.frameBorder * 2,
-            frameSize.height - this.frameBorder * 2);
+        this.innerBounds = new Rectangle(frameBounds.x + this.frameBorder,
+        		frameBounds.y + this.frameBorder, frameSize.width - this.frameBorder * 2,
+        		frameSize.height - this.frameBorder * 2);
 
         // If the content size has yet not been computed, compute it now.
         if (contentSize == null)
@@ -2270,8 +2251,7 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     {
         if (this.isEnableMove())
         {
-            Point2D location = this.awtScreenPoint;
-            this.dragRefPoint = new Point((int) location.getX() - point.x, (int) location.getY() - point.y);
+            this.dragRefPoint = new Point( screenLocation.x - point.x, screenLocation.y - point.y);
         }
     }
 
@@ -2280,9 +2260,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
     {
         if (this.isEnableMove())
         {
-            double x = point.x + this.dragRefPoint.x;
-            double y = point.y + this.dragRefPoint.y;
-            this.setScreenLocation(new Offset(x, y, AVKey.PIXELS, AVKey.INSET_PIXELS));
+            Point pt = new Point(point.x + this.dragRefPoint.x, point.y + this.dragRefPoint.y);
+            this.setScreenLocation(pt);
         }
     }
 
@@ -2295,8 +2274,8 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
         super.selected(event);
 
         // Minimize the frame if the title bar was double clicked.
-        Rectangle titleBarBounds = new Rectangle((int) this.awtScreenPoint.getX() + this.frameBorder,
-            (int) this.awtScreenPoint.getY() + this.frameBorder * 2, this.innerBounds.width, this.titleBarHeight);
+        Rectangle titleBarBounds = new Rectangle(this.screenLocation.x + this.frameBorder,
+            this.screenLocation.y + this.frameBorder * 2, this.innerBounds.width, this.titleBarHeight);
 
         if (event.isLeftDoubleClick())
         {
