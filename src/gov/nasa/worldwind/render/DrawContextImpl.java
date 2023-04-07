@@ -1317,7 +1317,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         if (this.getPickRectangle() == null || this.getPickRectangle().isEmpty())
             return;
 
-        // Get the pick rectangle, transform it from AWT screen coordinates to OpenGL screen coordinates, then translate
+        // Get the pick rectangle, transform it from GL surface coordinates to OpenGL screen coordinates, then translate
         // it such that the screen's center is at the origin.
         Rectangle pr = new Rectangle(this.getPickRectangle());
         pr.translate(-viewportCenterScreenPoint.x, -viewportCenterScreenPoint.y);
