@@ -321,7 +321,6 @@ public class ScrollBar implements Renderable
     public void setValue(int value)
     {
         this.value = WWMath.clamp(value, this.getMinValue(), this.getMaxValue() - this.getExtent());
-        System.out.println("scroll " + this.value);
     }
 
     /**

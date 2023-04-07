@@ -638,8 +638,6 @@ public class AWTInputHandler extends WWObjectImpl
         }
 
         MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
-        System.out.printf("mouse %d %d --> %d %d\n", 
-        		awtMouseEvent.getX(), awtMouseEvent.getY(), mouseEvent.getX(), mouseEvent.getY());
         this.mousePoint = mouseEvent.getPoint();
         this.callMouseMovedListeners(mouseEvent);
 
