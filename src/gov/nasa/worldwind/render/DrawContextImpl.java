@@ -1268,9 +1268,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         if (getPickPoint() != null)
         {
             Point ptCenter = new Point(getPickPoint());
-            int viewportCtrX = (int) (getGLDrawable().getSurfaceWidth() / 2.0 + 0.5);
-            int viewportCtrY = (int) (getGLDrawable().getSurfaceHeight() / 2.0 + 0.5);
-            ptCenter.translate(viewportCtrX, viewportCtrY);
+            ptCenter.translate(-viewportCenterScreenPoint.x, -viewportCenterScreenPoint.y);
 
             //Number of pixels around pick point to include in frustum
             int offsetX = pickPointFrustumDimension.width / 2;
@@ -1282,7 +1280,9 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
             //Compute the distance to the near plane in screen coordinates
             double width = getView().getFieldOfView().tanHalfAngle() * getView().getNearClipDistance();
-            double x = width / (viewportCtrX);
+            double viewportWidth = getView().getViewport().getWidth();
+            if (viewportWidth <= 0.0) viewportWidth = 1.0;
+            double x = width / (viewportWidth/2);
             double screenDist = getView().getNearClipDistance() / x;
 
             //Create the four vectors that define the top-left, top-right, bottom-left, and bottom-right vectors
@@ -1296,8 +1296,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
                 getView().getNearClipDistance(), getView().getFarClipDistance());
 
             //Create the screen rectangle associated with this frustum
-            Rectangle rectScreen = new Rectangle(getPickPoint().x - offsetX,
-            									 getPickPoint().y - offsetY,
+            Rectangle rectScreen = new Rectangle(getPickPoint().x - offsetX + 1,
+            									 getPickPoint().y - offsetY - 1,
             									 pickPointFrustumDimension.width,
             									 pickPointFrustumDimension.height);
 
@@ -1317,18 +1317,14 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         if (this.getPickRectangle() == null || this.getPickRectangle().isEmpty())
             return;
 
-        View view = this.getView();
-
-        Rectangle viewport = view.getViewport();
-        double viewportWidth = viewport.getWidth() <= 0.0 ? 1.0 : viewport.getWidth();
-        double viewportHeight = viewport.getHeight() <= 0.0 ? 1.0 : viewport.getHeight();
-
         // Get the pick rectangle, transform it from AWT screen coordinates to OpenGL screen coordinates, then translate
         // it such that the screen's center is at the origin.
         Rectangle pr = new Rectangle(this.getPickRectangle());
-        pr.y = (int) viewportHeight - pr.y;
-        pr.translate((int) (-viewportWidth / 2), (int) (-viewportHeight / 2));
+        pr.translate(-viewportCenterScreenPoint.x, -viewportCenterScreenPoint.y);
 
+        double viewportWidth = view.getViewport().getWidth();
+        if (viewportWidth <= 0.0) viewportWidth = 1.0;
+      
         // Create the four vectors that define the top-left, top-right, bottom-left, and bottom-right corners of the
         // pick rectangle in screen coordinates.
         double screenDist = viewportWidth / (2 * view.getFieldOfView().tanHalfAngle());
@@ -1349,7 +1345,6 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         // Create the screen rectangle in OpenGL screen coordinates associated with this frustum. We translate the
         // specified pick rectangle from AWT coordinates to GL coordinates by inverting the y axis.
         Rectangle screenRect = new Rectangle(this.getPickRectangle());
-        screenRect.y = (int) viewportHeight - screenRect.y;
 
         this.pickFrustumList.add(new PickPointFrustum(frustum, screenRect));
     }
