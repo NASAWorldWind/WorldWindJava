@@ -965,6 +965,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
                 (byte) this.color.getBlue(), (byte) 100);
         gl.glBegin(GL2.GL_TRIANGLE_STRIP);
         for (i = 0; i < this.samples; i++) {
+        	if (this.positions[i] == null) break;
             x = i * lengthStep * stepX;
             y = (this.positions[i].getElevation() - min) * stepY;
             gl.glVertex3d(x, 0, 0);
@@ -976,6 +977,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
         gl.glColor4d(colorRGB[0], colorRGB[1], colorRGB[2], this.getOpacity());
         gl.glBegin(GL2.GL_LINE_STRIP);
         for (i = 0; i < this.samples; i++) {
+        	if (this.positions[i] == null) break;
             x = i * lengthStep * stepX;
             y = (this.positions[i].getElevation() - min) * stepY;
             gl.glVertex3d(x, y, 0);
