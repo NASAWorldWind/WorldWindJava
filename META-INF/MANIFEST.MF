@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WorldWindJava
+Bundle-SymbolicName: WorldWindJava
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: WorldWindJava.jar,
+ gdal.jar,
+ junit-4.5.jar,
+ vpf-symbols.jar,
+ gluegen-rt.jar,
+ gluegen-rt-natives-windows-amd64.jar,
+ jogl-all.jar,
+ jogl-all-natives-windows-amd64.jar,
+ gluegen.jar
+Automatic-Module-Name: WorldWindJava
+Bundle-RequiredExecutionEnvironment: JavaSE-11
