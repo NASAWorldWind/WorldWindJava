@@ -28,7 +28,6 @@
 
 package gov.nasa.worldwind;
 
-import com.jogamp.nativewindow.ScalableSurface;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.cache.*;
 import gov.nasa.worldwind.event.*;
@@ -68,7 +67,8 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
      * Causes resources used by the WorldWindow to be freed. The WorldWindow cannot be used once this method is
      * called. An OpenGL context for the window must be current.
      */
-    public void shutdown()
+    @Override
+	public void shutdown()
     {
         WorldWind.getDataFileStore().removePropertyChangeListener(this);
 
@@ -104,7 +104,8 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
             sc.dispose();
     }
 
-    public GpuResourceCache getGpuResourceCache()
+    @Override
+	public GpuResourceCache getGpuResourceCache()
     {
         return this.gpuResourceCache;
     }
@@ -115,42 +116,49 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         this.sceneController.setGpuResourceCache(this.gpuResourceCache);
     }
 
-    public void setModel(Model model)
+    @Override
+	public void setModel(Model model)
     {
         // model can be null, that's ok - it indicates no model.
         if (this.sceneController != null)
             this.sceneController.setModel(model);
     }
 
-    public Model getModel()
+    @Override
+	public Model getModel()
     {
         return this.sceneController != null ? this.sceneController.getModel() : null;
     }
 
-    public void setView(View view)
+    @Override
+	public void setView(View view)
     {
         // view can be null, that's ok - it indicates no view.
         if (this.sceneController != null)
             this.sceneController.setView(view);
     }
 
-    public View getView()
+    @Override
+	public View getView()
     {
         return this.sceneController != null ? this.sceneController.getView() : null;
     }
 
-    public void setModelAndView(Model model, View view)
+    @Override
+	public void setModelAndView(Model model, View view)
     {
         this.setModel(model);
         this.setView(view);
     }
 
-    public SceneController getSceneController()
+    @Override
+	public SceneController getSceneController()
     {
         return this.sceneController;
     }
 
-    public void setSceneController(SceneController sc)
+    @Override
+	public void setSceneController(SceneController sc)
     {
         if (sc != null && this.getSceneController() != null)
         {
@@ -160,31 +168,37 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         this.sceneController = sc;
     }
 
-    public InputHandler getInputHandler()
+    @Override
+	public InputHandler getInputHandler()
     {
         return this.inputHandler;
     }
 
-    public void setInputHandler(InputHandler inputHandler)
+    @Override
+	public void setInputHandler(InputHandler inputHandler)
     {
         this.inputHandler = inputHandler;
     }
 
-    public void redraw()
+    @Override
+	public void redraw()
     {
     }
 
-    public void redrawNow()
+    @Override
+	public void redrawNow()
     {
     }
 
-    public void setPerFrameStatisticsKeys(Set<String> keys)
+    @Override
+	public void setPerFrameStatisticsKeys(Set<String> keys)
     {
         if (this.sceneController != null)
             this.sceneController.setPerFrameStatisticsKeys(keys);
     }
 
-    public Collection<PerformanceStatistic> getPerFrameStatistics()
+    @Override
+	public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         if (this.sceneController == null || this.sceneController.getPerFrameStatistics() == null)
             return new ArrayList<PerformanceStatistic>(0);
@@ -192,17 +206,20 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         return this.sceneController.getPerFrameStatistics();
     }
 
-    public PickedObjectList getObjectsAtCurrentPosition()
+    @Override
+	public PickedObjectList getObjectsAtCurrentPosition()
     {
         return null;
     }
 
-    public PickedObjectList getObjectsInSelectionBox()
+    @Override
+	public PickedObjectList getObjectsInSelectionBox()
     {
         return null;
     }
 
-    public Position getCurrentPosition()
+    @Override
+	public Position getCurrentPosition()
     {
         if (this.sceneController == null)
             return null;
@@ -243,12 +260,14 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         return pol != null && pol.size() > 0 ? pol : null;
     }
 
-    public void addRenderingListener(RenderingListener listener)
+    @Override
+	public void addRenderingListener(RenderingListener listener)
     {
         this.eventListeners.add(RenderingListener.class, listener);
     }
 
-    public void removeRenderingListener(RenderingListener listener)
+    @Override
+	public void removeRenderingListener(RenderingListener listener)
     {
         this.eventListeners.remove(RenderingListener.class, listener);
     }
@@ -261,12 +280,14 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         }
     }
 
-    public void addPositionListener(PositionListener listener)
+    @Override
+	public void addPositionListener(PositionListener listener)
     {
         this.eventListeners.add(PositionListener.class, listener);
     }
 
-    public void removePositionListener(PositionListener listener)
+    @Override
+	public void removePositionListener(PositionListener listener)
     {
         this.eventListeners.remove(PositionListener.class, listener);
     }
@@ -275,7 +296,8 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     {
         EventQueue.invokeLater(new Runnable()
         {
-            public void run()
+            @Override
+			public void run()
             {
                 for (PositionListener listener : eventListeners.getListeners(PositionListener.class))
                 {
@@ -285,12 +307,14 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         });
     }
 
-    public void addSelectListener(SelectListener listener)
+    @Override
+	public void addSelectListener(SelectListener listener)
     {
         this.eventListeners.add(SelectListener.class, listener);
     }
 
-    public void removeSelectListener(SelectListener listener)
+    @Override
+	public void removeSelectListener(SelectListener listener)
     {
         this.eventListeners.remove(SelectListener.class, listener);
     }
@@ -299,7 +323,8 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     {
         EventQueue.invokeLater(new Runnable()
         {
-            public void run()
+            @Override
+			public void run()
             {
                 for (SelectListener listener : eventListeners.getListeners(SelectListener.class))
                 {
@@ -309,12 +334,14 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         });
     }
 
-    public void addRenderingExceptionListener(RenderingExceptionListener listener)
+    @Override
+	public void addRenderingExceptionListener(RenderingExceptionListener listener)
     {
         this.eventListeners.add(RenderingExceptionListener.class, listener);
     }
 
-    public void removeRenderingExceptionListener(RenderingExceptionListener listener)
+    @Override
+	public void removeRenderingExceptionListener(RenderingExceptionListener listener)
     {
         this.eventListeners.remove(RenderingExceptionListener.class, listener);
     }
@@ -323,7 +350,8 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     {
         EventQueue.invokeLater(new Runnable()
         {
-            public void run()
+            @Override
+			public void run()
             {
                 for (RenderingExceptionListener listener : eventListeners.getListeners(
                     RenderingExceptionListener.class))
@@ -340,33 +368,5 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     {
         long cacheSize = Configuration.getLongValue(AVKey.TEXTURE_CACHE_SIZE, FALLBACK_TEXTURE_CACHE_SIZE);
         return new BasicGpuResourceCache((long) (0.8 * cacheSize), cacheSize);
-    }
-
-    /**
-     * Configures JOGL's surface pixel scaling on the specified
-     * <code>ScalableSurface</code> to ensure backward compatibility with
-     * WorldWind applications developed prior to JOGL pixel scaling's
-     * introduction.This method is used by <code>GLCanvas</code> and
-     * <code>GLJPanel</code> to effectively disable JOGL's surface pixel scaling
-     * by requesting a 1:1 scale.<p>
-     * Since v2.2.0, JOGL defaults to using high-dpi pixel scales where
-     * possible. This causes WorldWind screen elements such as placemarks, the
-     * compass, the world map, the view controls, and the scale bar (plus many
-     * more) to appear smaller than they are intended to on screen. The high-dpi
-     * default also has the effect of degrading WorldWind rendering performance.
-     *
-     * @param surface The surface to configure.
-     */
-    public static void configureIdentityPixelScale(ScalableSurface surface)
-    {
-        if (surface == null)
-        {
-            String message = Logging.getMessage("nullValue.SurfaceIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
-        }
-
-        float[] identityScale = new float[] {ScalableSurface.IDENTITY_PIXELSCALE, ScalableSurface.IDENTITY_PIXELSCALE};
-        surface.setSurfaceScale(identityScale);
     }
 }

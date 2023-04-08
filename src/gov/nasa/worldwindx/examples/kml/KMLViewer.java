@@ -37,7 +37,6 @@ import gov.nasa.worldwind.util.layertree.*;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.ogc.kml.*;
 import gov.nasa.worldwind.ogc.kml.impl.KMLController;
-import gov.nasa.worldwind.render.Offset;
 import gov.nasa.worldwind.util.*;
 
 import javax.swing.*;
@@ -76,7 +75,7 @@ public class KMLViewer extends ApplicationTemplate
             // Add the on-screen layer tree, refreshing model with the WorldWindow's current layer list. We
             // intentionally refresh the tree's model before adding the layer that contains the tree itself. This
             // prevents the tree's layer from being displayed in the tree itself.
-            this.layerTree = new LayerTree(new Offset(20d, 160d, AVKey.PIXELS, AVKey.INSET_PIXELS));
+            this.layerTree = new LayerTree(new Point(20, 160));
             this.layerTree.getModel().refresh(this.getWwd().getModel().getLayers());
 
             // Set up a layer to display the on-screen layer tree in the WorldWindow. This layer is not displayed in
@@ -119,7 +118,8 @@ public class KMLViewer extends ApplicationTemplate
             // Set up to receive SSLHandshakeExceptions that occur during resource retrieval.
             WorldWind.getRetrievalService().setSSLExceptionListener(new RetrievalService.SSLExceptionListener()
             {
-                public void onException(Throwable e, String path)
+                @Override
+				public void onException(Throwable e, String path)
                 {
                     System.out.println(path);
                     System.out.println(e);
@@ -164,14 +164,16 @@ public class KMLViewer extends ApplicationTemplate
             // we ensure that the network link tree view appearance is consistent with the KML specification.
             layerNode.addPropertyChangeListener(AVKey.RETRIEVAL_STATE_SUCCESSFUL, new PropertyChangeListener()
             {
-                public void propertyChange(final PropertyChangeEvent event)
+                @Override
+				public void propertyChange(final PropertyChangeEvent event)
                 {
                     if (event.getSource() instanceof KMLNetworkLinkTreeNode)
                     {
                         // Manipulate the tree on the EDT.
                         SwingUtilities.invokeLater(new Runnable()
                         {
-                            public void run()
+                            @Override
+							public void run()
                             {
                                 ((KMLNetworkLinkTreeNode) event.getSource()).expandOpenContainers(layerTree);
                                 getWwd().redraw();
@@ -213,7 +215,8 @@ public class KMLViewer extends ApplicationTemplate
          * If loading the KML source fails, this prints the exception and its stack trace to the standard error stream,
          * but otherwise does nothing.
          */
-        public void run()
+        @Override
+		public void run()
         {
             try
             {
@@ -226,7 +229,8 @@ public class KMLViewer extends ApplicationTemplate
                 final KMLRoot finalKMLRoot = kmlRoot;
                 SwingUtilities.invokeLater(new Runnable()
                 {
-                    public void run()
+                    @Override
+					public void run()
                     {
                         appFrame.addKMLLayer(finalKMLRoot);
                     }
@@ -287,7 +291,8 @@ public class KMLViewer extends ApplicationTemplate
 
         JMenuItem openFileMenuItem = new JMenuItem(new AbstractAction("Open File...")
         {
-            public void actionPerformed(ActionEvent actionEvent)
+            @Override
+			public void actionPerformed(ActionEvent actionEvent)
             {
                 try
                 {
@@ -311,7 +316,8 @@ public class KMLViewer extends ApplicationTemplate
 
         JMenuItem openURLMenuItem = new JMenuItem(new AbstractAction("Open URL...")
         {
-            public void actionPerformed(ActionEvent actionEvent)
+            @Override
+			public void actionPerformed(ActionEvent actionEvent)
             {
                 try
                 {
@@ -334,6 +340,7 @@ public class KMLViewer extends ApplicationTemplate
     public static void main(String[] args)
     {
         //noinspection UnusedDeclaration
-        final AppFrame af = (AppFrame) start("WorldWind KML Viewer", AppFrame.class);
+        @SuppressWarnings("unused")
+		final AppFrame af = (AppFrame) start("WorldWind KML Viewer", AppFrame.class);
     }
 }

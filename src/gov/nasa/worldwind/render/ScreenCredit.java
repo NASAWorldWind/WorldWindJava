@@ -47,6 +47,4 @@ public interface ScreenCredit extends Renderable
     void setLink(String link);
 
     String getLink();
-
-    public void pick(DrawContext dc, java.awt.Point pickPoint);
 }

@@ -27,6 +27,8 @@
  */
 package gov.nasa.worldwind.util.layertree;
 
+import java.awt.Point;
+
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.render.Offset;
 import gov.nasa.worldwind.util.Logging;
@@ -87,11 +89,11 @@ public class LayerTree extends BasicTree
      * Creates a new <code>LayerTree</code> with an empty <code>LayerTreeModel</code> and the specified screen
      * location.
      *
-     * @param offset the screen location of the tree's upper left corner, relative to the screen's upper left corner.
+     * @param offset the screen location of the tree's lower left corner, relative to the screen's lower left corner.
      *
      * @throws IllegalArgumentException if <code>offset</code> is <code>null</code>.
      */
-    public LayerTree(Offset offset)
+    public LayerTree(Point offset)
     {
         if (offset == null)
         {
@@ -107,12 +109,12 @@ public class LayerTree extends BasicTree
      * Creates a new <code>LayerTree</code> with the specified <code>model</code> and the specified screen location.
      *
      * @param model  the tree model to use.
-     * @param offset the screen location of the tree's upper left corner, relative to the screen's upper left corner.
+     * @param offset the screen location of the tree's lower left corner, relative to the screen's lower left corner. (GL surface pixels)
      *
      * @throws IllegalArgumentException if <code>model</code> is <code>null</code>, or if <code>offset</code> is
      *                                  <code>null</code>.
      */
-    public LayerTree(LayerTreeModel model, Offset offset)
+    public LayerTree(LayerTreeModel model, Point offset)
     {
         if (model == null)
         {
@@ -139,7 +141,7 @@ public class LayerTree extends BasicTree
      * @param model  this tree's model to use, or <code>null</code> to create a new <code>LayerTreeModel</code>.
      * @param offset the screen location of this tree's upper left corner, or <code>null</code> to use the default.
      */
-    protected void initialize(LayerTreeModel model, Offset offset)
+    protected void initialize(LayerTreeModel model, Point offset)
     {
         if (model == null)
             model = this.createTreeModel();
@@ -167,10 +169,10 @@ public class LayerTree extends BasicTree
      *
      * @return new <code>TreeLayout</code>.
      */
-    protected TreeLayout createTreeLayout(Offset offset)
+    protected TreeLayout createTreeLayout(Point offset)
     {
         if (offset == null)
-            offset = DEFAULT_OFFSET;
+            offset = new Point(DEFAULT_OFFSET.getX().intValue(), DEFAULT_OFFSET.getY().intValue());
 
         BasicTreeLayout layout = new BasicTreeLayout(this, offset);
         layout.getFrame().setFrameTitle(DEFAULT_FRAME_TITLE);
@@ -196,7 +198,8 @@ public class LayerTree extends BasicTree
     }
 
     /** {@inheritDoc} */
-    public LayerTreeModel getModel()
+    @Override
+	public LayerTreeModel getModel()
     {
         return (LayerTreeModel) super.getModel();
     }

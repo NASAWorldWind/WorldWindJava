@@ -94,7 +94,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -132,7 +131,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -172,7 +170,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -216,7 +213,6 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.createView();
             this.createDefaultInputHandler();
             WorldWind.addPropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
-            WorldWindowImpl.configureIdentityPixelScale(this);
             this.wwd.endInitialization();
         }
         catch (Exception e)
@@ -227,7 +223,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         }
     }
 
-    public void propertyChange(PropertyChangeEvent evt)
+    @Override
+	public void propertyChange(PropertyChangeEvent evt)
     {
         if(this.wwd == evt.getSource())
             this.firePropertyChange(evt);
@@ -237,7 +234,8 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             this.shutdown();
     }
 
-    public void shutdown()
+    @Override
+	public void shutdown()
     {
         WorldWind.removePropertyChangeListener(WorldWind.SHUTDOWN_EVENT, this);
         this.wwd.shutdown();
@@ -267,12 +265,14 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         this.setInputHandler((InputHandler) WorldWind.createConfigurationComponent(AVKey.INPUT_HANDLER_CLASS_NAME));
     }
 
-    public InputHandler getInputHandler()
+    @Override
+	public InputHandler getInputHandler()
     {
         return this.wwd.getInputHandler();
     }
 
-    public void setInputHandler(InputHandler inputHandler)
+    @Override
+	public void setInputHandler(InputHandler inputHandler)
     {
         if (this.wwd.getInputHandler() != null)
             this.wwd.getInputHandler().setEventSource(null); // remove this window as a source of events
@@ -282,153 +282,182 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
             inputHandler.setEventSource(this);
     }
 
-    public SceneController getSceneController()
+    @Override
+	public SceneController getSceneController()
     {
         return this.wwd.getSceneController();
     }
 
-    public void setSceneController(SceneController sceneController)
+    @Override
+	public void setSceneController(SceneController sceneController)
     {
         this.wwd.setSceneController(sceneController);
     }
 
-    public GpuResourceCache getGpuResourceCache()
+    @Override
+	public GpuResourceCache getGpuResourceCache()
     {
         return this.wwd.getGpuResourceCache();
     }
 
-    public void redraw()
+    @Override
+	public void redraw()
     {
         this.repaint();
     }
 
-    public void redrawNow()
+    @Override
+	public void redrawNow()
     {
         this.wwd.redrawNow();
     }
 
-    public void setModel(Model model)
+    @Override
+	public void setModel(Model model)
     {
         // null models are permissible
         this.wwd.setModel(model);
     }
 
-    public Model getModel()
+    @Override
+	public Model getModel()
     {
         return this.wwd.getModel();
     }
 
-    public void setView(View view)
+    @Override
+	public void setView(View view)
     {
         // null views are permissible
         if (view != null)
             this.wwd.setView(view);
     }
 
-    public View getView()
+    @Override
+	public View getView()
     {
         return this.wwd.getView();
     }
 
-    public void setModelAndView(Model model, View view)
+    @Override
+	public void setModelAndView(Model model, View view)
     {   // null models/views are permissible
         this.setModel(model);
         this.setView(view);
     }
 
-    public void addRenderingListener(RenderingListener listener)
+    @Override
+	public void addRenderingListener(RenderingListener listener)
     {
         this.wwd.addRenderingListener(listener);
     }
 
-    public void removeRenderingListener(RenderingListener listener)
+    @Override
+	public void removeRenderingListener(RenderingListener listener)
     {
         this.wwd.removeRenderingListener(listener);
     }
 
-    public void addSelectListener(SelectListener listener)
+    @Override
+	public void addSelectListener(SelectListener listener)
     {
         this.wwd.getInputHandler().addSelectListener(listener);
         this.wwd.addSelectListener(listener);
     }
 
-    public void removeSelectListener(SelectListener listener)
+    @Override
+	public void removeSelectListener(SelectListener listener)
     {
         this.wwd.getInputHandler().removeSelectListener(listener);
         this.wwd.removeSelectListener(listener);
     }
 
-    public void addPositionListener(PositionListener listener)
+    @Override
+	public void addPositionListener(PositionListener listener)
     {
         this.wwd.addPositionListener(listener);
     }
 
-    public void removePositionListener(PositionListener listener)
+    @Override
+	public void removePositionListener(PositionListener listener)
     {
         this.wwd.removePositionListener(listener);
     }
 
-    public void addRenderingExceptionListener(RenderingExceptionListener listener)
+    @Override
+	public void addRenderingExceptionListener(RenderingExceptionListener listener)
     {
         this.wwd.addRenderingExceptionListener(listener);
     }
 
-    public void removeRenderingExceptionListener(RenderingExceptionListener listener)
+    @Override
+	public void removeRenderingExceptionListener(RenderingExceptionListener listener)
     {
         this.wwd.removeRenderingExceptionListener(listener);
     }
 
-    public Position getCurrentPosition()
+    @Override
+	public Position getCurrentPosition()
     {
         return this.wwd.getCurrentPosition();
     }
 
-    public PickedObjectList getObjectsAtCurrentPosition()
+    @Override
+	public PickedObjectList getObjectsAtCurrentPosition()
     {
         return this.wwd.getSceneController() != null ? this.wwd.getSceneController().getPickedObjectList() : null;
     }
 
-    public PickedObjectList getObjectsInSelectionBox()
+    @Override
+	public PickedObjectList getObjectsInSelectionBox()
     {
         return this.wwd.getSceneController() != null ? this.wwd.getSceneController().getObjectsInPickRectangle() : null;
     }
 
-    public Object setValue(String key, Object value)
+    @Override
+	public Object setValue(String key, Object value)
     {
         return this.wwd.setValue(key, value);
     }
 
-    public AVList setValues(AVList avList)
+    @Override
+	public AVList setValues(AVList avList)
     {
         return this.wwd.setValues(avList);
     }
 
-    public Object getValue(String key)
+    @Override
+	public Object getValue(String key)
     {
         return this.wwd.getValue(key);
     }
 
-    public Collection<Object> getValues()
+    @Override
+	public Collection<Object> getValues()
     {
         return this.wwd.getValues();
     }
 
-    public Set<Map.Entry<String, Object>> getEntries()
+    @Override
+	public Set<Map.Entry<String, Object>> getEntries()
     {
         return this.wwd.getEntries();
     }
 
-    public String getStringValue(String key)
+    @Override
+	public String getStringValue(String key)
     {
         return this.wwd.getStringValue(key);
     }
 
-    public boolean hasKey(String key)
+    @Override
+	public boolean hasKey(String key)
     {
         return this.wwd.hasKey(key);
     }
 
-    public Object removeKey(String key)
+    @Override
+	public Object removeKey(String key)
     {
         return this.wwd.removeKey(key);
     }
@@ -463,28 +492,53 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         super.firePropertyChange(propertyName, oldValue, newValue);
     }
 
-    public void firePropertyChange(PropertyChangeEvent propertyChangeEvent)
+    @Override
+	public void firePropertyChange(PropertyChangeEvent propertyChangeEvent)
     {
         this.wwd.firePropertyChange(propertyChangeEvent);
     }
 
-    public AVList copy()
+    @Override
+	public AVList copy()
     {
         return this.wwd.copy();
     }
 
-    public AVList clearList()
+    @Override
+	public AVList clearList()
     {
         return this.wwd.clearList();
     }
 
-    public void setPerFrameStatisticsKeys(Set<String> keys)
+    @Override
+	public void setPerFrameStatisticsKeys(Set<String> keys)
     {
         this.wwd.setPerFrameStatisticsKeys(keys);
     }
 
-    public Collection<PerformanceStatistic> getPerFrameStatistics()
+    @Override
+	public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         return this.wwd.getPerFrameStatistics();
+    }
+    
+    /**
+     * @return current mouse pointer position in GL surface screen coordinates.
+     */
+    @Override
+    public Point getMousePosition() throws HeadlessException {
+    	Point mpos = super.getMousePosition();
+		int [] awtPt = { mpos.x, mpos.y };
+		
+		if (wwd.getContext() == null) return mpos;
+	
+		GLDrawable drawable = wwd.getContext().getGLDrawable();
+		if (drawable == null) return mpos;
+
+		// Convert to GL surface coordinates
+		int [] glSurfacePt = drawable.getNativeSurface().convertToPixelUnits(awtPt);
+		int glSurfaceHeight = drawable.getSurfaceHeight();
+		glSurfacePt[1] = glSurfaceHeight - glSurfacePt[1] - 1;
+		return new Point(glSurfacePt[0], glSurfacePt[1]);
     }
 }
