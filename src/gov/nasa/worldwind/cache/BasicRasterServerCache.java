@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.cache;
@@ -21,7 +43,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * The <code>BasicRasterServerCache</code> is an implementation of the memory cache that is specific to store maximum
  * possible cacheable items, until the heap size allows. Once the memory limit is hit, it will drop ALL cached items.
  * Also, BasicRasterServerCache creates a pruner thread that removes all cached items which were not used for 20 seconds
- * or more. The least recent use timeout is configurable via the <code>setLeastRecentUseTimeout()<code> method. In
+ * or more. The least recent use timeout is configurable via the <code>setLeastRecentUseTimeout()</code> method. In
  * addition, the <code>BasicRasterServerCache</code> allocates 100MB memory and keeps only a phantom reference to the
  * allocated 100M memory. Once any part of the application needs more memory the phantom referenced memory will be
  * immediately released and the phantom reference will be added to the internal reference queue, which is monitored by

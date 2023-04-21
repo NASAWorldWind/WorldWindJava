@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind;
@@ -109,7 +131,7 @@ public interface SceneController extends WWObject, Disposable
      * Specifies the current pick point in AWT screen coordinates, or <code>null</code> to indicate that there is no
      * pick point. Each frame, this scene controller determines which objects are drawn at the pick point and places
      * them in a PickedObjectList. This list can be accessed by calling {@link #getPickedObjectList()}.
-     * <p/>
+     * <p>
      * If the pick point is <code>null</code>, this scene controller ignores the pick point and the list of objects
      * returned by getPickedObjectList is empty.
      *
@@ -130,7 +152,7 @@ public interface SceneController extends WWObject, Disposable
      * Specifies the current pick rectangle in AWT screen coordinates, or <code>null</code> to indicate that there is no
      * pick rectangle. Each frame, this scene controller determines which objects intersect the pick rectangle and
      * places them in a PickedObjectList. This list can be accessed by calling {@link #getObjectsInPickRectangle()}.
-     * <p/>
+     * <p>
      * If the pick rectangle is <code>null</code>, this scene controller ignores the pick rectangle and the list of
      * objects returned by getObjectsInPickRectangle is empty.
      *

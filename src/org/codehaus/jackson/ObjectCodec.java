@@ -9,9 +9,6 @@ import org.codehaus.jackson.type.TypeReference;
  * Abstract class that defines the interface that {@link JsonParser} and
  * {@link JsonGenerator} use to serialize and deserialize regular
  * Java objects (POJOs aka Beans).
- *<p>
- * The standard implementation of this class is
- * {@link org.codehaus.jackson.map.ObjectMapper}.
  */
 public abstract class ObjectCodec
 {
@@ -32,36 +29,57 @@ public abstract class ObjectCodec
      * container ({@link java.util.Collection} or {@link java.util.Map}.
      * The reason is that due to type erasure, key and value types
      * can not be introspected when using this method.
+     * @param <T> Undocumented.
+     * @param jp Undocumented.
+     * @param valueType Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException  Undocumented.
      */
     public abstract <T> T readValue(JsonParser jp, Class<T> valueType)
         throws IOException, JsonProcessingException;
 
     /**
-     * Method to deserialize JSON content into a Java type, reference
-     * to which is passed as argument. Type is passed using so-called
-     * "super type token" (see )
-     * and specifically needs to be used if the root type is a 
-     * parameterized (generic) container type.
+     * Method to deserialize JSON content into a Java type, reference to which is passed as argument.Type is passed
+     * using so-called "super type token" (see ) and specifically needs to be used if the root type is a parameterized
+     * (generic) container type.
+     *
+     * @param <T> Undocumented.
+     * @param jp Undocumented.
+     * @param valueTypeRef Undocumented.
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException Undocumented.
      */
     public abstract <T> T readValue(JsonParser jp, TypeReference<?> valueTypeRef)
         throws IOException, JsonProcessingException;
 
     /**
      * Method to deserialize JSON content as tree expressed
-     * using set of {@link JsonNode} instances. Returns
-     * root of the resulting tree (where root can consist
-     * of just a single node if the current event is a
-     * value event, not container).
+     * using set of {@link JsonNode} instances.Returns
+ root of the resulting tree (where root can consist
+ of just a single node if the current event is a
+ value event, not container).
+     * @param <T> Undocumented.
+     * @param jp Undocumented.
+     * @param valueType Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException  Undocumented.
      */
     public abstract <T> T readValue(JsonParser jp, JavaType valueType)
         throws IOException, JsonProcessingException;
 
     /**
      * Method to deserialize JSON content as tree expressed
-     * using set of {@link JsonNode} instances. Returns
-     * root of the resulting tree (where root can consist
-     * of just a single node if the current event is a
-     * value event, not container).
+     * using set of {@link JsonNode} instances.Returns
+ root of the resulting tree (where root can consist
+ of just a single node if the current event is a
+ value event, not container).
+     * @param jp Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException  Undocumented.
      */
     public abstract JsonNode readTree(JsonParser jp)
         throws IOException, JsonProcessingException;
@@ -75,6 +93,10 @@ public abstract class ObjectCodec
     /**
      * Method to serialize given Java Object, using generator
      * provided.
+     * @param jgen Undocumented.
+     * @param value Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException Undocumented.
      */
     public abstract void writeValue(JsonGenerator jgen, Object value)
         throws IOException, JsonProcessingException;
@@ -82,6 +104,10 @@ public abstract class ObjectCodec
     /**
      * Method to serialize given Json Tree, using generator
      * provided.
+     * @param jgen Undocumented.
+     * @param rootNode Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException Undocumented.
      */
     public abstract void writeTree(JsonGenerator jgen, JsonNode rootNode)
         throws IOException, JsonProcessingException;
@@ -96,6 +122,7 @@ public abstract class ObjectCodec
      * Method for construct root level Object nodes
      * for Tree Model instances.
      *
+     * @return  Undocumented.
      * @since 1.2
      */
     public abstract JsonNode createObjectNode();
@@ -104,6 +131,7 @@ public abstract class ObjectCodec
      * Method for construct root level Array nodes
      * for Tree Model instances.
      *
+     * @return  Undocumented.
      * @since 1.2
      */
     public abstract JsonNode createArrayNode();
@@ -113,6 +141,8 @@ public abstract class ObjectCodec
      * contents of a JSON tree, as if it was external serialized
      * JSON content.
      *
+     * @param n Undocumented.
+     * @return  Undocumented.
      * @since 1.3
      */
     public abstract JsonParser treeAsTokens(JsonNode n);
@@ -130,10 +160,16 @@ c    public abstract JsonGenerator treeFromTokens(JsonNode containerNode)
     */
 
     /**
-     * Convenience method for converting given JSON tree into instance of specified
-     * value type. This is equivalent to first constructing a {@link JsonParser} to
-     * iterate over contents of the tree, and using that parser for data binding.
-     * 
+     * Convenience method for converting given JSON tree into instance of specified value type.This is equivalent to
+     * first constructing a {@link JsonParser} to iterate over contents of the tree, and using that parser for data
+     * binding.
+     *
+     * @param <T> Undocumented.
+     * @param n Undocumented.
+     * @param valueType Undocumented.
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonProcessingException Undocumented.
      * @since 1.3
      */
     public abstract <T> T treeToValue(JsonNode n, Class<T> valueType)

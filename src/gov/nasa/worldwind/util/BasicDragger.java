@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2016 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -60,9 +82,12 @@ public class BasicDragger implements SelectListener
     /**
      * Ignores the useTerrain argument as it has been deprecated and utilizes the single parameter constructor.
      *
+     * @param wwd The world window.
+     * @param useTerrain Unused.
      * @deprecated the useTerrain property has been deprecated in favor of the {@link Draggable} interface which allows
      * the object to define the drag behavior.
      */
+    @Deprecated
     public BasicDragger(WorldWindow wwd, boolean useTerrain)
     {
         this(wwd);
@@ -83,16 +108,18 @@ public class BasicDragger implements SelectListener
      * @return <code>false</code> as this functionality has been deprecated.
      * @deprecated the {@link Draggable} provides the object being dragged complete control over the dragging behavior.
      */
+    @Deprecated
     public boolean isUseTerrain()
     {
         return false;
     }
 
     /**
-     * @param useTerrain
+     * @param useTerrain Unused.
      *
      * @deprecated definition of dragging behavior now defined by the object in the {@link Draggable} interface.
      */
+    @Deprecated
     public void setUseTerrain(boolean useTerrain)
     {
         // ignored - functionality deprecated

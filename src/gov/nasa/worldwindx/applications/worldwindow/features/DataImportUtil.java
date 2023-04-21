@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.applications.worldwindow.features;
 
@@ -82,14 +104,14 @@ public class DataImportUtil
     }
 
     /**
-     * Returns true if the specified input source is non-null and represents a reference to a World Wind .NET LayerSet
+     * Returns true if the specified input source is non-null and represents a reference to a WorldWind .NET LayerSet
      * XML document, and false otherwise. The input source may be one of the following: <ul> <li>{@link String}</li>
      * <li>{@link java.io.File}</li> <li>{@link java.net.URL}</li> <li>{@link java.net.URI}</li> <li>{@link
      * java.io.InputStream}</li> </ul>
      *
-     * @param source the input source reference to test as a World Wind .NET LayerSet document.
+     * @param source the input source reference to test as a WorldWind .NET LayerSet document.
      *
-     * @return true if the input source is a World Wind .NET LayerSet document, and false otherwise.
+     * @return true if the input source is a WorldWind .NET LayerSet document, and false otherwise.
      *
      * @throws IllegalArgumentException if the input source is null.
      */
@@ -138,7 +160,7 @@ public class DataImportUtil
      * default location for importing data. This attempts to use the first FileStore location marked as an "install"
      * location. If no install location exists, this falls back to the FileStore's default write location, the same
      * location where downloaded data is cached.
-     * <p/>
+     * <p>
      * The returned {@link java.io.File} represents an abstract path, and therefore may not exist. In this case, the
      * caller must create the missing directories composing the abstract path.
      *

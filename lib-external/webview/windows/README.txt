@@ -17,7 +17,7 @@ Building the library
 --------------------
 
 The library is built using Microsoft NMake. The build process can be launched from ant using the ant task
-native.webview.libraries, defined in the World Wind build.xml file.
+native.webview.libraries, defined in the WorldWind build.xml file.
 
 To build using ant:
 

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -20,10 +42,10 @@ public class TileKey implements Comparable<TileKey>
     private final int hash;
 
     /**
-     * @param level
-     * @param row
-     * @param col
-     * @param cacheName
+     * @param level Tile level.
+     * @param row Tile row.
+     * @param col Tile col.
+     * @param cacheName Cache name.
      * @throws IllegalArgumentException if <code>level</code>, <code>row</code> or <code>column</code> is negative or if
      *                                  <code>cacheName</code> is null or empty
      */
@@ -61,9 +83,10 @@ public class TileKey implements Comparable<TileKey>
     }
 
     /**
-     * @param latitude
-     * @param longitude
-     * @param levelNumber
+     * @param latitude Tile latitude.
+     * @param longitude Tile longitude.
+     * @param levelSet The level set.
+     * @param levelNumber Tile level number.
      * @throws IllegalArgumentException if any parameter is null
      */
     public TileKey(Angle latitude, Angle longitude, LevelSet levelSet, int levelNumber)
@@ -89,7 +112,7 @@ public class TileKey implements Comparable<TileKey>
     }
 
     /**
-     * @param tile
+     * @param tile The source tile.
      * @throws IllegalArgumentException if <code>tile</code> is null
      */
     public TileKey(Tile tile)

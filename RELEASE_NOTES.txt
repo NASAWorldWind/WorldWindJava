@@ -1,0 +1,26 @@
+################### WorldWindJava 2.2.1
+
+This version of WorldWind Java is a maintenance release that addresses small fixes (updated formatting, typos, bad references, etc.) to various areas of the code and removes references to services that are no longer supported by the WorldWind servers.
+
+WorldWind's API remains unchanged in this release and we are committed to maintaining a consistent API in future releases.
+
+################### WorldWindJava 2.2.0
+
+The primary goal of the WorldWind Java (WWJ) v2.2.0 release is to modernize the SDK after a period of inactivity. During this process some defects were addressed as well. Highlights of v2.2.0:
+
+- Upgrade to Java 11
+- Upgrade to the OpenGL layer (JOGL) 2.4
+- Switch to the Apache 2.0 license
+- Deprecation of unsupported functionality such as Applets, WebStart and WebView.
+
+WorldWind's API remains largely unchanged in this release and we are committed to maintaining a consistent API in future releases.
+
+The prior release of WorldWind Java, v2.1.0, was compiled with Java 8. The decision was made to upgrade WWJ to Java 11 based on questionable support options for Java 8 at the time. This situation has evolved over time and we are evaluating whether a Java 8 version of WWJ is desirable. Your feedback is welcome. 
+
+Migrating to Java 11 and JOGL 2.4 went relatively smoothly. Primary areas of work:
+
+- The package names for JOGL have changed although the API remains relatively consistent.
+- Creating work alike code to replace the use of unpublished JRE APIs that now throw an access exception. For example, setting the java library path system property. Discussions around the types of changes that need to be made when moving from 8 to 11 are broadly available on the Web.
+- Removing deprecated functionality like WebStart, Applets and WebView.
+
+This release positions WorldWind Java to begin adding new functionality in the near future, please watch this repository for further updates.

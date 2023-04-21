@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.layers;
 
@@ -46,7 +68,7 @@ public interface Layer extends WWObject, Disposable, Restorable
 
     /**
      * Returns the layer's opacity, the degree to which it is blended with underlying layers.
-     * <p/>
+     * <p>
      * Many layers apply special usage of opacity, and some ignore it in favor of the opacity settings of their internal
      * renderables. See the description of this method in specific layers to determine usage there.
      *
@@ -56,7 +78,7 @@ public interface Layer extends WWObject, Disposable, Restorable
 
     /**
      * Sets the layer's opacity, the degree to which it is blended with underlying layers.
-     * <p/>
+     * <p>
      * Many layers apply special usage of opacity, and some ignore it in favor of the opacity settings of their internal
      * renderables. See the description of this method in specific layers to determine usage there.
      *
@@ -67,7 +89,7 @@ public interface Layer extends WWObject, Disposable, Restorable
 
     /**
      * Indicates whether the layer performs selection during picking.
-     * <p/>
+     * <p>
      * Most layers enable picking by default. However, this becomes inconvenient for {@link
      * gov.nasa.worldwind.render.SurfaceImage} and {@link gov.nasa.worldwind.layers.SurfaceImageLayer}} when the image
      * covers a large area because the view input handlers detect the surface image rather than the terrain as the top
@@ -224,7 +246,7 @@ public interface Layer extends WWObject, Disposable, Restorable
     /**
      * Indicates the altitude above which this layer likely has low value or is not expected to be active. This value is
      * independent of the maximum active altitude, {@link #setMaxActiveAltitude(double)} and does not reflect it.
-     * <p/>
+     * <p>
      * The returned altitude is valid when the field of view indicated by {@link gov.nasa.worldwind.View#getFieldOfView()}
      * is set to its default value. Changing the field of view to any value other than the default may change this
      * layer's maximum effective altitude, but the returned altitude will not reflect that change.
@@ -239,7 +261,7 @@ public interface Layer extends WWObject, Disposable, Restorable
     /**
      * Indicates the altitude below which this layer likely has low value or is not expected to be active. This value is
      * independent of the minimum active altitude, {@link #setMinActiveAltitude(double)} and does not reflect it.
-     * <p/>
+     * <p>
      * The returned altitude is valid when the field of view indicated by {@link gov.nasa.worldwind.View#getFieldOfView()}
      * is set to its default value. Changing the field of view to any value other than the default may change this
      * layer's minimum effective altitude, but the returned altitude will not reflect that change.

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.kml.impl;
@@ -26,11 +48,10 @@ import java.util.regex.*;
  * implementing the Balloon interface, this class provides a thin wrapper around another Balloon implementation and adds
  * the logic for styling the Balloon according to the KML style. All Balloon methods on this class pass through to the
  * contained Balloon.
- * <p/>
+ * <p>
  * To use KML Balloon, first create a Balloon of the desired type, and then create the KML Balloon. For example:
- * <p/>
- * <code>
  * <pre>
+ * <code>
  *   KMLPlacemark myPlacemark = ...;
  *   Position placemarkPosition = ...;
  *
@@ -39,8 +60,8 @@ import java.util.regex.*;
  *
  *   // Create a KML Balloon to apply the placemark's KML BalloonStyle to the browser balloon.
  *   KMLGlobeBalloonImpl kmlBalloon = new KMLGlobeBalloonImpl(globeBalloon, myPlacemark);
- * </pre>
  * </code>
+ * </pre>
  *
  * @author pabercrombie
  * @version $Id: KMLAbstractBalloon.java 1555 2013-08-20 13:33:12Z pabercrombie $
@@ -84,6 +105,7 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
      *
      * @param balloon The balloon contained in this wrapper object.
      */
+    @SuppressWarnings("deprecation")
     protected void initialize(Balloon balloon)
     {
         balloon.setTextDecoder(this.createTextDecoder(this.parent));
@@ -339,7 +361,7 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
     /**
      * Add hyperlink tags to URLs in the balloon text. The text may include some simple HTML markup. This method
      * attempts to identify URLs in the text while not altering URLs that are already linked.
-     * <p/>
+     * <p>
      * This method is conservative about what is identified as a URL, in order to avoid adding links to text that the
      * user did not intend to be linked. Only HTTP and HTTPS URLs are recognised, as well as text that begins with www.
      * (in which case a http:// prefix will be prepended). Some punctuation characters that are valid URL characters
@@ -486,12 +508,12 @@ public abstract class KMLAbstractBalloon implements Balloon, WebResourceResolver
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * This implementation resolves relative resource paths by calling <code>{@link
      * gov.nasa.worldwind.ogc.kml.io.KMLDoc#getSupportFilePath(String)}</code> on the parent
      * <code>KMLAbstractFeature's</code> <code>KMLDoc</code>. This is necessary to correctly resolve relative references
      * in a KMZ archive.
-     * <p/>
+     * <p>
      * This returns <code>null</code> if the specified <code>address</code> is <code>null</code>.
      */
     public URL resolve(String address)

@@ -67,6 +67,7 @@ public abstract class JsonStreamContext
     /**
      * Method that returns true if this context is an Array context;
      * that is, content is being read from or written to a Json Array.
+     * @return  Undocumented.
      */
     public final boolean inArray() { return _type == TYPE_ARRAY; }
 
@@ -74,12 +75,14 @@ public abstract class JsonStreamContext
      * Method that returns true if this context is a Root context;
      * that is, content is being read from or written to without
      * enclosing array or object structure.
+     * @return  Undocumented.
      */
     public final boolean inRoot() { return _type == TYPE_ROOT; }
 
     /**
      * Method that returns true if this context is an Object context;
      * that is, content is being read from or written to a Json Object.
+     * @return  Undocumented.
      */
     public final boolean inObject() { return _type == TYPE_OBJECT; }
 

@@ -24,6 +24,7 @@ public @interface JsonWriteNullProperties
     /**
      * Whether properties for beans of annotated type will always be
      * written (true), or only if not null (false).
+      * @return Undocumented
      */
     boolean value() default true;
 }

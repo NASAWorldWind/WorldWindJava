@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -18,8 +40,8 @@ import gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
 import javax.xml.stream.*;
 import java.io.*;
 import java.nio.*;
@@ -27,13 +49,13 @@ import java.util.*;
 
 /**
  * /** A 3D polygon. The polygon may be complex with multiple internal but not intersecting contours.
- * <p/>
- * Polygons are safe to share among World Windows. They should not be shared among layers in the same World Window.
- * <p/>
+ * <p>
+ * Polygons are safe to share among WorldWindows. They should not be shared among layers in the same WorldWindow.
+ * <p>
  * In order to support simultaneous use of this shape with multiple globes (windows), this shape maintains a cache of
  * data computed relative to each globe. During rendering, the data for the currently active globe, as indicated in the
  * draw context, is made current. Subsequently called methods rely on the existence of this current data cache entry.
- * <p/>
+ * <p>
  * When drawn on a 2D globe, this shape uses a {@link SurfacePolygon} to represent itself. The following features are
  * not provided in this case: rotation and texture.
  *
@@ -871,7 +893,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Compute enough geometry to determine this polygon's extent, reference point and eye distance.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.
@@ -901,7 +923,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Computes the minimum distance between this polygon and the eye point.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the draw context.
@@ -1003,7 +1025,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Compute the cap geometry.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.
@@ -1152,7 +1174,7 @@ public class Polygon extends AbstractShape
 
     /**
      * Tessellates the polygon.
-     * <p/>
+     * <p>
      * This method catches {@link OutOfMemoryError} exceptions and if the draw context is not null passes the exception
      * to the rendering exception listener (see {@link WorldWindow#addRenderingExceptionListener(gov.nasa.worldwind.event.RenderingExceptionListener)}).
      *
@@ -1417,7 +1439,7 @@ public class Polygon extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Note that this method overwrites the boundary locations lists, and therefore no longer refer to the originally
      * specified boundary lists.
      *
@@ -1460,7 +1482,7 @@ public class Polygon extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Note that this method overwrites the boundary locations lists, and therefore no longer refer to the originally
      * specified boundary lists.
      *

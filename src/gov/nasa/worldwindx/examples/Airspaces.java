@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
@@ -16,11 +38,11 @@ import gov.nasa.worldwindx.examples.util.RandomShapeAttributes;
 import java.util.Arrays;
 
 /**
- * Illustrates how to configure and display World Wind <code>{@link Airspace}</code> shapes. Airspace shapes are
+ * Illustrates how to configure and display WorldWind <code>{@link Airspace}</code> shapes. Airspace shapes are
  * extruded 3D volumes defined by geographic coordinates and upper- and lower- altitude boundaries. The interior of
  * airspace shapes always conforms to the curvature of the globe, and optionally also conform to the underlying
  * terrain.
- * <p/>
+ * <p>
  * This shows how to use all 11 types of standard airspace shapes: <ul> <li><code>{@link Orbit}</code> - a rectangle
  * with rounded end caps.</li> <li><code>{@link Curtain}</code> - a vertically extruded wall.</li> <li><code>{@link
  * Polygon}</code> - a vertically extruded polygon.</li> <li><code>{@link PolyArc}</code> - a vertically extruded
@@ -445,7 +467,7 @@ public class Airspaces extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        start("World Wind Airspaces", AppFrame.class);
+        start("WorldWind Airspaces", AppFrame.class);
     }
 
     protected static Iterable<LatLon> makeLatLon(double[] src)

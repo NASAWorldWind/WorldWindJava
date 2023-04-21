@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples;
@@ -17,11 +39,11 @@ import javax.swing.border.*;
 import java.awt.*;
 
 /**
- * Illustrates how to use World Wind within a Swing JSplitPane. Doing so is mostly straightforward, but in order to work
+ * Illustrates how to use WorldWind within a Swing JSplitPane. Doing so is mostly straightforward, but in order to work
  * around a Swing bug the WorldWindow must be placed within a JPanel and that JPanel's minimum preferred size must be
  * set to zero (both width and height). See the code that does this in the first few lines of the AppPanel constructor
  * below.
- * <p/>
+ * <p>
  * This example also illustrates another bug in Swing that does not have a known workaround: the WorldWindow does not
  * resize when a vertical split-pane's one-touch-expand widget is clicked if that split-pane contains a horizontal
  * split-plane that contains the WorldWindow. If the one-touch widget is clicked on the bottom pane of this example,
@@ -125,7 +147,7 @@ public class SplitPaneUsage
 
     public static void main(String[] args)
     {
-        start("World Wind Split Pane Usage");
+        start("WorldWind Split Pane Usage");
     }
 
     public static void start(String appName)

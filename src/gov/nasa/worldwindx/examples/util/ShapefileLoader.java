@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.util;
 
@@ -14,15 +36,15 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
 /**
- * Converts Shapefile geometry into World Wind renderable objects. Shapefile geometries are mapped to World Wind objects
- * as follows: <table> <tr><th>Shapefile Geometry</th><th>World Wind Object</th></tr> <tr><td>Point</td><td>{@link
+ * Converts Shapefile geometry into WorldWind renderable objects. Shapefile geometries are mapped to WorldWind objects
+ * as follows: <table> <caption style="font-weight: bold;">WorldWind Shapefile Mapping</caption><tr><th>Shapefile Geometry</th><th>WorldWind Object</th></tr> <tr><td>Point</td><td>{@link
  * gov.nasa.worldwind.render.WWIcon}</td></tr> <tr><td>MultiPoint</td><td>List of {@link
  * gov.nasa.worldwind.render.WWIcon}</td></tr> <tr><td>Polyline</td><td>{@link gov.nasa.worldwind.render.SurfacePolylines}</td></tr>
  * <tr><td>Polygon</td><td>{@link gov.nasa.worldwind.render.SurfacePolygons}</td></tr> </table>
- * <p/>
+ * <p>
  * Shapefiles do not contain a standard definition for color and other visual attributes. Though some Shapefiles contain
  * color information in each record's key-value attributes, ShapefileLoader does not attempt to interpret that
- * information. Instead, the World Wind renderable objects created by ShapefileLoader are assigned a random color.
+ * information. Instead, the WorldWind renderable objects created by ShapefileLoader are assigned a random color.
  * Callers can replace or extend this behavior by defining a subclass of ShapefileLoader and overriding the following
  * methods: <ul> <li>{@link #nextPointAttributes()}</li> <li>{@link #nextPolylineAttributes()}</li> <li>{@link
  * #nextPolygonAttributes()}</li></ul>.
@@ -31,6 +53,7 @@ import gov.nasa.worldwind.util.*;
  * @version $Id: ShapefileLoader.java 2326 2014-09-17 22:35:45Z dcollins $
  * @deprecated Use {@link ShapefileLayerFactory} instead.
  */
+@Deprecated
 public class ShapefileLoader
 {
     protected static final RandomShapeAttributes randomAttrs = new RandomShapeAttributes();

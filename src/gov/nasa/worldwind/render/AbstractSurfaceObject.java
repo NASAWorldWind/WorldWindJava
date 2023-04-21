@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -15,7 +37,7 @@ import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -27,7 +49,7 @@ import java.util.List;
  * building the composite representation the SceneController invokes {@link #render(DrawContext)} in ordered rendering
  * mode. To avoid overloading the purpose of the render method, AbstractSurfaceObject does not add itself to the
  * DrawContext's ordered surface renderable queue during rendering.
- * <p/>
+ * <p>
  * Subclasses that do not wish to participate in this composite representation can override this behavior as follows:
  * <ol> <li>Override {@link #makeOrderedPreRenderable(DrawContext)}; do not add this object to the draw context's
  * ordered renderable queue. Perform any preRender processing necessary for the subclass to pick and render itself.</li>
@@ -299,6 +321,13 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
         this.extentCache.clear();
     }
 
+    /* Updates this SurfaceObject's modified time and clears its internal caches. */
+    protected void onShapeChanged()
+    {
+        this.updateModifiedTime();
+        this.clearCaches();
+    }
+
     //**************************************************************//
     //********************  Extent  ********************************//
     //**************************************************************//
@@ -436,7 +465,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
      * DrawContext's ordered surface renderable list. Additionally, this prepares the SurfaceObject's pickable
      * representation if the SurfaceObject's containing layer is enabled for picking and the SurfaceObject intersects
      * one of the DrawContext's picking frustums.
-     * <p/>
+     * <p>
      * During ordered preRendering, the {@link gov.nasa.worldwind.SceneController} builds a composite representation of
      * this SurfaceObject and any other SurfaceObject on the DrawContext's ordered surface renderable list. The
      * SceneController causes each SurfaceObject's to draw itself into the composite representation by calling its
@@ -472,7 +501,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
      * DrawContext's ordered surface renderable list. We ignore this call during rendering mode to suppress calls to
      * {@link #render(DrawContext)} during ordered rendering mode. The SceneController already invokes render during
      * ordered picking mode to build a composite representation of the SurfaceObjects.
-     * <p/>
+     * <p>
      * During ordered picking, the {@link gov.nasa.worldwind.SceneController} invokes the SurfaceObject's {@link
      * #pick(DrawContext, java.awt.Point)} method.
      *
@@ -707,7 +736,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
     /**
      * Causes this SurfaceObject to render its bounding sectors to the specified region in geographic coordinates. The
      * specified viewport denotes the geographic region and its corresponding screen viewport.
-     * <p/>
+     * <p>
      * The bounding sectors are rendered as a 1 pixel wide green outline.
      *
      * @param dc  the current DrawContext.
@@ -770,7 +799,7 @@ public abstract class AbstractSurfaceObject extends WWObjectImpl implements Surf
      * Represents a surface object's current state. StateKey uniquely identifies a surface object's current state as
      * follows: <ul> <li>The StateKey class distinguishes the key from other object types.</li> <li>The object's unique
      * ID distinguishes one surface object instances from another.</li> <li>The object's modified time distinguishes an
-     * object's internal state from any of its previous states.</li> Using the unique ID to distinguish between objects
+     * object's internal state from any of its previous states.</li> </ul> Using the unique ID to distinguish between objects
      * ensures that the StateKey does not store dangling references to the surface object itself. Should the StateKey
      * live longer than the surface object that created it, the StateKey does not prevent the object from being garbage
      * collected.

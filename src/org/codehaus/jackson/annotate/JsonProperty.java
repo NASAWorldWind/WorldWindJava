@@ -33,6 +33,7 @@ public @interface JsonProperty
      * Defines name of the logical property, i.e. Json object field
      * name to use for the property: if empty String (which is the
      * default), will use name of the field that is annotated.
+     * @return Undocumented
      */
     String value() default "";
 }

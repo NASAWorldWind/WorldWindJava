@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -520,7 +542,7 @@ public class ImageUtil
      * @param aspectRatio  the aspect ratio, width/height, of the assembled image. If the aspect ratio is greater than
      *                     or equal to one, the assembled image uses the full width of the canvas; the height used is
      *                     proportional to the inverse of the aspect ratio. If the aspect ratio is less than one, the
-     *                     full height of the canvas is used; the width used is proportional to the aspect ratio. <p/>
+     *                     full height of the canvas is used; the width used is proportional to the aspect ratio. <p>
      *                     The aspect ratio is typically used to maintain consistent width and height units while
      *                     assembling multiple images into a canvas of a different aspect ratio than the canvas sector,
      *                     such as drawing a non-square region into a 1024x1024 canvas. An aspect ratio of 1 causes the
@@ -832,7 +854,7 @@ public class ImageUtil
      * Returns a copy of the specified image such that the new dimensions are powers of two. The new image dimensions
      * will be equal to or greater than the original image. The flag <code>scaleToFit</code> determines whether the
      * original image should be drawn into the new image with no special scaling, or whether the original image should
-     * be scaled to fit exactly in the new image. <p/> If the original image dimensions are already powers of two, this
+     * be scaled to fit exactly in the new image. <p> If the original image dimensions are already powers of two, this
      * method will simply return the original image.
      *
      * @param image      the BufferedImage to convert to a power of two image.

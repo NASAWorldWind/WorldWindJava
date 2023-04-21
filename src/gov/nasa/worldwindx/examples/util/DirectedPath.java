@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.util;
@@ -14,7 +36,7 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.nio.*;
 import java.util.List;
 
@@ -51,7 +73,7 @@ public class DirectedPath extends Path
 
     /**
      * Creates a path with specified positions.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions is specified, no path is drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -67,7 +89,7 @@ public class DirectedPath extends Path
 
     /**
      * Creates a path with positions specified via a generic list.
-     * <p/>
+     * <p>
      * Note: If fewer than two positions is specified, the path is not drawn.
      *
      * @param positions the path positions. This reference is retained by this shape; the positions are not copied. If
@@ -205,7 +227,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to also compute the geometry of the direction arrows.
      */
     @Override
@@ -217,7 +239,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to return a {@link gov.nasa.worldwindx.examples.util.DirectedSurfacePolyline}.
      */
     @Override
@@ -231,7 +253,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to update the arrow properties of {@link gov.nasa.worldwindx.examples.util.DirectedSurfacePolyline}.
      */
     @Override
@@ -311,6 +333,8 @@ public class DirectedPath extends Path
      * Compute the geometry of a direction arrow between two points.
      *
      * @param dc       current draw context
+     * @param poleA The first pole.
+     * @param poleB The second pole.
      * @param polePtA  the first pole position. This is one of the application defined path positions.
      * @param polePtB  second pole position
      * @param buffer   buffer in which to place computed points
@@ -428,7 +452,7 @@ public class DirectedPath extends Path
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to also draw direction arrows.
      *
      * @param dc Current draw context.
@@ -444,7 +468,7 @@ public class DirectedPath extends Path
     /**
      * Draws this DirectedPath's direction arrows. Called from {@link #doDrawOutline(gov.nasa.worldwind.render.DrawContext)}
      * before drawing the Path's actual outline.
-     * <p/>
+     * <p>
      * If this Path is entirely located on the terrain, this applies an offset to the arrow's depth values to to ensure
      * they shows over the terrain. This does not apply a depth offset in any other case to avoid incorrectly drawing
      * the arrows over objects they should be behind, including the terrain. In addition to applying a depth offset,

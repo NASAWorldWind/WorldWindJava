@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -19,7 +41,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.io.*;
@@ -27,7 +49,7 @@ import java.io.*;
 /**
  * Provides a base class form several geometric {@link gov.nasa.worldwind.render.Renderable}s. Implements common
  * attribute handling and rendering flow for outlined shapes. Provides common defaults and common export code.
- * <p/>
+ * <p>
  * In order to support simultaneous use of this shape with multiple globes (windows), this shape maintains a cache of
  * data computed relative to each globe. During rendering, the data for the currently active globe, as indicated in the
  * draw context, is made current. Subsequently called methods rely on the existence of this current data cache entry.
@@ -91,7 +113,7 @@ public abstract class AbstractShape extends WWObjectImpl
     /**
      * Indicates whether texture should be applied to this shape. Called during rendering to determine whether texture
      * state should be established during preparation for interior drawing.
-     * <p/>
+     * <p>
      * Note: This method always returns false during the pick pass.
      *
      * @param dc the current draw context
@@ -131,7 +153,7 @@ public abstract class AbstractShape extends WWObjectImpl
      * Draws this shape's outline. Called immediately after calling {@link #prepareToDrawOutline(DrawContext,
      * ShapeAttributes, ShapeAttributes)}, which establishes OpenGL state for lighting, blending, pick color and line
      * attributes. Subclasses should execute the drawing commands specific to the type of shape.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -142,7 +164,7 @@ public abstract class AbstractShape extends WWObjectImpl
      * Draws this shape's interior. Called immediately after calling {@link #prepareToDrawInterior(DrawContext,
      * ShapeAttributes, ShapeAttributes)}, which establishes OpenGL state for lighting, blending, pick color and
      * interior attributes. Subclasses should execute the drawing commands specific to the type of shape.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -151,7 +173,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Fill this shape's vertex buffer objects. If the vertex buffer object resource IDs don't yet exist, create them.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -463,9 +485,9 @@ public abstract class AbstractShape extends WWObjectImpl
     /**
      * Specifies this shape's altitude mode, one of {@link WorldWind#ABSOLUTE}, {@link WorldWind#RELATIVE_TO_GROUND} or
      * {@link WorldWind#CLAMP_TO_GROUND}.
-     * <p/>
+     * <p>
      * Note: If the altitude mode is unrecognized, {@link WorldWind#ABSOLUTE} is used.
-     * <p/>
+     * <p>
      * Note: Subclasses may recognize additional altitude modes or may not recognize the ones described above.
      *
      * @param altitudeMode the altitude mode. The default value is {@link WorldWind#ABSOLUTE}.
@@ -489,7 +511,7 @@ public abstract class AbstractShape extends WWObjectImpl
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     public boolean isEnableBatchRendering()
     {
@@ -513,7 +535,7 @@ public abstract class AbstractShape extends WWObjectImpl
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     public boolean isEnableBatchPicking()
     {
@@ -525,7 +547,7 @@ public abstract class AbstractShape extends WWObjectImpl
      * together if they are contained in the same layer. This increases performance but allows only the top-most of the
      * polygons to be reported in a {@link gov.nasa.worldwind.event.SelectEvent} even if several of the polygons are at
      * the pick position.
-     * <p/>
+     * <p>
      * Batch rendering ({@link #setEnableBatchRendering(boolean)}) must be enabled in order for batch picking to occur.
      *
      * @param enableBatchPicking true to enable batch rendering, otherwise false.
@@ -549,7 +571,7 @@ public abstract class AbstractShape extends WWObjectImpl
     /**
      * Specifies the outline line width to use during picking. A larger width than normal typically makes the outline
      * easier to pick.
-     * <p/>
+     * <p>
      * Note that the size of the pick aperture also affects the precision necessary to pick.
      *
      * @param outlinePickWidth the outline pick width. The default is 10.
@@ -733,7 +755,7 @@ public abstract class AbstractShape extends WWObjectImpl
     /**
      * Indicates whether this shape's renderable geometry must be recomputed, either as a result of an attribute or
      * property change or the expiration of the geometry regeneration interval.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -978,7 +1000,7 @@ public abstract class AbstractShape extends WWObjectImpl
     /**
      * Determines whether to add this shape to the draw context's ordered renderable list. Creates this shapes
      * renderable geometry.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1091,7 +1113,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Determines whether this shape intersects the view frustum.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1111,7 +1133,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Draws this shape as an ordered renderable.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1135,7 +1157,7 @@ public abstract class AbstractShape extends WWObjectImpl
     /**
      * Draws this ordered renderable and all subsequent Path ordered renderables in the ordered renderable list. If the
      * current pick mode is true, only shapes within the same layer are drawn as a batch.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1183,7 +1205,7 @@ public abstract class AbstractShape extends WWObjectImpl
      * {@link PickSupport}. The <code>PickSupport</code> may not be the one associated with this instance. During batch
      * picking the <code>PickSupport</code> of the instance initiating the batch picking is used so that all shapes
      * rendered in batch are added to the same pick list.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc             the current draw context.
@@ -1218,7 +1240,7 @@ public abstract class AbstractShape extends WWObjectImpl
      *
      * @deprecated Use the more general {@link #createPickedObject(int)} instead.
      */
-    @SuppressWarnings({"UnusedParameters"})
+    @Deprecated
     protected PickedObject createPickedObject(DrawContext dc, Color pickColor)
     {
         return this.createPickedObject(pickColor.getRGB());
@@ -1239,7 +1261,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Establish the OpenGL state needed to draw this shape.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc       the current draw context.
@@ -1292,7 +1314,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Pop the state set in {@link #beginDrawing(DrawContext, int)}.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1317,7 +1339,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Draws this shape's outline.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1393,7 +1415,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Draws this shape's interior.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1540,7 +1562,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Get or create OpenGL resource IDs for the current data cache entry.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.
@@ -1555,7 +1577,7 @@ public abstract class AbstractShape extends WWObjectImpl
 
     /**
      * Removes from the GPU resource cache the entry for the current data cache entry's VBOs.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.

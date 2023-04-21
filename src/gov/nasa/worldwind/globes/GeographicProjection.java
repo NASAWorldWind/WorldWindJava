@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2014 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.globes;
@@ -11,7 +33,7 @@ import gov.nasa.worldwind.geom.*;
 /**
  * Defines an interface to project geographic coordinates to Cartesian coordinates. Used by {@link Globe2D}
  * implementations to transform geographic coordinates to meters and back.
- * <p/>
+ * <p>
  * Each implementation of this interface defines its own constructors, which may accept arguments that completely define
  * the projection.
  *
@@ -55,7 +77,7 @@ public interface GeographicProjection
 
     /**
      * Converts a geographic position to meters in Cartesian coordinates.
-     * <p/>
+     * <p>
      * Note: The input arguments are not checked for <code>null</code> prior to being used. The caller, typically a
      * {@link Globe2D} implementation, is expected do perform that check prior to calling this method.
      *
@@ -75,12 +97,12 @@ public interface GeographicProjection
 
     /**
      * Converts a grid of geographic positions to a grid of points in Cartesian coordinates.
-     * <p/>
+     * <p>
      * This method provides an interface for efficient generation of a grid of cartesian points within a sector. The
      * grid is constructed by dividing the sector into <code>numLon x numLat</code> evenly separated points in
      * geographic coordinates. The first and last points in latitude and longitude are placed at the sector's minimum
      * and maximum boundary, and the remaining points are spaced evenly between those boundary points.
-     * <p/>
+     * <p>
      * For each grid point within the sector, an elevation value is specified via an array of elevations. The
      * calculation at each position incorporates the associated elevation.
      *
@@ -104,7 +126,7 @@ public interface GeographicProjection
 
     /**
      * Converts a Cartesian point in meters to a geographic position.
-     * <p/>
+     * <p>
      * Note: The input arguments are not checked for <code>null</code> prior to being used. The caller, typically a
      * {@link Globe2D} implementation, is expected do perform that check prior to calling this method.
      *

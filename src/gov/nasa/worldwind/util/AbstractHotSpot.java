@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -42,7 +64,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the HotSpot is selected in the World Window. The default implementation does nothing. Override this
+     * Called when the HotSpot is selected in the WorldWindow. The default implementation does nothing. Override this
      * method to handle select events.
      *
      * @param event The event to handle.
@@ -82,7 +104,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is clicked on the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the mouse is clicked on the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse click events.
      *
      * @param event The event to handle.
@@ -92,7 +114,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is pressed over the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the mouse is pressed over the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse pressed events.
      *
      * @param event The event to handle.
@@ -102,7 +124,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is released over the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the mouse is released over the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse released events.
      *
      * @param event The event to handle.
@@ -112,7 +134,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse enters the World Window and the HotSpot is active. The default implementation does nothing.
+     * Called when the mouse enters the WorldWindow and the HotSpot is active. The default implementation does nothing.
      * Override this method to handle mouse enter events.
      *
      * @param event The event to handle.
@@ -122,7 +144,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse exits the World Window and the HotSpot is active. The default implementation does nothing.
+     * Called when the mouse exits the WorldWindow and the HotSpot is active. The default implementation does nothing.
      * Override this method to handle mouse exit events.
      *
      * @param event The event to handle.
@@ -132,7 +154,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse is dragged in the World Window and the HotSpot is active. The default implementation does
+     * Called when the mouse is dragged in the WorldWindow and the HotSpot is active. The default implementation does
      * nothing. Override this method to handle mouse dragged events.
      *
      * @param event The event to handle.
@@ -142,7 +164,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the cursor moves over the HotSpot in the World Window. The default implementation does nothing.
+     * Called when the cursor moves over the HotSpot in the WorldWindow. The default implementation does nothing.
      * Override this method to handle mouse move events.
      *
      * @param event The event to handle.
@@ -152,7 +174,7 @@ public abstract class AbstractHotSpot extends AVListImpl implements HotSpot
     }
 
     /**
-     * Called when the mouse wheel is moved in the World Window and HotSpot is active. The default implementation does
+     * Called when the mouse wheel is moved in the WorldWindow and HotSpot is active. The default implementation does
      * nothing. Override this method to handle mouse wheel events.
      *
      * @param event The event to handle.

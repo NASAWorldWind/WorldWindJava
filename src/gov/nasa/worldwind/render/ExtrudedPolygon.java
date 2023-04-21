@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -18,8 +40,8 @@ import gov.nasa.worldwind.ogc.kml.impl.KMLExportUtil;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
 import javax.xml.stream.*;
 import java.io.*;
 import java.nio.*;
@@ -29,17 +51,17 @@ import java.util.*;
  * A multi-sided 3D shell formed by a base polygon in latitude and longitude extruded from the terrain to either a
  * specified height or an independent height per location. The base polygon may be complex with multiple internal but
  * not intersecting contours.
- * <p/>
+ * <p>
  * Extruded polygon boundaries may be specified using either {@link LatLon} locations or {@link Position} positions, but
  * all the shape's boundary vertices must be the same type.
- * <p/>
+ * <p>
  * Extruded polygons may optionally be textured. Textures may be applied to both the faces of the outer and inner
  * boundaries or just the outer boundaries. Texture can also be applied independently to the cap. Standard lighting is
  * optionally applied. Texture source images are lazily retrieved and loaded. This can cause a brief period in which the
  * texture is not displayed while it is retrieved from disk or network.
- * <p/>
+ * <p>
  * <code>ExtrudedPolygon</code> side faces and cap have independent attributes for both normal and highlighted drawing.
- * <p/>
+ * <p>
  * When specifying a single height (altitude mode {@link WorldWind#CONSTANT}, the height is relative to a reference
  * location designated by one of the specified polygon locations in the outer boundary. The default reference location
  * is the first one in the polygon's outer boundary. An alternative location may be specified by calling {@link
@@ -48,22 +70,22 @@ import java.util.*;
  * elevations other than that at the reference location, the distances from those points to the cap are adjusted so that
  * the adjacent sides precisely meet the cap. When specifying polygons using a single height, only the latitudes and
  * longitudes of polygon boundary positions must be specified.
- * <p/>
+ * <p>
  * Independent per-location heights may be specified via the <i>altitude</i> field of {@link Position}s defining the
  * polygon's inner and outer boundaries. Depending on the specified altitude mode, the position altitudes may be
  * interpreted as altitudes relative to mean sea level or altitudes above the ground at the associated latitude and
  * longitude locations.
- * <p/>
+ * <p>
  * Boundaries are required to be closed, their first location must be equal to their last location. Boundaries that are
  * not closed are explicitly closed by this shape when they are specified.
- * <p/>
- * Extruded polygons are safe to share among World Windows. They should not be shared among layers in the same World
+ * <p>
+ * Extruded polygons are safe to share among WorldWindows. They should not be shared among layers in the same World
  * Window.
- * <p/>
+ * <p>
  * In order to support simultaneous use of this shape with multiple globes (windows), this shape maintains a cache of
  * data computed relative to each globe. During rendering, the data for the currently active globe, as indicated in the
  * draw context, is made current. Subsequently called methods rely on the existence of this current data cache entry.
- * <p/>
+ * <p>
  * When drawn on a 2D globe, this shape uses a {@link SurfacePolygon} to represent itself. Cap texture is not supported
  * in this case.
  *
@@ -1361,7 +1383,7 @@ public class ExtrudedPolygon extends AbstractShape
 
     /**
      * Draws the cap's outline.
-     * <p/>
+     * <p>
      * This base implementation draws the outline of the basic polygon. Subclasses should override it to draw their
      * outline or an alternate outline of the basic polygon.
      *
@@ -2400,7 +2422,7 @@ public class ExtrudedPolygon extends AbstractShape
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Note that this method overwrites the boundary locations lists, and therefore no longer refer to the originally
      * specified boundary lists.
      *

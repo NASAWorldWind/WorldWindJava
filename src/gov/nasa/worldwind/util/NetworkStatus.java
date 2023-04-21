@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -15,17 +37,17 @@ import java.util.List;
  * implementing object's tracking list. When a host has been logged a specified number of times, it is marked as
  * unreachable. Users can query instances of classes implementing this interface to determine whether a host has been
  * marked as unreachable.
- * <p/>
+ * <p>
  * Users are expected to invoke the {@link #logUnavailableHost(java.net.URL)} method when an attempt to contact a host
  * fails. Each invocation increments the failure count by one. When the count exceeds the attempt limit, the host is
  * marked as unreachable. When attempts to contact the host <em>are</em> successful, users should invoke {@link
  * #logAvailableHost(java.net.URL)} method to clear its status.
- * <p/>
+ * <p>
  * A host may become reachable at a time subsequent to its being logged. To detect this, the implementation marks a host
  * as not unreachable after a specifiable interval of time. If the host is once more logged as unavailable, its entry
  * returns to the unavailable state. This cycle continues indefinitely.
- * <p/>
- * Methods are provided to determine whether the public network can be reached and whether the NASA World Wind servers
+ * <p>
+ * Methods are provided to determine whether the public network can be reached and whether the NASA WorldWind servers
  * cab be reached. The addresses used to detect public network access can be explicitly specified.
  *
  * @author tag
@@ -80,7 +102,7 @@ public interface NetworkStatus extends AVList
     boolean isNetworkUnavailable(long checkInterval);
 
     /**
-     * Indicates whether the NASA World Wind servers can be reached.
+     * Indicates whether the NASA WorldWind servers can be reached.
      *
      * @return false if the servers can be reached, otherwise true.
      */
@@ -102,17 +124,17 @@ public interface NetworkStatus extends AVList
     long getTryAgainInterval();
 
     /**
-     * Indicates whether World Wind will attempt to connect to the network to retrieve data or for other reasons.
+     * Indicates whether WorldWind will attempt to connect to the network to retrieve data or for other reasons.
      *
-     * @return <code>true</code> if World Wind is in off-line mode, <code>false</code> if not.
+     * @return <code>true</code> if WorldWind is in off-line mode, <code>false</code> if not.
      */
     boolean isOfflineMode();
 
     /**
-     * Indicates whether World Wind should attempt to connect to the network to retrieve data or for other reasons. The
+     * Indicates whether WorldWind should attempt to connect to the network to retrieve data or for other reasons. The
      * default value for this attribute is <code>false</code>, indicating that the network should be used.
      *
-     * @param offlineMode <code>true</code> if World Wind should use the network, <code>false</code> otherwise
+     * @param offlineMode <code>true</code> if WorldWind should use the network, <code>false</code> otherwise
      */
     void setOfflineMode(boolean offlineMode);
 

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -20,18 +42,18 @@ import java.util.Map;
  * models imported from COLLADA and other 3D file formats. The model's geometry is defined in its own coordinate system;
  * properties of this shape place and orient the model geographically. Specific model types subclass this class to
  * provide their implementation and any additional properties.
- * <p/>
+ * <p>
  * This class also accepts a resource map to independently link resources named in the model definition (the defining
  * model file) to actual resources. Each map entry's key is a resource name as expressed in the model definition. Each
  * map entry's value is the reference to the actual resource. The reference is interpreted by rules specific to the
  * model format, but typically may be a relative or absolute file reference or a URL to a local or remote resource. If
  * the map or an entry referred to by the model definition is not defined, resource references are typically considered
  * relative to the location of the model definition's location.
- * <p/>
+ * <p>
  * In the case of a COLLADA file referenced from a KML file, relative references are considered relative to the location
  * of the KML file. If the file is KMZ, relative references are considered references to resources within the KMZ
  * archive.
- * <p/>
+ * <p>
  * This class applies {@link ShapeAttributes} to the shape, but the effect of some of those attributes, such as {@link
  * ShapeAttributes#isDrawOutline()} is dependent on the specific implementation of this <code>AbstractGeneralShape</code>. See
  * the class description of those shapes to determine how shape attributes are applied.
@@ -253,7 +275,7 @@ public abstract class AbstractGeneralShape extends AbstractShape
 
     /**
      * Computes the minimum distance between this shape and the eye point.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc        the current draw context.

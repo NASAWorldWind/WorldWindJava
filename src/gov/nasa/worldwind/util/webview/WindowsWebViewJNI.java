@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util.webview;
@@ -16,23 +38,20 @@ import java.beans.PropertyChangeListener;
 /**
  * JNI bindings for the Windows WebView library. This library provides functions for creating and destroying native
  * WebViews, sending user input to a WebView, and adding listeners to a WebView.
- * <p/>
  * <h3>Message loops</h3>
- * <p/>
+ * <p>
  * WebViews created by this library must be managed by a message loop in native code. This class provides methods for
  * creating and running a native message loop using a Java thread. Each WebView must be associated with one message
  * loop. Each message loop can handle any number of WebViews.
- * <p/>
+ * <p>
  * To create a WebView message loop: <ol> <li> Create a new Java thread to run the message loop.</li> <li> Call {@link
  * #newMessageLoop()} from the message loop thread.</li> <li> Call {@link #runMessageLoop(long)} from the message loop
  * thread. This enters a blocking loop in native code. It will not return until {@link #releaseMessageLoop(long)} is
  * called by another thread.</li> </ol>
- * <p/>
+ * <p>
  * Here is an example of creating and running  a message loop:
- * <p/>
  * <pre>
  * long webViewMessageLoop = 0;
- * <p/>
  * // Create a new thread to run the WebView message loop.
  * webViewUI = new Thread("WebView UI")
  * {
@@ -41,20 +60,17 @@ import java.beans.PropertyChangeListener;
  *          // Create a message loop in native code. This call must return
  *          // before any messages are sent to the WebView.
  *          webViewMessageLoop = WindowsWebViewJNI.newMessageLoop();
- * <p/>
  *          // Notify the outer thread that the message loop is ready.
  *          synchronized (webViewUILock)
  *          {
  *              webViewUILock.notify();
  *          }
- * <p/>
  *          // Process messages in native code until the message loop
  *          // is terminated.
  *          WindowsWebViewJNI.runMessageLoop(webViewMessageloop);
  *      }
  *  };
  *  webViewUI.start();
- * <p/>
  *  // Wait for the newly started thread to create the message loop. We cannot
  *  // safely use the WebView until the message loop has been initialized.
  *  while (webViewMessageLoop == 0)
@@ -71,7 +87,9 @@ import java.beans.PropertyChangeListener;
  *
  * @author pabercrombie
  * @version $Id: WindowsWebViewJNI.java 1171 2013-02-11 21:45:02Z dcollins $
+ * @deprecated 
  */
+@Deprecated
 public class WindowsWebViewJNI
 {
     static

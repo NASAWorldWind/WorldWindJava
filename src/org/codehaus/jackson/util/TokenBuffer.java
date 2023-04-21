@@ -137,6 +137,7 @@ public class TokenBuffer
     /**
      * @param src Parser to use for accessing source information
      *    like location, configured codec
+     * @return Undocumented.
      */
     public JsonParser asParser(JsonParser src)
     {
@@ -160,6 +161,9 @@ public class TokenBuffer
      * but we can not have upwards
      * references (from core to mapper package); and as such we also
      * can not take second argument.
+     * @param jgen Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonGenerationException Undocumented.
      */
     public void serialize(JsonGenerator jgen)
         throws IOException, JsonGenerationException
@@ -1095,8 +1099,12 @@ public class TokenBuffer
         }
 
         /**
+         * @param b64variant Undocumented.
+         * @param ch Undocumented.
          * @param bindex Relative index within base64 character unit; between 0
          *   and 3 (as unit has exactly 4 characters)
+         * @param msg Undocumented.
+         * @throws org.codehaus.jackson.JsonParseException Undocumented.
          */
         protected void _reportInvalidBase64(Base64Variant b64variant, char ch, int bindex, String msg)
             throws JsonParseException

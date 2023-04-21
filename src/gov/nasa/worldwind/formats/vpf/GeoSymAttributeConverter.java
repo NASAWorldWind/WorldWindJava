@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.formats.vpf;
 
@@ -15,13 +37,13 @@ import java.util.ArrayList;
 
 /**
  * The GeoSymAttributeConverter application converts GeoSym line attributes, area attributes, and area patterns into a
- * form usable by World Wind VPF shapes. Outputs to "gsac-out" a comma-separated-value (CSV) file containing line and
+ * form usable by WorldWind VPF shapes. Outputs to "gsac-out" a comma-separated-value (CSV) file containing line and
  * area attributes for VPF line and area shapes, and PNG images containing area patterns for VPF area shapes.
- * <p/>
+ * <p>
  * GeoSymAttributeConverter is used to build the VPF symbol JAR file <code>vpf-symbols.jar</code>. For instructions on
  * how to build <code>vpf-symbols.jar</code>, see the file <code>VPF_README.txt</code>, which is distributed in each
- * World Wind release.
- * <p/>
+ * WorldWind release.
+ * <p>
  * <code> Usage: java -cp worldwind.jar gov.nasa.worldwind.formats.vpf.GeoSymAttributeConverter [full path to
  * "GeoSymEd2Final/GRAPHICS/CTEXT"] </code>
  *
@@ -425,7 +447,7 @@ public class GeoSymAttributeConverter
         System.out.println("GeoSymAttributeConverter");
         System.out.println();
         System.out.println("Converts GeoSym line attributes, area attributes, and area patterns into a form usable by");
-        System.out.println("World Wind VPF shapes. Outputs to \"" + OUT_DIR + "\" a comma-separated-value file");
+        System.out.println("WorldWind VPF shapes. Outputs to \"" + OUT_DIR + "\" a comma-separated-value file");
         System.out.println("containing line and area attributes for VPF line and area shapes, and PNG files");
         System.out.println("containing area patterns for VPF area shapes.");
         System.out.println();

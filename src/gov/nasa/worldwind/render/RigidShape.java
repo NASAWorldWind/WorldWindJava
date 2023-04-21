@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -17,15 +39,15 @@ import gov.nasa.worldwind.render.airspaces.Geometry;
 import gov.nasa.worldwind.terrain.Terrain;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.nio.*;
 import java.util.*;
 
 /**
  * A general rigid volume defined by a center position and the three axis radii. If A is the radius in the north-south
  * direction, and b is the radius in the east-west direction, and c is the radius in the vertical direction (increasing
- * altitude), then A == B == C defines a unit shape, A == B > C defines a vertically flattened shape (disk-shaped), A ==
- * B < C defines a vertically stretched shape.
+ * altitude), then A == B == C defines a unit shape, A == B &gt; C defines a vertically flattened shape (disk-shaped), A ==
+ * B &lt; C defines a vertically stretched shape.
  *
  * @author ccrick
  * @version $Id: RigidShape.java 2990 2015-04-07 19:06:15Z tgaskins $
@@ -1369,7 +1391,7 @@ public abstract class RigidShape extends AbstractShape
 
     /**
      * Get or create OpenGL resource IDs for the current data cache entry.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param index the index of the LOD whose VboID's will be retrieved.
@@ -1393,7 +1415,7 @@ public abstract class RigidShape extends AbstractShape
 
     /**
      * Removes from the GPU resource cache the entry for the current data cache entry's VBOs.
-     * <p/>
+     * <p>
      * A {@link gov.nasa.worldwind.render.AbstractShape.AbstractShapeData} must be current when this method is called.
      *
      * @param dc the current draw context.

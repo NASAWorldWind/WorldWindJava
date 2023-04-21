@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
@@ -14,7 +36,7 @@ import java.awt.*;
 import java.util.Arrays;
 
 /**
- * Illustrates how to enable shape dragging in World Wind by using a <code>{@link gov.nasa.worldwind.util.BasicDragger}</code>. This creates
+ * Illustrates how to enable shape dragging in WorldWind by using a <code>{@link gov.nasa.worldwind.util.BasicDragger}</code>. This creates
  * multiple shapes on the surface terrain that can be dragged to a new location on the terrain. The shapes retain their
  * form when dragged.
  *
@@ -29,7 +51,7 @@ public class DraggingShapes extends ApplicationTemplate
 
         public AppFrame()
         {
-            // Add a basic dragger to the World Window's select listeners to enable shape dragging.
+            // Add a basic dragger to the WorldWindow's select listeners to enable shape dragging.
             this.getWwd().addSelectListener(new BasicDragger(this.getWwd()));
 
             // Create a layer of shapes to drag.
@@ -187,6 +209,6 @@ public class DraggingShapes extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Dragging Shapes", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Dragging Shapes", AppFrame.class);
     }
 }

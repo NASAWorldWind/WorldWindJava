@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.layers;
 
@@ -34,11 +56,11 @@ public class BasicLayerFactory extends BasicFactory
      * <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link java.io.InputStream}</li> <li>{@link
      * Element}</li> <li>a {@link String} holding a file name, a name of a resource on the classpath, or a string
      * representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * For tiled image layers, this maps the <code>serviceName</code> attribute of the <code>Layer/Service</code>
      * element of the XML configuration file to the appropriate base tiled image layer type. Service types recognized
      * are: <ul> <li>"WMS" for layers that draw their data from a WMS web service.</li> <li>"WWTileService" for layers
-     * that draw their data from a World Wind tile service.</li> <li>"Offline" for layers that draw their data only from
+     * that draw their data from a WorldWind tile service.</li> <li>"Offline" for layers that draw their data only from
      * the local cache.</li> </ul>
      *
      * @param configSource the configuration source. See above for supported types.
@@ -134,7 +156,7 @@ public class BasicLayerFactory extends BasicFactory
     /**
      * Create a collection of layer lists and their included layers described by an array of XML layer-list description
      * elements.
-     * <p/>
+     * <p>
      * Any exceptions occurring during creation of the layer lists or their included layers are logged and not
      * re-thrown. The layers associated with the exceptions are not included in the returned layer list.
      *
@@ -211,7 +233,7 @@ public class BasicLayerFactory extends BasicFactory
 
     /**
      * Create a list of layers described by an array of XML layer description elements.
-     * <p/>
+     * <p>
      * Any exceptions occurring during creation of the layers are logged and not re-thrown. The layers associated with
      * the exceptions are not included in the returned layer list.
      *
@@ -250,7 +272,7 @@ public class BasicLayerFactory extends BasicFactory
      *
      * @throws WWUnrecognizedException if the layer type or service type given in the describing element is
      *                                 unrecognized.
-     * @see #createTiledImageLayer(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createTiledImageLayer(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     protected Layer createFromLayerDocument(Element domElement, AVList params)
     {

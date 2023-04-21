@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.formats.shapefile;
 
@@ -13,7 +35,7 @@ import java.nio.ByteBuffer;
 
 /**
  * Represents a Shapefile record with a point shape type. Point shapes represent a single x,y coordinate pair.
- * <p/>
+ * <p>
  * Point shapes may have an optional z-coordinate or m-coordinate that accompanies the x,y coordinate pair. If a Point
  * has a z-coordinate, then <code>{@link #getZ()}</code> returns a non-<code>null</code> value. If a Point has an
  * m-coordinate, then <code>{@link #getM()}</code> returns a non-<code>null</code> value.
@@ -26,7 +48,17 @@ public class ShapefileRecordPoint extends ShapefileRecord
     protected Double z; // non-null only for Z types
     protected Double m; // non-null only for Measure types with measures specified
 
-    /** {@inheritDoc} */
+    /**
+     * Constructs a record instance from the given {@link java.nio.ByteBuffer}. The buffer's current position must be
+     * the start of the record, and will be the start of the next record when the constructor returns.
+     *
+     * @param shapeFile the parent {@link Shapefile}.
+     * @param buffer    the shapefile record {@link java.nio.ByteBuffer} to read from.
+     *
+     * @throws IllegalArgumentException if any argument is null or otherwise invalid.
+     * @throws gov.nasa.worldwind.exception.WWRuntimeException
+     *                                  if the record's shape type does not match that of the shapefile.
+     */
     public ShapefileRecordPoint(Shapefile shapeFile, ByteBuffer buffer)
     {
         super(shapeFile, buffer);

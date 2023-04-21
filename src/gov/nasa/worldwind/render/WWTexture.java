@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -10,7 +32,7 @@ import com.jogamp.opengl.util.texture.TextureCoords;
 
 /**
  * Represents a texture derived from an image source such as an image file or a {@link java.awt.image.BufferedImage}.
- * <p/>
+ * <p>
  * The interface contains a method, {@link #isTextureInitializationFailed()} to determine whether the instance failed to
  * convert an image source to a texture. If such a failure occurs, the method returns true and no further attempts are
  * made to create the texture.
@@ -29,10 +51,10 @@ public interface WWTexture
 
     /**
      * Makes this texture the current texture for rendering.
-     * <p/>
+     * <p>
      * If the implementing instance's internal texture has not been created from its image source, the implementing
      * class determines when the texture is retrieved and available.
-     * <p/>
+     * <p>
      * If a texture cannot be created from its image source it cannot be bound. This method returns an indication of
      * whether the texture was bound or was not bound due to a failure during creation.
      *

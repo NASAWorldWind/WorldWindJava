@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.lineofsight;
@@ -31,12 +53,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Computes and displays line-of-sight intersections for terrain and renderables. Uses a {@link Terrain} object in order
  * to determine accurate intersections relative to the highest-resolution elevation data associated with a specified
  * globe.
- * <p/>
+ * <p>
  * This class uses a {@link gov.nasa.worldwindx.examples.lineofsight.TerrainLineIntersector} and a {@link
  * gov.nasa.worldwindx.examples.lineofsight.ShapeLineIntersector} to compute the intersections.
- * <p/>
- * <em>Usage:</em> <br/> Shift-click: Calculate lines of sight for a position. <br/> Ctrl-click: Cancel the running
- * computation. <br/> Alt-click: Re-run the most recent line of sight calculation.
+ * <p>
+ * <em>Usage:</em> <br> Shift-click: Calculate lines of sight for a position. <br> Ctrl-click: Cancel the running
+ * computation. <br> Alt-click: Re-run the most recent line of sight calculation.
  *
  * @author tag
  * @version $Id: LinesOfSight.java 2109 2014-06-30 16:52:38Z tgaskins $
@@ -133,7 +155,7 @@ public class LinesOfSight extends ApplicationTemplate
                 public void mouseClicked(MouseEvent mouseEvent)
                 {
                     // Control-Click cancels any currently running operation.
-                    if ((mouseEvent.getModifiers() & ActionEvent.CTRL_MASK) != 0)
+                    if ((mouseEvent.getModifiersEx() & InputEvent.CTRL_DOWN_MASK) != 0)
                     {
                         if (calculationDispatchThread != null && calculationDispatchThread.isAlive())
                             calculationDispatchThread.interrupt();
@@ -141,7 +163,7 @@ public class LinesOfSight extends ApplicationTemplate
                     }
 
                     // Alt-Click repeats the most recent calculations.
-                    if ((mouseEvent.getModifiers() & ActionEvent.ALT_MASK) != 0)
+                    if ((mouseEvent.getModifiersEx() & InputEvent.ALT_DOWN_MASK) != 0)
                     {
                         if (previousCurrentPosition == null)
                             return;
@@ -153,7 +175,7 @@ public class LinesOfSight extends ApplicationTemplate
                     }
 
                     // Perform the intersection tests in response to Shift-Click.
-                    if ((mouseEvent.getModifiers() & ActionEvent.SHIFT_MASK) == 0)
+                    if ((mouseEvent.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) == 0)
                         return;
 
                     mouseEvent.consume(); // tell the rest of WW that this event has been processed
@@ -344,7 +366,7 @@ public class LinesOfSight extends ApplicationTemplate
 
             final int progress = (int) (100d * numPositionsProcessed / (double) totalNum);
 
-            // On the EDT, update the progress bar and if calculations are complete, update the World Window.
+            // On the EDT, update the progress bar and if calculations are complete, update the WorldWindow.
             SwingUtilities.invokeLater(new Runnable()
             {
                 public void run()
@@ -365,7 +387,7 @@ public class LinesOfSight extends ApplicationTemplate
             });
         }
 
-        /** Updates the World Wind model with the new intersection locations and sight lines. */
+        /** Updates the WorldWind model with the new intersection locations and sight lines. */
         protected void showResults()
         {
             this.intersectionsLayer.removeAllRenderables();
@@ -612,6 +634,6 @@ public class LinesOfSight extends ApplicationTemplate
     public static void main(String[] args)
     {
         // Adjust configuration values before instantiation
-        ApplicationTemplate.start("World Wind Terrain Intersections", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Terrain Intersections", AppFrame.class);
     }
 }

@@ -22,6 +22,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotation
+@Deprecated
 public @interface JsonGetter
 {
     /**
@@ -29,6 +30,7 @@ public @interface JsonGetter
      * method is used to access ("get"); empty String means that
      * name should be derived from the underlying method (using
      * standard Bean name detection rules)
+     * @return Undocumented
      */
     String value() default "";
 }

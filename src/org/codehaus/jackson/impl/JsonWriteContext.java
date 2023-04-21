@@ -83,6 +83,7 @@ public abstract class JsonWriteContext
     /**
      * Method that writer is to call before it writes a field name.
      *
+     * @param name Undocumented.
      * @return Index of the field entry (0-based)
      */
     public abstract int writeFieldName(String name);

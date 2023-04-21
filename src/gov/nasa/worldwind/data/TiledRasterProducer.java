@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.data;
 
@@ -698,20 +720,20 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     /**
      * Extracts a maximum level limit from the AVList if the AVList contains AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL.
      * This method requires <code>maxNumOfLevels</code> - the actual maximum numbers of levels.
-     * <p/>
+     * <p>
      * The AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL could specify multiple things:
-     * <p/>
+     * <p>
      * If the value of the AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL is "Auto" (as String), the calculated limit of
      * levels will be 70% of the actual maximum numbers of levels <code>maxNumOfLevels</code>.
-     * <p/>
+     * <p>
      * If the type of the value of the AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL is Integer, it should contain an
      * integer number between 0 (for level 0 only) and the actual maximum numbers of levels
      * <code>maxNumOfLevels</code>.
-     * <p/>
+     * <p>
      * It is also possible to specify the limit as percents, in this case the type of the
      * AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL value must be "String", have a numeric value as text and the "%"
      * percent sign in the end. Examples: "100%", "25%", "50%", etc.
-     * <p/>
+     * <p>
      * Value of AVKey.TILED_RASTER_PRODUCER_LIMIT_MAX_LEVEL could be a numeric string (for example, "3"), or Integer.
      * The value will be correctly extracted and compared with the <code>maxNumOfLevels</code>. Valid values must be
      * smaller or equal to <code>maxNumOfLevels</code>.
@@ -952,8 +974,9 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
      * Installs the configuration file which describes the tiled data produced by this TiledRasterProducer. The install
      * location, configuration filename, and configuration file contents are derived from the specified parameter list.
      * This throws an exception if the configuration file cannot be installed for any reason.
-     * <p/>
-     * The parameter list must contain <strong>at least</strong> the following keys: <table> <tr><th>Key</th></tr>
+     * <p>
+     * The parameter list must contain <strong>at least</strong> the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>
@@ -1028,7 +1051,8 @@ public abstract class TiledRasterProducer extends AbstractDataStoreProducer
     /**
      * Returns the location of the configuration file which describes the tiled data produced by this
      * TiledRasterProducer. The install location is derived from the specified parameter list. This returns null if the
-     * parameter list is null, or if it does not contain any of the following keys: <table> <tr><th>Key</th></tr>
+     * parameter list is null, or if it does not contain any of the following keys: <table> 
+     * <caption style="font-weight: bold;">Required Keys</caption><tr><th>Key</th></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#FILE_STORE_LOCATION}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td></td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td></td></tr> </table>

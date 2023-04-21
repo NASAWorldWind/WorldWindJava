@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2012 United States Government as represented by the Administrator of the
-  ~ National Aeronautics and Space Administration.
-  ~ All Rights Reserved.
-  -->
+~ Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+~ Administrator of the National Aeronautics and Space Administration.
+~ All rights reserved.
+~ 
+~ The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+~ Version 2.0 (the "License"); you may not use this file except in compliance
+~ with the License. You may obtain a copy of the License at
+~ http://www.apache.org/licenses/LICENSE-2.0
+~ 
+~ Unless required by applicable law or agreed to in writing, software distributed
+~ under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+~ CONDITIONS OF ANY KIND, either express or implied. See the License for the
+~ specific language governing permissions and limitations under the License.
+~ 
+~ NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+~ software:
+~ 
+~     Jackson Parser – Licensed under Apache 2.0
+~     GDAL – Licensed under MIT
+~     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+~     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+~ 
+~ A complete listing of 3rd Party software notices and licenses included in
+~ NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+~ notices and licenses PDF found in code directory.
+-->
 
 <!--$Id: worldwind.xml 2348 2014-09-25 23:35:46Z dcollins $-->
-<!--Default World Wind configuration values-->
+<!--Default WorldWind configuration values-->
 <!--Any of these can be overridden by specifying an application configuration document-->
 <!--An alternate document to this one can also be specified-->
 <!--See the javadoc for the Configuration class for details-->
@@ -65,7 +87,7 @@
     <Property name="gov.nasa.worldwind.avkey.DataFileStoreConfigurationFileName" value="config/DataFileStore.xml"/>
     <Property name="gov.nasa.worldwind.avkey.WorldMapImagePath" value="images/earth-map-512x256.dds"/>
     <Property name="gov.nasa.worldwind.StarsLayer.StarsFileName" value="config/Hipparcos_Stars_Mag6x5044.dat"/>
-    <!--The following are tuning parameters for various World Wind internals-->
+    <!--The following are tuning parameters for various WorldWind internals-->
     <Property name="gov.nasa.worldwind.avkey.RetrievalPoolSize" value="4"/>
     <Property name="gov.nasa.worldwind.avkey.RetrievalQueueSize" value="200"/>
     <Property name="gov.nasa.worldwind.avkey.RetrievalStaleRequestLimit" value="9000"/>
@@ -94,10 +116,10 @@
     <!--<Property name="gov.nasa.worldwind.avkey.UrlProxyType" value="Proxy.Type.Http"/>-->
 
     <!-- Location of icons for MIL-STD-2525C symbol set. This can be a URL to a web server, to a local zip or jar archive.
-         See http://goworldwind.org/developers-guide/symbology/tactical-symbols/#offline-use for more information on how
-         to configure a local symbol repository.
-         Examples: http://myserver.com/milstd2525/   (web server)
-                   jar:file:milstd2525-symbols.zip!  (local zip archive)  -->
+See https://worldwind.arc.nasa.gov/java/tutorials/tactical-symbols/#offline-use for more information on how
+to configure a local symbol repository.
+Examples: http://myserver.com/milstd2525/   (web server)
+    jar:file:milstd2525-symbols.zip!  (local zip archive)  -->
     <Property name="gov.nasa.worldwind.avkey.MilStd2525IconRetrieverPath"
               value="https://worldwind.arc.nasa.gov/milstd2525c/rev1/"/>
 </WorldWindConfiguration>

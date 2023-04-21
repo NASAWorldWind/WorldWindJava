@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.globes;
 
@@ -11,16 +33,16 @@ import gov.nasa.worldwind.geom.*;
 import java.util.List;
 
 /**
- * <p/>
+ * <p>
  * Provides the elevations to a {@link Globe} or other object holding elevations.
- * <p/>
+ * <p>
  * An <code>ElevationModel</code> often approximates elevations at multiple levels of spatial resolution. For any given
  * viewing position, the model determines an appropriate target resolution. That target resolution may not be
  * immediately achievable, however, because the corresponding elevation data might not be locally available and must be
  * retrieved from a remote location. When this is the case, the <code>Elevations</code> object returned for a sector
  * holds the resolution achievable with the data currently available. That resolution may not be the same as the target
  * resolution. The achieved resolution is made available in the interface.
- * <p/>
+ * <p>
  *
  * @author Tom Gaskins
  * @version $Id: ElevationModel.java 3420 2015-09-10 23:25:43Z tgaskins $
@@ -84,7 +106,7 @@ public interface ElevationModel extends WWObject, Restorable, Disposable
     /**
      * Specifies the value used to identify missing data in an elevation model. Locations with this elevation value are
      * assigned the missing-data replacement value, specified by {@link #setMissingDataReplacement(double)}.
-     * <p/>
+     * <p>
      * The missing-data value is often specified by the metadata of the data set, in which case the elevation model
      * automatically defines that value to be the missing-data signal. When the missing-data signal is not specified in
      * the metadata, the application may specify it via this method.
@@ -194,7 +216,7 @@ public interface ElevationModel extends WWObject, Restorable, Disposable
      * Returns the elevation at a specified location. If the elevation at the specified location is the elevation
      * model's missing data signal, or if the location specified is outside the elevation model's coverage area, the
      * elevation model's missing data replacement value is returned.
-     * <p/>
+     * <p>
      * The elevation returned from this method is the best available in memory. If no elevation is in memory, the
      * elevation model's minimum extreme elevation at the location is returned. Local disk caches are not consulted.
      *

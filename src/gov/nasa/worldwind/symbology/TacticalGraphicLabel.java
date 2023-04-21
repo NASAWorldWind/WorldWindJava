@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.symbology;
@@ -14,7 +36,7 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -300,7 +322,7 @@ public class TacticalGraphicLabel
      * horizontal with the text alignment position, and centers the label vertically. For example, if the text alignment
      * is <code>AVKey.LEFT</code>., then the left edge of the text will be aligned with the geographic position, and the
      * label will be centered vertically.
-     * <p/>
+     * <p>
      * When the text is rotated a horizontal offset moves the text along the orientation line, and a vertical offset
      * moves the text perpendicular to the orientation line.
      *
@@ -604,7 +626,7 @@ public class TacticalGraphicLabel
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchPicking(boolean).
+     * @see #setEnableBatchPicking(boolean)
      */
     public boolean isEnableBatchPicking()
     {
@@ -615,7 +637,7 @@ public class TacticalGraphicLabel
      * Specifies whether adjacent Labels in the ordered renderable list may be pick-tested together if they are
      * contained in the same layer. This increases performance but allows only the top-most of the label to be reported
      * in a {@link gov.nasa.worldwind.event.SelectEvent} even if several of the labels are at the pick position.
-     * <p/>
+     * <p>
      * Batch rendering ({@link #setEnableBatchRendering(boolean)}) must be enabled in order for batch picking to occur.
      *
      * @param enableBatchPicking true to enable batch rendering, otherwise false.
@@ -630,7 +652,7 @@ public class TacticalGraphicLabel
      *
      * @return true if batch rendering is enabled, otherwise false.
      *
-     * @see #setEnableBatchRendering(boolean).
+     * @see #setEnableBatchRendering(boolean)
      */
     public boolean isEnableBatchRendering()
     {
@@ -847,7 +869,14 @@ public class TacticalGraphicLabel
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * Causes this <code>Renderable</code> to render itself using the provided draw context.
+     *
+     * @param dc the <code>DrawContext</code> to be used
+     *
+     * @throws IllegalArgumentException if the draw context is null.
+     * @see DrawContext
+     */
     public void render(DrawContext dc)
     {
         // This render method is called twice during frame generation. It's first called as a Renderable

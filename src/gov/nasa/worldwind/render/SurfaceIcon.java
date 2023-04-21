@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -12,7 +34,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.List;
@@ -81,12 +103,12 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
         }
 
         this.location = location;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
      * Get the icon displacement in pixels relative to the reference location.  Can be <code>null</code>.
-     * <p/>
+     * <p>
      * When <code>null</code> the icon will be drawn with it's image center on top of it's reference location - see
      * {@link #setLocation(LatLon)}. Otherwise the icon will be shifted of a distance equivalent to the number of pixels
      * specified as <code>x</code> and <code>y</code> offset values. Positive values will move the icon to the right for
@@ -101,7 +123,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
     /**
      * Set the icon displacement in pixels relative to the reference location. Can be <code>null</code>.
-     * <p/>
+     * <p>
      * When <code>null</code> the icon will be drawn with it's image center on top of it's refence location - see {@link
      * #setLocation(LatLon)}. Otherwise the icon will be shifted of a distance equivalent to the number of pixels
      * specified as <code>x</code> and <code>y</code> offset values. Positive values will move the icon to the right for
@@ -112,7 +134,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setLocationOffset(Vec4 locationOffset)
     {
         this.locationOffset = locationOffset; // can be null
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -145,7 +167,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
         this.imageSource = imageSource;
         this.texture = null;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -172,7 +194,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     {
         this.useMipMaps = useMipMaps;
         this.texture = null;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -202,7 +224,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
             throw new IllegalArgumentException(message);
         }
         this.scale = scale;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -224,7 +246,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setHeading(Angle heading)
     {
         this.heading = heading;  // can be null
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -256,7 +278,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     /**
      * Get the minimum size in meter the icon image is allowed to be reduced to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with {@link #setMinSize(double)} and
      * {@link #setMaxSize(double)}.
@@ -271,7 +293,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     /**
      * Set the minimum size in meter the icon image is allowed to be reduced to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with <code>setMinSize(double)</code>
      * and {@link #setMaxSize(double)}.
@@ -281,13 +303,13 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setMinSize(double sizeInMeter)
     {
         this.minSize = sizeInMeter;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
      * Get the maximum size in meter the icon image is allowed to be enlarged to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with {@link #setMinSize(double)} and
      * {@link #setMaxSize(double)}.
@@ -302,7 +324,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     /**
      * Get the maximum size in meter the icon image is allowed to be enlarged to once applied to the terrain surface.
      * This limit applies to the source image largest dimension.
-     * <p/>
+     * <p>
      * The icon will try to maintain it's apparent size depending on it's distance from the eye and will extend over a
      * rectangular area which largest dimension is bounded by the values provided with {@link #setMinSize(double)} and
      * <code>setMaxSize(double)</code>.
@@ -312,7 +334,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
     public void setMaxSize(double sizeInMeter)
     {
         this.maxSize = sizeInMeter;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     /**
@@ -327,7 +349,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
     /**
      * Set the {@link Color} the source image will be combined with - default to white.
-     * <p/>
+     * <p>
      * A non white color will mostly affect the white portions from the original image. This is mostly useful to alter
      * the appearance of 'colorless' icons - which mainly contain black, white and shades of gray.
      *
@@ -344,7 +366,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
             throw new IllegalArgumentException(message);
         }
         this.color = color;
-        this.onPropertyChanged();
+        this.onShapeChanged();
     }
 
     protected boolean isMaintainAppearance()
@@ -356,7 +378,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
 
     /**
      * {@inheritDoc}
-     * <p/>
+     * <p>
      * Overridden to return a unique state key if the icon is configured to always redraw. SurfaceIcon does not use a
      * cached representation if it's heading is configured to follow the view, or if it's configured to maintain a
      * constant screen size.
@@ -434,18 +456,6 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable, D
             // Restore gl state
             this.endDraw(dc);
         }
-    }
-
-    protected void onPropertyChanged()
-    {
-        this.updateModifiedTime();
-        this.clearCaches();
-    }
-
-    @Override
-    protected void clearCaches()
-    {
-        super.clearCaches();
     }
 
     protected List<Sector> computeSectors(DrawContext dc)

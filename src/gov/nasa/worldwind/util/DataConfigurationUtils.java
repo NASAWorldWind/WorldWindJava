@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -23,7 +45,7 @@ import java.net.*;
 import java.util.concurrent.*;
 
 /**
- * A collection of static methods useful for opening, reading, and otherwise working with World Wind data configuration
+ * A collection of static methods useful for opening, reading, and otherwise working with WorldWind data configuration
  * documents.
  *
  * @author dcollins
@@ -37,7 +59,7 @@ public class DataConfigurationUtils
     /**
      * Returns true if the specified {@link org.w3c.dom.Element} is a data configuration document. This recognizes the
      * following data configuration documents: <ul> <li>Layer Configuration Documents</li> <li>Elevation Model
-     * Configuration Documents</li> <li>Installed DataDescriptor Documents</li> <li>World Wind .NET LayerSet
+     * Configuration Documents</li> <li>Installed DataDescriptor Documents</li> <li>WorldWind .NET LayerSet
      * Documents</li> </ul>
      *
      * @param domElement the document in question.
@@ -83,7 +105,7 @@ public class DataConfigurationUtils
      * Returns the specified data configuration document transformed to a standard Layer or ElevationModel configuration
      * document. This returns the original document if the document is already in a standard form, or if the document is
      * not one of the recognized types. Installed DataDescriptor documents are transformed to standard Layer or
-     * ElevationModel configuration documents, depending on the document contents. World Wind .NET LayerSet documents
+     * ElevationModel configuration documents, depending on the document contents. WorldWind .NET LayerSet documents
      * are transformed to standard Layer configuration documents. This returns null if the document's root element is
      * null.
      *
@@ -125,10 +147,10 @@ public class DataConfigurationUtils
     /**
      * Returns the specified data configuration document's display name as a string, or null if the document is not one
      * of the recognized types. This determines the display name for each type of data configuration document as
-     * follows: <table> <tr><th>Document Type</th><th>Path to Display Name</th></tr> <tr><td>Layer
+     * follows: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Document Type</th><th>Path to Display Name</th></tr> <tr><td>Layer
      * Configuration</td><td>./DisplayName</td></tr> <tr><td>Elevation Model Configuration</td><td>./DisplayName</td></tr>
      * <tr><td>Installed DataDescriptor</td><td>./property[@name="dataSet"]/property[@name="gov.nasa.worldwind.avkey.DatasetNameKey"]</td></tr>
-     * <tr><td>World Wind .NET LayerSet</td><td>./QuadTileSet/Name</td></tr> <tr><td>Other</td><td>null</td></tr>
+     * <tr><td>WorldWind .NET LayerSet</td><td>./QuadTileSet/Name</td></tr> <tr><td>Other</td><td>null</td></tr>
      * </table>
      *
      * @param domElement the data configuration document who's display name is returned.
@@ -169,10 +191,10 @@ public class DataConfigurationUtils
 
     /**
      * Returns the specified data configuration document's type as a string, or null if the document is not one of the
-     * recognized types. This maps data configuration documents to a type string as follows: <table> <tr><th>Document
+     * recognized types. This maps data configuration documents to a type string as follows: <table><caption style="font-weight: bold;">Mapping</caption> <tr><th>Document
      * Type</th><th>Type String</th></tr> <tr><td>Layer Configuration</td><td>"Layer"</td></tr> <tr><td>Elevation Model
      * Configuration</td><td>"Elevation Model"</td></tr> <tr><td>Installed DataDescriptor</td><td>"Layer" or
-     * "ElevationModel"</td></tr> <tr><td>World Wind .NET LayerSet</td><td>"Layer"</td></tr>
+     * "ElevationModel"</td></tr> <tr><td>WorldWind .NET LayerSet</td><td>"Layer"</td></tr>
      * <tr><td>Other</td><td>null</td></tr> </table>
      *
      * @param domElement the data configuration document to determine a type for.
@@ -270,7 +292,7 @@ public class DataConfigurationUtils
      * Convenience method for computing a data configuration file's cache name in a FileStore, given the file's cache
      * path. This writes the computed cache name to the specified parameter list under the key {@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}. If the parameter already exists, it's left unchanged.
-     * <p/>
+     * <p>
      * A data configuration file's cache name is its parent directory in the cache. The cache name therefore points to
      * the directory containing both the configuration file and any cached data associated with it. Determining the
      * cache name at run time - instead of hard wiring it in the data configuration file - enables cache data to be
@@ -460,7 +482,7 @@ public class DataConfigurationUtils
 
     /**
      * Appends WMS layer parameters as elements to a specified context. This appends elements for the following
-     * parameters: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th> <tr><td>{@link
+     * parameters: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
      * AVKey#WMS_VERSION}</td><td>Service/@version</td><td>String</td></tr> <tr><td>{@link
      * AVKey#LAYER_NAMES}</td><td>Service/LayerNames</td><td>String</td></tr> <tr><td>{@link
      * AVKey#STYLE_NAMES}</td><td>Service/StyleNames</td><td>String</td></tr> <tr><td>{@link
@@ -537,7 +559,7 @@ public class DataConfigurationUtils
 
     /**
      * Appends WCS layer parameters as elements to a specified context. This appends elements for the following
-     * parameters: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th> <tr><td>{@link
+     * parameters: <table><caption style="font-weight: bold;">Mapping</caption> <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr> <tr><td>{@link
      * AVKey#WCS_VERSION}</td><td>Service/@version</td><td>String</td></tr> <tr><td>{@link
      * AVKey#COVERAGE_IDENTIFIERS}</td><td>Service/coverageIdentifiers</td><td>String</td></tr> <tr><td>{@link
      * AVKey#GET_COVERAGE_URL}</td><td>Service/GetCoverageURL</td><td>String</td></tr> <tr><td>{@link
@@ -613,8 +635,8 @@ public class DataConfigurationUtils
     /**
      * Parses WMS layer parameters from the XML configuration document starting at domElement. This writes output as
      * key-value pairs to params. If a parameter from the XML document already exists in params, that parameter is
-     * ignored. Supported key and parameter names are: <table> <th><td>Parameter</td><td>Element
-     * Path</td><td>Type</td></th> <tr><td>{@link AVKey#WMS_VERSION}</td><td>Service/@version</td><td>String</td></tr>
+     * ignored. Supported key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Parameter</th><th>Element
+     * Path</th><th>Type</th></tr> <tr><td>{@link AVKey#WMS_VERSION}</td><td>Service/@version</td><td>String</td></tr>
      * <tr><td>{@link AVKey#LAYER_NAMES}</td><td>Service/LayerNames</td><td>String</td></tr> <tr><td>{@link
      * AVKey#STYLE_NAMES}</td><td>Service/StyleNames</td><td>String</td></tr> <tr><td>{@link
      * AVKey#GET_MAP_URL}</td><td>Service/GetMapURL</td><td>String</td></tr> <tr><td>{@link
@@ -1218,7 +1240,7 @@ public class DataConfigurationUtils
 
     /**
      * Appends LevelSet configuration parameters as elements to the specified context. This appends elements for the
-     * following parameters: <table> <th><td>Key</td><td>Name</td><td>Path</td></th> <tr><td>{@link
+     * following parameters: <table> <caption style="font-weight: bold;">Mapping</caption><tr><th>Key</th><th>Name</th><td>Path</td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>DatasetName</td><td>String</td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td>DataCacheName</td><td>String</td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#SERVICE}</td><td>Service/URL</td><td>String</td></tr> <tr><td>{@link
@@ -1338,7 +1360,8 @@ public class DataConfigurationUtils
     /**
      * Parses LevelSet configuration parameters from the specified DOM document. This writes output as key-value pairs
      * to params. If a parameter from the XML document already exists in params, that parameter is ignored. Supported
-     * key and parameter names are: <table> <th><td>Parameter</td><td>Element path</td><td>Type</td></th> <tr><td>{@link
+     * key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Parameter</th><th>Element path</th><th>Type</th></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>DatasetName</td><td>String</td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td>DataCacheName</td><td>String</td></tr> <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#SERVICE}</td><td>Service/URL</td><td>String</td></tr> <tr><td>{@link
@@ -1421,7 +1444,9 @@ public class DataConfigurationUtils
     /**
      * Gathers LevelSet configuration parameters from a specified LevelSet reference. This writes output as key-value
      * pairs params. If a parameter from the XML document already exists in params, that parameter is ignored. Supported
-     * key and parameter names are: <table> <th><td>Parameter</td><td>Element Path</td><td>Type</td></th> <tr><td>{@link
+     * key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Parameter</th><th>Element Path</th><th>Type</th></tr>
+     * <tr><td>{@link
      * gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>First Level's dataset</td><td>String</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATA_CACHE_NAME}</td><td>First Level's
      * cacheName</td><td>String</td></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#SERVICE}</td><td>First Level's
@@ -1810,7 +1835,7 @@ public class DataConfigurationUtils
 
         // Data descriptor files are written with the property "gov.nasa.worldwind.avkey.MissingDataValue". But it
         // means the value that denotes a missing data point, and not the value that replaces missing values.
-        // Translate that key here to MissingDataSignal, so it is properly understood by the World Wind API
+        // Translate that key here to MissingDataSignal, so it is properly understood by the WorldWind API
         // (esp. BasicElevationModel).
         Double d = WWXML.getDouble(context, "property[@name=\"gov.nasa.worldwind.avkey.MissingDataValue\"]", xpath);
         if (d != null)
@@ -1880,11 +1905,11 @@ public class DataConfigurationUtils
     }
 
     //**************************************************************//
-    //********************  World Wind .NET LayerSet Configuration  //
+    //********************  WorldWind .NET LayerSet Configuration  //
     //**************************************************************//
 
     /**
-     * Returns true if a specified document is a World Wind .NET LayerSet configuration document, and false otherwise.
+     * Returns true if a specified document is a WorldWind .NET LayerSet configuration document, and false otherwise.
      *
      * @param domElement the document in question.
      *
@@ -1908,7 +1933,7 @@ public class DataConfigurationUtils
     }
 
     /**
-     * Returns true if a specified XML event is the root of a World Wind .NET LayerSet configuration document, and false
+     * Returns true if a specified XML event is the root of a WorldWind .NET LayerSet configuration document, and false
      * otherwise.
      *
      * @param event the XML event in question.
@@ -1936,9 +1961,10 @@ public class DataConfigurationUtils
     }
 
     /**
-     * Parses World Wind .NET LayerSet configuration parameters from the specified document. This writes output as
+     * Parses WorldWind .NET LayerSet configuration parameters from the specified document. This writes output as
      * key-value pairs to params. If a parameter from the LayerSet document already exists in params, that parameter is
-     * ignored. Supported key and parameter names are: <table> <tr><th>Parameter</th><th>Element
+     * ignored. Supported key and parameter names are: <table> <caption style="font-weight: bold;">Mapping</caption>
+     * <tr><th>Parameter</th><th>Element
      * Path</th><th>Type</th></tr> <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DISPLAY_NAME}</td><td>QuadTileSet/Name<td></td><td>String</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#DATASET_NAME}</td><td>QuadTileSet/Name<td></td><td>String</td></tr>
      * <tr><td>{@link gov.nasa.worldwind.avlist.AVKey#OPACITY}</td><td>QuadTileSet/Opacity<td></td><td>Double</td></tr>
@@ -2114,7 +2140,7 @@ public class DataConfigurationUtils
     }
 
     /**
-     * Transforms a World Wind .NET LayerSet configuration document to a standard layer configuration document.
+     * Transforms a WorldWind .NET LayerSet configuration document to a standard layer configuration document.
      *
      * @param domElement LayerSet document to transform.
      *

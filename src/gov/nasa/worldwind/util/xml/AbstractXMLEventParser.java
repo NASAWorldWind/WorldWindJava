@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util.xml;
@@ -17,16 +39,16 @@ import java.util.*;
 
 /**
  * Base class for XML event parsers. Handles parsing control and creation of new parser instances.
- * <p/>
+ * <p>
  * A parser holds the information parsed from the event stream. That information can be queried via the parser's
  * accessors. A parser typically does not maintain a reference to the event stream it parsed or the parser context used
  * during parsing.
- * <p/>
+ * <p>
  * Parsers are created when events of the associated type are encountered in the input stream. An {@link
  * #allocate(XMLEventParserContext, javax.xml.stream.events.XMLEvent)} method in the parser typically creates a default
  * parser prior to consulting the {@link XMLEventParserContext}, which returns a new parser whose type is determined by
  * consulting a table of event types. The default parser is returned if the table contains no entry for the event type.
- * <p/>
+ * <p>
  * A parser can be associated with a specific namespace. The namespace is used to qualify the parser's association with
  * event types.
  *

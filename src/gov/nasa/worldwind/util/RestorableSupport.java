@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.util;
 
@@ -19,10 +41,11 @@ import java.util.List;
  * <code>stateObject</code> elements. Each <code>stateObject</code> element is identified by its <code>name</code>
  * attribute. The value of a <code>stateObject</code> can either be simple text content, or nested
  * <code>stateObject</code> elements.
- * <p/>
+ * <p>
  * For example, this document stores four states: the string "Hello World!", the largest value an unsigned byte can
- * hold, the value of PI to six digits, and a boolean "true". <code>
+ * hold, the value of PI to six digits, and a boolean "true". 
  * <pre>
+ * <code>
  * {@literal <?xml version="1.0" encoding="UTF-8"?>}
  * {@literal <restorableState>}
  *   {@literal <stateObject name="helloWorldString">Hello World!</stateObject>}
@@ -30,8 +53,9 @@ import java.util.List;
  *   {@literal <stateObject name="pi">3.141592</stateObject>}
  *   {@literal <stateObject name="booleanTrue">true</stateObject>}
  * {@literal </restorableState>}
+ * </code> 
  * </pre>
- * </code> Callers can create a new RestorableSupport with no state content, or create a RestorableSupport from an
+ * Callers can create a new RestorableSupport with no state content, or create a RestorableSupport from an
  * existing XML document string. Callers can then add state by name and value, and query state by name.
  * RestorableSupport provides convenience methods for addding and querying state values as Strings, Integers, Doubles,
  * and Booleans.
@@ -1278,11 +1302,11 @@ public class RestorableSupport
     }
 
     /**
-     * Returns the value of the StateObject as a HashMap of <Integer, OffsetsList> pairs.
+     * Returns the value of the StateObject as a HashMap of &lt;Integer, OffsetsList&gt; pairs.
      *
      * @param stateObject the StateObject that is converted to a HashMap of OffsetsLists.
      *
-     * @return the value of the StateObject as a HashMap of <Integer, OffsetsList> pairs.
+     * @return the value of the StateObject as a HashMap of &lt;Integer, OffsetsList&gt; pairs.
      *
      * @throws IllegalArgumentException If <code>stateObject</code> is null, or does not belong to this
      *                                  RestorableSupport.
@@ -1457,12 +1481,12 @@ public class RestorableSupport
     }
 
     /**
-     * Returns the value of the StateObject as a HashMap of <Integer, Object> pairs, representing the shape's
+     * Returns the value of the StateObject as a HashMap of &lt;Integer, Object&gt; pairs, representing the shape's
      * imageSources.
      *
      * @param stateObject the StateObject that is converted to a HashMap of imageSources.
      *
-     * @return the value of the StateObject as a HashMap of <Integer, Object> pairs.
+     * @return the value of the StateObject as a HashMap of &lt;Integer, Object&gt; pairs.
      *
      * @throws IllegalArgumentException If <code>stateObject</code> is null, or does not belong to this
      *                                  RestorableSupport.

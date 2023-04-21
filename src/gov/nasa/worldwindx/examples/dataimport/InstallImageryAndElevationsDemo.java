@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.dataimport;
 
@@ -25,12 +47,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Illustrates a simple application that installs imagery and elevation data for use in World Wind. The application
+ * Illustrates a simple application that installs imagery and elevation data for use in WorldWind. The application
  * enables the user to locate and install imagery or elevation data on the local hard drive. Once installed, the data is
- * visualized in World Wind either as a <code>{@link gov.nasa.worldwind.layers.TiledImageLayer}</code> or an
+ * visualized in WorldWind either as a <code>{@link gov.nasa.worldwind.layers.TiledImageLayer}</code> or an
  * <code>{@link gov.nasa.worldwind.globes.ElevationModel}</code>. The application also illustrates how to visualize data
  * that has been installed during a previous session.
- * <p/>
+ * <p>
  * For the simplest possible examples of installing imagery and elevation data, see the examples <code>{@link
  * InstallImagery}</code> and <code>{@link InstallElevations}</code>.
  *
@@ -82,7 +104,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
     {
         public static final String TOOLTIP_FULL_PYRAMID =
             "Installing a full pyramid takes longer and consumes more space on the user's hard drive, "
-                + "but has the best runtime performance, which is important for World Wind Server";
+                + "but has the best runtime performance, which is important for WorldWind Server";
 
         public static final String TOOLTIP_PARTIAL_PYRAMID =
             "Installing a partial pyramid takes less time and consumes less space on the user's hard drive"
@@ -159,7 +181,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
 
                     try
                     {
-                        // Install the file into a form usable by World Wind components.
+                        // Install the file into a form usable by WorldWind components.
                         dataConfig = installDataFromFiles(InstalledDataFrame.this, files, fileStore);
                     }
                     catch (Exception e)
@@ -300,9 +322,9 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
                 continue;
 
             // This data configuration came from an existing file from disk, therefore we cannot guarantee that the
-            // current version of World Wind's data installer produced it. This data configuration file may have been
-            // created by a previous version of World Wind, or by another program. Set fallback values for any missing
-            // parameters that World Wind needs to construct a Layer or ElevationModel from this data configuration.
+            // current version of WorldWind's data installer produced it. This data configuration file may have been
+            // created by a previous version of WorldWind, or by another program. Set fallback values for any missing
+            // parameters that WorldWind needs to construct a Layer or ElevationModel from this data configuration.
             AVList params = new AVListImpl();
             setFallbackParams(doc, filename, params);
 
@@ -470,7 +492,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
                 Thread.yield();
             }
 
-            // Convert the file to a form usable by World Wind components, according to the specified DataStoreProducer.
+            // Convert the file to a form usable by WorldWind components, according to the specified DataStoreProducer.
             // This throws an exception if production fails for any reason.
             producer.startProduction();
         }
@@ -557,7 +579,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
 
     /**
      * Suggests a name for a dataset based on pathnames of the passed files.
-     * <p/>
+     * <p>
      * Attempts to extract all common words that files' path can share, removes all non-alpha-numeric chars
      *
      * @param files Array of raster files
@@ -644,7 +666,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
      *
      * @return instance of the DataStoreProducer
      *
-     * @throws IllegalArgumentException, if types of rasters do not match, or array of raster files is null or empty
+     * @throws IllegalArgumentException if types of rasters do not match, or array of raster files is null or empty
      */
     protected static DataStoreProducer createDataStoreProducerFromFiles(File[] files) throws IllegalArgumentException
     {
@@ -696,7 +718,7 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
             }
             else if (DataInstallUtil.isWWDotNetLayerSet(file))
             {
-                // you cannot select multiple World Wind .NET Layer Sets
+                // you cannot select multiple WorldWind .NET Layer Sets
                 // bail out on a first raster
                 return new WWDotNetLayerSetConverter();
             }
@@ -747,6 +769,6 @@ public class InstallImageryAndElevationsDemo extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Imagery and Elevation Installation", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Imagery and Elevation Installation", AppFrame.class);
     }
 }

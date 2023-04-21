@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.terrain;
 
@@ -36,11 +58,11 @@ public class BasicElevationModelFactory extends BasicFactory
      * <li>a {@link java.net.URL}</li> <li>a {@link java.io.File}</li> <li>a {@link java.io.InputStream}</li> <li> an
      * {@link org.w3c.dom.Element}</li> <li>a {@link String} holding a file name, a name of a resource on the classpath,
      * or a string representation of a URL</li> </ul>
-     * <p/>
+     * <p>
      * For non-compound models, this method maps the <code>serviceName</code> attribute of the
      * <code>ElevationModel/Service</code> element of the XML configuration document to the appropriate elevation-model
      * type. Service types recognized are:" <ul> <li>"WMS" for elevation models that draw their data from a WMS web
-     * service.</li> <li>"WWTileService" for elevation models that draw their data from a World Wind tile service.</li>
+     * service.</li> <li>"WWTileService" for elevation models that draw their data from a WorldWind tile service.</li>
      * <li>"Offline" for elevation models that draw their data only from the local cache.</li> </ul>
      *
      * @param configSource the configuration source. See above for supported types.
@@ -115,7 +137,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * @return the requested elevation model, or null if the specified element does not describe an elevation model.
      *
      * @throws Exception if a problem occurs during creation.
-     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     @Override
     protected ElevationModel doCreateFromElement(Element domElement, AVList params) throws Exception
@@ -145,7 +167,7 @@ public class BasicElevationModelFactory extends BasicFactory
 
     /**
      * Creates a compound elevation model and populates it with a specified list of elevation models.
-     * <p/>
+     * <p>
      * Any exceptions occurring during creation of the elevation models are logged and not re-thrown. The elevation
      * models associated with the exceptions are not included in the returned compound model.
      *
@@ -155,7 +177,7 @@ public class BasicElevationModelFactory extends BasicFactory
      * @return a compound elevation model populated with the specified elevation models. The compound model will contain
      *         no elevation models if none were specified or exceptions occurred for all that were specified.
      *
-     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList).
+     * @see #createNonCompoundModel(org.w3c.dom.Element, gov.nasa.worldwind.avlist.AVList)
      */
     protected CompoundElevationModel createCompoundModel(Element[] elements, AVList params)
     {

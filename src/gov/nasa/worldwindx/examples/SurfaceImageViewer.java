@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples;
@@ -18,18 +40,18 @@ import java.io.*;
 
 /**
  * Open and view arbitrary surface images and elevations that have an accompanying world file.
- * <p/>
+ * <p>
  * After clicking the open button and selecting the desired image or elevations file, the program status will change to
  * Loading while WorldWind installs the selected data.  Wait until the status changes to Ready. The data will have
  * finished installing and will be ready for viewing.
- * <p/>
+ * <p>
  * Image and elevation files that you wish to load must be accompanied by a world file, or they will fail to load. The
  * world file can be identified as the file with a file extension consisting of three letters.  The first two of these
  * will be the first and last letters of the image or elevation file type, e.g. tf for a tiff file, or jg for a jpeg
  * file.  The last letter will be a double.
- * <p/>
+ * <p>
  * For example, a world file accompanying a jpeg file would have the extension .jgw :
- * <p/>
+ * <p>
  * image.jpg           // image file
  * image.jgw           // accompanying world file
  *
@@ -175,6 +197,6 @@ public class SurfaceImageViewer extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("World Wind Surface Images", SurfaceImageViewer.AppFrame.class);
+        ApplicationTemplate.start("WorldWind Surface Images", SurfaceImageViewer.AppFrame.class);
     }
 }

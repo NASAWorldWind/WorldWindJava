@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util.tree;
@@ -14,8 +36,8 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.GLU;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -28,7 +50,7 @@ import java.util.List;
  * A frame that can scroll its contents. The frame can be interactively resized by dragging the border, and be moved by
  * dragging the frame or title bar. The frame can be minimized. The frame displays scroll bars if the size of the
  * content exceeds the size of the frame, and optionally displays a title bar with a text string and an icon.
- * <p/>
+ * <p>
  * The frame renders its contents into a texture, and then draws the texture when the frame is rendered. This provides
  * good performance for content that is expensive to draw, and changes infrequently. If the frame is sized so large that
  * the visible portion of the contents cannot be rendered into a single texture, then the contents will be drawn
@@ -954,9 +976,10 @@ public class ScrollFrame extends DragControl implements PreRenderable, Renderabl
 
     /**
      * Returns a new tile texture with the specified width and height.
-     * <p/>
+     * <p>
      * The returned texture's internal format is RGBA8.
      *
+     * @param dc The draw context.
      * @param width  the texture's width, in pixels.
      * @param height the texture's height, in pixels.
      *

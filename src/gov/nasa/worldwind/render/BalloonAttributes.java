@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.render;
@@ -9,7 +31,7 @@ package gov.nasa.worldwind.render;
 import java.awt.*;
 
 /**
- * Holds attributes for World Wind {@link gov.nasa.worldwind.render.Balloon} shapes. Changes made to the attributes are
+ * Holds attributes for WorldWind {@link gov.nasa.worldwind.render.Balloon} shapes. Changes made to the attributes are
  * applied to the balloon when the <code>WorldWindow</code> renders the next frame. Instances of
  * <code>BalloonAttributes</code> may be shared by many balloons, thereby reducing the memory normally required to store
  * attributes for each balloon.
@@ -35,7 +57,7 @@ public interface BalloonAttributes extends ShapeAttributes
      * <code>AVKey.SHAPE_RECTANGLE</code>, then <code>size</code> specifies the rectangle's width and height. If the
      * balloon's shape is <code>AVKey.SHAPE_ELLIPSE</code>, then <code>size</code> specifies the ellipse's x- and
      * y-radii.
-     * <p/>
+     * <p>
      * The balloon's content area is the rectangle obtained by taking the balloon's <code>size</code> and shrinking it
      * by the balloon's insets.
      *
@@ -87,11 +109,11 @@ public interface BalloonAttributes extends ShapeAttributes
      * of (0, 0) pixels causes the balloon's lower left corner to be placed at the screen reference point. An
      * <code>offset</code> of (1, 1) in fraction units causes the balloon's upper right corner to be placed at the
      * screen reference point.
-     * <p/>
+     * <p>
      * If the balloon is attached to the globe, the screen reference point is the projection of its geographic position
      * into the viewport. If the balloon is attached to the screen, the screen reference point is the balloon's screen
      * point.
-     * <p/>
+     * <p>
      * If the balloon has a leader shape, the leader extends from one side of the balloon's frame and points to the
      * screen reference point.
      *
@@ -116,10 +138,10 @@ public interface BalloonAttributes extends ShapeAttributes
      * Specifies the amount of space (in pixels) between the balloon's content and the edges of the balloon's frame. The
      * balloon's content area decreases to account for the specified <code>insets</code>. If the balloon's size and
      * insets cause the content width or height to become less than 1, then the balloon's content is not displayed.
-     * <p/>
+     * <p>
      * If the balloon's shape is <code>AVKey.SHAPE_RECTANGLE</code>, <code>insets</code> specifies the padding between
      * the balloon's content area and the rectangle's top, left, bottom, and right.
-     * <p/>
+     * <p>
      * If the balloon's shape is <code>AVKey.SHAPE_ELLIPSE</code>, <code>insets</code> specifies the padding between the
      * balloon's content area and the ellipse's top, left, bottom, and right apexes.
      *
@@ -144,16 +166,16 @@ public interface BalloonAttributes extends ShapeAttributes
      * Specifies the shape of the balloon's frame. The <code>shape</code> may be one of the following: <ul> <li>{@link
      * gov.nasa.worldwind.avlist.AVKey#SHAPE_NONE}</li> <li>{@link gov.nasa.worldwind.avlist.AVKey#SHAPE_RECTANGLE}</li>
      * <li>{@link gov.nasa.worldwind.avlist.AVKey#SHAPE_ELLIPSE}</li> </ul>
-     * <p/>
+     * <p>
      * If the <code>shape</code> is <code>AVKey.SHAPE_NONE</code>, the balloon's content is displayed in a rectangle in
      * the viewport without any decoration. The rectangle's dimension in the viewport are specified by calling {@link
      * #setSize(Size)}.
-     * <p/>
+     * <p>
      * If the <code>shape</code> is <code>AVKey.SHAPE_RECTANGLE</code>, the balloon is displayed as a rectangle in the
      * viewport with optionally rounded corners. The rectangle's dimension in the viewport are specified by calling
      * {@link #setSize(Size)}. The rectangle's corner radius in pixels is specified by calling {@link
      * #setCornerRadius(int)}.
-     * <p/>
+     * <p>
      * If the <code>shape</code> is <code>AVKey.SHAPE_ELLIPSE</code>, the balloon is displayed as an ellipse in the
      * viewport. The ellipse's x- and y-radii are specified by calling {@link #setSize(Size)}. The balloon's corner
      * radius attribute is ignored.
@@ -180,9 +202,9 @@ public interface BalloonAttributes extends ShapeAttributes
      * Specifies the shape of the balloon's leader. The <code>shape</code> may be one of the following: <ul> <li>{@link
      * gov.nasa.worldwind.avlist.AVKey#SHAPE_NONE}</li> <li>{@link gov.nasa.worldwind.avlist.AVKey#SHAPE_TRIANGLE}</li>
      * </ul>
-     * <p/>
+     * <p>
      * If the <code>shape</code> is <code>AVKey.SHAPE_NONE</code>, the leader is disabled and does not display.
-     * <p/>
+     * <p>
      * If the <code>shape</code> is <code>AVKey.SHAPE_TRIANGLE</code>, the leader extends from one side of the balloon's
      * frame and points to the balloon's screen reference point. The width of the leader (in pixels) where it intersects
      * the balloon's frame is specified by calling {@link #setLeaderWidth(int)}.
@@ -207,9 +229,9 @@ public interface BalloonAttributes extends ShapeAttributes
     /**
      * Specifies the width of the balloon's leader, in pixels. The specified <code>width</code> must be zero or a
      * positive integer. Specifying a <code>width</code> of zero disables the balloon's leader.
-     * <p/>
+     * <p>
      * This does nothing if the balloon's leader shape is <code>AVKey.SHAPE_NONE</code>.
-     * <p/>
+     * <p>
      * If the balloon's leader shape is <code>AVKey.SHAPE_TRIANGLE</code>, this specifies the size of the leader where
      * it intersects the balloon's frame.
      *
@@ -344,10 +366,10 @@ public interface BalloonAttributes extends ShapeAttributes
      * following: <ul> <li>{@link gov.nasa.worldwind.avlist.AVKey#REPEAT_NONE}</li> <li>{@link
      * gov.nasa.worldwind.avlist.AVKey#REPEAT_X}</li> <li>{@link gov.nasa.worldwind.avlist.AVKey#REPEAT_Y}</li>
      * <li>{@link gov.nasa.worldwind.avlist.AVKey#REPEAT_XY}</li> </ul>
-     * <p/>
+     * <p>
      * If <code>repeat</code> is <code>AVKey.REPEAT_NONE</code>, the balloon's texture is displayed according to its
      * offset and scale without any repeating pattern.
-     * <p/>
+     * <p>
      * If <code>repeat</code> is <code>AVKey.REPEAT_X</code>, <code>AVKey.REPEAT_Y</code>, or
      * <code>AVKey.REPEAT_XY</code>, the balloon's texture is repeated along the X axis, along the Y axis, or along both
      * the X and Y axes, respectively. The texture is repeated after its offset and scale are applied.

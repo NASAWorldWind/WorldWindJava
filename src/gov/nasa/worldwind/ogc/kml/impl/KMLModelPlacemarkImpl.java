@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.kml.impl;
@@ -217,7 +239,7 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
      * resources will be resolved relative to the .dae file within the archive. Normally references in a KMZ are
      * resolved relative to the root of the archive, but Model references are an exception. See
      * https://developers.google.com/kml/documentation/kmzarchives and https://developers.google.com/kml/documentation/kmlreference#model
-     * <p/>
+     * <p>
      * {@inheritDoc}.
      */
     public String resolveFilePath(String path) throws IOException
@@ -296,14 +318,15 @@ public class KMLModelPlacemarkImpl extends WWObjectImpl implements KMLRenderable
     }
 
     /**
-     * Initiates a retrieval of the model referenced by this placemark. Once the resource is retrieved and loaded, this
+     * Initiates a retrieval of the model referenced by this placemark.Once the resource is retrieved and loaded, this
      * calls <code>{@link #setColladaRoot(ColladaRoot)}</code> to specify this link's new network resource, and sends an
      * <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code> property change event to this
-     * link's property change listeners.
-     * <p/>
+     * link's property change listeners.<p>
      * This does nothing if this <code>KMLNetworkLink</code> has no <code>KMLLink</code>.
      *
      * @param address the address of the resource to retrieve
+     * @throws java.io.IOException if a reading error occurs.
+     * @throws javax.xml.stream.XMLStreamException if a parsing error occurs.
      */
     protected void retrieveModel(String address) throws IOException, XMLStreamException
     {

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -15,7 +37,7 @@ import java.util.*;
  * tree's cells. For each submitted item, this class' {@link #doOperation} method is called for each leaf or
  * intermediate cell that intersects the item. That method typically stores the item's association with the intersecting
  * cell, either to populate a quadtree membership list or to mark it as a visible item.
- * <p/>
+ * <p>
  * The filter uses a bit-set to identify cells that intersect submitted items. This minimal memory eliminates the need
  * to retain cell information other than identity. Only cell identities are retained by this abstract class. Subclasses
  * provide the means to retain item information associated with intersecting cells.
@@ -258,7 +280,7 @@ public abstract class BitSetQuadTreeFilter
      * A quadtree filter that determines the bit positions of cells associated with items and intersecting a specified
      * region. Typically used to traverse the bit-set index of a populated quadtree to determine potentially visible
      * items.
-     * <p/>
+     * <p>
      * This class requires a previously populated filter and determines which of its cells intersect a specified
      * sector.
      */

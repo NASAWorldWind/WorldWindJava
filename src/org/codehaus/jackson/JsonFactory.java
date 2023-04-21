@@ -132,6 +132,9 @@ public class JsonFactory
      * Method for enabling or disabling specified parser feature
      * (check {@link JsonParser.Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @param state Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public final JsonFactory configure(JsonParser.Feature f, boolean state)
@@ -148,6 +151,8 @@ public class JsonFactory
      * Method for enabling specified parser feature
      * (check {@link JsonParser.Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public JsonFactory enable(JsonParser.Feature f) {
@@ -159,6 +164,8 @@ public class JsonFactory
      * Method for disabling specified parser features
      * (check {@link JsonParser.Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public JsonFactory disable(JsonParser.Feature f) {
@@ -169,6 +176,8 @@ public class JsonFactory
     /**
      * Checked whether specified parser feature is enabled.
      *
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public final boolean isEnabled(JsonParser.Feature f) {
@@ -178,29 +187,39 @@ public class JsonFactory
     // // // Older deprecated (as of 1.2) methods
 
     /**
+     * @param f Undocumented.
      * @deprecated Use {@link #enable(JsonParser.Feature)} instead
      */
+    @Deprecated
     public final void enableParserFeature(JsonParser.Feature f) {
         enable(f);
     }
 
     /**
+     * @param f Undocumented.
      * @deprecated Use {@link #disable(JsonParser.Feature)} instead
      */
+    @Deprecated
     public final void disableParserFeature(JsonParser.Feature f) {
         disable(f);
     }
 
     /**
+     * @param f Undocumented.
+     * @param state Undocumented.
      * @deprecated Use {@link #configure(JsonParser.Feature, boolean)} instead
      */
+    @Deprecated
     public final void setParserFeature(JsonParser.Feature f, boolean state) {
         configure(f, state);
     }
 
     /**
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @deprecated Use {@link #isEnabled(JsonParser.Feature)} instead
      */
+    @Deprecated
     public final boolean isParserFeatureEnabled(JsonParser.Feature f) {
         return (_parserFeatures & f.getMask()) != 0;
     }
@@ -215,6 +234,9 @@ public class JsonFactory
      * Method for enabling or disabling specified generator feature
      * (check {@link JsonGenerator.Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @param state Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public final JsonFactory configure(JsonGenerator.Feature f, boolean state) {
@@ -231,6 +253,8 @@ public class JsonFactory
      * Method for enabling specified generator features
      * (check {@link JsonGenerator.Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public JsonFactory enable(JsonGenerator.Feature f) {
@@ -242,6 +266,8 @@ public class JsonFactory
      * Method for disabling specified generator feature
      * (check {@link JsonGenerator.Feature} for list of features)
      *
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public JsonFactory disable(JsonGenerator.Feature f) {
@@ -252,6 +278,8 @@ public class JsonFactory
     /**
      * Checked whether specified generator feature is enabled.
      *
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @since 1.2
      */
     public final boolean isEnabled(JsonGenerator.Feature f) {
@@ -261,29 +289,39 @@ public class JsonFactory
     // // // Older deprecated (as of 1.2) methods
 
     /**
+     * @param f Undocumented.
      * @deprecated Use {@link #enable(JsonGenerator.Feature)} instead
      */
+    @Deprecated
     public final void enableGeneratorFeature(JsonGenerator.Feature f) {
         enable(f);
     }
 
     /**
+     * @param f Undocumented.
      * @deprecated Use {@link #disable(JsonGenerator.Feature)} instead
      */
+    @Deprecated
     public final void disableGeneratorFeature(JsonGenerator.Feature f) {
         disable(f);
     }
 
     /**
+     * @param f Undocumented.
+     * @param state Undocumented.
      * @deprecated Use {@link #configure(JsonGenerator.Feature, boolean)} instead
      */
+    @Deprecated
     public final void setGeneratorFeature(JsonGenerator.Feature f, boolean state) {
         configure(f, state);
     }
 
     /**
+     * @param f Undocumented.
+     * @return  Undocumented.
      * @deprecated Use {@link #isEnabled(JsonGenerator.Feature)} instead
      */
+    @Deprecated
     public final boolean isGeneratorFeatureEnabled(JsonGenerator.Feature f) {
         return isEnabled(f);
     }
@@ -309,15 +347,17 @@ public class JsonFactory
 
     /**
      * Method for constructing json parser instance to parse
-     * contents of specified file. Encoding is auto-detected
-     * from contents according to json specification recommended
-     * mechanism.
-     *<p>
+     * contents of specified file.Encoding is auto-detected
+ from contents according to json specification recommended
+ mechanism.<p>
      * Underlying input stream (needed for reading contents)
      * will be <b>owned</b> (and managed, i.e. closed as need be) by
      * the parser, since caller has no access to it.
      *
      * @param f File that contains JSON content to parse
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException  Undocumented.
      */
     public JsonParser createJsonParser(File f)
         throws IOException, JsonParseException
@@ -326,17 +366,15 @@ public class JsonFactory
     }
 
     /**
-     * Method for constructing json parser instance to parse
-     * contents of resource reference by given URL.
-     * Encoding is auto-detected
-     * from contents according to json specification recommended
-     * mechanism.
-     *<p>
-     * Underlying input stream (needed for reading contents)
-     * will be <b>owned</b> (and managed, i.e. closed as need be) by
-     * the parser, since caller has no access to it.
+     * Method for constructing json parser instance to parse contents of resource reference by given URL.Encoding is
+     * auto-detected from contents according to json specification recommended mechanism.<p>
+     * Underlying input stream (needed for reading contents) will be <b>owned</b> (and managed, i.e. closed as need be)
+     * by the parser, since caller has no access to it.
      *
      * @param url URL pointing to resource that contains JSON content to parse
+     * @return Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     public JsonParser createJsonParser(URL url)
         throws IOException, JsonParseException
@@ -358,6 +396,9 @@ public class JsonFactory
      * auto-detected as suggested by Json RFC.
      *
      * @param in InputStream to use for reading JSON content to parse
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException  Undocumented.
      */
     public JsonParser createJsonParser(InputStream in)
         throws IOException, JsonParseException
@@ -377,6 +418,9 @@ public class JsonFactory
      *<p>
      *
      * @param r Reader to use for reading JSON content to parse
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException  Undocumented.
      */
     public JsonParser createJsonParser(Reader r)
         throws IOException, JsonParseException
@@ -412,10 +456,8 @@ public class JsonFactory
 
     /**
      * Method for constructing json generator for writing json content
-     * using specified output stream.
-     * Encoding to use must be specified, and needs to be one of available
-     * types (as per JSON specification).
-     *<p>
+     * using specified output stream.Encoding to use must be specified, and needs to be one of available
+ types (as per JSON specification).<p>
      * Underlying stream <b>is NOT owned</b> by the generator constructed,
      * so that generator will NOT close the output stream when
      * {@link JsonGenerator#close} is called (unless auto-closing
@@ -426,6 +468,8 @@ public class JsonFactory
      *
      * @param out OutputStream to use for writing json content 
      * @param enc Character encoding to use
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
      */
     public JsonGenerator createJsonGenerator(OutputStream out, JsonEncoding enc)
         throws IOException
@@ -448,6 +492,8 @@ public class JsonFactory
      * Using application needs to close it explicitly.
      *
      * @param out Writer to use for writing json content 
+     * @return   Undocumented.
+     * @throws java.io.IOException   Undocumented.
      */
     public JsonGenerator createJsonGenerator(Writer out)
         throws IOException
@@ -459,16 +505,16 @@ public class JsonFactory
     /**
      * Method for constructing json generator for writing json content
      * to specified file, overwriting contents it might have (or creating
-     * it if such file does not yet exist).
-     * Encoding to use must be specified, and needs to be one of available
-     * types (as per JSON specification).
-     *<p>
+     * it if such file does not yet exist).Encoding to use must be specified, and needs to be one of available
+ types (as per JSON specification).<p>
      * Underlying stream <b>is owned</b> by the generator constructed,
      * i.e. generator will handle closing of file when
      * {@link JsonGenerator#close} is called.
      *
      * @param f File to write contents to
      * @param enc Character encoding to use
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
      */
     public JsonGenerator createJsonGenerator(File f, JsonEncoding enc)
         throws IOException
@@ -488,6 +534,9 @@ public class JsonFactory
 
     /**
      * Overridable construction method that actually instantiates desired generator.
+     * @param srcRef Undocumented.
+     * @param resourceManaged Undocumented.
+     * @return  Undocumented.
      */
     protected IOContext _createContext(Object srcRef, boolean resourceManaged)
     {
@@ -496,6 +545,11 @@ public class JsonFactory
 
     /**
      * Overridable construction method that actually instantiates desired parser.
+     * @param in Undocumented.
+     * @param ctxt Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException Undocumented.
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected JsonParser _createJsonParser(InputStream in, IOContext ctxt)
         throws IOException, JsonParseException
@@ -520,6 +574,10 @@ public class JsonFactory
 
     /**
      * Overridable construction method that actually instantiates desired generator
+     * @param out Undocumented.
+     * @param ctxt Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
      */
     protected JsonGenerator _createJsonGenerator(Writer out, IOContext ctxt)
         throws IOException
@@ -532,6 +590,7 @@ public class JsonFactory
      * for parsers and generators.
      *<p>
      * Note: only public to give access for <code>ObjectMapper</code>
+     * @return  Undocumented.
      */
     public BufferRecycler _getBufferRecycler()
     {
@@ -549,8 +608,10 @@ public class JsonFactory
 
     /**
      * Helper methods used for constructing an optimal stream for
-     * parsers to use, when input is to be read from an URL.
-     * This helps when reading file content via URL.
+     * parsers to use, when input is to be read from an URL.This helps when reading file content via URL.
+     * @param url Undocumented.
+     * @return  Undocumented.
+     * @throws java.io.IOException  Undocumented.
      */
     protected InputStream _optimizedStreamFromURL(URL url)
         throws IOException

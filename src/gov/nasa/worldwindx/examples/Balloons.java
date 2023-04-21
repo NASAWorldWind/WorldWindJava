@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples;
 
@@ -17,25 +39,25 @@ import java.awt.*;
 import java.io.InputStream;
 
 /**
- * Illustrates how to use a World Wind <code>{@link Balloon}</code> to display on-screen information to the user in the
+ * Illustrates how to use a WorldWind <code>{@link Balloon}</code> to display on-screen information to the user in the
  * form of a screen-aligned text balloon. There are two abstract balloon types: <code>{@link ScreenBalloon}</code> which
  * displays a balloon at a point on the screen, and <code>{@link GlobeBalloon}</code> which displays a balloon attached
  * to a position on the Globe. For each abstract balloon type, there are two concrete types: AnnotationBalloon which
  * provides support for simple text content with an optional image, and BrowserBalloon which provides support for
  * complex HTML, JavaScript, and Flash content.
- * <p/>
- * <strong>Balloon Content</strong> <br/> A Balloon's content is specified by calling <code>{@link
+ * <p>
+ * <strong>Balloon Content</strong> <br> A Balloon's content is specified by calling <code>{@link
  * Balloon#setText(String)}</code>, and its visual attributes are specified by calling <code>{@link
  * Balloon#setAttributes(gov.nasa.worldwind.render.BalloonAttributes)}</code> with an instance of <code>{@link
  * BalloonAttributes}</code>.
- * <p/>
- * <strong>ScreenBalloon</strong> <br/> ScreenBalloons display a screen-aligned balloon at a point on the screen. There
+ * <p>
+ * <strong>ScreenBalloon</strong> <br> ScreenBalloons display a screen-aligned balloon at a point on the screen. There
  * are two concrete ScreenBalloon types: <ul> <li><code>{@link ScreenAnnotationBalloon}</code> - a screen-attached
  * balloon with support for multi-line text, a background image, simple HTML text markup, and simple text styling
  * attributes.</li> <li><code>{@link ScreenBrowserBalloon}</code> - a screen-attached balloon with support for HTML,
  * JavaScript, and Flash content.</li> </ul>
- * <p/>
- * <strong>GlobeBalloon</strong> <br/> GlobeBalloons display a screen-aligned balloon attached to a position on the
+ * <p>
+ * <strong>GlobeBalloon</strong> <br> GlobeBalloons display a screen-aligned balloon attached to a position on the
  * Globe. <ul> <li><code>{@link GlobeAnnotationBalloon}</code> - a Globe-attached balloon with support for multi-line
  * text, a background image, simple HTML text markup, and simple text styling attributes.</li> <li><code>{@link
  * GlobeBrowserBalloon}</code> - a Globe-attached balloon with support for HTML, JavaScript, and Flash content.</li>
@@ -44,19 +66,18 @@ import java.io.InputStream;
  * @author pabercrombie
  * @version $Id: Balloons.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class Balloons extends ApplicationTemplate
-{
-    protected static final String BROWSER_BALLOON_CONTENT_PATH
-        = "gov/nasa/worldwindx/examples/data/BrowserBalloonExample.html";
+public class Balloons extends ApplicationTemplate {
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
+    protected static final String BROWSER_BALLOON_CONTENT_PATH
+            = "gov/nasa/worldwindx/examples/data/BrowserBalloonExample.html";
+
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
         protected HotSpotController hotSpotController;
         protected BalloonController balloonController;
         protected RenderableLayer layer;
 
-        public AppFrame()
-        {
+        public AppFrame() {
             super(true, true, false);
 
             // Add a controller to send input events to BrowserBalloons.
@@ -73,7 +94,7 @@ public class Balloons extends ApplicationTemplate
             this.makeAnnotationBalloon();
             this.makeBrowserBalloon();
 
-            // Size the World Window to provide enough screen space for the BrowserBalloon, and center the World Window
+            // Size the WorldWindow to provide enough screen space for the BrowserBalloon, and center the WorldWindow
             // on the screen.
             Dimension size = new Dimension(1200, 800);
             this.setPreferredSize(size);
@@ -81,10 +102,9 @@ public class Balloons extends ApplicationTemplate
             WWUtil.alignComponent(null, this, AVKey.CENTER);
         }
 
-        protected void makeAnnotationBalloon()
-        {
+        protected void makeAnnotationBalloon() {
             Balloon balloon = new ScreenAnnotationBalloon("<b>AnnotationBalloon</b> attached to the screen",
-                new Point(50, 300));
+                    new Point(50, 300));
 
             BalloonAttributes attrs = new BasicBalloonAttributes();
             // Size the balloon to fit its text, place its lower-left corner at the point, put event padding between the
@@ -103,28 +123,24 @@ public class Balloons extends ApplicationTemplate
             this.layer.addRenderable(balloon);
         }
 
-        protected void makeBrowserBalloon()
-        {
+        @Deprecated
+        protected void makeBrowserBalloon() {
             String htmlString = null;
             InputStream contentStream = null;
 
-            try
-            {
+            try {
                 // Read the URL content into a String using the default encoding (UTF-8).
                 contentStream = WWIO.openFileOrResourceStream(BROWSER_BALLOON_CONTENT_PATH, this.getClass());
                 htmlString = WWIO.readStreamToString(contentStream, null);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally
-            {
+            } finally {
                 WWIO.closeStream(contentStream, BROWSER_BALLOON_CONTENT_PATH);
             }
 
-            if (htmlString == null)
+            if (htmlString == null) {
                 htmlString = Logging.getMessage("generic.ExceptionAttemptingToReadFile", BROWSER_BALLOON_CONTENT_PATH);
+            }
 
             Position balloonPosition = Position.fromDegrees(38.883056, -77.016389);
 
@@ -148,14 +164,13 @@ public class Balloons extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Configure the initial view parameters so that the browser balloon is centered in the viewport.
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 60);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -85);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 9500000);
         Configuration.setValue(AVKey.INITIAL_PITCH, 45);
 
-        ApplicationTemplate.start("World Wind Balloons", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Balloons", AppFrame.class);
     }
 }

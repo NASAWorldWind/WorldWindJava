@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.globes;
 
@@ -902,12 +924,12 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
      * points to the intersection of the prime meridian and the equator, in the equatorial plane. The X axis completes a
      * right-handed coordinate system, and is 90 degrees east of the Z axis and also in the equatorial plane. Sea level
      * is at z = zero.
-     * <p/>
+     * <p>
      * This method provides an interface for efficient generation of a grid of cartesian points within a sector. The
      * grid is constructed by dividing the sector into <code>numLon x numLat</code> evenly separated points in
      * geographic coordinates. The first and last points in latitude and longitude are placed at the sector's minimum
      * and maximum boundary, and the remaining points are spaced evenly between those boundary points.
-     * <p/>
+     * <p>
      * For each grid point within the sector, an elevation value is specified via an array of elevations. The
      * calculation at each position incorporates the associated elevation.
      *

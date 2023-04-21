@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind;
@@ -18,19 +40,19 @@ import gov.nasa.worldwind.view.ViewPropertyLimits;
  * follows the OpenGL convention of a right-handed coordinate system with the origin at the eye point and looking down
  * the negative Z axis. <code>View</code> also provides a transformation from eye coordinates to screen coordinates,
  * following the OpenGL convention of an origin in the lower left hand screen corner.
- * <p/>
+ * <p>
  * Most of the accessor and computation methods on <code>View</code> will use viewing state computed in the last call to
  * {@link #apply(gov.nasa.worldwind.render.DrawContext) apply}.
- * <p/>
- * The following methods return state values <i>updated in the most recent call to apply</i>. <code> <ul>
+ * <p>
+ * The following methods return state values <i>updated in the most recent call to apply</i>. <ul>
  * <li>getEyePosition</li> <li>getEyePoint</li> <li>getUpVector</li> <li>getForwardVector</li>
  * <li>getModelviewMatrix</li> <li>getViewport</li> <li>getFrustum</li> <li>getFrustumInModelCoordinates</li>
- * <li>getProjectionMatrix</li> </code> </ul>
- * <p/>
+ * <li>getProjectionMatrix</li> </ul> 
+ * <p>
  * The following methods return computed values using state that was updated in the most recent call to
- * <code>apply</code>. <code> <ul> <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
+ * <code>apply</code>.  <ul> <li>project</li> <li>unproject</li> <li>computeRayFromScreenPoint</li>
  * <li>computePositionFromScreenPoint</li> <li>computePixelSizeAtDistance</li> <li>computeHorizonDistance</li> </ul>
- * </code>
+ * 
  *
  * @author Paul Collins
  * @version $Id: View.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -47,7 +69,7 @@ public interface View extends WWObject, Restorable
     /**
      * Returns the current geographic coordinates of this view's eye position, as computed for the most recent model
      * traversal.
-     * <p/>
+     * <p>
      * Note: The value returned is not necessarily the value specified to {@link #setEyePosition(gov.nasa.worldwind.geom.Position)}
      * but is the eye position corresponding to this view's most recently applied state.
      *
@@ -68,7 +90,7 @@ public interface View extends WWObject, Restorable
     /**
      * Returns the current geographic coordinates of this view's eye position, as determined from this view's current
      * parameters.
-     * <p/>
+     * <p>
      * Note: The value returned is not necessarily the value specified to {@link #setEyePosition(gov.nasa.worldwind.geom.Position)}
      * but is the eye position corresponding to this view's current parameters.
      *
@@ -262,7 +284,7 @@ public interface View extends WWObject, Restorable
      * reflects the values of this view, as do any computed values of the view, such as the modelview matrix, projection
      * matrix and viewing frustum.
      *
-     * @param dc the current World Wind DrawContext on which <code>View</code> will apply its state.
+     * @param dc the current WorldWind DrawContext on which <code>View</code> will apply its state.
      *
      * @throws IllegalArgumentException If <code>dc</code> is null, or if the <code>Globe</code> or <code>GL</code>
      *                                  instances in <code>dc</code> are null.
@@ -303,7 +325,7 @@ public interface View extends WWObject, Restorable
      * popReferenceCenter} after rendering is complete. Note that calls to {@link #getModelviewMatrix} will not return
      * reference-center model-view matrix, but the original matrix.
      *
-     * @param dc              the current World Wind drawing context on which new model-view state will be applied.
+     * @param dc              the current WorldWind drawing context on which new model-view state will be applied.
      * @param referenceCenter the location to become the new world origin.
      *
      * @return a new model-view matrix with origin is at <code>referenceCenter</code>, or null if this method failed.
@@ -316,7 +338,7 @@ public interface View extends WWObject, Restorable
     /**
      * Removes the model-view matrix on top of the matrix stack, and restores the original matrix.
      *
-     * @param dc the current World Wind drawing context on which the original matrix will be restored.
+     * @param dc the current WorldWind drawing context on which the original matrix will be restored.
      *
      * @throws IllegalArgumentException if <code>dc</code> is null, or if the <code>Globe</code> or <code>GL</code>
      *                                  instances in <code>dc</code> are null.

@@ -22,11 +22,12 @@ import java.lang.annotation.Target;
  * then the call to associated "setter" method would fail with
  * a type-mismatch exception.
  *
- * @deprecated As of version 1.1, use {@link org.codehaus.jackson.map.annotate.JsonDeserialize#contentAs} instead
+ * @deprecated
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotation
+@Deprecated
 public @interface JsonContentClass
 {
     /**
@@ -37,6 +38,7 @@ public @interface JsonContentClass
      *<p>
      * Note: if a non-property method is annotated with this annotation,
      * deserializer will throw an exception to denote invalid annotation.
+     * @return Undocumented
      */
     public Class<?> value();
 }

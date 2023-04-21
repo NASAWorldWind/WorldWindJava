@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -14,7 +36,7 @@ import gov.nasa.worldwind.layers.TextureTile;
 import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.util.*;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -22,34 +44,33 @@ import java.util.List;
 /**
  * Builds a list of {@link gov.nasa.worldwind.render.SurfaceTile} instances who's content is defined by a specified set
  * of {@link gov.nasa.worldwind.render.SurfaceRenderable} instances. It's typically not necessary to use
- * SurfaceObjectTileBuilder directly. World Wind's default scene controller automatically batches instances of
+ * SurfaceObjectTileBuilder directly. WorldWind's default scene controller automatically batches instances of
  * SurfaceRenderable in a single SurfaceObjectTileBuilder. Applications that need to draw basic surface shapes should
  * use or extend {@link gov.nasa.worldwind.render.SurfaceShape} instead of using SurfaceObjectTileBuilder directly.
- * <p/>
+ * <p>
  * Surface tiles are built by calling {@link #buildTiles(DrawContext, Iterable)} with an iterable of surface
  * renderables. This assembles a set of surface tiles that meet the resolution requirements for the specified draw
  * context, then draws the surface renderables into those offscreen surface tiles by calling render on each instance.
  * This process may temporarily use the framebuffer to perform offscreen rendering, and therefore should be called
- * during the preRender method of a World Wind layer. See the {@link gov.nasa.worldwind.render.PreRenderable} interface
+ * during the preRender method of a WorldWind layer. See the {@link gov.nasa.worldwind.render.PreRenderable} interface
  * for details. Once built, the surface tiles can be rendered by a {@link gov.nasa.worldwind.render.SurfaceTileRenderer}.
- * <p/>
+ * <p>
  * By default, SurfaceObjectTileBuilder creates texture tiles with a width and height of 512 pixels, and with internal
  * format <code>GL_RGBA</code>. These parameters are configurable by calling {@link
  * #setTileDimension(java.awt.Dimension)} or {@link #setTileTextureFormat(int)}.
- * <p/>
+ * <p>
  * The most common usage pattern for SurfaceObjectTileBuilder is to build the surface tiles from a set of surface
  * renderables during the preRender phase, then draw those surface tiles during the render phase. For example, a
  * renderable can use SurfaceObjectTileBuilder to draw a set of surface renderables as follows:
- * <p/>
- * <code>
  * <pre>
+ * <code>
  * class MyRenderable implements Renderable, PreRenderable
  * {
  *     protected SurfaceObjectTileBuilder tileBuilder = new SurfaceObjectTileBuilder();
  *
  *     public void preRender(DrawContext dc)
  *     {
- *         List<?> surfaceRenderables = Arrays.asList(
+ *         List&lt;?&gt; surfaceRenderables = Arrays.asList(
  *             new SurfaceCircle(LatLon.fromDegrees(0, 100), 10000),
  *             new SurfaceSquare(LatLon.fromDegrees(0, 101), 10000));
  *         this.tileBuilder.buildSurfaceTiles(dc, surfaceRenderables);
@@ -60,8 +81,8 @@ import java.util.List;
  *         dc.getGeographicSurfaceTileRenderer().renderTiles(dc, this.tileBuilder.getTiles(dc));
  *     }
  * }
- * </pre>
  * </code>
+ * </pre>
  *
  * @author dcollins
  * @version $Id: SurfaceObjectTileBuilder.java 3108 2015-05-26 19:07:06Z dcollins $
@@ -202,7 +223,7 @@ public class SurfaceObjectTileBuilder
 
     /**
      * Specifies the surface tile's OpenGL texture format. A value of 0 indicates that the default format should be
-     * used. Otherwise, the texture format may be one of the following: <code> <ul> <li>GL_ALPHA</li> <li>GL_ALPHA4</li>
+     * used. Otherwise, the texture format may be one of the following: <ul> <li>GL_ALPHA</li> <li>GL_ALPHA4</li>
      * <li>GL_ALPHA8</li> <li>GL_ALPHA12</li> <li>GL_ALPHA16</li> <li>GL_COMPRESSED_ALPHA</li>
      * <li>GL_COMPRESSED_LUMINANCE</li> <li>GL_COMPRESSED_LUMINANCE_ALPHA</li> <li>GL_COMPRESSED_INTENSITY</li>
      * <li>GL_COMPRESSED_RGB</li> <li>GL_COMPRESSED_RGBA</li> <li>GL_DEPTH_COMPONENT</li> <li>GL_DEPTH_COMPONENT16</li>
@@ -215,8 +236,8 @@ public class SurfaceObjectTileBuilder
      * <li>GL_RGB10</li> <li>GL_RGB12</li> <li>GL_RGB16</li> <li>GL_RGBA</li> <li>GL_RGBA2</li> <li>GL_RGBA4</li>
      * <li>GL_RGB5_A1</li> <li>GL_RGBA8</li> <li>GL_RGB10_A2</li> <li>GL_RGBA12</li> <li>GL_RGBA16</li>
      * <li>GL_SLUMINANCE</li> <li>GL_SLUMINANCE8</li> <li>GL_SLUMINANCE_ALPHA</li> <li>GL_SLUMINANCE8_ALPHA8</li>
-     * <li>GL_SRGB</li> <li>GL_SRGB8</li> <li>GL_SRGB_ALPHA</li> <li>GL_SRGB8_ALPHA8</li> </ul> </code>
-     * <p/>
+     * <li>GL_SRGB</li> <li>GL_SRGB8</li> <li>GL_SRGB_ALPHA</li> <li>GL_SRGB8_ALPHA8</li> </ul> 
+     * <p>
      * If the texture format is any of <code>GL_RGB, GL_RGB8, GL_RGBA, or GL_RGBA8</code>, the tile builder attempts to
      * use OpenGL framebuffer objects to render shapes to the texture tiles. Otherwise, this renders shapes to the
      * framebuffer and copies the framebuffer contents to the texture tiles.
@@ -371,8 +392,8 @@ public class SurfaceObjectTileBuilder
      * Assembles the surface tiles and draws any surface renderables in the iterable into those offscreen tiles. The
      * surface tiles are assembled to meet the necessary resolution of to the draw context's {@link
      * gov.nasa.worldwind.View}. This may temporarily use the framebuffer to perform offscreen rendering, and therefore
-     * should be called during the preRender method of a World Wind {@link gov.nasa.worldwind.layers.Layer}.
-     * <p/>
+     * should be called during the preRender method of a WorldWind {@link gov.nasa.worldwind.layers.Layer}.
+     * <p>
      * This does nothing if the specified iterable is null, is empty or contains no surface renderables.
      *
      * @param dc       the draw context to build tiles for.
@@ -505,7 +526,7 @@ public class SurfaceObjectTileBuilder
     /**
      * Updates each {@link SurfaceObjectTileBuilder.SurfaceObjectTile} in the {@link #currentInfo}. This is typically
      * called after {@link #assembleTiles(DrawContext)} to update the assembled tiles.
-     * <p/>
+     * <p>
      * This method does nothing if <code>currentTiles</code> is empty.
      *
      * @param dc the draw context the tiles relate to.
@@ -619,18 +640,18 @@ public class SurfaceObjectTileBuilder
 
     /**
      * Returns a new surface tile texture for use on the specified draw context with the specified width and height.
-     * <p/>
+     * <p>
      * The returned texture's internal format is specified by <code>tilePixelFormat</code>. If
      * <code>tilePixelFormat</code> is zero, this returns a texture with internal format <code>GL_RGBA8</code>.
-     * <p/>
-     * The returned texture's parameters are configured as follows: <table> <tr><th>Parameter
+     * <p>
+     * The returned texture's parameters are configured as follows: <table> <caption style="font-weight: bold;">Parameters</caption><tr><th>Parameter
      * Name</th><th>Value</th></tr> <tr><td><code>GL.GL_TEXTURE_MIN_FILTER</code></td><td><code>GL_LINEAR_MIPMAP_LINEAR</code>
      * if <code>useLinearFilter</code> and <code>useMipmaps</code> are both true, <code>GL_LINEAR</code> if
      * <code>useLinearFilter</code> is true and <code>useMipmaps</code> is false, and <code>GL_NEAREST</code> if
      * <code>useLinearFilter</code> is false.</td></tr> <tr><td><code>GL.GL_TEXTURE_MAG_FILTER</code></td><td><code>GL_LINEAR</code>
      * if <code>useLinearFilter</code> is true, <code>GL_NEAREST</code> if <code>useLinearFilter</code> is
      * false.</td></tr> <tr><td><code>GL.GL_TEXTURE_WRAP_S</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr>
-     * <tr><td><code>GL.GL_TEXTURE_WRAP_T</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr>
+     * <tr><td><code>GL.GL_TEXTURE_WRAP_T</code></td><td><code>GL_CLAMP_TO_EDGE</code></td></tr></table>
      *
      * @param dc     the draw context to create a texture for.
      * @param width  the texture's width, in pixels.
@@ -742,15 +763,15 @@ public class SurfaceObjectTileBuilder
      * <code>SurfaceObjectTileBuilder</code> share common LevelSets to determine which tiles are visible, but create
      * unique tile instances and uses a unique tile cache name. Since all instances use the same tile structure to
      * determine visible tiles, this saves memory while ensuring that each instance stores its own tiles in the cache.
-     * <p/>
+     * <p>
      * The returned LevelSet's cache name and dataset name are dummy values, and should not be used. Use this tile
      * builder's cache name for the specified <code>tileDimension</code> instead.
-     * <p/>
+     * <p>
      * In practice, there are at most 10 dimensions we use: 512, 256, 128, 64, 32, 16, 8, 4, 2, 1. Therefore keeping the
      * <code>LevelSet</code>s in a map requires little memory overhead, and ensures each <code>LevelSet</code> is
      * retained once constructed. Retaining references to the <code>LevelSet</code>s means we're able to re-use the
      * texture resources associated with each <code>LevelSet</code> in the <code>DrawContext</code>'s texture cache.
-     * <p/>
+     * <p>
      * Subsequent calls are guaranteed to return the same <code>LevelSet</code> for the same
      * <code>tileDimension</code>.
      *
@@ -826,7 +847,7 @@ public class SurfaceObjectTileBuilder
      * frustum during rendering mode, and against the DrawContext's pick frustums during picking mode. If a tile does
      * not meet the tile builder's resolution criteria, it's split into four sub-tiles and the process recursively
      * repeated on the sub-tiles. Visible leaf tiles are added to the {@link #currentInfo}.
-     * <p/>
+     * <p>
      * During assembly each surface renderable in {@link #currentSurfaceObjects} is sorted into the tiles they
      * intersect. The top level tiles are used as an index to quickly determine which tiles each renderable intersects.
      * Surface renderables are sorted into sub-tiles by simple intersection tests, and are added to each tile's surface
@@ -923,7 +944,7 @@ public class SurfaceObjectTileBuilder
      * Potentially adds the specified tile or its descendants to the tile builder's {@link #currentInfo}. The tile and
      * its descendants are discarded if the tile is not visible or does not intersect any surface renderables in the
      * parent's surface renderable list. See {@link SurfaceObjectTileBuilder.SurfaceObjectTile#getObjectList()}.
-     * <p/>
+     * <p>
      * If the tile meet the tile builder's resolution criteria it's added to the tile builder's
      * <code>currentTiles</code> list. Otherwise, it's split into four sub-tiles and each tile is recursively processed.
      * See {@link #meetsRenderCriteria(DrawContext, gov.nasa.worldwind.util.LevelSet, gov.nasa.worldwind.util.Tile)}.
@@ -1149,7 +1170,7 @@ public class SurfaceObjectTileBuilder
      * Creates a key to address the tile information associated with the specified draw context. Each key is unique to
      * this instance, the tile dimensions that fit in the draw context's viewport, and the globe offset when a 2D globe
      * is in use. Using a unique set of tile information ensures that
-     * <p/>
+     * <p>
      * In practices, there are at most 10 dimensions we'll use (512, 256, 128, 64, 32, 16, 8, 4, 2, 1) and 3 globe
      * offsets (-1, 0, 1). Therefore there are at most 30 sets of tile information for each instance of
      * SurfaceObjectTileBuilder.
@@ -1352,8 +1373,8 @@ public class SurfaceObjectTileBuilder
         }
 
         /**
-         * Returns the tile's size in bytes. Overridden to append the size of the {@link #cacheName} and the {@link
-         * #lastUpdateStateKey} to the superclass' computed size.
+         * Returns the tile's size in bytes. Overridden to append the size of the {@link #lastUpdateStateKey} to the
+         * superclass' computed size.
          *
          * @return The tile's size in bytes.
          */
@@ -1457,7 +1478,7 @@ public class SurfaceObjectTileBuilder
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Overridden to return a new SurfaceObjectTile. The returned tile is created with the same cache name as this
          * tile.
          */
@@ -1469,7 +1490,7 @@ public class SurfaceObjectTileBuilder
 
         /**
          * {@inheritDoc}
-         * <p/>
+         * <p>
          * Overridden to return a TileKey with the same cache name as this tile.
          */
         @Override

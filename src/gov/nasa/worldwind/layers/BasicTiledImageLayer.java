@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.layers;
 
@@ -346,7 +368,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
      * the specified format. Otherwise, this returns the texture data in its native format. If <code>useMipMaps</code>
      * is true, this generates mip maps for any non-DDS texture data, and uses any mip-maps contained in DDS texture
      * data.
-     * <p/>
+     * <p>
      * Supported texture formats are as follows: <ul> <li><code>image/dds</code> - Returns DDS texture data, converting
      * the data to DDS if necessary. If the data is already in DDS format it's returned as-is.</li> </ul>
      *
@@ -400,11 +422,11 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
 
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all imagery for a given sector and resolution to the
-     * current World Wind file cache, without downloading imagery that is already in the cache.
-     * <p/>
+     * current WorldWind file cache, without downloading imagery that is already in the cache.
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link BasicTiledImageLayerBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -426,16 +448,16 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
     /**
      * Start a new {@link BulkRetrievalThread} that downloads all imagery for a given sector and resolution to a
      * specified {@link FileStore}, without downloading imagery that is already in the file store.
-     * <p/>
+     * <p>
      * This method creates and starts a thread to perform the download. A reference to the thread is returned. To create
      * a downloader that has not been started, construct a {@link BasicTiledImageLayerBulkDownloader}.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
      * @param sector     the sector to download data for.
      * @param resolution the target resolution, provided in radians of latitude per texel.
-     * @param fileStore  the file store in which to place the downloaded imagery. If null the current World Wind file
+     * @param fileStore  the file store in which to place the downloaded imagery. If null the current WorldWind file
      *                   cache is used.
      * @param listener   an optional retrieval listener. May be null.
      *
@@ -460,9 +482,9 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
     }
 
     /**
-     * Get the estimated size in bytes of the imagery not in the World Wind file cache for the given sector and
+     * Get the estimated size in bytes of the imagery not in the WorldWind file cache for the given sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
@@ -481,13 +503,13 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
     /**
      * Get the estimated size in bytes of the imagery not in a specified file store for a specified sector and
      * resolution.
-     * <p/>
+     * <p>
      * Note that the target resolution must be provided in radians of latitude per texel, which is the resolution in
      * meters divided by the globe radius.
      *
      * @param sector     the sector to estimate.
      * @param resolution the target resolution, provided in radians of latitude per texel.
-     * @param fileStore  the file store to examine. If null the current World Wind file cache is used.
+     * @param fileStore  the file store to examine. If null the current WorldWind file cache is used.
      *
      * @return the estimated size in byte of the missing imagery.
      *
@@ -716,7 +738,7 @@ public class BasicTiledImageLayer extends TiledImageLayer implements BulkRetriev
         //
         // Note that we use the URL's String representation as the cache key. We cannot use the URL itself, because
         // the cache invokes the methods Object.hashCode() and Object.equals() on the cache key. URL's implementations
-        // of hashCode() and equals() perform blocking IO calls. World Wind does not perform blocking calls during
+        // of hashCode() and equals() perform blocking IO calls. WorldWind does not perform blocking calls during
         // rendering, and this method is likely to be called from the rendering thread.
         WMSCapabilities caps;
         if (this.isNetworkRetrievalEnabled())

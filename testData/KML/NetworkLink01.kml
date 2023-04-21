@@ -17,7 +17,7 @@
                 <text>
                     <![CDATA[
                         <h3>Balloon With Remote Link</h3>
-                        Open <a href="http://worldwind.arc.nasa.gov" target="_blank">World Wind Java</a> website in a new window.
+                        Open <a href="http://worldwind.arc.nasa.gov" target="_blank">WorldWind Java</a> website in a new window.
                         ]]>
                 </text>
             </BalloonStyle>

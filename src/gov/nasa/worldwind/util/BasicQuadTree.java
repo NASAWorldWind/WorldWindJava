@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.util;
@@ -14,10 +36,10 @@ import java.util.*;
 /**
  * Implements a quadtree backed by a bit-set index. A bit-set provides a minimal-memory index. Each bit identifies one
  * cell in the quadtree.
- * <p/>
+ * <p>
  * This class provides methods to add and remove items from the quadtree, and to determine the items intersecting
  * specified regions.
- * <p/>
+ * <p>
  * Items can be added with an associated name, and can be retrieved and removed by name.
  *
  * @author tag
@@ -34,7 +56,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Constructs a quadtree of a specified level and spanning a specified region.
-     * <p/>
+     * <p>
      * The number of levels in the quadtree must be specified to the constructor. The more levels there are the more
      * discriminating searches will be, but at the cost of some performance because more cells are searched. For the
      * Earth, a level count of 8 provides leaf cells about 75 km along their meridian edges (edges of constant Earth, a
@@ -66,7 +88,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Constructs a quadtree of a specified level and spanning a specified region.
-     * <p/>
+     * <p>
      * The number of levels in the quadtree must be specified to the constructor. The more levels there are the more
      * discriminating searches will be, but at the cost of some performance because more cells are searched. For the
      * Earth, a level count of 8 provides leaf cells about 75 km along their meridian edges (edges of constant Earth, a
@@ -216,7 +238,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Removes an item from the tree.
-     * <p/>
+     * <p>
      * <em>Note:</em> For large collections, this can be an expensive operation.
      *
      * @param item the item to remove. If null, no item is removed.
@@ -249,7 +271,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
 
     /**
      * Removes an item from the tree by name.
-     * <p/>
+     * <p>
      * <em>Note:</em> For large collections, this can be an expensive operation.
      *
      * @param name the name of the item to remove. If null, no item is removed.
@@ -296,7 +318,7 @@ public class BasicQuadTree<T> extends BitSetQuadTreeFilter implements Iterable<T
     /**
      * Returns an iterator over the items in the tree. There is no specific iteration order and the iterator may return
      * duplicate entries.
-     * <p/>
+     * <p>
      * <em>Note</em> The {@link java.util.Iterator#remove()} operation is not supported.
      *
      * @return an iterator over the items in the tree.

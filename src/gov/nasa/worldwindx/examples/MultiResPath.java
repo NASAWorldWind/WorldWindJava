@@ -1,9 +1,30 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
-
 package gov.nasa.worldwindx.examples;
 
 import gov.nasa.worldwind.WorldWind;
@@ -15,47 +36,41 @@ import gov.nasa.worldwind.render.*;
 import java.util.*;
 
 /**
- * Illustrates use of the {@link MultiResolutionPath} shape, which adapts its complexity as the path's distance frome
- * the eye point changes.
- * <p/>
+ * Illustrates use of the {@link MultiResolutionPath} shape, which adapts its complexity as the path's distance from the
+ * eye point changes.
+ * <p>
  * Also illustrates the use of the "show positions" feature of {@link Path}.
  *
  * @author tag
  * @version $Id: MultiResPath.java 2109 2014-06-30 16:52:38Z tgaskins $
  */
-public class MultiResPath extends ApplicationTemplate
-{
+public class MultiResPath extends ApplicationTemplate {
+
     // Specify several Paths, each with large numbers of positions.
     protected static final int NUM_POSITIONS = 108000;
     protected static final double SPEED = 90 / Earth.WGS84_EQUATORIAL_RADIUS; // meters per second to radians
-    protected static final Position[] ORIGIN = new Position[]
-        {
-            Position.fromDegrees(40.2377, -105.6480, 200),
-            Position.fromDegrees(41.2625, -105.6503, 200),
-            Position.fromDegrees(42.2285, -105.6169, 200),
-            Position.fromDegrees(43.2019, -105.6467, 200),
-            Position.fromDegrees(44.2414, -105.6911, 200),
-        };
+    protected static final Position[] ORIGIN = new Position[]{
+        Position.fromDegrees(40.2377, -105.6480, 200),
+        Position.fromDegrees(41.2625, -105.6503, 200),
+        Position.fromDegrees(42.2285, -105.6169, 200),
+        Position.fromDegrees(43.2019, -105.6467, 200),
+        Position.fromDegrees(44.2414, -105.6911, 200),};
 
-    public static class AppFrame extends ApplicationTemplate.AppFrame
-    {
-        public AppFrame()
-        {
+    public static class AppFrame extends ApplicationTemplate.AppFrame {
+
+        public AppFrame() {
             super(true, true, false);
 
             makeMany();
         }
 
-        protected void makeMany()
-        {
-            for (Position pos : ORIGIN)
-            {
+        protected void makeMany() {
+            for (Position pos : ORIGIN) {
                 this.addShape(pos);
             }
         }
 
-        protected void addShape(Position origin)
-        {
+        protected void addShape(Position origin) {
             int altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
             LatLon location = new LatLon(origin);
@@ -64,9 +79,8 @@ public class MultiResPath extends ApplicationTemplate
             double distance = 60 * SPEED / 20; // seconds x radians per second
 
             // Create the Path positions.
-            List<Position> positions = new ArrayList<Position>(NUM_POSITIONS);
-            for (int i = 0; i < NUM_POSITIONS; i++)
-            {
+            List<Position> positions = new ArrayList<>(NUM_POSITIONS);
+            for (int i = 0; i < NUM_POSITIONS; i++) {
                 Position position = new Position(location, altitude);
                 positions.add(position);
 
@@ -80,7 +94,7 @@ public class MultiResPath extends ApplicationTemplate
             attrs.setDrawInterior(false);
             attrs.setOutlineMaterial(Material.RED);
 
-            MultiResolutionPath path = new MultiResolutionPath(positions);
+            Path path = new Path(positions);
 
             // Indicate that dots are to be drawn at each specified path position.
             path.setShowPositions(true);
@@ -100,8 +114,7 @@ public class MultiResPath extends ApplicationTemplate
         }
     }
 
-    public static void main(String[] args)
-    {
-        ApplicationTemplate.start("World Wind UAVPath Test", AppFrame.class);
+    public static void main(String[] args) {
+        ApplicationTemplate.start("WorldWind UAVPath Test", AppFrame.class);
     }
 }

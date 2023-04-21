@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwindx.examples.util;
 
@@ -88,7 +110,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
         this.annotation.getAttributes().setBorderWidth(1);
         this.addRenderable(this.annotation);
 
-        // Listen to world window for select event
+        // Listen to WorldWindow for select event
         this.wwd.addSelectListener(this);
     }
 
@@ -397,7 +419,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
      * Determines whether the layer list frame is minimized. When minimized, the layer list only contains itself as the
      * only item, and thus shrinks toward it's corner position.
      *
-     * @return <ode>true</code> if the layer list frame is minimized.
+     * @return <code>true</code> if the layer list frame is minimized.
      */
     public boolean isMinimized()
     {
@@ -408,7 +430,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
      * Set the layer list frame to be minimized. When minimized, the layer list only contains itself as the only item,
      * and thus shrinks toward it's corner position.
      *
-     * @param minimized <ode>true</code> if the layer list frame sould be minimized.
+     * @param minimized <code>true</code> if the layer list frame sould be minimized.
      */
     public void setMinimized(boolean minimized)
     {
@@ -418,7 +440,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Determines whether the layer list can be moved or dragged with the mouse cursor.
-     * <p/>
+     * <p>
      * If enabled, dragging the frame will result in a change to it's location offset - {@link
      * #setLocationOffset(Vec4)}. If the list is also set to snap to corners - {@link #setSnapToCorners(boolean)}, the
      * frame position may change so as to be attached to the nearest corner - see {@link #setPosition(String)}.
@@ -432,7 +454,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Sets whether the layer list can be moved or dragged with the mouse cursor.
-     * <p/>
+     * <p>
      * If enabled, dragging the frame will result in a change to it's location offset - {@link
      * #setLocationOffset(Vec4)}. If the list is also set to snap to corners - {@link #setSnapToCorners(boolean)}, the
      * frame position may change so as to be attached to the nearest corner - see {@link #setPosition(String)}.
@@ -468,7 +490,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Determines whether the layer list snaps to the viewport sides and corners while being dragged.
-     * <p/>
+     * <p>
      * Dragging the layer list frame will result in a change to it's location offset - {@link #setLocationOffset(Vec4)}.
      * If the list is also set to snap to corners - {@link #setSnapToCorners(boolean)}, the frame position may change so
      * as to be attached to the nearest corner - see {@link #setPosition(String)}.
@@ -482,7 +504,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
 
     /**
      * Sets whether the layer list snaps to the viewport sides and corners while being dragged.
-     * <p/>
+     * <p>
      * Dragging the layer list frame will result in a change to it's location offset - {@link #setLocationOffset(Vec4)}.
      * If the list is also set to snap to corners the frame position may change so as to be attached to the nearest
      * corner - see {@link #setPosition(String)}.
@@ -584,7 +606,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
                 {
                     boolean wasDraggingLayer = this.draggingLayer;
                     this.drag(event);
-                    // Update list if dragging a layer, otherwise just redraw the world window
+                    // Update list if dragging a layer, otherwise just redraw the WorldWindow
                     if (this.draggingLayer || wasDraggingLayer)
                         update = true;
                     else
@@ -772,7 +794,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
     /**
      * Change the annotation appearance according to the given highlighted state.
      *
-     * @param highlighted <ode>true</code> if the annotation should appear highlighted.
+     * @param highlighted <code>true</code> if the annotation should appear highlighted.
      */
     protected void highlight(boolean highlighted)
     {

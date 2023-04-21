@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.kml;
@@ -18,10 +40,10 @@ import java.awt.*;
 import java.beans.*;
 
 /**
- * A controller that maps KML events to changes in a World Wind application. This controller animates the view to a KML
+ * A controller that maps KML events to changes in a WorldWind application. This controller animates the view to a KML
  * feature when the feature is clicked in the feature tree, and animates the view to KML network links when they are
  * refreshed.
- * <p/>
+ * <p>
  * This controller may optionally be associated with a {@link BalloonController}. If a BalloonController is set, this
  * controller will open the description balloon for a KML feature when the feature is clicked in the feature tree.
  *
@@ -140,7 +162,7 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      * Upon receiving a <code>{@link gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code> event from a
      * <code>KMLNetworkLink</code>, this attempts to fly to a <code>KMLAbstractView</code> associated with the link's
      * KML resource.
-     * <p/>
+     * <p>
      * If the <code>KMLNetworkLink</code>'s <code>flyToView</code> property is <code>0</code> or <code>false</code>,
      * this ignores the event. Otherwise, this attempts to get a <code>KMLAbstractView</code> from features in the
      * link's KML resource as follows: <ol> <li><code>NetworkLinkControl</code> child of link's KML resource.</li>
@@ -171,7 +193,7 @@ public class KMLApplicationController implements SelectListener, PropertyChangeL
      * Called from <code>propertyChange</code> when a <code>KMLNetworkLink</code> sends a <code>{@link
      * gov.nasa.worldwind.avlist.AVKey#RETRIEVAL_STATE_SUCCESSFUL}</code> property change event. This attempts to fly to
      * a view associated with the link's KML resource.
-     * <p/>
+     * <p>
      * This does nothing if the <code>networkLink</code> is <code>null</code>.
      *
      * @param networkLink the <code>KMLNetworkLink</code> that has been refreshed.

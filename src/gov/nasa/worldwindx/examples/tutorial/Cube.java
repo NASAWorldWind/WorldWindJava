@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwindx.examples.tutorial;
@@ -15,13 +37,13 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.OGLUtil;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import java.awt.*;
 
 /**
  * Example of a custom {@link Renderable} that draws a cube at a geographic position. This class shows the simplest
- * possible example of a custom Renderable, while still following World Wind best practices. See
- * http://goworldwind.org/developers-guide/how-to-build-a-custom-renderable/ for a complete description of this
+ * possible example of a custom Renderable, while still following WorldWind best practices. See
+ * https://worldwind.arc.nasa.gov/java/tutorials/build-a-custom-renderable/ for a complete description of this
  * example.
  *
  * @author pabercrombie
@@ -106,6 +128,7 @@ public class Cube extends ApplicationTemplate implements Renderable
      * Determines whether the cube intersects the view frustum.
      *
      * @param dc the current draw context.
+     * @param orderedCube The cube to check.
      *
      * @return true if this cube intersects the frustum, otherwise false.
      */
@@ -121,6 +144,7 @@ public class Cube extends ApplicationTemplate implements Renderable
      * Compute per-frame attributes, and add the ordered renderable to the ordered renderable list.
      *
      * @param dc Current draw context.
+     * @return The resulting cube.
      */
     protected OrderedCube makeOrderedRenderable(DrawContext dc)
     {
@@ -165,10 +189,11 @@ public class Cube extends ApplicationTemplate implements Renderable
     }
 
     /**
-     * Set up drawing state, and draw the cube. This method is called when the cube is rendered in ordered rendering
+     * Set up drawing state, and draw the cube.This method is called when the cube is rendered in ordered rendering
      * mode.
      *
      * @param dc Current draw context.
+     * @param pickCandidates The pick candidates list.
      */
     protected void drawOrderedRenderable(DrawContext dc, PickSupport pickCandidates)
     {
@@ -307,6 +332,6 @@ public class Cube extends ApplicationTemplate implements Renderable
         Configuration.setValue(AVKey.INITIAL_PITCH, 45);
         Configuration.setValue(AVKey.INITIAL_HEADING, 45);
 
-        ApplicationTemplate.start("World Wind Custom Renderable Tutorial", AppFrame.class);
+        ApplicationTemplate.start("WorldWind Custom Renderable Tutorial", AppFrame.class);
     }
 }

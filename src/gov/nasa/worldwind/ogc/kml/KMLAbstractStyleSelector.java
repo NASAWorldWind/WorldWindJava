@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind.ogc.kml;
@@ -33,7 +55,7 @@ public abstract class KMLAbstractStyleSelector extends KMLAbstractObject
      * Obtains the selector's effective style for a specified style type (<i>IconStyle</i>, <i>ListStyle</i>, etc.) and
      * state (<i>normal</i> or <i>highlight</i>). The returned style is the result of merging values from the specified
      * style selectors and style URL, with precedence given to style selectors.
-     * <p/>
+     * <p>
      * Remote <i>styleUrls</i> that have not yet been resolved are not included in the result. In this case the returned
      * sub-style is marked with a field named {@link gov.nasa.worldwind.avlist.AVKey#UNRESOLVED}. The same is true when
      * a StyleMap refers to a Style other than one internal to the KML document.
@@ -88,7 +110,7 @@ public abstract class KMLAbstractStyleSelector extends KMLAbstractObject
      * Obtains the selector's effective style for a specified style type (<i>IconStyle</i>, <i>ListStyle</i>, etc.) and
      * state (<i>normal</i> or <i>highlight</i>). The returned style is the result of merging values from the specified
      * style selector and style URL, with precedence given to style selector.
-     * <p/>
+     * <p>
      * Remote <i>styleUrls</i> that have not yet been resolved are not included in the result. In this case the returned
      * sub-style is marked with the value {@link gov.nasa.worldwind.avlist.AVKey#UNRESOLVED}.
      *

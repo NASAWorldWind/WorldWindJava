@@ -327,13 +327,13 @@ public abstract class JsonNumericParserBase
      */
 
     /**
-     * Method that will parse actual numeric value out of a syntactically
-     * valid number value. Type it will parse into depends on whether
-     * it is a floating point number, as well as its magnitude: smallest
-     * legal type (of ones available) is used for efficiency.
+     * Method that will parse actual numeric value out of a syntactically valid number value.Type it will parse into
+     * depends on whether it is a floating point number, as well as its magnitude: smallest legal type (of ones
+     * available) is used for efficiency.
      *
-     * @param expType Numeric type that we will immediately need, if any;
-     *   mostly necessary to optimize handling of floating point numbers
+     * @param expType Numeric type that we will immediately need, if any; mostly necessary to optimize handling of
+     * floating point numbers
+     * @throws org.codehaus.jackson.JsonParseException Undocumented.
      */
     protected final void parseNumericValue(int expType)
         throws JsonParseException

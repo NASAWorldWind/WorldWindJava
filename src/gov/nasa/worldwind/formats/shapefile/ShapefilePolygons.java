@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2014 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.formats.shapefile;
 
@@ -16,8 +38,8 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.combine.*;
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
+import com.jogamp.opengl.*;
+import com.jogamp.opengl.glu.*;
 import java.awt.*;
 import java.beans.*;
 import java.nio.*;
@@ -465,7 +487,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
      * Values greater than 0 cause shape detail to appear at higher resolution at greater altitudes than normal, but at
      * an increased performance cost. Values less than 0 decrease the default resolution at any given altitude. The
      * default value is 0. Values typically range between -0.5 and 0.5.
-     * <p/>
+     * <p>
      * Note: The resolution-to-height relationship is defined by a scale factor that specifies the approximate size of
      * discernible lengths in the shape relative to eye distance. The scale is specified as a power of 10. A value of 3,
      * for example, specifies that a length of 1 meter on the shape should be distinguishable from an altitude of 10^3
@@ -502,7 +524,7 @@ public class ShapefilePolygons extends ShapefileRenderable implements OrderedRen
     /**
      * Specifies the outline line width to use during picking. A larger width than normal typically makes the outline
      * easier to pick.
-     * <p/>
+     * <p>
      * Note that the size of the pick aperture also affects the precision necessary to pick.
      *
      * @param outlinePickWidth the outline pick width. The default is 10.

@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 
 package gov.nasa.worldwind;
@@ -13,11 +35,11 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.pick.PickedObjectList;
 import gov.nasa.worldwind.util.PerformanceStatistic;
 
-import javax.media.opengl.GLContext;
+import com.jogamp.opengl.GLContext;
 import java.util.*;
 
 /**
- * The top-level interface common to all toolkit-specific World Wind windows.
+ * The top-level interface common to all toolkit-specific WorldWind windows.
  *
  * @author Tom Gaskins
  * @version $Id: WorldWindow.java 2047 2014-06-06 22:48:33Z tgaskins $
@@ -94,43 +116,43 @@ public interface WorldWindow extends AVList
     /**
      * Sets the input handler to use for this instance.
      *
-     * @param inputHandler The input handler to use for this world window. May by <code>null</code> if <code>null</code>
-     *                     is specified, the current input handler, if any, is disassociated with the world window.
+     * @param inputHandler The input handler to use for this WorldWindow. May by <code>null</code> if <code>null</code>
+     *                     is specified, the current input handler, if any, is disassociated with the WorldWindow.
      */
     void setInputHandler(InputHandler inputHandler);
 
     /**
-     * Adds a rendering listener to this world window. Rendering listeners are called at key point during World Wind
+     * Adds a rendering listener to this WorldWindow. Rendering listeners are called at key point during WorldWind
      * drawing and provide applications the ability to participate or monitor rendering.
      *
-     * @param listener The rendering listener to add to those notified of rendering events by this world window.
+     * @param listener The rendering listener to add to those notified of rendering events by this WorldWindow.
      */
     void addRenderingListener(RenderingListener listener);
 
     /**
-     * Removes a specified rendering listener associated with this world window.
+     * Removes a specified rendering listener associated with this WorldWindow.
      *
      * @param listener The rendering listener to remove.
      */
     void removeRenderingListener(RenderingListener listener);
 
     /**
-     * Adds a select listener to this world window. Select listeners are called when a selection is made by the user in
-     * the world window. A selection is any operation that identifies a visible item.
+     * Adds a select listener to this WorldWindow. Select listeners are called when a selection is made by the user in
+     * the WorldWindow. A selection is any operation that identifies a visible item.
      *
      * @param listener The select listener to add.
      */
     void addSelectListener(SelectListener listener);
 
     /**
-     * Removes the specified select listener associated with this world window.
+     * Removes the specified select listener associated with this WorldWindow.
      *
      * @param listener The select listener to remove.
      */
     void removeSelectListener(SelectListener listener);
 
     /**
-     * Adds a position listener to this world window. Position listeners are called when the cursor's position changes.
+     * Adds a position listener to this WorldWindow. Position listeners are called when the cursor's position changes.
      * They identify the position of the cursor on the globe, or that the cursor is not on the globe.
      *
      * @param listener The position listener to add.
@@ -138,21 +160,21 @@ public interface WorldWindow extends AVList
     void addPositionListener(PositionListener listener);
 
     /**
-     * Removes the specified position listener associated with this world window.
+     * Removes the specified position listener associated with this WorldWindow.
      *
      * @param listener The listener to remove.
      */
     void removePositionListener(PositionListener listener);
 
     /**
-     * Causes a repaint event to be enqueued with the window system for this world window. The repaint will occur at the
+     * Causes a repaint event to be enqueued with the window system for this WorldWindow. The repaint will occur at the
      * window system's discretion, within the window system toolkit's event loop, and on the thread of that loop. This
-     * is the preferred method for requesting a repaint of the world window.
+     * is the preferred method for requesting a repaint of the WorldWindow.
      */
     void redraw();
 
     /**
-     * Immediately repaints the world window without waiting for a window system repaint event. This is not the
+     * Immediately repaints the WorldWindow without waiting for a window system repaint event. This is not the
      * preferred way to cause a repaint, but is provided for the rare cases that require it.
      */
     void redrawNow();
@@ -166,8 +188,8 @@ public interface WorldWindow extends AVList
     Position getCurrentPosition();
 
     /**
-     * Returns the World Wind objects at the current cursor position. The list of objects under the cursor is determined
-     * each time the world window is repainted. This method returns the list of objects determined when the most recent
+     * Returns the WorldWind objects at the current cursor position. The list of objects under the cursor is determined
+     * each time the WorldWindow is repainted. This method returns the list of objects determined when the most recent
      * repaint was performed.
      *
      * @return The list of objects at the cursor position, or <code>null</code> if no objects are under the cursor.
@@ -175,8 +197,8 @@ public interface WorldWindow extends AVList
     PickedObjectList getObjectsAtCurrentPosition();
 
     /**
-     * Returns the World Wind objects intersecting the current selection box. The list of objects in the selection box
-     * is determined each time the world window  is repainted. This method returns the list of objects determined when
+     * Returns the WorldWind objects intersecting the current selection box. The list of objects in the selection box
+     * is determined each time the WorldWindow  is repainted. This method returns the list of objects determined when
      * the most recent repaint was performed.
      *
      * @return The list of objects intersecting the selection box, or <code>null</code> if no objects are in the box.
@@ -184,14 +206,14 @@ public interface WorldWindow extends AVList
     PickedObjectList getObjectsInSelectionBox();
 
     /**
-     * Returns the GPU Resource used by this World Window. This method is for internal use only.
-     * <p/>
+     * Returns the GPU Resource used by this WorldWindow. This method is for internal use only.
+     * <p>
      * Note: Applications do not need to interact with the GPU resource cache. It is self managed. Modifying it in any
      * way will cause significant problems such as excessive memory usage or application crashes. The only reason to use
      * the GPU resource cache is to request management of GPU resources within implementations of shapes or layers. And
      * then access should be only through the draw context only.
      *
-     * @return The GPU Resource cache used by this World Window.
+     * @return The GPU Resource cache used by this WorldWindow.
      */
     GpuResourceCache getGpuResourceCache();
 
@@ -211,13 +233,13 @@ public interface WorldWindow extends AVList
     Collection<PerformanceStatistic> getPerFrameStatistics(); // TODO: move the constants from AVKey to this interface.
 
     /**
-     * Causes resources used by the World Window to be freed. The World Window cannot be used once this method is
+     * Causes resources used by the WorldWindow to be freed. The WorldWindow cannot be used once this method is
      * called.
      */
     void shutdown();
 
     /**
-     * Adds an exception listener to this world window. Exception listeners are called when an exception or other
+     * Adds an exception listener to this WorldWindow. Exception listeners are called when an exception or other
      * critical event occurs during drawable initialization or during rendering.
      *
      * @param listener the The exception listener to add.
@@ -225,7 +247,7 @@ public interface WorldWindow extends AVList
     void addRenderingExceptionListener(RenderingExceptionListener listener);
 
     /**
-     * Removes the specified rendering exception listener associated with this world window.
+     * Removes the specified rendering exception listener associated with this WorldWindow.
      *
      * @param listener The listener to remove.
      */

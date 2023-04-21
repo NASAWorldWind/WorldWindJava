@@ -19,11 +19,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotation
+@Deprecated
 public @interface JsonSetter
 {
     /**
      * Optional default argument that defines logical property this
      * method is used to modify ("set").
+     * @return Undocumented
      */
     String value() default "";
 }

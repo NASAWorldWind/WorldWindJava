@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.render;
 
@@ -14,7 +36,7 @@ import gov.nasa.worldwind.ogc.kml.gx.GXConstants;
 import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.Logging;
 
-import javax.media.opengl.*;
+import com.jogamp.opengl.*;
 import javax.xml.stream.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -25,7 +47,7 @@ import java.util.List;
 
 /**
  * Renders a single image contained in a local file, a remote file, or a <code>BufferedImage</code>.
- * <p/>
+ * <p>
  * Note: The view input handlers detect the surface image rather than the terrain as the top picked object in {@link
  * gov.nasa.worldwind.event.SelectEvent}s and will not respond to the user's attempts at navigation when the cursor is
  * over the image. If this is not the desired behavior, disable picking for the layer containing the surface image.
@@ -536,7 +558,6 @@ public class SurfaceImage extends WWObjectImpl
     /**
      * Export the Surface Image. The {@code output} object will receive the exported data. The type of this object
      * depends on the export format. The formats and object types supported by this class are:
-     * <p/>
      * <pre>
      * Format                                         Supported output object types
      * ================================================================================

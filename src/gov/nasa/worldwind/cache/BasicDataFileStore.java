@@ -1,7 +1,29 @@
 /*
- * Copyright (C) 2012 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration.
- * All Rights Reserved.
+ * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ * 
+ * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * 
+ * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
+ * software:
+ * 
+ *     Jackson Parser – Licensed under Apache 2.0
+ *     GDAL – Licensed under MIT
+ *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
+ *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
+ * 
+ * A complete listing of 3rd Party software notices and licenses included in
+ * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
+ * notices and licenses PDF found in code directory.
  */
 package gov.nasa.worldwind.cache;
 
@@ -52,14 +74,13 @@ public class BasicDataFileStore extends AbstractFileStore
      * requested that does not have a format suffix, <code>requestFile</code> appends a suffix appropriate for the
      * content type returned by the server. Subsequent calls to <code>requestFile</code> use the content types in this
      * list to find the content type matching the cached file.
-     * <p/>
-     * This is initialized to the following list of default content types typically used in World Wind applications:
-     * <p/>
+     * <p>
+     * This is initialized to the following list of default content types typically used in WorldWind applications:
      * <ul> <li>application/vnd.google-earth.kml+xml</li> <li>application/vnd.google-earth.kmz</li>
      * <li>model/collada+xml</li> <li>image/dds</li> <li>image/gif</li> <li>image/jpeg</li> <li>image/jpg</li>
      * <li>image/png</li> </ul>
-     * <p/>
-     * This list may be overridden by specifying a comma-delimited list of content types in the World Wind configuration
+     * <p>
+     * This list may be overridden by specifying a comma-delimited list of content types in the WorldWind configuration
      * parameter <code>gov.nasa.worldwind.avkey.CacheContentTypes</code>.
      */
     protected List<String> cacheContentTypes = new ArrayList<String>(DEFAULT_CACHE_CONTENT_TYPES);
@@ -249,7 +270,7 @@ public class BasicDataFileStore extends AbstractFileStore
             throw new IllegalStateException(message);
         }
 
-        // Store remote files in the World Wind cache by default. This provides backward compatibility with applications
+        // Store remote files in the WorldWind cache by default. This provides backward compatibility with applications
         // depending on requestFile's behavior prior to the addition of the cacheRemoteFile parameter.
         return this.requestFile(address, true);
     }
@@ -307,13 +328,13 @@ public class BasicDataFileStore extends AbstractFileStore
     /**
      * Returns a file from the cache, the local file system or the classpath if the file exists. The specified address
      * may be a jar URL. See {@link java.net.JarURLConnection} for a description of jar URLs. If
-     * <code>searchLocalCache</code> is <code>true</code> this looks for the file in the World Wind cache, otherwise
+     * <code>searchLocalCache</code> is <code>true</code> this looks for the file in the WorldWind cache, otherwise
      * this only looks for the file in the local file system and the classpath.
      *
      * @param address          the name used to identify the cached file.
      * @param retrievalUrl     the URL to obtain the file if it is not in the cache. Used only to determine a location
      *                         to search in the local cache. May be null.
-     * @param searchLocalCache <code>true</code> to look for the file in the World Wind cache, otherwise
+     * @param searchLocalCache <code>true</code> to look for the file in the WorldWind cache, otherwise
      *                         <code>false</code>.
      *
      * @return the requested file if it exists, otherwise null.
@@ -361,7 +382,7 @@ public class BasicDataFileStore extends AbstractFileStore
                 }
         }
 
-        // If the address is a file, look for the file in the classpath and World Wind disk cache. We perform this step
+        // If the address is a file, look for the file in the classpath and WorldWind disk cache. We perform this step
         // regardless of the searchLocalCache parameter, because this looks for the file in the classpath.
         // We need to ensure that the address is not a network address (HTTP, etc.) because the getResource call in
         // findFile will attempt to retrieve from that URL on the thread that called this method, which might be the EDT
@@ -369,7 +390,7 @@ public class BasicDataFileStore extends AbstractFileStore
         if (cacheFileUrl == null && (addressProtocol == null || addressProtocol.equals("file")))
             cacheFileUrl = WorldWind.getDataFileStore().findFile(address, true);
 
-        // Look for the file in the World Wind disk cache by creating a cache path from the file's address. We ignore this
+        // Look for the file in the WorldWind disk cache by creating a cache path from the file's address. We ignore this
         // step if searchLocalCache is false.
         if (cacheFileUrl == null && retrievalUrl != null && searchLocalCache)
         {
@@ -412,7 +433,7 @@ public class BasicDataFileStore extends AbstractFileStore
 
     /**
      * Returns the length of the resource referred to by a jar URL. Can be used to test whether the resource exists.
-     * <p/>
+     * <p>
      * Note: This method causes the URL to open a connection and retrieve content length.
      *
      * @param jarUrl the jar URL.
@@ -595,13 +616,13 @@ public class BasicDataFileStore extends AbstractFileStore
     /**
      * Makes a path to the file in the cache from the file's generic URL and content type. If the URL has a non-empty
      * query string, then this returns a path name formatted as follows:
-     * <p/>
+     * <p>
      * <code>host/hashCode/path_query.suffix</code>
-     * <p/>
+     * <p>
      * Otherwise, this returns a path name formatted as follows:
-     * <p/>
+     * <p>
      * <code>host/hashCode/path.suffix</code>
-     * <p/>
+     * <p>
      * Where <code>host</code> is the name of the host machine, <code>hashCode</code> is a four digit hash code computed
      * from the string "path" or "path_query" (if the URL has a query string), <code>path</code> is the URL's path part,
      * <code>query</code> is the URL's query string, and <code>suffix</code> is either the path's suffix or a suffix
@@ -610,7 +631,7 @@ public class BasicDataFileStore extends AbstractFileStore
      * should a large number of files be requested from the same host. If two URLs have the same hash code, then both
      * URLs are stored under the same <code>hashCode</code> folder in the cache and are differentiated by their
      * <code>path</code> and <code>query</code> parts.
-     * <p/>
+     * <p>
      * This removes any private parameters from the query string to ensure that those parameters are not written to the
      * file store as part of the cache name. For example, the "CONNECTID" query parameter typically encodes a user's
      * unique connection id, and must not be shared. Writing this parameter to the cache would expose that parameter to
@@ -669,9 +690,9 @@ public class BasicDataFileStore extends AbstractFileStore
     /**
      * Makes a path to the file in the cache from the file's JAR URL and content type. This returns a path name
      * formatted as follows:
-     * <p/>
+     * <p>
      * <code>host/path.suffix</code>
-     * <p/>
+     * <p>
      * Where <code>host</code> is the path to the JAR file, <code>path</code> is the file's path within the JAR archive,
      * and <code>suffix</code> is either the path's suffix or a suffix created from the specified content type.
      *
@@ -772,10 +793,9 @@ public class BasicDataFileStore extends AbstractFileStore
      * store as part of the cache name. For example, the "CONNECTID" query parameter typically encodes a user's unique
      * connection id, and must not be shared. Writing this parameter to the cache would expose that parameter to anyone
      * using the same machine.
-     * <p/>
+     * <p>
      * This removes the key, the value, and any trailing parameter delimiter of all private parameters in the specified
      * query string. Recognized private query parameters are as follows:
-     * <p/>
      * <ul> <li>CONNECTID</li> </ul>
      *
      * @param queryString the query string to examine.
