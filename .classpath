@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry exported="true" kind="lib" path="gluegen.jar" sourcepath="gluegen-java-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="gluegen-rt.jar" sourcepath="gluegen-java-src.zip"/>
-	<classpathentry exported="true" kind="lib" path="gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry exported="true" kind="lib" path="gluegen-rt-natives-windows-amd64.jar" sourcepath="gluegen-java-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="jogl-all.jar" sourcepath="jogl-java-src.zip"/>
-	<classpathentry exported="true" kind="lib" path="jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry exported="true" kind="lib" path="jogl-all-natives-windows-amd64.jar" sourcepath="jogl-java-src.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
