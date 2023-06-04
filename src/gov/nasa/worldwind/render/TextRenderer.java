@@ -71,6 +71,8 @@
 package gov.nasa.worldwind.render;
 
 import com.jogamp.common.nio.Buffers;
+import com.jogamp.nativewindow.NativeSurface;
+import com.jogamp.nativewindow.ScalableSurface;
 import com.jogamp.opengl.GLExtensions;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.opengl.util.awt.TextureRenderer;
@@ -318,7 +320,18 @@ public class TextRenderer {
     public TextRenderer(Font font, boolean antialiased,
                         boolean useFractionalMetrics, RenderDelegate renderDelegate,
                         boolean mipmap) {
-        this.font = font;
+
+        NativeSurface surface = GLContext.getCurrent().getGLDrawable().getNativeSurface();
+        if (surface instanceof ScalableSurface) {
+        	// DPI scaling for surface
+        	float[] surfaceScale = new float[2];
+        	((ScalableSurface) surface).getCurrentSurfaceScale(surfaceScale);
+        	float newSize = font.getSize() * surfaceScale[0];
+        	this.font = font.deriveFont(newSize);
+        } else {
+        	this.font = font;
+        }
+        
         this.antialiased = antialiased;
         this.useFractionalMetrics = useFractionalMetrics;
         this.mipmap = mipmap;
