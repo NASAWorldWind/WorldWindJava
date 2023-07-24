@@ -683,7 +683,8 @@ public class ScrollBar implements Renderable
      *
      * @param dc the <code>DrawContext</code> to be used
      */
-    public void render(DrawContext dc)
+    @Override
+	public void render(DrawContext dc)
     {
         if (dc.getFrameTimeStamp() != this.frameNumber)
         {
@@ -1110,7 +1111,9 @@ public class ScrollBar implements Renderable
             this.dragRefValue = this.scrollBar.getValue();
         }
 
-        protected void drag(Point point)
+        /** {@inheritDoc} */
+        @Override
+		protected void drag(Point point)
         {
             int delta;
             int adjustment;
@@ -1118,7 +1121,10 @@ public class ScrollBar implements Renderable
 
             if (AVKey.VERTICAL.equals(scrollBar.getOrientation()))
             {
-                delta = point.y - this.dragRefPoint.y;
+            	// scroll bar zero position is at the top in GL surface coordinates.
+            	// 'point' will be in GL surface coordinates, so moving the mouse 
+            	// towards the bottom of the screen yields a smaller y value.
+                delta = this.dragRefPoint.y - point.y;
                 screenDimension = this.scrollBar.scrollBounds.height - this.scrollBar.getMinScrollKnobSize();
             }
             else

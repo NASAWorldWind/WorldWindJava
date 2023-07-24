@@ -496,7 +496,7 @@ public class ViewControlsSelectListener implements SelectListener
         double size = control.getAttributes().getSize().width * control.getAttributes().getScale();
         Vec4 center = new Vec4(control.getScreenPoint().x, control.getScreenPoint().y + size / 2, 0);
         double px = lastPickPoint.x - center.x;
-        double py = view.getViewport().getHeight() - lastPickPoint.y - center.y;
+        double py = lastPickPoint.y - center.y;
         Angle heading = view.getHeading().add(Angle.fromRadians(Math.atan2(px, py)));
         heading = heading.degrees >= 0 ? heading : heading.addDegrees(360);
         return heading;
@@ -508,7 +508,7 @@ public class ViewControlsSelectListener implements SelectListener
         double size = control.getAttributes().getSize().width * control.getAttributes().getScale();
         Vec4 center = new Vec4(control.getScreenPoint().x, control.getScreenPoint().y + size / 2, 0);
         double px = lastPickPoint.x - center.x;
-        double py = view.getViewport().getHeight() - lastPickPoint.y - center.y;
+        double py = lastPickPoint.y - center.y;
         double pickDistance = Math.sqrt(px * px + py * py);
         double pickDistanceFactor = Math.min(pickDistance / 10, 5);
 
@@ -547,7 +547,7 @@ public class ViewControlsSelectListener implements SelectListener
         // Compute last pick point 'pitch' relative to look control center on y
         double size = control.getAttributes().getSize().width * control.getAttributes().getScale();
         Vec4 center = new Vec4(control.getScreenPoint().x, control.getScreenPoint().y + size / 2, 0);
-        double py = view.getViewport().getHeight() - lastPickPoint.y - center.y;
+        double py = lastPickPoint.y - center.y;
         double pickDistanceFactor = Math.min(Math.abs(py) / 3000, 5) * Math.signum(py);
         // New pitch
         Angle pitch = view.getPitch().add(Angle.fromRadians(pitchStep * pickDistanceFactor));

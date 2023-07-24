@@ -101,7 +101,7 @@ public abstract class DragControl extends TreeHotSpot
     /**
      * Called when a drag begins. This implementation saves the first drag point to {@link #dragRefPoint}.
      *
-     * @param point Point at which dragging started.
+     * @param point Point at which dragging started (GL surface pixels)
      */
     protected void beginDrag(Point point)
     {
@@ -111,7 +111,7 @@ public abstract class DragControl extends TreeHotSpot
     /**
      * Called for each point within a drag action.
      *
-     * @param point Current drag point.
+     * @param point Current drag point. (GL surface pixels)
      */
     protected abstract void drag(Point point);
 

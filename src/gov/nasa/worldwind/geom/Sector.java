@@ -284,6 +284,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon> {
         double maxLon = Angle.NEG180.getDegrees();
 
         for (LatLon p : locations) {
+        	if (p == null) break;
             double lat = p.getLatitude().getDegrees();
             if (lat < minLat) {
                 minLat = lat;

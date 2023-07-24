@@ -128,7 +128,7 @@ public interface SceneController extends WWObject, Disposable
     double getFrameTime();
 
     /**
-     * Specifies the current pick point in AWT screen coordinates, or <code>null</code> to indicate that there is no
+     * Specifies the current pick point in GL surface screen coordinates, or <code>null</code> to indicate that there is no
      * pick point. Each frame, this scene controller determines which objects are drawn at the pick point and places
      * them in a PickedObjectList. This list can be accessed by calling {@link #getPickedObjectList()}.
      * <p>
@@ -140,7 +140,7 @@ public interface SceneController extends WWObject, Disposable
     void setPickPoint(Point pickPoint);
 
     /**
-     * Returns the current pick point in AWT screen coordinates.
+     * Returns the current pick point in GL surface coordinates.
      *
      * @return the current pick point, or <code>null</code> if no pick point is current.
      *
@@ -149,7 +149,7 @@ public interface SceneController extends WWObject, Disposable
     Point getPickPoint();
 
     /**
-     * Specifies the current pick rectangle in AWT screen coordinates, or <code>null</code> to indicate that there is no
+     * Specifies the current pick rectangle in GL surface coordinates, or <code>null</code> to indicate that there is no
      * pick rectangle. Each frame, this scene controller determines which objects intersect the pick rectangle and
      * places them in a PickedObjectList. This list can be accessed by calling {@link #getObjectsInPickRectangle()}.
      * <p>
@@ -161,7 +161,7 @@ public interface SceneController extends WWObject, Disposable
     void setPickRectangle(Rectangle pickRect);
 
     /**
-     * Returns the current pick rectangle in AWT screen coordinates.
+     * Returns the current pick rectangle in GL surface coordinates.
      *
      * @return the current pick rectangle, or <code>null</code> if no pick rectangle is current.
      *
