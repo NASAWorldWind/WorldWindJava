@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -68,7 +68,7 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
      * called. An OpenGL context for the window must be current.
      */
     @Override
-	public void shutdown()
+    public void shutdown()
     {
         WorldWind.getDataFileStore().removePropertyChangeListener(this);
 
@@ -105,7 +105,7 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public GpuResourceCache getGpuResourceCache()
+    public GpuResourceCache getGpuResourceCache()
     {
         return this.gpuResourceCache;
     }
@@ -117,7 +117,7 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public void setModel(Model model)
+    public void setModel(Model model)
     {
         // model can be null, that's ok - it indicates no model.
         if (this.sceneController != null)
@@ -125,13 +125,13 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public Model getModel()
+    public Model getModel()
     {
         return this.sceneController != null ? this.sceneController.getModel() : null;
     }
 
     @Override
-	public void setView(View view)
+    public void setView(View view)
     {
         // view can be null, that's ok - it indicates no view.
         if (this.sceneController != null)
@@ -139,26 +139,26 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public View getView()
+    public View getView()
     {
         return this.sceneController != null ? this.sceneController.getView() : null;
     }
 
     @Override
-	public void setModelAndView(Model model, View view)
+    public void setModelAndView(Model model, View view)
     {
         this.setModel(model);
         this.setView(view);
     }
 
     @Override
-	public SceneController getSceneController()
+    public SceneController getSceneController()
     {
         return this.sceneController;
     }
 
     @Override
-	public void setSceneController(SceneController sc)
+    public void setSceneController(SceneController sc)
     {
         if (sc != null && this.getSceneController() != null)
         {
@@ -169,36 +169,36 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public InputHandler getInputHandler()
+    public InputHandler getInputHandler()
     {
         return this.inputHandler;
     }
 
     @Override
-	public void setInputHandler(InputHandler inputHandler)
+    public void setInputHandler(InputHandler inputHandler)
     {
         this.inputHandler = inputHandler;
     }
 
     @Override
-	public void redraw()
+    public void redraw()
     {
     }
 
     @Override
-	public void redrawNow()
+    public void redrawNow()
     {
     }
 
     @Override
-	public void setPerFrameStatisticsKeys(Set<String> keys)
+    public void setPerFrameStatisticsKeys(Set<String> keys)
     {
         if (this.sceneController != null)
             this.sceneController.setPerFrameStatisticsKeys(keys);
     }
 
     @Override
-	public Collection<PerformanceStatistic> getPerFrameStatistics()
+    public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         if (this.sceneController == null || this.sceneController.getPerFrameStatistics() == null)
             return new ArrayList<PerformanceStatistic>(0);
@@ -207,19 +207,19 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public PickedObjectList getObjectsAtCurrentPosition()
+    public PickedObjectList getObjectsAtCurrentPosition()
     {
         return null;
     }
 
     @Override
-	public PickedObjectList getObjectsInSelectionBox()
+    public PickedObjectList getObjectsInSelectionBox()
     {
         return null;
     }
 
     @Override
-	public Position getCurrentPosition()
+    public Position getCurrentPosition()
     {
         if (this.sceneController == null)
             return null;
@@ -261,13 +261,13 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public void addRenderingListener(RenderingListener listener)
+    public void addRenderingListener(RenderingListener listener)
     {
         this.eventListeners.add(RenderingListener.class, listener);
     }
 
     @Override
-	public void removeRenderingListener(RenderingListener listener)
+    public void removeRenderingListener(RenderingListener listener)
     {
         this.eventListeners.remove(RenderingListener.class, listener);
     }
@@ -281,13 +281,13 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public void addPositionListener(PositionListener listener)
+    public void addPositionListener(PositionListener listener)
     {
         this.eventListeners.add(PositionListener.class, listener);
     }
 
     @Override
-	public void removePositionListener(PositionListener listener)
+    public void removePositionListener(PositionListener listener)
     {
         this.eventListeners.remove(PositionListener.class, listener);
     }
@@ -297,7 +297,7 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         EventQueue.invokeLater(new Runnable()
         {
             @Override
-			public void run()
+            public void run()
             {
                 for (PositionListener listener : eventListeners.getListeners(PositionListener.class))
                 {
@@ -308,13 +308,13 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public void addSelectListener(SelectListener listener)
+    public void addSelectListener(SelectListener listener)
     {
         this.eventListeners.add(SelectListener.class, listener);
     }
 
     @Override
-	public void removeSelectListener(SelectListener listener)
+    public void removeSelectListener(SelectListener listener)
     {
         this.eventListeners.remove(SelectListener.class, listener);
     }
@@ -324,7 +324,7 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         EventQueue.invokeLater(new Runnable()
         {
             @Override
-			public void run()
+            public void run()
             {
                 for (SelectListener listener : eventListeners.getListeners(SelectListener.class))
                 {
@@ -335,13 +335,13 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
     }
 
     @Override
-	public void addRenderingExceptionListener(RenderingExceptionListener listener)
+    public void addRenderingExceptionListener(RenderingExceptionListener listener)
     {
         this.eventListeners.add(RenderingExceptionListener.class, listener);
     }
 
     @Override
-	public void removeRenderingExceptionListener(RenderingExceptionListener listener)
+    public void removeRenderingExceptionListener(RenderingExceptionListener listener)
     {
         this.eventListeners.remove(RenderingExceptionListener.class, listener);
     }
@@ -351,7 +351,7 @@ public abstract class WorldWindowImpl extends WWObjectImpl implements WorldWindo
         EventQueue.invokeLater(new Runnable()
         {
             @Override
-			public void run()
+            public void run()
             {
                 for (RenderingExceptionListener listener : eventListeners.getListeners(
                     RenderingExceptionListener.class))

@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -112,7 +112,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public void reinitialize()
+    public void reinitialize()
     {
         if (this.textRendererCache != null)
             this.textRendererCache.dispose();
@@ -121,7 +121,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
 
     /** Releases resources associated with this scene controller. */
     @Override
-	public void dispose()
+    public void dispose()
     {
         if (this.lastPickedObjects != null)
             this.lastPickedObjects.clear();
@@ -139,13 +139,13 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public GpuResourceCache getGpuResourceCache()
+    public GpuResourceCache getGpuResourceCache()
     {
         return this.gpuResourceCache;
     }
 
     @Override
-	public void setGpuResourceCache(GpuResourceCache gpuResourceCache)
+    public void setGpuResourceCache(GpuResourceCache gpuResourceCache)
     {
         this.gpuResourceCache = gpuResourceCache;
     }
@@ -156,19 +156,19 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public Model getModel()
+    public Model getModel()
     {
         return this.model;
     }
 
     @Override
-	public View getView()
+    public View getView()
     {
         return this.view;
     }
 
     @Override
-	public void setModel(Model model)
+    public void setModel(Model model)
     {
         if (this.model != null)
             this.model.removePropertyChangeListener(this);
@@ -181,7 +181,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public void setView(View view)
+    public void setView(View view)
     {
         if (this.view != null)
             this.view.removePropertyChangeListener(this);
@@ -195,7 +195,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public void setVerticalExaggeration(double verticalExaggeration)
+    public void setVerticalExaggeration(double verticalExaggeration)
     {
         Double oldVE = this.verticalExaggeration;
         this.verticalExaggeration = verticalExaggeration;
@@ -203,42 +203,42 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public double getVerticalExaggeration()
+    public double getVerticalExaggeration()
     {
         return this.verticalExaggeration;
     }
 
     /** {@inheritDoc} */
     @Override
-	public void setPickPoint(Point pickPoint)
+    public void setPickPoint(Point pickPoint)
     {
-    	this.pickPoint = pickPoint;
+        this.pickPoint = pickPoint;
     }
 
     /** {@inheritDoc} */
     @Override
-	public Point getPickPoint()
+    public Point getPickPoint()
     {
         return this.pickPoint;
     }
 
     /** {@inheritDoc} */
     @Override
-	public void setPickRectangle(Rectangle pickRect)
+    public void setPickRectangle(Rectangle pickRect)
     {
         this.pickRect = pickRect;
     }
 
     /** {@inheritDoc} */
     @Override
-	public Rectangle getPickRectangle()
+    public Rectangle getPickRectangle()
     {
         return this.pickRect;
     }
 
     /** {@inheritDoc} */
     @Override
-	public PickedObjectList getPickedObjectList()
+    public PickedObjectList getPickedObjectList()
     {
         return this.lastPickedObjects;
     }
@@ -250,49 +250,49 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
 
     /** {@inheritDoc} */
     @Override
-	public PickedObjectList getObjectsInPickRectangle()
+    public PickedObjectList getObjectsInPickRectangle()
     {
         return this.lastObjectsInPickRect;
     }
 
     @Override
-	public void setDeepPickEnabled(boolean tf)
+    public void setDeepPickEnabled(boolean tf)
     {
         this.deepPick = tf;
     }
 
     @Override
-	public boolean isDeepPickEnabled()
+    public boolean isDeepPickEnabled()
     {
         return this.deepPick;
     }
 
     @Override
-	public SectorGeometryList getTerrain()
+    public SectorGeometryList getTerrain()
     {
         return this.dc.getSurfaceGeometry();
     }
 
     @Override
-	public DrawContext getDrawContext()
+    public DrawContext getDrawContext()
     {
         return this.dc;
     }
 
     @Override
-	public double getFramesPerSecond()
+    public double getFramesPerSecond()
     {
         return this.framesPerSecond;
     }
 
     @Override
-	public double getFrameTime()
+    public double getFrameTime()
     {
         return this.frameTime;
     }
 
     @Override
-	public void setPerFrameStatisticsKeys(Set<String> keys)
+    public void setPerFrameStatisticsKeys(Set<String> keys)
     {
         this.perFrameStatisticsKeys.clear();
         if (keys == null)
@@ -306,39 +306,39 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public Collection<PerformanceStatistic> getPerFrameStatistics()
+    public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         return perFrameStatistics;
     }
 
     @Override
-	public Collection<Throwable> getRenderingExceptions()
+    public Collection<Throwable> getRenderingExceptions()
     {
         return this.renderingExceptions;
     }
 
     @Override
-	public ScreenCreditController getScreenCreditController()
+    public ScreenCreditController getScreenCreditController()
     {
         return screenCreditController;
     }
 
     @Override
-	public void setScreenCreditController(ScreenCreditController screenCreditController)
+    public void setScreenCreditController(ScreenCreditController screenCreditController)
     {
         this.screenCreditController = screenCreditController;
     }
 
     /** {@inheritDoc} */
     @Override
-	public GLRuntimeCapabilities getGLRuntimeCapabilities()
+    public GLRuntimeCapabilities getGLRuntimeCapabilities()
     {
         return this.glRuntimeCaps;
     }
 
     /** {@inheritDoc} */
     @Override
-	public void setGLRuntimeCapabilities(GLRuntimeCapabilities capabilities)
+    public void setGLRuntimeCapabilities(GLRuntimeCapabilities capabilities)
     {
         if (capabilities == null)
         {
@@ -441,7 +441,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     @Override
-	public int repaint()
+    public int repaint()
     {
         this.frameTime = System.currentTimeMillis();
 
@@ -665,8 +665,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
 
     protected void pickTerrain(DrawContext dc)
     {
-        if (dc.isPickingMode() && dc.getVisibleSector() != null && dc.getSurfaceGeometry() != null &&
-            dc.getSurfaceGeometry().size() > 0)
+        if (dc.isPickingMode() && dc.getVisibleSector() != null && dc.getSurfaceGeometry() != null
+            && dc.getSurfaceGeometry().size() > 0)
         {
             this.pickPoints.clear();
             if (dc.getPickPoint() != null)
@@ -787,7 +787,10 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                 // used to cull the number of colors that the draw context must consider with identifying the unique
                 // pick colors in the specified screen rectangle.
                 if (minAndMaxColorCodes == null)
-                    minAndMaxColorCodes = new int[] {colorCode, colorCode};
+                    minAndMaxColorCodes = new int[]
+                    {
+                        colorCode, colorCode
+                    };
                 else
                 {
                     if (minAndMaxColorCodes[0] > colorCode)
@@ -839,8 +842,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             this.lastPickedObjects = new PickedObjectList(dc.getPickedObjects());
             this.lastObjectsInPickRect = new PickedObjectList(dc.getObjectsInPickRectangle());
 
-            if (this.isDeepPickEnabled() &&
-                (this.lastPickedObjects.hasNonTerrainObjects() || this.lastObjectsInPickRect.hasNonTerrainObjects()))
+            if (this.isDeepPickEnabled()
+                && (this.lastPickedObjects.hasNonTerrainObjects() || this.lastObjectsInPickRect.hasNonTerrainObjects()))
             {
                 this.doDeepPick(dc);
             }
@@ -987,8 +990,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             dc.setOrderedRenderingMode(false);
 
             // Draw the diagnostic displays.
-            if (dc.getSurfaceGeometry() != null && dc.getModel() != null && (dc.getModel().isShowWireframeExterior() ||
-                dc.getModel().isShowWireframeInterior() || dc.getModel().isShowTessellationBoundingVolumes()))
+            if (dc.getSurfaceGeometry() != null && dc.getModel() != null && (dc.getModel().isShowWireframeExterior()
+                || dc.getModel().isShowWireframeInterior() || dc.getModel().isShowTessellationBoundingVolumes()))
             {
                 Model model = dc.getModel();
 
@@ -1039,7 +1042,6 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     //**************************************************************//
     //********************  Ordered Surface Renderable  ************//
     //**************************************************************//
-
     protected void preRenderOrderedSurfaceRenderables(DrawContext dc)
     {
         if (dc.getOrderedSurfaceRenderables().isEmpty())
@@ -1154,9 +1156,9 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         if (tileCount == 0)
             return;
 
-        int attributeMask =
-            GL2.GL_COLOR_BUFFER_BIT   // For alpha test enable, blend enable, alpha func, blend func, blend ref.
-                | GL2.GL_POLYGON_BIT; // For cull face enable, cull face, polygon mode.
+        int attributeMask
+            = GL2.GL_COLOR_BUFFER_BIT // For alpha test enable, blend enable, alpha func, blend func, blend ref.
+            | GL2.GL_POLYGON_BIT; // For cull face enable, cull face, polygon mode.
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLStackHandler ogsh = new OGLStackHandler();
