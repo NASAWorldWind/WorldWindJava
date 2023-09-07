@@ -37,6 +37,8 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import java.awt.*;
 import java.awt.geom.*;
 import java.beans.PropertyChangeEvent;

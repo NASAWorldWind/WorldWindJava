@@ -39,6 +39,8 @@ import org.w3c.dom.*;
 
 import javax.imageio.ImageIO;
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import javax.xml.xpath.XPath;
 import java.awt.image.*;
 import java.io.*;

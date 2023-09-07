@@ -38,6 +38,8 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwindx.examples.util.PowerOfTwoPaddedImage;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import javax.swing.*;
 import javax.swing.Box;
 import javax.swing.border.*;
