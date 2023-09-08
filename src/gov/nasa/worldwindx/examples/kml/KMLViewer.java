@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -30,6 +30,10 @@ package gov.nasa.worldwindx.examples.kml;
 
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.geom.LatLon;
+import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.layers.Layer;
+import gov.nasa.worldwind.layers.LayerList;
 import gov.nasa.worldwind.retrieve.RetrievalService;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 import gov.nasa.worldwindx.examples.util.*;
@@ -37,7 +41,10 @@ import gov.nasa.worldwind.util.layertree.*;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.ogc.kml.*;
 import gov.nasa.worldwind.ogc.kml.impl.KMLController;
+import gov.nasa.worldwind.render.Size;
 import gov.nasa.worldwind.util.*;
+import gov.nasa.worldwind.util.tree.BasicTreeLayout;
+import gov.nasa.worldwind.util.tree.ScrollFrame;
 
 import javax.swing.*;
 import javax.swing.filechooser.*;
@@ -72,12 +79,23 @@ public class KMLViewer extends ApplicationTemplate
         {
             super(true, false, false); // Don't include the layer panel; we're using the on-screen layer tree.
 
+            LayerList layers = this.getWwd().getModel().getLayers();
+            for (Layer l : layers)
+            {
+                if (l.getName().equals("Bing Imagery"))
+                {
+                    l.setEnabled(true);
+                }
+
+            }
             // Add the on-screen layer tree, refreshing model with the WorldWindow's current layer list. We
             // intentionally refresh the tree's model before adding the layer that contains the tree itself. This
             // prevents the tree's layer from being displayed in the tree itself.
             this.layerTree = new LayerTree(new Point(20, 160));
             this.layerTree.getModel().refresh(this.getWwd().getModel().getLayers());
-
+            BasicTreeLayout treeLayout = (BasicTreeLayout) this.layerTree.getLayout();
+            ScrollFrame frame = treeLayout.getFrame();
+            frame.setSize(Size.fromPixels(320, 600));
             // Set up a layer to display the on-screen layer tree in the WorldWindow. This layer is not displayed in
             // the layer tree's model. Doing so would enable the user to hide the layer tree display with no way of
             // bringing it back.
@@ -108,7 +126,7 @@ public class KMLViewer extends ApplicationTemplate
             this.kmlAppController.setBalloonController(balloonController);
 
             // Size the WorldWindow to take up the space typically used by the layer panel.
-            Dimension size = new Dimension(1400, 800);
+            Dimension size = new Dimension(1400, 1024);
             this.setPreferredSize(size);
             this.pack();
             WWUtil.alignComponent(null, this, AVKey.CENTER);
@@ -119,7 +137,7 @@ public class KMLViewer extends ApplicationTemplate
             WorldWind.getRetrievalService().setSSLExceptionListener(new RetrievalService.SSLExceptionListener()
             {
                 @Override
-				public void onException(Throwable e, String path)
+                public void onException(Throwable e, String path)
                 {
                     System.out.println(path);
                     System.out.println(e);
@@ -156,7 +174,9 @@ public class KMLViewer extends ApplicationTemplate
             this.layerTree.getModel().addLayer(layerNode);
             this.layerTree.makeVisible(layerNode.getPath());
             layerNode.expandOpenContainers(this.layerTree);
-
+            LatLon kmlLocation = kmlRoot.getExtent().getCentroid();
+            Position eyePosition = new Position(kmlLocation.latitude, kmlLocation.longitude, 10000);
+            this.getWwd().getView().setEyePosition(eyePosition);
             // Listens to refresh property change events from KML network link nodes. Upon receiving such an event this
             // expands any tree paths that represent open KML containers. When a KML network link refreshes, its tree
             // node replaces its children with new nodes created from the refreshed content, then sends a refresh
@@ -165,7 +185,7 @@ public class KMLViewer extends ApplicationTemplate
             layerNode.addPropertyChangeListener(AVKey.RETRIEVAL_STATE_SUCCESSFUL, new PropertyChangeListener()
             {
                 @Override
-				public void propertyChange(final PropertyChangeEvent event)
+                public void propertyChange(final PropertyChangeEvent event)
                 {
                     if (event.getSource() instanceof KMLNetworkLinkTreeNode)
                     {
@@ -173,7 +193,7 @@ public class KMLViewer extends ApplicationTemplate
                         SwingUtilities.invokeLater(new Runnable()
                         {
                             @Override
-							public void run()
+                            public void run()
                             {
                                 ((KMLNetworkLinkTreeNode) event.getSource()).expandOpenContainers(layerTree);
                                 getWwd().redraw();
@@ -216,7 +236,7 @@ public class KMLViewer extends ApplicationTemplate
          * but otherwise does nothing.
          */
         @Override
-		public void run()
+        public void run()
         {
             try
             {
@@ -230,7 +250,7 @@ public class KMLViewer extends ApplicationTemplate
                 SwingUtilities.invokeLater(new Runnable()
                 {
                     @Override
-					public void run()
+                    public void run()
                     {
                         appFrame.addKMLLayer(finalKMLRoot);
                     }
@@ -292,7 +312,7 @@ public class KMLViewer extends ApplicationTemplate
         JMenuItem openFileMenuItem = new JMenuItem(new AbstractAction("Open File...")
         {
             @Override
-			public void actionPerformed(ActionEvent actionEvent)
+            public void actionPerformed(ActionEvent actionEvent)
             {
                 try
                 {
@@ -317,7 +337,7 @@ public class KMLViewer extends ApplicationTemplate
         JMenuItem openURLMenuItem = new JMenuItem(new AbstractAction("Open URL...")
         {
             @Override
-			public void actionPerformed(ActionEvent actionEvent)
+            public void actionPerformed(ActionEvent actionEvent)
             {
                 try
                 {
@@ -339,8 +359,10 @@ public class KMLViewer extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        //noinspection UnusedDeclaration
-        @SuppressWarnings("unused")
-		final AppFrame af = (AppFrame) start("WorldWind KML Viewer", AppFrame.class);
+        final KMLViewer.AppFrame app = (KMLViewer.AppFrame) start("WorldWind KML Viewer", AppFrame.class);
+        if (args.length > 0)
+        {
+            new WorkerThread(args[0], app).start();
+        }
     }
 }

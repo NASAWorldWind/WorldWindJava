@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -29,6 +29,7 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
+import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.ogc.kml.impl.KMLTraversalContext;
 import gov.nasa.worldwind.render.DrawContext;
 import gov.nasa.worldwind.util.*;
@@ -156,6 +157,12 @@ public class KMLAbstractContainer extends KMLAbstractFeature
         }
     }
 
+    @Override
+    public Sector getExtent()
+    {
+        return this.getFeaturesExtent();
+    }
+
     /**
      * Prepares this KML container for rendering. This pushes this container's Region on the KML traversal context's
      * region stack. Descendant features use the KML traversal context's region stack to inherit Regions from parent
@@ -164,7 +171,10 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param tc the current KML traversal context.
      * @param dc the current draw context.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
+    @SuppressWarnings(
+        {
+            "UnusedDeclaration"
+        })
     protected void beginRendering(KMLTraversalContext tc, DrawContext dc)
     {
         if (this.getRegion() != null)
@@ -179,7 +189,10 @@ public class KMLAbstractContainer extends KMLAbstractFeature
      * @param tc the current KML traversal context.
      * @param dc the current draw context.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
+    @SuppressWarnings(
+        {
+            "UnusedDeclaration"
+        })
     protected void endRendering(KMLTraversalContext tc, DrawContext dc)
     {
         if (this.getRegion() != null)
@@ -244,6 +257,36 @@ public class KMLAbstractContainer extends KMLAbstractFeature
         {
             feature.render(tc, dc);
         }
+    }
+
+    protected Sector getFeaturesExtent()
+    {
+        List<KMLAbstractFeature> containers = new ArrayList<>();
+        Sector fullExtent = null;
+        // Render non-container child features first, and containers second. This ensures that features closer to the
+        // root are rendered before features deeper in the tree. In the case of an image pyramid of GroundOverlays,
+        // this causes the deeper nested overlays (which are typically more detailed) to render on top of the more
+        // general overlay that is higher in the tree.
+        for (KMLAbstractFeature feature : this.getFeatures())
+        {
+            if (feature instanceof KMLAbstractContainer)
+            {
+                containers.add(feature);
+            }
+            else
+            {
+                Sector featureExtent = feature.getExtent();
+                fullExtent = (fullExtent == null) ? featureExtent : fullExtent.union(featureExtent);
+            }
+        }
+
+        // Now render the containers
+        for (KMLAbstractFeature feature : containers)
+        {
+            Sector featureExtent = feature.getExtent();
+            fullExtent = (fullExtent == null) ? featureExtent : fullExtent.union(featureExtent);
+        }
+        return fullExtent;
     }
 
     @Override

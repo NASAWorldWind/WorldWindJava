@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -29,6 +29,7 @@
 package gov.nasa.worldwind.ogc.kml;
 
 import gov.nasa.worldwind.event.Message;
+import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.ogc.kml.impl.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
@@ -374,7 +375,10 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
      * @param tc the current KML traversal context.
      * @param dc the current draw context.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
+    @SuppressWarnings(
+        {
+            "UnusedDeclaration"
+        })
     protected void renderBalloon(KMLTraversalContext tc, DrawContext dc)
     {
         if (this.getBalloon() != null)
@@ -442,8 +446,8 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
     protected void mergeStyleSelectors(KMLAbstractFeature sourceFeature)
     {
         // Make a copy of the existing list so we can modify it as we traverse the copy.
-        List<KMLAbstractStyleSelector> styleSelectorsCopy =
-            new ArrayList<KMLAbstractStyleSelector>(this.getStyleSelectors().size());
+        List<KMLAbstractStyleSelector> styleSelectorsCopy
+            = new ArrayList<KMLAbstractStyleSelector>(this.getStyleSelectors().size());
         styleSelectorsCopy.addAll(this.getStyleSelectors());
 
         for (KMLAbstractStyleSelector sourceSelector : sourceFeature.getStyleSelectors())
@@ -464,4 +468,6 @@ public abstract class KMLAbstractFeature extends KMLAbstractObject implements KM
             this.getStyleSelectors().add(sourceSelector);
         }
     }
+
+    public abstract Sector getExtent();
 }
