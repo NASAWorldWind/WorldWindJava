@@ -104,15 +104,17 @@ public class SelectEvent extends WWEvent
     private final Point pickPoint;			// GL surface coordinates
     private final Rectangle pickRect;		// GL surface coordinates
     private final MouseEvent mouseEvent;	// GL surface coordinates
+    private final Point awtMousePt;			// AWT screen coordinates
     private final PickedObjectList pickedObjects;
 
-    public SelectEvent(Object source, String eventAction, MouseEvent mouseEvent, PickedObjectList pickedObjects)
+    public SelectEvent(Object source, String eventAction, Point awtPt, MouseEvent mouseEvent, PickedObjectList pickedObjects)
     {
         super(source);
         this.eventAction = eventAction;
         this.pickPoint = mouseEvent != null ? mouseEvent.getPoint() : null;
         this.pickRect = null;
         this.mouseEvent = mouseEvent;
+        this.awtMousePt = awtPt;
         this.pickedObjects = pickedObjects;
     }
 
@@ -123,6 +125,7 @@ public class SelectEvent extends WWEvent
         this.pickPoint = pickPoint;
         this.pickRect = null;
         this.mouseEvent = null;
+        this.awtMousePt = null;
         this.pickedObjects = pickedObjects;
     }
 
@@ -133,6 +136,7 @@ public class SelectEvent extends WWEvent
         this.pickPoint = null;
         this.pickRect = pickRectangle;
         this.mouseEvent = null;
+        this.awtMousePt = null;
         this.pickedObjects = pickedObjects;
     }
 
@@ -149,6 +153,10 @@ public class SelectEvent extends WWEvent
     {
         return this.eventAction != null ? this.eventAction : "gov.nasa.worldwind.SelectEvent.UnknownEventAction";
     }
+
+    public Point getAwtMousePt() {
+		return awtMousePt;
+	}
 
     public Point getPickPoint()
     {
