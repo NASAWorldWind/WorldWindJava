@@ -1752,7 +1752,17 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 		// Convert to GL surface coordinates
 		int [] glSurfacePt = drawable.getNativeSurface().convertToPixelUnits(awtPt);
 		int glSurfaceHeight = drawable.getSurfaceHeight();
-		glSurfacePt[1] = glSurfaceHeight - glSurfacePt[1] - 1;
+		glSurfacePt[1] = glSurfaceHeight-1 - glSurfacePt[1];
 		return glSurfacePt;
 	}
+	    
+    public Point glPointToAwtPoint(Point glPoint) {
+		GLDrawable drawable = glContext.getGLDrawable();
+		if (drawable == null) return glPoint;
+
+		final int viewportHeight = getView().getViewport().height;
+		int [] glPt = { glPoint.x, viewportHeight-1 - glPoint.y };
+        getGLDrawable().getNativeSurface().convertToWindowUnits(glPt);
+        return new Point(glPt[0], glPt[1]);    	
+    }
 }
