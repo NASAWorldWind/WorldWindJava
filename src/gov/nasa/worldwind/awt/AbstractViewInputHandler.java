@@ -954,7 +954,7 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         return slope - 1.0;
     }
 
-    protected static Point constrainToSourceBounds(Point point, Object source)
+    protected static Point constrainToSourceBounds(Point point, WorldWindow source)
     {
         if (point == null)
             return null;
@@ -973,8 +973,10 @@ public abstract class AbstractViewInputHandler implements ViewInputHandler, java
         int y = (int) point.getY();
         if (y < 0)
             y = 0;
-        if (y > c.getHeight())
-            y = c.getHeight();
+        
+        // c.getHeight() is AWT coords height, point is MouseEvent GL surface coords
+        if (y >= source.getView().getViewport().height)
+            y = source.getView().getViewport().height - 1;
 
         return new Point(x, y);
     }
