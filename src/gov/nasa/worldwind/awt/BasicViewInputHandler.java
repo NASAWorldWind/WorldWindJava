@@ -219,10 +219,10 @@ public abstract class BasicViewInputHandler extends AbstractViewInputHandler
 
             Point movement = ViewUtil.subtract(point, lastPoint);
             int headingInput = movement.x;
-            int pitchInput = movement.y;
+            int pitchInput = -movement.y;
             Point totalMovement = ViewUtil.subtract(point, mouseDownPoint);
             int totalHeadingInput = totalMovement.x;
-            int totalPitchInput = totalMovement.y;
+            int totalPitchInput = -totalMovement.y;
 
             ViewInputAttributes.DeviceAttributes deviceAttributes =
                 getAttributes().getDeviceAttributes(ViewInputAttributes.DEVICE_MOUSE);
@@ -267,7 +267,7 @@ public abstract class BasicViewInputHandler extends AbstractViewInputHandler
                 mouseDownPoint = lastPoint;
             Point totalMovement = ViewUtil.subtract(point, mouseDownPoint);
             int totalHeadingInput = totalMovement.x;
-            int totalPitchInput = totalMovement.y;
+            int totalPitchInput = -totalMovement.y;
 
             ViewInputAttributes.DeviceAttributes deviceAttributes =
                 getAttributes().getDeviceAttributes(ViewInputAttributes.DEVICE_MOUSE);
