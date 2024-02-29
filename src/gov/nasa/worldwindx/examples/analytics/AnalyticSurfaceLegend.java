@@ -37,6 +37,8 @@ import java.awt.image.*;
 import java.text.Format;
 import java.util.ArrayList;
 
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 /**
  * @author dcollins
  * @version $Id: AnalyticSurfaceLegend.java 2053 2014-06-10 20:16:57Z tgaskins $

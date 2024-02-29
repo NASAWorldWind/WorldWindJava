@@ -30,6 +30,8 @@ package gov.nasa.worldwind.render;
 import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;

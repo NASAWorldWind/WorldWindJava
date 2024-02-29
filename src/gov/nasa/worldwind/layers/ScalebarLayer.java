@@ -34,6 +34,8 @@ import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import java.awt.*;
 import java.awt.geom.*;
 

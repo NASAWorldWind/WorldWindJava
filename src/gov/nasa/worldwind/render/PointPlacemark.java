@@ -40,6 +40,8 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import javax.xml.stream.*;
 import java.awt.*;
 import java.awt.geom.*;

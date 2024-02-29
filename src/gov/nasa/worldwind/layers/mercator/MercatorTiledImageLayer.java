@@ -38,6 +38,8 @@ import gov.nasa.worldwind.util.*;
 
 import javax.imageio.ImageIO;
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.*;
