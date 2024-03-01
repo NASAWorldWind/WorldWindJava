@@ -56,7 +56,7 @@ public class LocalRasterServerRetriever extends WWObjectImpl implements Retrieve
     protected long submitTime;
     protected long beginTime;
     protected long endTime;
-
+    protected String basicAuthenticationEncodedString;
     public LocalRasterServerRetriever(AVList params, RasterServer rasterServer, RetrievalPostProcessor postProcessor)
     {
         if (null != params)
@@ -175,6 +175,11 @@ public class LocalRasterServerRetriever extends WWObjectImpl implements Retrieve
     public void setStaleRequestLimit(int staleRequestLimit)
     {
         this.staleRequestLimit = staleRequestLimit;
+    }
+
+    @Override
+    public void setBasicAuthentication(String basicAuthorizationString) {
+        this.basicAuthenticationEncodedString = basicAuthorizationString;
     }
 
     public Retriever call() throws Exception

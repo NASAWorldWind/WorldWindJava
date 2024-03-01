@@ -63,12 +63,30 @@ public class WCS100Capabilities extends AbstractXMLEventParser
      */
     public static WCS100Capabilities retrieve(URI uri) throws Exception
     {
+        return retrieve(uri, null, null);
+    }
+
+    /**
+     * Retrieves the WCS capabilities document from a specified WCS server.
+     *
+     * @param uri The URI of the server.
+     * @param basicAuthUsername Username for Basic Authentication
+     * @param basicAuthPassword Password for Basic Authentication
+     *
+     * @return The WCS capabilities document for the specified server.
+     *
+     * @throws IllegalArgumentException if the specified URI is invalid.
+     * @throws gov.nasa.worldwind.exception.WWRuntimeException
+     *                                  if an error occurs retrieving the document.
+     */
+    public static WCS100Capabilities retrieve(URI uri, String basicAuthUsername, String basicAuthPassword) throws Exception
+    {
         try
         {
             CapabilitiesRequest request = new CapabilitiesRequest(uri, "WCS");
             request.setVersion("1.0.0");
 
-            return new WCS100Capabilities(request.toString());
+            return new WCS100Capabilities(request.toString(), basicAuthUsername, basicAuthPassword);
         }
         catch (URISyntaxException e)
         {
@@ -80,9 +98,21 @@ public class WCS100Capabilities extends AbstractXMLEventParser
 
     public WCS100Capabilities(Object docSource)
     {
+        this(docSource, null, null);
+    }
+
+    /**
+     * Constructs WCS100Capabilities with an optional Base64 Encoded String for Basic Authentication
+     *
+     * @param docSource
+     * @param basicAuthUsername Username for Basic Authentication
+     * @param basicAuthUsername Password for Basic Authentication
+     */
+    public WCS100Capabilities(Object docSource, String basicAuthUsername, String basicAuthPassword)
+    {
         super(OGCConstants.WCS_1_0_0_NAMESPACE_URI);
 
-        this.eventReader = this.createReader(docSource);
+        this.eventReader = this.createReader(docSource, basicAuthUsername, basicAuthPassword);
 
         this.initialize();
     }
@@ -92,9 +122,9 @@ public class WCS100Capabilities extends AbstractXMLEventParser
         this.parserContext = this.createParserContext(this.eventReader);
     }
 
-    protected XMLEventReader createReader(Object docSource)
+    protected XMLEventReader createReader(Object docSource, String basicAuthUsername, String basicAuthPassword)
     {
-        return WWXML.openEventReader(docSource);
+        return WWXML.openEventReader(docSource, basicAuthUsername, basicAuthPassword);
     }
 
     protected XMLEventParserContext createParserContext(XMLEventReader reader)
