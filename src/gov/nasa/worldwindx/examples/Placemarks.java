@@ -273,6 +273,7 @@ public class Placemarks extends ApplicationTemplate
                     // Create and assign the placemark attributes.
                     PointPlacemarkAttributes attrs = new PointPlacemarkAttributes();
                     attrs.setImage(symbolImage);
+                    attrs.setImageOffset(new Offset(0.5, 0.5, AVKey.FRACTION, AVKey.FRACTION));
                     attrs.setImageColor(new Color(1f, 1f, 1f, 1f));
                     attrs.setLabelOffset(new Offset(0.9d, 0.6d, AVKey.FRACTION, AVKey.FRACTION));
                     attrs.setScale(0.5);
