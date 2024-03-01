@@ -295,6 +295,7 @@ class MGRSCoordConverter
             UPSCoord UPS = convertMGRSToUPS(MGRSString);
             if (UPS != null)
             {
+                error_code = MGRS_NO_ERROR;
                 latitude = UPS.getLatitude().radians;
                 longitude = UPS.getLongitude().radians;
             }
@@ -365,6 +366,7 @@ class MGRSCoordConverter
         num_letters = i - j;
         if (num_letters == 3)
         {
+            error_code = MGRS_NO_ERROR;
             /* get letters */
             letters[0] = alphabet.indexOf(Character.toUpperCase(MGRSString.charAt(j)));
             if ((letters[0] == LETTER_I) || (letters[0] == LETTER_O))
@@ -1124,7 +1126,7 @@ class MGRSCoordConverter
             {
                 hemisphere = AVKey.SOUTH;
 
-                ltr2_low_value = upsConstants[mgrs.latitudeBand][12]; //.ltr2_low_value;
+                ltr2_low_value = upsConstants[mgrs.latitudeBand][1]; //.ltr2_low_value;
                 ltr2_high_value = upsConstants[mgrs.latitudeBand][2]; //.ltr2_high_value;
                 ltr3_high_value = upsConstants[mgrs.latitudeBand][3]; //.ltr3_high_value;
                 false_easting = upsConstants[mgrs.latitudeBand][4]; //.false_easting;
