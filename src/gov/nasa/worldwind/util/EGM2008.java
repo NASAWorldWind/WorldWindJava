@@ -40,13 +40,13 @@ import java.nio.FloatBuffer;
 
 public class EGM2008
 {
-    protected static final int N_ROW_MARKERS = 2; // The beginning and end of each row of latitude data is a flag of some sort
-    protected static final int LONGITUDE_COLS = 8640 + N_ROW_MARKERS; // Number of float32s in a row of data in the data file.
-    protected static final int LATITUDE_ROWS = 4321; // Number of rows.
+    public static final int N_ROW_MARKERS = 2; // The beginning and end of each row of latitude data is a flag of some sort
+    public static final int N_LONGITUDE_COLS = 8640 + N_ROW_MARKERS; // Number of float32s in a row of data in the data file.
+    public static final int N_LATITUDE_ROWS = 4321; // Number of rows.
     public static final double GRID_RESOLUTION = 2.5d / 60d; // 2.5 minute grid
-    protected static final double CELL_AREA = GRID_RESOLUTION * GRID_RESOLUTION;
-    protected static final long CACHE_SIZE = EGM2008.LONGITUDE_COLS * 4 * 45 * 15; // Cache 15 degrees worth of offsets.
-    protected static final int N_LAT_ROW_BYTES = LONGITUDE_COLS * 4; // Offsets are float32
+    public static final double CELL_AREA = GRID_RESOLUTION * GRID_RESOLUTION;
+    protected static final long CACHE_SIZE = EGM2008.N_LONGITUDE_COLS * 4 * 45 * 15; // Cache 15 degrees worth of offsets.
+    public static final int N_LAT_ROW_BYTES = N_LONGITUDE_COLS * 4; // Offsets are float32
 
     protected String offsetsFilePath;
     protected BufferWrapper deltas;
@@ -171,7 +171,7 @@ public class EGM2008
         boolean retrievalRequired = false;
         for (int i = 0; i < interpRowIndices.length; i++)
         {
-            if (interpRowIndices[i] < EGM2008.LATITUDE_ROWS)
+            if (interpRowIndices[i] < EGM2008.N_LATITUDE_ROWS)
             {
                 float[] latData = (float[]) this.offsetCache.getObject(interpRowIndices[i]);
                 latDataArray[i] = latData;
@@ -187,14 +187,14 @@ public class EGM2008
             {
                 for (int i = 0; i < interpRowIndices.length; i++)
                 {
-                    if (interpRowIndices[i] < EGM2008.LATITUDE_ROWS && latDataArray[i] == null)
+                    if (interpRowIndices[i] < EGM2008.N_LATITUDE_ROWS && latDataArray[i] == null)
                     {
                         offsetFile.seek(interpRowIndices[i] * EGM2008.N_LAT_ROW_BYTES);
                         byte[] latByteData = new byte[EGM2008.N_LAT_ROW_BYTES];
                         offsetFile.read(latByteData);
                         ByteBuffer latByteBuffer = ByteBuffer.wrap(latByteData).order(ByteOrder.LITTLE_ENDIAN);
                         FloatBuffer latFloatBuffer = latByteBuffer.asFloatBuffer();
-                        float[] latData = new float[EGM2008.LONGITUDE_COLS];
+                        float[] latData = new float[EGM2008.N_LONGITUDE_COLS];
                         latFloatBuffer.get(latData);
                         this.offsetCache.add(interpRowIndices[i], latData, EGM2008.N_LAT_ROW_BYTES);
                         latDataArray[i] = latData;

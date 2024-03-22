@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 /**
- * Shows how to apply EGM2008 offsets to the Earth.
+ * Shows how to apply EGM2008 offsets to Earth elevations.
  *
  * This EGM2008 data file is not included in the SDK due to its size. The data may be downloaded here:
  * https://builds.worldwind.arc.nasa.gov/artifactory/EGM2008-Data/egm2008_25.dat
@@ -156,12 +156,12 @@ public class EGM2008Offsets extends ApplicationTemplate
                         double elevation = earth.getElevation(pos.latitude, pos.longitude);
                         if (egmAvailable)
                         {
-                            placemark.setValue(AVKey.DISPLAY_NAME, String.format("EGM2008 Offset: %7.4f\nEllipse elevation:%7.4f\nEGM2008 Adjusted elevation: %7.4f",
-                                egmOffset, elevation, elevation + egmOffset));
+                            placemark.setValue(AVKey.DISPLAY_NAME, String.format("EGM2008 Offset: %7.4f\nEllipsoid elevation:%7.4f\nEGM2008 Adjusted elevation: %7.4f",
+                                egmOffset, elevation, elevation - egmOffset));
                         }
                         else
                         {
-                            placemark.setValue(AVKey.DISPLAY_NAME, String.format("EGM2008 Offset: N/A\nEllipse elevation:%7.4f\nEGM2008 Adjusted elevation: N/A",
+                            placemark.setValue(AVKey.DISPLAY_NAME, String.format("EGM2008 Offset: N/A\nEllipsoid elevation:%7.4f\nEGM2008 Adjusted elevation: N/A",
                                 elevation));
                         }
                         placemark.setLabelText(label);
