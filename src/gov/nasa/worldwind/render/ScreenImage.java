@@ -78,13 +78,6 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
      * is computed in <code>computeOffsets</code> and used in <code>draw</code> Initially <code>null</code>.
      */
     protected Point screenLocation;
-    /**
-     * Indicates the location of this screen image in the viewport (on the screen) in AWT coordinates. This property is
-     * assigned in <code>setScreenLocation</code> and <code>computeOffsets</code>. In <code>computeOffsets</code>, this
-     * is computed by converting the <code>screenLocation</code> from OpenGL coordinates to AWT coordinates. Initially
-     * <code>null</code>.
-     */
-    protected Point awtScreenLocation;
     protected double dx;
     protected double dy;
     protected Layer pickLayer;
@@ -122,7 +115,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
      */
     public Point getScreenLocation()
     {
-        return this.awtScreenLocation;
+        return this.screenLocation;
     }
 
     /**
@@ -136,7 +129,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
     public Point getScreenLocation(DrawContext dc)
     {
         this.computeOffsets(dc);
-        return this.awtScreenLocation;
+        return this.screenLocation;
     }
 
     /**
@@ -151,17 +144,16 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
      */
     public void setScreenLocation(Point screenLocation)
     {
-        // Use units PIXELS for the X screen offset, and and INSET_PIXELS for the Y screen offset. The Offset is in
-        // OpenGL coordinates with the origin in the lower-left corner, but the Point is in AWT coordinates with the
-        // origin in the upper-left corner. This offset translates the origin from the lower-left to the upper-left
-        // corner.
-        this.screenOffset = new Offset(screenLocation.getX(), screenLocation.getY(), AVKey.PIXELS, AVKey.INSET_PIXELS);
+        // Use units PIXELS for the X screen offset, and and PIXELS for the Y screen offset. The Offset is in
+        // OpenGL coordinates with the origin in the lower-left corner, as is the Point.  This offset 
+    	// translates the origin from the lower-left to the upper-left corner.
+        this.screenOffset = new Offset(screenLocation.getX(), screenLocation.getY(), AVKey.PIXELS, AVKey.PIXELS);
         this.imageOffset = new Offset(0.5, 0.5, AVKey.FRACTION, AVKey.FRACTION);
 
         // Set cached screen location to the initial screen location so that it can be retrieved if getScreenLocation()
         // is called before the image is rendered. This maintains backward compatibility with the previous behavior of
         // ScreenImage.
-        this.awtScreenLocation = new Point(screenLocation);
+        this.screenLocation = new Point(screenLocation);
     }
 
     /**
@@ -544,12 +536,7 @@ public class ScreenImage extends WWObjectImpl implements Renderable, Exportable
             {
                 this.screenLocation = new Point(viewportWidth / 2, viewportHeight / 2);
             }
-
-            // Convert the screen location from OpenGL to AWT coordinates and store the result in awtScreenLocation. The
-            // awtScreenLocation property is used in getScreenLocation to indicate the screen location in AWT
-            // coordinates.
-            this.awtScreenLocation = new Point(this.screenLocation.x, viewportHeight - this.screenLocation.y);
-
+          
             Point.Double overlayPoint;
             if (this.imageOffset != null)
                 overlayPoint = this.imageOffset.computeOffset(this.width, this.height, null, null);

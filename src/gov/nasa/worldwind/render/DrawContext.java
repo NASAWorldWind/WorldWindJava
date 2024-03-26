@@ -1051,4 +1051,11 @@ public interface DrawContext extends WWObject, Disposable
      * Convert AWT effective screen location to GL surface location using DPI scaling.
      */
     int [] awtPointToGLpoint(Point pt);
+    
+    /**
+     * Convert GL surface coordinate point to AWT device point using DPI scaling.
+     * @param glPoint
+     * @return
+     */
+    public Point glPointToAwtPoint(Point glPoint);
 }
