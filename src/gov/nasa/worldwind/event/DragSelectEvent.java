@@ -42,10 +42,11 @@ public class DragSelectEvent extends SelectEvent
 {
     private final java.awt.Point previousPickPoint;
 
-    public DragSelectEvent(Object source, String eventAction, MouseEvent mouseEvent, PickedObjectList pickedObjects,
-        java.awt.Point previousPickPoint)
+    public DragSelectEvent(Object source, String eventAction, java.awt.Point awtPt, MouseEvent mouseEvent, 
+    		               PickedObjectList pickedObjects,
+    		               java.awt.Point previousPickPoint)
     {
-        super(source, eventAction, mouseEvent, pickedObjects);
+        super(source, eventAction, awtPt, mouseEvent, pickedObjects);
         this.previousPickPoint = previousPickPoint;
     }
 

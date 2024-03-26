@@ -404,24 +404,26 @@ public class AWTInputHandler extends WWObjectImpl
         if (pickedObjects != null && pickedObjects.getTopPickedObject() != null
             && !pickedObjects.getTopPickedObject().isTerrain())
         {
-            // Something is under the cursor, so it's deemed "selected".
+        	Point awtPt = awtMouseEvent.getPoint();		// AWT screen coordinates
+
+        	// Something is under the cursor, so it's deemed "selected".
             if (MouseEvent.BUTTON1 == mouseEvent.getButton())
             {
                 if (mouseEvent.getClickCount() <= 1)
                 {
                     this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_CLICK,
-                        mouseEvent, pickedObjects));
+                    		awtPt, mouseEvent, pickedObjects));
                 }
                 else
                 {
                     this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_DOUBLE_CLICK,
-                        mouseEvent, pickedObjects));
+                    		awtPt, mouseEvent, pickedObjects));
                 }
             }
             else if (MouseEvent.BUTTON3 == mouseEvent.getButton())
             {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.RIGHT_CLICK,
-                    mouseEvent, pickedObjects));
+                		awtPt, mouseEvent, pickedObjects));
             }
 
             this.wwd.getView().firePropertyChange(AVKey.VIEW, null, this.wwd.getView());
@@ -472,16 +474,18 @@ public class AWTInputHandler extends WWObjectImpl
         if (this.objectsAtButtonPress != null && objectsAtButtonPress.getTopPickedObject() != null
             && !this.objectsAtButtonPress.getTopPickedObject().isTerrain())
         {
+        	Point awtPt = awtMouseEvent.getPoint();		// AWT screen coordinates
+
             // Something is under the cursor, so it's deemed "selected".
             if (MouseEvent.BUTTON1 == mouseEvent.getButton())
             {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_PRESS,
-                    mouseEvent, this.objectsAtButtonPress));
+                		awtPt, mouseEvent, this.objectsAtButtonPress));
             }
             else if (MouseEvent.BUTTON3 == mouseEvent.getButton())
             {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.RIGHT_PRESS,
-                    mouseEvent, this.objectsAtButtonPress));
+                		awtPt, mouseEvent, this.objectsAtButtonPress));
             }
 
             // Initiate a repaint.
@@ -600,8 +604,9 @@ public class AWTInputHandler extends WWObjectImpl
                 && !pickedObjects.getTopPickedObject().isTerrain()))
             {
                 this.isDragging = true;
-                DragSelectEvent selectEvent = new DragSelectEvent(this.wwd, SelectEvent.DRAG, mouseEvent, pickedObjects,
-                    prevMousePoint);
+                DragSelectEvent selectEvent = new DragSelectEvent(this.wwd, SelectEvent.DRAG, 
+                									awtMouseEvent.getPoint(), mouseEvent, 
+                									pickedObjects, prevMousePoint);
                 this.callSelectListeners(selectEvent);
 
                 // If no listener consumed the event, then cancel the drag.
@@ -790,7 +795,7 @@ public class AWTInputHandler extends WWObjectImpl
         if (this.isDragging)
         {
             this.callSelectListeners(new DragSelectEvent(this.wwd, SelectEvent.DRAG_END, null,
-                this.objectsAtButtonPress, this.mousePoint));
+                null, this.objectsAtButtonPress, this.mousePoint));
         }
 
         this.isDragging = false;
