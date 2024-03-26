@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -34,6 +34,7 @@ import gov.nasa.worldwind.event.*;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.util.*;
+import java.awt.Dimension;
 
 /**
  * Controls display of tool tips on picked objects. Any shape implementing {@link AVList} can participate. Shapes
@@ -52,6 +53,7 @@ public class ToolTipController implements SelectListener, Disposable
     protected Object lastHoverObject;
     protected AnnotationLayer layer;
     protected ToolTipAnnotation annotation;
+    protected Dimension annotationSize = null;
 
     /**
      * Create a controller for a specified {@link WorldWindow} that displays tool tips on hover and/or rollover.
@@ -84,6 +86,16 @@ public class ToolTipController implements SelectListener, Disposable
         this.wwd.addSelectListener(this);
     }
 
+    public Dimension getAnnotationSize()
+    {
+        return this.annotationSize;
+    }
+
+    public void setAnnotationSize(Dimension value)
+    {
+        this.annotationSize = value;
+    }
+
     public void dispose()
     {
         this.wwd.removeSelectListener(this);
@@ -91,14 +103,14 @@ public class ToolTipController implements SelectListener, Disposable
 
     protected String getHoverText(SelectEvent event)
     {
-        return event.getTopObject() != null && event.getTopObject() instanceof AVList ?
-            ((AVList) event.getTopObject()).getStringValue(this.hoverKey) : null;
+        return event.getTopObject() != null && event.getTopObject() instanceof AVList
+            ? ((AVList) event.getTopObject()).getStringValue(this.hoverKey) : null;
     }
 
     protected String getRolloverText(SelectEvent event)
     {
-        return event.getTopObject() != null && event.getTopObject() instanceof AVList ?
-            ((AVList) event.getTopObject()).getStringValue(this.rolloverKey) : null;
+        return event.getTopObject() != null && event.getTopObject() instanceof AVList
+            ? ((AVList) event.getTopObject()).getStringValue(this.rolloverKey) : null;
     }
 
     public void selected(SelectEvent event)
@@ -167,6 +179,7 @@ public class ToolTipController implements SelectListener, Disposable
         else
         {
             annotation = new ToolTipAnnotation(text);
+            annotation.getAttributes().setSize(this.annotationSize);
         }
 
         if (layer == null)

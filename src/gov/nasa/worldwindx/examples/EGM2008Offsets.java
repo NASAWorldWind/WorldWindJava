@@ -36,7 +36,7 @@ import gov.nasa.worldwind.globes.Earth;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.render.PointPlacemark;
-import gov.nasa.worldwind.util.EGM96;
+import gov.nasa.worldwind.util.EGM2008;
 import java.awt.Dimension;
 
 import java.io.IOException;
@@ -44,12 +44,14 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 /**
- * Shows how to apply EGM96 offsets to the Earth.
+ * Shows how to apply EGM2008 offsets to Earth elevations.
  *
- * @author tag
- * @version $Id: EGM96Offsets.java 1501 2013-07-11 15:59:11Z tgaskins $
+ * This EGM2008 data file is not included in the SDK due to its size. The data may be downloaded here:
+ * https://builds.worldwind.arc.nasa.gov/artifactory/EGM2008-Data/egm2008_25.dat
+ *
+ * This example looks for the EGM2008 data in the WorldWind src/config folder by default.
  */
-public class EGM96Offsets extends ApplicationTemplate
+public class EGM2008Offsets extends ApplicationTemplate
 {
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {
@@ -116,14 +118,6 @@ public class EGM96Offsets extends ApplicationTemplate
         {
             Model m = this.wwjPanel.getWwd().getModel();
             Earth earth = (Earth) m.getGlobe();
-            try
-            {
-                earth.applyEGMA96Offsets("config/EGM96.dat");
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
             final RenderableLayer layer = new RenderableLayer();
             double[] locations = new double[]
             {
@@ -133,6 +127,14 @@ public class EGM96Offsets extends ApplicationTemplate
                 -80.0, 0.0,
                 -90.0, 0.0
             };
+            EGM2008 egm2008Offsets = new EGM2008("config/egm2008_25.dat");
+            boolean egmAvailable = egm2008Offsets.isEGMDataAvailable();
+            if (!egmAvailable)
+            {
+                System.out.println("*** EGM 2008 data not available.");
+            }
+
+            // Run the elevation query in a separate thread to avoid locking up the user interface
             Thread t = new Thread(() ->
             {
                 ArrayList<LatLon> elevLocations = new ArrayList<>();
@@ -143,18 +145,34 @@ public class EGM96Offsets extends ApplicationTemplate
 
                 loadBestElevations(elevLocations);
 
-                EGM96 egm96Offsets = earth.getEGM96();
-                for (int i = 0; i < locations.length; i += 2)
+                try
                 {
-                    Position pos = Position.fromDegrees(locations[i], locations[i + 1], 0);
-                    PointPlacemark placemark = new PointPlacemark(pos);
-                    String label = String.format("lat: %7.4f, lon: %7.4f", locations[i], locations[i + 1]);
-                    placemark.setValue(AVKey.DISPLAY_NAME, String.format("EGM96 Offset: %7.4f\nEGM96 Adjusted elevation: %7.4f",
-                        egm96Offsets.getOffset(pos.latitude, pos.longitude),
-                        earth.getElevation(pos.latitude, pos.longitude)));
-                    placemark.setLabelText(label);
-                    layer.addRenderable(placemark);
+                    for (int i = 0; i < locations.length; i += 2)
+                    {
+                        Position pos = Position.fromDegrees(locations[i], locations[i + 1], 0);
+                        PointPlacemark placemark = new PointPlacemark(pos);
+                        String label = String.format("lat: %7.4f, lon: %7.4f", locations[i], locations[i + 1]);
+                        float egmOffset = egm2008Offsets.getOffset(pos.latitude, pos.longitude);
+                        double elevation = earth.getElevation(pos.latitude, pos.longitude);
+                        if (egmAvailable)
+                        {
+                            placemark.setValue(AVKey.DISPLAY_NAME, String.format("EGM2008 Offset: %7.4f\nEllipsoid elevation:%7.4f\nEGM2008 Adjusted elevation: %7.4f",
+                                egmOffset, elevation, elevation - egmOffset));
+                        }
+                        else
+                        {
+                            placemark.setValue(AVKey.DISPLAY_NAME, String.format("EGM2008 Offset: N/A\nEllipsoid elevation:%7.4f\nEGM2008 Adjusted elevation: N/A",
+                                elevation));
+                        }
+                        placemark.setLabelText(label);
+                        layer.addRenderable(placemark);
+                    }
                 }
+                catch (IOException iex)
+                {
+                    iex.printStackTrace();
+                }
+
                 SwingUtilities.invokeLater(() ->
                 {
                     System.out.println("Elevations retrieved");
@@ -163,6 +181,50 @@ public class EGM96Offsets extends ApplicationTemplate
             });
             t.start();
 
+            try
+            {
+                // Test offsets for some coordinates
+                float lat = 47;
+                float lon = -94;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                lat = 37;
+                lon = -119;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                // Try previous coordinates to verify caching
+                lat = 47;
+                lon = -94;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                lat = 37;
+                lon = -119;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                lat = 47.02f;
+                lon = -94.02f;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                float gridResolution = (float) EGM2008.GRID_RESOLUTION;
+                lat = 47 + gridResolution;
+                lon = -94 - gridResolution;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                lat = 36.0f;
+                lon = -117.0f;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                lat = 36.0f;
+                lon = -117.041666666667f;
+                System.out.println(lat + "," + lon + "," + egm2008Offsets.getOffset(lat, lon));
+
+                System.out.println();
+            }
+            catch (IOException iex)
+            {
+                iex.printStackTrace();
+            }
+
             this.wwjPanel.toolTipController.setAnnotationSize(new Dimension(500, 0));
             insertBeforeCompass(getWwd(), layer);
         }
@@ -170,6 +232,6 @@ public class EGM96Offsets extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-        ApplicationTemplate.start("WorldWind EGM96 Offsets", AppFrame.class);
+        ApplicationTemplate.start("WorldWind EGM2008 Offsets", AppFrame.class);
     }
 }
