@@ -65,6 +65,8 @@ class RPFRetriever extends WWObjectImpl implements Retriever
     public static final int RESPONSE_CODE_OK = 1;
     public static final int RESPONSE_CODE_NO_CONTENT = 2;
 
+    protected String basicAuthenticationEncodedString;
+
     public RPFRetriever(RPFGenerator.RPFServiceInstance service, URL url, RetrievalPostProcessor postProcessor)
     {
         if (service == null)
@@ -194,6 +196,11 @@ class RPFRetriever extends WWObjectImpl implements Retriever
     public void setStaleRequestLimit(int staleRequestLimit)
     {
         this.staleRequestLimit = staleRequestLimit;
+    }
+
+    @Override
+    public void setBasicAuthentication(String basicAuthorizationString) {
+        this.basicAuthenticationEncodedString = basicAuthorizationString;
     }
 
     public final RPFGenerator.RPFServiceInstance getService()

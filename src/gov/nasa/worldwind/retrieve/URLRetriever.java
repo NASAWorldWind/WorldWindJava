@@ -71,6 +71,7 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
     protected long submitTime;
     protected long beginTime;
     protected long endTime;
+    protected String basicAuthenticationEncodedStr;
 
     /**
      * Create the appropriate retriever for a URL's protocol.
@@ -333,6 +334,12 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
                 this.connection = this.url.openConnection(proxy);
             else
                 this.connection = this.url.openConnection();
+
+            // Set optional basic authentication
+            if (basicAuthenticationEncodedStr != null)
+            {
+                this.connection.setRequestProperty("Authorization", "Basic " + basicAuthenticationEncodedStr);
+            }
         }
         catch (java.io.IOException e)
         {
@@ -606,6 +613,10 @@ public abstract class URLRetriever extends WWObjectImpl implements Retriever
             return System.currentTimeMillis() + (expiration - date);
 
         return expiration;
+    }
+
+    public void setBasicAuthentication(String basicAuthenticationEncodedStr){
+        this.basicAuthenticationEncodedStr = basicAuthenticationEncodedStr;
     }
 
     @Override
