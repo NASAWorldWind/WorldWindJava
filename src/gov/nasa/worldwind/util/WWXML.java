@@ -61,6 +61,8 @@ public class WWXML
 {
     public static final String XLINK_URI = "http://www.w3.org/1999/xlink";
 
+    private static Map<XMLEventReader, InputStream> inputSources = new HashMap<XMLEventReader, InputStream>();
+    
     /**
      * Create a DOM builder.
      *
@@ -192,9 +194,12 @@ public class WWXML
             throw new IllegalArgumentException(message);
         }
 
-        InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c);
-
-        return inputStream != null ? openDocumentStream(inputStream) : null;
+        try (InputStream inputStream = WWIO.openFileOrResourceStream(filePath, c)) {
+        	return inputStream != null ? openDocumentStream(inputStream) : null;
+        } catch (IOException e) {
+        	e.printStackTrace();
+        	return null;
+        }
     }
 
     /**
@@ -295,10 +300,7 @@ public class WWXML
             throw new IllegalArgumentException(message);
         }
 
-        try
-        {
-            java.io.FileOutputStream outputStream = new java.io.FileOutputStream(filePath);
-
+        try (java.io.FileOutputStream outputStream = new java.io.FileOutputStream(filePath)) {
             saveDocumentToStream(doc, outputStream);
         }
         catch (IOException e)
@@ -378,7 +380,9 @@ public class WWXML
 
         try
         {
-            return inputFactory.createXMLEventReader(inputStream);
+        	XMLEventReader reader = inputFactory.createXMLEventReader(inputStream);
+            inputSources.put(reader, inputStream);
+            return reader;
         }
         catch (XMLStreamException e)
         {
@@ -462,7 +466,9 @@ public class WWXML
         try
         {
             InputStream inputStream = url.openStream();
-            return openEventReaderStream(inputStream, isNamespaceAware);
+            XMLEventReader reader = openEventReaderStream(inputStream, isNamespaceAware);
+            inputSources.put(reader, inputStream);
+            return reader;
         }
         catch (IOException e)
         {
@@ -553,6 +559,15 @@ public class WWXML
         try
         {
             eventReader.close();
+            InputStream is = inputSources.get(eventReader);
+            if (is != null) {
+            	try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+            	inputSources.remove(eventReader);
+            }
         }
         catch (XMLStreamException e)
         {
