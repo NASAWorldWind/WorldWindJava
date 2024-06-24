@@ -170,9 +170,9 @@ public class InstallDTED extends ApplicationTemplate
                 {
                     this.findDTEDFiles(file, files);
                 }
-                else if (file.getName().endsWith("dt0")
-                    || file.getName().endsWith("dt1")
-                    || file.getName().endsWith("dt2"))
+                else if (file.getName().toLowerCase().endsWith("dt0")
+                    || file.getName().toLowerCase().endsWith("dt1")
+                    || file.getName().toLowerCase().endsWith("dt2"))
                 {
                     files.add(file);
                 }
