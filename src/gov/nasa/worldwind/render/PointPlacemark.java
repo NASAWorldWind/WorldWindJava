@@ -1001,30 +1001,6 @@ public class PointPlacemark extends WWObjectImpl
                     (byte) color.getAlpha());
             }
 
-            // The image is drawn using a parallel projection.
-            osh.pushProjectionIdentity(gl);
-            gl.glOrtho(0d, dc.getView().getViewport().width, 0d, dc.getView().getViewport().height, -1d, 1d);
-
-            // Apply the depth buffer but don't change it (for screen-space shapes).
-            if ((!dc.isDeepPickingEnabled()))
-                gl.glEnable(GL.GL_DEPTH_TEST);
-            gl.glDepthMask(false);
-
-            // Suppress any fully transparent image pixels.
-            gl.glEnable(GL2.GL_ALPHA_TEST);
-            gl.glAlphaFunc(GL2.GL_GREATER, 0.001f);
-
-            // Adjust depth of image to bring it slightly forward
-            double depth = opm.screenPoint.z - (8d * 0.00048875809d);
-            depth = depth < 0d ? 0d : (depth > 1d ? 1d : depth);
-            gl.glDepthFunc(GL.GL_LESS);
-            gl.glDepthRange(depth, depth);
-
-            // The image is drawn using a translated and scaled unit quad.
-            // Translate to screen point and adjust to align hot spot.
-            osh.pushModelviewIdentity(gl);
-            gl.glTranslated(opm.screenPoint.x + this.dx, opm.screenPoint.y + this.dy, 0);
-
             // Compute the scale
             double xscale;
             Double scale = this.getActiveAttributes().getScale();
@@ -1039,28 +1015,51 @@ public class PointPlacemark extends WWObjectImpl
             else
                 yscale = this.activeTexture.getHeight(dc);
 
-            Double heading = getActiveAttributes().getHeading();
+            // Calculate maximum possible depth value in case of rectangle is tilted on 90 degree and rotated on 45
+            double maxDepth = Math.max(xscale, yscale) * 1.42;
+
+            // The image is drawn using a parallel projection.
+            osh.pushProjectionIdentity(gl);
+            gl.glOrtho(0d, dc.getView().getViewport().width, 0d, dc.getView().getViewport().height, -maxDepth, maxDepth);
+
+            // Apply the depth buffer but don't change it (for screen-space shapes).
+            if ((!dc.isDeepPickingEnabled()))
+                gl.glEnable(GL.GL_DEPTH_TEST);
+            gl.glDepthMask(false);
+
+            // Suppress any fully transparent image pixels.
+            gl.glEnable(GL2.GL_ALPHA_TEST);
+            gl.glAlphaFunc(GL2.GL_GREATER, 0.001f);
+
+            // Adjust depth of image to bring it slightly forward
+            double depth = opm.screenPoint.z - (8d * 0.00048875809d);
+            depth = depth < 0d ? 0d : Math.min(depth, 1d);
+            gl.glDepthFunc(GL.GL_LESS);
+            gl.glDepthRange(depth, depth);
+
+            // The image is drawn using a translated and scaled unit quad.
+            osh.pushModelviewIdentity(gl);
+
+            // Translate to screen point.
+            gl.glTranslated(opm.screenPoint.x, opm.screenPoint.y, 0);
+
+            // Apply the pitch if specified.
             Double pitch = getActiveAttributes().getPitch();
-
-            // Adjust heading to be relative to globe or screen
-            if (heading != null)
-            {
-                if (AVKey.RELATIVE_TO_GLOBE.equals(this.getActiveAttributes().getHeadingReference()))
-                    heading = dc.getView().getHeading().degrees - heading;
-                else
-                    heading = -heading;
+            if (pitch != null) {
+                gl.glRotated(pitch, 1, 0, 0);
             }
 
-            // Apply the heading and pitch if specified.
-            if (heading != null || pitch != null)
-            {
-                gl.glTranslated(xscale / 2, yscale / 2, 0);
-                if (pitch != null)
-                    gl.glRotated(pitch, 1, 0, 0);
-                if (heading != null)
-                    gl.glRotated(heading, 0, 0, 1);
-                gl.glTranslated(-xscale / 2, -yscale / 2, 0);
+            // Apply the heading if specified.
+            Double heading = getActiveAttributes().getHeading();
+            if (heading != null) {
+                // Adjust heading to be relative to globe or screen
+                heading = AVKey.RELATIVE_TO_GLOBE.equals(this.getActiveAttributes().getHeadingReference())
+                        ? dc.getView().getHeading().degrees - heading : -heading;
+                gl.glRotated(heading, 0, 0, 1);
             }
+
+            // Adjust to align hot spot.
+            gl.glTranslated(this.dx, this.dy, 0);
 
             // Scale the unit quad
             gl.glScaled(xscale, yscale, 1);
