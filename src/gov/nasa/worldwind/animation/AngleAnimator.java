@@ -134,7 +134,7 @@ public class AngleAnimator extends BasicAnimator
 
     /**
      * Get the {@link gov.nasa.worldwind.util.PropertyAccessor} in use by this animation
-     * 
+     *
      * @return the {@link gov.nasa.worldwind.util.PropertyAccessor} in use by this animation
      */
     public PropertyAccessor.AngleAccessor getPropertyAccessor()
@@ -172,7 +172,5 @@ public class AngleAnimator extends BasicAnimator
            interpolant,
            this.begin,
            this.end);
-
-        
     }
 }
