@@ -62,6 +62,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
     protected AtomicBoolean showNetworkStatus = new AtomicBoolean(true);
     protected AtomicBoolean isNetworkAvailable = new AtomicBoolean(true);
     protected Thread netCheckThread;
+    private Timer downloadTimer;
 
     public StatusBar()
     {
@@ -83,7 +84,7 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
         heartBeat.setHorizontalAlignment(SwingConstants.CENTER);
         heartBeat.setForeground(new java.awt.Color(255, 0, 0, 0));
 
-        Timer downloadTimer = new Timer(100, new ActionListener()
+        downloadTimer = new Timer(100, new ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent actionEvent)
             {
@@ -319,5 +320,10 @@ public class StatusBar extends JPanel implements PositionListener, RenderingList
                     altDisplay.setText(Logging.getMessage("term.Altitude"));
             }
         });
+    }
+    
+    public void stopDownloadTimer()
+    {
+        downloadTimer.stop();
     }
 }
