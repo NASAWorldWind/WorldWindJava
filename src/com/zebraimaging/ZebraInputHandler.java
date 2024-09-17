@@ -19,28 +19,28 @@ public class ZebraInputHandler extends AWTInputHandler
     /** All instantiations of this class are stored for internal retrieval. */
     private static List<ZebraInputHandler> instances = new ArrayList<ZebraInputHandler>();
     private static Timer repaintContextsTimer = null;
-    
+
     final static TimerTask repaintContextsTask = new TimerTask()
 	{
-		public void run()        	
+		public void run()
 		{
 			Iterator<ZebraInputHandler> itr = instances.iterator();
 	        while (itr.hasNext())
 	        {
-	            ZebraInputHandler h = itr.next();	           
+	            ZebraInputHandler h = itr.next();
 	            if (h.NeedsRefresh() == true)
 	            {
 	            	h.SetRefresh(false);
 	            	h.getWorldWindow().redraw();
-	            }        		            	
+	            }
 	        }
 		}
 	};
-	
+
 	private long hwnd = 0;
-    private boolean arGL2Present = false;    
+    private boolean arGL2Present = false;
     private boolean refresh = false;
-    
+
     public ZebraInputHandler()
     {
         /**
@@ -49,7 +49,7 @@ public class ZebraInputHandler extends AWTInputHandler
          * (b) Not using the Zebra integration tools.
          */
         try
-        {        	
+        {
             System.loadLibrary("arGL2Integrator");
             arGL2Present = true;
             instances.add(this);
@@ -59,7 +59,7 @@ public class ZebraInputHandler extends AWTInputHandler
         {
             System.out.println("FAILED to load arGL2Integrator.dll");
         }
-        
+
         if (repaintContextsTimer == null)
         {
         	repaintContextsTimer = new Timer();
@@ -68,15 +68,15 @@ public class ZebraInputHandler extends AWTInputHandler
     }
 
     private synchronized void SetRefresh(boolean value)
-    { 
+    {
     	refresh = value;
     }
-    
+
     private synchronized boolean NeedsRefresh()
     {
     	return refresh;
 	}
-    
+
     public void keyPressed(KeyEvent e)
     {
         boolean consumed = false;
@@ -198,7 +198,7 @@ public class ZebraInputHandler extends AWTInputHandler
     // Java static methods executed by arGL2Integrator.dll via JNI
 
     public static void forceRepaint(long hwnd)
-    {   
+    {
         /** Force the instance of the ZebraViewInputHandler class to redraw it's associated OpenGL window. */
         ZebraInputHandler h = getInstance(hwnd);
         if (h != null)
