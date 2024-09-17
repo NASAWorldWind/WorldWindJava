@@ -36,7 +36,7 @@ import gov.nasa.worldwind.util.*;
  */
 public class PositionAnimator extends BasicAnimator
 {
-    
+
     protected Position begin;
     protected Position end;
     protected final PropertyAccessor.PositionAccessor propertyAccessor;
@@ -69,7 +69,7 @@ public class PositionAnimator extends BasicAnimator
         this.end = end;
         this.propertyAccessor = propertyAccessor;
     }
-    
+
     public void setBegin(Position begin)
     {
         this.begin = begin;
