@@ -443,7 +443,7 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
             // the center of the screen.
             if (getWorldWindow() instanceof Component)
             {
-                if (getMousePoint().y < ((Component) getWorldWindow()).getHeight() / 2)
+                if (getMousePoint().y > ((Component) getWorldWindow()).getHeight() / 2)
                 {
                     headingInput = -headingInput;
                 }
