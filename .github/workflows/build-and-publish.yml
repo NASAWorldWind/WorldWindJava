@@ -1,0 +1,127 @@
+# GitHub Actions workflow to build WorldWind Java with Ant and publish to GitHub Packages
+name: Build and Publish
+
+on:
+  push:
+    branches: [ "develop", "main" ]
+  pull_request:
+    branches: [ "develop", "main" ]
+  release:
+    types: [created]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+
+    - name: Cache build dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.ant/lib
+        key: ${{ runner.os }}-ant-${{ hashFiles('**/*.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-ant-
+
+    - name: Build with Ant
+      run: |
+        echo "Building WorldWind Java with Ant..."
+        ant -f release-build.xml clean
+        ant -f release-build.xml assemble
+
+    - name: List generated JAR files
+      run: |
+        echo "Generated JAR files:"
+        find . -name "*.jar" -type f | grep -E "(worldwind|worldwindx)" | sort
+        echo "Root directory JAR files:"
+        ls -la *.jar | grep -E "(worldwind|worldwindx)" || echo "No worldwind JAR files in root"
+
+    - name: Verify JAR files exist
+      run: |
+        echo "Verifying JAR files exist..."
+        if [ ! -f "./worldwind.jar" ]; then
+          echo "ERROR: worldwind.jar not found"
+          exit 1
+        fi
+        if [ ! -f "./worldwindx.jar" ]; then
+          echo "ERROR: worldwindx.jar not found"
+          exit 1
+        fi
+        echo "JAR file sizes:"
+        ls -la worldwind.jar worldwindx.jar
+
+    - name: Determine version for publishing
+      id: version
+      run: |
+        if [ "${{ github.event_name }}" = "release" ]; then
+          VERSION="${{ github.event.release.tag_name }}"
+        else
+          VERSION="${{ github.ref_name }}-$(echo ${{ github.sha }} | cut -c1-8)"
+        fi
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+        echo "Publishing version: $VERSION"
+
+    - name: Set up Maven settings
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        server-id: github
+        settings-path: ${{ github.workspace }}
+
+    - name: Publish JAR files to GitHub Packages
+      if: github.event_name == 'release' || github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
+      run: |
+        VERSION="${{ steps.version.outputs.VERSION }}"
+        echo "Publishing version: $VERSION"
+        
+        # Publish worldwind.jar
+        echo "Publishing worldwind.jar..."
+        mvn deploy:deploy-file \
+          -DgroupId=gov.nasa.worldwind \
+          -DartifactId=worldwind \
+          -Dversion="$VERSION" \
+          -Dpackaging=jar \
+          -Dfile=./worldwind.jar \
+          -DrepositoryId=github \
+          -Durl=https://maven.pkg.github.com/ismakun/WorldWindJava \
+          -s $GITHUB_WORKSPACE/settings.xml \
+          -B
+        
+        # Publish worldwindx.jar
+        echo "Publishing worldwindx.jar..."
+        mvn deploy:deploy-file \
+          -DgroupId=gov.nasa.worldwind \
+          -DartifactId=worldwindx \
+          -Dversion="$VERSION" \
+          -Dpackaging=jar \
+          -Dfile=./worldwindx.jar \
+          -DrepositoryId=github \
+          -Durl=https://maven.pkg.github.com/ismakun/WorldWindJava \
+          -s $GITHUB_WORKSPACE/settings.xml \
+          -B
+        
+        echo "Successfully published both JAR files to GitHub Packages"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: worldwind-jars-${{ github.sha }}
+        path: |
+          worldwind.jar
+          worldwindx.jar
+        retention-days: 30
