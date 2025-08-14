@@ -23,7 +23,8 @@ Official WorldWind Java releases have the latest stable features, enhancements a
 
 - [GitHub Releases](https://github.com/NASAWorldWind/WorldWindJava/releases/) documents official releases
 - [GitHub Milestones](https://github.com/NASAWorldWind/WorldWindJava/milestones) documents upcoming releases and the development roadmap
-- [Travis CI](https://travis-ci.com/NASAWorldWind/WorldWindJava) provides continuous integration and build automation
+- [GitHub Actions](https://github.com/ismakun/WorldWindJava/actions) provides continuous integration and build automation
+- [GitHub Packages](https://github.com/ismakun/WorldWindJava/packages) hosts automatically built JAR artifacts
 
 ## Run a Demo
 
@@ -74,6 +75,43 @@ binary JAR files as follows:
    JOGL attempts to use the native binary JAR files before loading from the library path, so these files must not be
    deployed with the application.
 4. When running, specify the JVM argument -Djogamp.gluegen.UseTempJarCache=false
+
+## Accessing Pre-built JAR Files
+
+Pre-built WorldWind Java JAR files are automatically published to GitHub Packages through GitHub Actions:
+
+- **worldwind.jar** - Core WorldWind library containing the main SDK
+- **worldwindx.jar** - Extended examples and applications
+
+### Maven Dependency
+
+To use the published JAR files in a Maven project, add this to your `pom.xml`:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>gov.nasa.worldwind</groupId>
+        <artifactId>worldwind</artifactId>
+        <version>develop-latest</version>
+    </dependency>
+    <dependency>
+        <groupId>gov.nasa.worldwind</groupId>
+        <artifactId>worldwindx</artifactId>
+        <version>develop-latest</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+    <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/ismakun/WorldWindJava</url>
+    </repository>
+</repositories>
+```
+
+### Direct Download
+
+JAR files can also be downloaded directly from the [GitHub Packages page](https://github.com/ismakun/WorldWindJava/packages) or from [GitHub Actions artifacts](https://github.com/ismakun/WorldWindJava/actions).
 
 ## License
 
