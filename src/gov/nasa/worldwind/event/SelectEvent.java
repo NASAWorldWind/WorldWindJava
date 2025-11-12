@@ -65,7 +65,6 @@ import java.util.List;
  * @author tag
  * @version $Id: SelectEvent.java 1171 2013-02-11 21:45:02Z dcollins $
  */
-@SuppressWarnings({"StringEquality"})
 public class SelectEvent extends WWEvent
 {
     /** The user clicked the left mouse button while the cursor was over picked object. */
@@ -96,24 +95,26 @@ public class SelectEvent extends WWEvent
      * The user has selected one or more of objects using a selection box. A box rollover event is generated every frame
      * if one or more objects intersect the box, in which case the event's pickedObjects list contain the selected
      * objects. A box rollover event is generated once when the selection becomes empty, in which case the event's
-     * pickedObjects is <code>null</code>. In either case, the event's pickRect contains the selection box bounds in AWT
-     * screen coordinates.
+     * pickedObjects is <code>null</code>. In either case, the event's pickRect contains the
+     * selection box bounds in GL surface coordinates.
      */
     public static final String BOX_ROLLOVER = "gov.nasa.worldwind.SelectEvent.BoxRollover";
 
     private final String eventAction;
-    private final Point pickPoint;
-    private final Rectangle pickRect;
-    private final MouseEvent mouseEvent;
+    private final Point pickPoint;			// GL surface coordinates
+    private final Rectangle pickRect;		// GL surface coordinates
+    private final MouseEvent mouseEvent;	// GL surface coordinates
+    private final Point awtMousePt;			// AWT screen coordinates
     private final PickedObjectList pickedObjects;
 
-    public SelectEvent(Object source, String eventAction, MouseEvent mouseEvent, PickedObjectList pickedObjects)
+    public SelectEvent(Object source, String eventAction, Point awtPt, MouseEvent mouseEvent, PickedObjectList pickedObjects)
     {
         super(source);
         this.eventAction = eventAction;
         this.pickPoint = mouseEvent != null ? mouseEvent.getPoint() : null;
         this.pickRect = null;
         this.mouseEvent = mouseEvent;
+        this.awtMousePt = awtPt;
         this.pickedObjects = pickedObjects;
     }
 
@@ -124,6 +125,7 @@ public class SelectEvent extends WWEvent
         this.pickPoint = pickPoint;
         this.pickRect = null;
         this.mouseEvent = null;
+        this.awtMousePt = null;
         this.pickedObjects = pickedObjects;
     }
 
@@ -134,6 +136,7 @@ public class SelectEvent extends WWEvent
         this.pickPoint = null;
         this.pickRect = pickRectangle;
         this.mouseEvent = null;
+        this.awtMousePt = null;
         this.pickedObjects = pickedObjects;
     }
 
@@ -150,6 +153,10 @@ public class SelectEvent extends WWEvent
     {
         return this.eventAction != null ? this.eventAction : "gov.nasa.worldwind.SelectEvent.UnknownEventAction";
     }
+
+    public Point getAwtMousePt() {
+		return awtMousePt;
+	}
 
     public Point getPickPoint()
     {

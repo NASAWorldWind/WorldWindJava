@@ -67,17 +67,20 @@ public class CompassLayer extends AbstractLayer
 
     protected class OrderedIcon implements OrderedRenderable
     {
-        public double getDistanceFromEye()
+        @Override
+		public double getDistanceFromEye()
         {
             return 0;
         }
 
-        public void pick(DrawContext dc, Point pickPoint)
+        @Override
+		public void pick(DrawContext dc, Point pickPoint)
         {
             CompassLayer.this.draw(dc);
         }
 
-        public void render(DrawContext dc)
+        @Override
+		public void render(DrawContext dc)
         {
             CompassLayer.this.draw(dc);
         }
@@ -295,7 +298,8 @@ public class CompassLayer extends AbstractLayer
         this.locationOffset = locationOffset;
     }
 
-    protected void doRender(DrawContext dc)
+    @Override
+	protected void doRender(DrawContext dc)
     {
         if (dc.isContinuous2DGlobe() && this.frameStampForDrawing == dc.getFrameTimeStamp())
             return;
@@ -305,7 +309,8 @@ public class CompassLayer extends AbstractLayer
         this.frameStampForDrawing = dc.getFrameTimeStamp();
     }
 
-    protected void doPick(DrawContext dc, Point pickPoint)
+    @Override
+	protected void doPick(DrawContext dc, Point pickPoint)
     {
         if (dc.isContinuous2DGlobe() && this.frameStampForPicking == dc.getFrameTimeStamp())
             return;
@@ -414,7 +419,7 @@ public class CompassLayer extends AbstractLayer
                         Vec4 center = new Vec4(locationSW.x + width * scale / 2, locationSW.y + height * scale / 2,
                             0);
                         double px = dc.getPickPoint().x - center.x;
-                        double py = viewport.getHeight() - dc.getPickPoint().y - center.y;
+                        double py = dc.getPickPoint().y - center.y;
                         Angle pickHeading = Angle.fromRadians(Math.atan2(px, py));
                         pickHeading = pickHeading.degrees >= 0 ? pickHeading : pickHeading.addDegrees(360);
                         po.setValue("Heading", pickHeading);

@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -57,6 +57,7 @@ public class AWTInputHandler extends WWObjectImpl
     protected boolean forceRedrawOnMousePressed = Configuration.getBooleanValue(AVKey.REDRAW_ON_MOUSE_PRESSED, false);
     protected javax.swing.Timer hoverTimer = new javax.swing.Timer(600, new ActionListener()
     {
+        @Override
         public void actionPerformed(ActionEvent actionEvent)
         {
             if (AWTInputHandler.this.pickMatches(AWTInputHandler.this.hoverObjects))
@@ -75,6 +76,7 @@ public class AWTInputHandler extends WWObjectImpl
     {
     }
 
+    @Override
     public void dispose()
     {
         this.hoverTimer.stop();
@@ -91,6 +93,7 @@ public class AWTInputHandler extends WWObjectImpl
         this.objectsAtButtonPress = null;
     }
 
+    @Override
     public void setEventSource(WorldWindow newWorldWindow)
     {
         if (newWorldWindow != null && !(newWorldWindow instanceof Component))
@@ -139,6 +142,7 @@ public class AWTInputHandler extends WWObjectImpl
 
         this.selectListener = new SelectListener()
         {
+            @Override
             public void selected(SelectEvent event)
             {
                 if (event.getEventAction().equals(SelectEvent.ROLLOVER))
@@ -160,16 +164,19 @@ public class AWTInputHandler extends WWObjectImpl
         this.wwd.removeSelectListener(selectListener);
     }
 
+    @Override
     public WorldWindow getEventSource()
     {
         return this.wwd;
     }
 
+    @Override
     public void setHoverDelay(int delay)
     {
         this.hoverTimer.setDelay(delay);
     }
 
+    @Override
     public int getHoverDelay()
     {
         return this.hoverTimer.getDelay();
@@ -250,22 +257,25 @@ public class AWTInputHandler extends WWObjectImpl
         this.objectsAtButtonPress = objectsAtButtonPress;
     }
 
+    @Override
     public boolean isForceRedrawOnMousePressed()
     {
         return forceRedrawOnMousePressed;
     }
 
+    @Override
     public void setForceRedrawOnMousePressed(boolean forceRedrawOnMousePressed)
     {
         this.forceRedrawOnMousePressed = forceRedrawOnMousePressed;
     }
-/*
+
+    /*
     public ViewInputHandler getViewInputHandler()
     {
         return viewInputHandler;
     }
-    */
-
+     */
+    @Override
     public void keyTyped(KeyEvent keyEvent)
     {
         if (this.wwd == null)
@@ -286,6 +296,7 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
+    @Override
     public void keyPressed(KeyEvent keyEvent)
     {
         if (this.wwd == null)
@@ -306,6 +317,7 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
+    @Override
     public void keyReleased(KeyEvent keyEvent)
     {
         if (this.wwd == null)
@@ -326,7 +338,48 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
-    public void mouseClicked(final MouseEvent mouseEvent)
+    /**
+     * Construct a mouse event with GL surface screen coordinates
+     * @param e
+     * @return
+     */
+    private MouseEvent glMouseEvent(MouseEvent awtMouseEvent)
+    {
+        int[] GLmousePt = wwd.getSceneController().getDrawContext().awtPointToGLpoint(awtMouseEvent.getPoint());
+        MouseEvent e = new MouseEvent(awtMouseEvent.getComponent(), awtMouseEvent.getID(),
+            awtMouseEvent.getWhen(), awtMouseEvent.getModifiersEx(),
+            GLmousePt[0], GLmousePt[1], awtMouseEvent.getClickCount(), awtMouseEvent.isPopupTrigger(),
+            awtMouseEvent.getButton());
+
+        if (awtMouseEvent.isConsumed())		// needed in case this method is overridden by a subclass
+            e.consume();
+
+        return e;
+    }
+
+    /**
+     * Construct a mouse wheel event with GL surface screen coordinates
+     * @param e
+     * @return
+     */
+    private MouseWheelEvent glMouseWheelEvent(MouseWheelEvent awtEv)
+    {
+        int[] GLmousePt = wwd.getSceneController().getDrawContext().awtPointToGLpoint(awtEv.getPoint());
+        MouseWheelEvent e = new MouseWheelEvent(awtEv.getComponent(), awtEv.getID(),
+            awtEv.getWhen(), awtEv.getModifiersEx(),
+            GLmousePt[0], GLmousePt[1], awtEv.getXOnScreen(), awtEv.getYOnScreen(),
+            awtEv.getClickCount(), awtEv.isPopupTrigger(),
+            awtEv.getScrollType(), awtEv.getScrollAmount(),
+            awtEv.getWheelRotation(), awtEv.getPreciseWheelRotation());
+
+        if (awtEv.isConsumed())		// needed in case this method is overridden by a subclass
+            e.consume();
+
+        return e;
+    }
+
+    @Override
+    public void mouseClicked(final MouseEvent awtMouseEvent)
     {
         if (this.wwd == null)
         {
@@ -338,10 +391,11 @@ public class AWTInputHandler extends WWObjectImpl
             return;
         }
 
-        if (mouseEvent == null)
+        if (awtMouseEvent == null)
         {
             return;
         }
+        MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
 
         PickedObjectList pickedObjects = this.wwd.getObjectsAtCurrentPosition();
 
@@ -350,24 +404,26 @@ public class AWTInputHandler extends WWObjectImpl
         if (pickedObjects != null && pickedObjects.getTopPickedObject() != null
             && !pickedObjects.getTopPickedObject().isTerrain())
         {
-            // Something is under the cursor, so it's deemed "selected".
+        	Point awtPt = awtMouseEvent.getPoint();		// AWT screen coordinates
+
+        	// Something is under the cursor, so it's deemed "selected".
             if (MouseEvent.BUTTON1 == mouseEvent.getButton())
             {
                 if (mouseEvent.getClickCount() <= 1)
                 {
                     this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_CLICK,
-                        mouseEvent, pickedObjects));
+                    		awtPt, mouseEvent, pickedObjects));
                 }
                 else
                 {
                     this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_DOUBLE_CLICK,
-                        mouseEvent, pickedObjects));
+                    		awtPt, mouseEvent, pickedObjects));
                 }
             }
             else if (MouseEvent.BUTTON3 == mouseEvent.getButton())
             {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.RIGHT_CLICK,
-                    mouseEvent, pickedObjects));
+                		awtPt, mouseEvent, pickedObjects));
             }
 
             this.wwd.getView().firePropertyChange(AVKey.VIEW, null, this.wwd.getView());
@@ -381,20 +437,22 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
-    public void mousePressed(MouseEvent mouseEvent)
+    @Override
+    public void mousePressed(MouseEvent awtMouseEvent)
     {
         if (this.wwd == null)
         {
             return;
         }
 
-        if (mouseEvent == null)
+        if (awtMouseEvent == null)
         {
             return;
         }
 
         // Determine if the mouse point has changed since the last mouse move event. This can happen if user switches to
         // another window, moves the mouse, and then switches back to the WorldWind window.
+        MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
         boolean mousePointChanged = !mouseEvent.getPoint().equals(this.mousePoint);
 
         this.mousePoint = mouseEvent.getPoint();
@@ -416,16 +474,18 @@ public class AWTInputHandler extends WWObjectImpl
         if (this.objectsAtButtonPress != null && objectsAtButtonPress.getTopPickedObject() != null
             && !this.objectsAtButtonPress.getTopPickedObject().isTerrain())
         {
+        	Point awtPt = awtMouseEvent.getPoint();		// AWT screen coordinates
+
             // Something is under the cursor, so it's deemed "selected".
             if (MouseEvent.BUTTON1 == mouseEvent.getButton())
             {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.LEFT_PRESS,
-                    mouseEvent, this.objectsAtButtonPress));
+                		awtPt, mouseEvent, this.objectsAtButtonPress));
             }
             else if (MouseEvent.BUTTON3 == mouseEvent.getButton())
             {
                 this.callSelectListeners(new SelectEvent(this.wwd, SelectEvent.RIGHT_PRESS,
-                    mouseEvent, this.objectsAtButtonPress));
+                		awtPt, mouseEvent, this.objectsAtButtonPress));
             }
 
             // Initiate a repaint.
@@ -448,18 +508,20 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
-    public void mouseReleased(MouseEvent mouseEvent)
+    @Override
+    public void mouseReleased(MouseEvent awtMouseEvent)
     {
         if (this.wwd == null)
         {
             return;
         }
 
-        if (mouseEvent == null)
+        if (awtMouseEvent == null)
         {
             return;
         }
 
+        MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
         this.mousePoint = mouseEvent.getPoint();
         this.callMouseReleasedListeners(mouseEvent);
         if (!mouseEvent.isConsumed())
@@ -470,36 +532,40 @@ public class AWTInputHandler extends WWObjectImpl
         this.cancelDrag();
     }
 
-    public void mouseEntered(MouseEvent mouseEvent)
+    @Override
+    public void mouseEntered(MouseEvent awtMouseEvent)
     {
         if (this.wwd == null)
         {
             return;
         }
 
-        if (mouseEvent == null)
+        if (awtMouseEvent == null)
         {
             return;
         }
 
+        MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
         this.callMouseEnteredListeners(mouseEvent);
         this.wwd.getView().getViewInputHandler().mouseEntered(mouseEvent);
         this.cancelHover();
         this.cancelDrag();
     }
 
-    public void mouseExited(MouseEvent mouseEvent)
+    @Override
+    public void mouseExited(MouseEvent awtMouseEvent)
     {
         if (this.wwd == null)
         {
             return;
         }
 
-        if (mouseEvent == null)
+        if (awtMouseEvent == null)
         {
             return;
         }
 
+        MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
         this.callMouseExitedListeners(mouseEvent);
         this.wwd.getView().getViewInputHandler().mouseExited(mouseEvent);
 
@@ -514,16 +580,18 @@ public class AWTInputHandler extends WWObjectImpl
         this.cancelDrag();
     }
 
-    public void mouseDragged(MouseEvent mouseEvent)
+    @Override
+    public void mouseDragged(MouseEvent awtMouseEvent)
     {
         if (this.wwd == null)
             return;
 
-        if (mouseEvent == null)
+        if (awtMouseEvent == null)
         {
             return;
         }
 
+        MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
         Point prevMousePoint = this.mousePoint;
         this.mousePoint = mouseEvent.getPoint();
         this.callMouseDraggedListeners(mouseEvent);
@@ -536,8 +604,9 @@ public class AWTInputHandler extends WWObjectImpl
                 && !pickedObjects.getTopPickedObject().isTerrain()))
             {
                 this.isDragging = true;
-                DragSelectEvent selectEvent = new DragSelectEvent(this.wwd, SelectEvent.DRAG, mouseEvent, pickedObjects,
-                    prevMousePoint);
+                DragSelectEvent selectEvent = new DragSelectEvent(this.wwd, SelectEvent.DRAG, 
+                									awtMouseEvent.getPoint(), mouseEvent, 
+                									pickedObjects, prevMousePoint);
                 this.callSelectListeners(selectEvent);
 
                 // If no listener consumed the event, then cancel the drag.
@@ -562,18 +631,20 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
-    public void mouseMoved(MouseEvent mouseEvent)
+    @Override
+    public void mouseMoved(MouseEvent awtMouseEvent)
     {
         if (this.wwd == null)
         {
             return;
         }
 
-        if (mouseEvent == null)
+        if (awtMouseEvent == null)
         {
             return;
         }
 
+        MouseEvent mouseEvent = glMouseEvent(awtMouseEvent);
         this.mousePoint = mouseEvent.getPoint();
         this.callMouseMovedListeners(mouseEvent);
 
@@ -590,24 +661,27 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
-    public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent awtMouseWheelEvent)
     {
         if (this.wwd == null)
         {
             return;
         }
 
-        if (mouseWheelEvent == null)
+        if (awtMouseWheelEvent == null)
         {
             return;
         }
 
+        MouseWheelEvent mouseWheelEvent = glMouseWheelEvent(awtMouseWheelEvent);
         this.callMouseWheelMovedListeners(mouseWheelEvent);
 
         if (!mouseWheelEvent.isConsumed())
             this.wwd.getView().getViewInputHandler().mouseWheelMoved(mouseWheelEvent);
     }
 
+    @Override
     public void focusGained(FocusEvent focusEvent)
     {
         if (this.wwd == null)
@@ -623,6 +697,7 @@ public class AWTInputHandler extends WWObjectImpl
         this.wwd.getView().getViewInputHandler().focusGained(focusEvent);
     }
 
+    @Override
     public void focusLost(FocusEvent focusEvent)
     {
         if (this.wwd == null)
@@ -651,10 +726,10 @@ public class AWTInputHandler extends WWObjectImpl
             PickedObject hover = this.hoverObjects.getTopPickedObject();
             PickedObject last = pickedObjects.getTopPickedObject();
 
-            Object oh = hover == null ? null : hover.getObject() != null ? hover.getObject() :
-                hover.getParentLayer() != null ? hover.getParentLayer() : null;
-            Object ol = last == null ? null : last.getObject() != null ? last.getObject() :
-                last.getParentLayer() != null ? last.getParentLayer() : null;
+            Object oh = hover == null ? null : hover.getObject() != null ? hover.getObject()
+                : hover.getParentLayer() != null ? hover.getParentLayer() : null;
+            Object ol = last == null ? null : last.getObject() != null ? last.getObject()
+                : last.getParentLayer() != null ? last.getParentLayer() : null;
             if (oh != null && ol != null && oh.equals(ol))
             {
                 return; // object picked is the hover object. don't do anything but wait for the timer to expire.
@@ -720,17 +795,19 @@ public class AWTInputHandler extends WWObjectImpl
         if (this.isDragging)
         {
             this.callSelectListeners(new DragSelectEvent(this.wwd, SelectEvent.DRAG_END, null,
-                this.objectsAtButtonPress, this.mousePoint));
+                null, this.objectsAtButtonPress, this.mousePoint));
         }
 
         this.isDragging = false;
     }
 
+    @Override
     public void addSelectListener(SelectListener listener)
     {
         this.eventListeners.add(SelectListener.class, listener);
     }
 
+    @Override
     public void removeSelectListener(SelectListener listener)
     {
         this.eventListeners.remove(SelectListener.class, listener);
@@ -744,41 +821,49 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
+    @Override
     public void addKeyListener(KeyListener listener)
     {
         this.eventListeners.add(KeyListener.class, listener);
     }
 
+    @Override
     public void removeKeyListener(KeyListener listener)
     {
         this.eventListeners.remove(KeyListener.class, listener);
     }
 
+    @Override
     public void addMouseListener(MouseListener listener)
     {
         this.eventListeners.add(MouseListener.class, listener);
     }
 
+    @Override
     public void removeMouseListener(MouseListener listener)
     {
         this.eventListeners.remove(MouseListener.class, listener);
     }
 
+    @Override
     public void addMouseMotionListener(MouseMotionListener listener)
     {
         this.eventListeners.add(MouseMotionListener.class, listener);
     }
 
+    @Override
     public void removeMouseMotionListener(MouseMotionListener listener)
     {
         this.eventListeners.remove(MouseMotionListener.class, listener);
     }
 
+    @Override
     public void addMouseWheelListener(MouseWheelListener listener)
     {
         this.eventListeners.add(MouseWheelListener.class, listener);
     }
 
+    @Override
     public void removeMouseWheelListener(MouseWheelListener listener)
     {
         this.eventListeners.remove(MouseWheelListener.class, listener);
@@ -872,6 +957,7 @@ public class AWTInputHandler extends WWObjectImpl
         }
     }
 
+    @Override
     public void propertyChange(PropertyChangeEvent event)
     {
         if (this.wwd == null)
@@ -889,8 +975,8 @@ public class AWTInputHandler extends WWObjectImpl
             return;
         }
 
-        if (event.getPropertyName().equals(AVKey.VIEW) &&
-            (event.getSource() == this.getWorldWindow().getSceneController()))
+        if (event.getPropertyName().equals(AVKey.VIEW)
+            && (event.getSource() == this.getWorldWindow().getSceneController()))
         {
             this.wwd.getView().getViewInputHandler().setWorldWindow(this.wwd);
         }

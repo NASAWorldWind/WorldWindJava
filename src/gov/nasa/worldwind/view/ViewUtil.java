@@ -536,17 +536,11 @@ public class ViewUtil
     }
 
     public static Line computeRayFromScreenPoint(View view, double x, double y,
-        Matrix modelview, Matrix projection, java.awt.Rectangle viewport)
+        Matrix modelview, Matrix projection)
     {
         if (modelview == null || projection == null)
         {
             String message = Logging.getMessage("nullValue.MatrixIsNull");
-            Logging.logger().severe(message);
-            throw new IllegalArgumentException(message);
-        }
-        if (viewport == null)
-        {
-            String message = Logging.getMessage("nullValue.RectangleIsNull");
             Logging.logger().severe(message);
             throw new IllegalArgumentException(message);
         }
@@ -566,9 +560,8 @@ public class ViewUtil
         if (eye == null)
             return null;
 
-        double yInGLCoords = viewport.height - y - 1;
-        Vec4 a = view.unProject(new Vec4(x, yInGLCoords, 0, 0));
-        Vec4 b = view.unProject(new Vec4(x, yInGLCoords, 1, 0));
+        Vec4 a = view.unProject(new Vec4(x, y, 0, 0));
+        Vec4 b = view.unProject(new Vec4(x, y, 1, 0));
         if (a == null || b == null)
             return null;
 

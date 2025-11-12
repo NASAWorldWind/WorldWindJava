@@ -41,16 +41,16 @@ import java.awt.*;
 public class DragContext
 {
     /**
-     * In accordance with the AWT screen coordinates the top left point of the window is the origin.
+     * In accordance with the GL surface coordinates the top left point of the window is the origin.
      */
     protected Point point;
     /**
-     * In accordance with the AWT screen coordinates the top left point of the window is the origin. This point is the
+     * In accordance with the GL surface coordinates the top left point of the window is the origin. This point is the
      * previous screen point.
      */
     protected Point previousPoint;
     /**
-     * In accordance with the AWT screen coordinates the top left point of the window is the origin. This point refers
+     * In accordance with the GL surface coordinates the top left point of the window is the origin. This point refers
      * to the initial point of the drag event.
      */
     protected Point initialPoint;
@@ -81,9 +81,9 @@ public class DragContext
     }
 
     /**
-     * Returns the current screen point with the origin at the top left corner of the window.
+     * Returns the current GL surface point with the origin at the top left corner of the window.
      *
-     * @return the current screen point.
+     * @return the current GL surface point.
      */
     public Point getPoint()
     {
@@ -91,9 +91,9 @@ public class DragContext
     }
 
     /**
-     * Set the {@link DragContext} current screen point.
+     * Set the {@link DragContext} current GL surface point.
      *
-     * @param point the point to assign to the current screen point.
+     * @param point the point to assign to the current GL surface point.
      *
      * @throws IllegalArgumentException if the point is null.
      */
@@ -110,7 +110,7 @@ public class DragContext
     }
 
     /**
-     * Returns the previous screen point with the origin at the top left corner of the window.
+     * Returns the previous GL surface point with the origin at the top left corner of the window.
      *
      * @return the previous point.
      */
@@ -120,9 +120,9 @@ public class DragContext
     }
 
     /**
-     * Set the {@link DragContext} previous screen point.
+     * Set the {@link DragContext} previous GL surface point.
      *
-     * @param previousPoint the screen point to assign to the previous screen point.
+     * @param previousPoint the GL surface point to assign to the previous screen point.
      *
      * @throws IllegalArgumentException if the previousPoint is null.
      */
@@ -139,10 +139,10 @@ public class DragContext
     }
 
     /**
-     * Returns the initial screen point with the origin at the top left corner of the window. The initial point is the
-     * screen point at the initiation of the drag event.
+     * Returns the initial GL surface point with the origin at the top left corner of the window. The initial point is the
+     * GL surface point at the initiation of the drag event.
      *
-     * @return the initial screen point.
+     * @return the initial GL surface point.
      */
     public Point getInitialPoint()
     {
@@ -150,9 +150,9 @@ public class DragContext
     }
 
     /**
-     * Set the {@link DragContext} initial screen point.
+     * Set the {@link DragContext} initial GL surface point.
      *
-     * @param initialPoint the screen point to assign to the initial screen point.
+     * @param initialPoint the GL surface point to assign to the initial screen point.
      *
      * @throws IllegalArgumentException if the initialPoint is null.
      */

@@ -591,7 +591,7 @@ public class BasicView extends WWObjectImpl implements View
     public Line computeRayFromScreenPoint(double x, double y)
     {
         return ViewUtil.computeRayFromScreenPoint(this, x, y,
-            this.modelview, this.projection, this.viewport);
+            this.modelview, this.projection);
     }
 
     public Position computePositionFromScreenPoint(double x, double y)

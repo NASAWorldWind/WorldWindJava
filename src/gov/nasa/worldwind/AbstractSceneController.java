@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -75,15 +75,15 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     protected double frameTime;
     protected double pickTime;
     /**
-     * The pick point in AWT screen coordinates, or <code>null</code> if the pick point is disabled. Initially
+     * The pick point in GL surface screen coordinates, or <code>null</code> if the pick point is disabled. Initially
      * <code>null</code>.
      */
-    protected Point pickPoint = null;
+    private Point pickPoint = null;
     /**
-     * The pick rectangle in AWT screen coordinates, or <code>null</code> if the pick rectangle is disabled. Initially
+     * The pick rectangle in GL surface screen coordinates, or <code>null</code> if the pick rectangle is disabled. Initially
      * <code>null</code>.
      */
-    protected Rectangle pickRect = null;
+    private Rectangle pickRect = null;
     protected boolean deepPick = false;
     protected GpuResourceCache gpuResourceCache;
     protected TextRendererCache textRendererCache = new TextRendererCache();
@@ -111,6 +111,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.setVerticalExaggeration(Configuration.getDoubleValue(AVKey.VERTICAL_EXAGGERATION, 1d));
     }
 
+    @Override
     public void reinitialize()
     {
         if (this.textRendererCache != null)
@@ -119,6 +120,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     /** Releases resources associated with this scene controller. */
+    @Override
     public void dispose()
     {
         if (this.lastPickedObjects != null)
@@ -136,11 +138,13 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             this.textRendererCache.dispose();
     }
 
+    @Override
     public GpuResourceCache getGpuResourceCache()
     {
         return this.gpuResourceCache;
     }
 
+    @Override
     public void setGpuResourceCache(GpuResourceCache gpuResourceCache)
     {
         this.gpuResourceCache = gpuResourceCache;
@@ -151,16 +155,19 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         return textRendererCache;
     }
 
+    @Override
     public Model getModel()
     {
         return this.model;
     }
 
+    @Override
     public View getView()
     {
         return this.view;
     }
 
+    @Override
     public void setModel(Model model)
     {
         if (this.model != null)
@@ -173,6 +180,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.firePropertyChange(AVKey.MODEL, oldModel, model);
     }
 
+    @Override
     public void setView(View view)
     {
         if (this.view != null)
@@ -186,6 +194,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.firePropertyChange(AVKey.VIEW, oldView, view);
     }
 
+    @Override
     public void setVerticalExaggeration(double verticalExaggeration)
     {
         Double oldVE = this.verticalExaggeration;
@@ -193,36 +202,42 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.firePropertyChange(AVKey.VERTICAL_EXAGGERATION, oldVE, verticalExaggeration);
     }
 
+    @Override
     public double getVerticalExaggeration()
     {
         return this.verticalExaggeration;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setPickPoint(Point pickPoint)
     {
         this.pickPoint = pickPoint;
     }
 
     /** {@inheritDoc} */
+    @Override
     public Point getPickPoint()
     {
         return this.pickPoint;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setPickRectangle(Rectangle pickRect)
     {
         this.pickRect = pickRect;
     }
 
     /** {@inheritDoc} */
+    @Override
     public Rectangle getPickRectangle()
     {
         return this.pickRect;
     }
 
     /** {@inheritDoc} */
+    @Override
     public PickedObjectList getPickedObjectList()
     {
         return this.lastPickedObjects;
@@ -234,41 +249,49 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     }
 
     /** {@inheritDoc} */
+    @Override
     public PickedObjectList getObjectsInPickRectangle()
     {
         return this.lastObjectsInPickRect;
     }
 
+    @Override
     public void setDeepPickEnabled(boolean tf)
     {
         this.deepPick = tf;
     }
 
+    @Override
     public boolean isDeepPickEnabled()
     {
         return this.deepPick;
     }
 
+    @Override
     public SectorGeometryList getTerrain()
     {
         return this.dc.getSurfaceGeometry();
     }
 
+    @Override
     public DrawContext getDrawContext()
     {
         return this.dc;
     }
 
+    @Override
     public double getFramesPerSecond()
     {
         return this.framesPerSecond;
     }
 
+    @Override
     public double getFrameTime()
     {
         return this.frameTime;
     }
 
+    @Override
     public void setPerFrameStatisticsKeys(Set<String> keys)
     {
         this.perFrameStatisticsKeys.clear();
@@ -282,33 +305,39 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         }
     }
 
+    @Override
     public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         return perFrameStatistics;
     }
 
+    @Override
     public Collection<Throwable> getRenderingExceptions()
     {
         return this.renderingExceptions;
     }
 
+    @Override
     public ScreenCreditController getScreenCreditController()
     {
         return screenCreditController;
     }
 
+    @Override
     public void setScreenCreditController(ScreenCreditController screenCreditController)
     {
         this.screenCreditController = screenCreditController;
     }
 
     /** {@inheritDoc} */
+    @Override
     public GLRuntimeCapabilities getGLRuntimeCapabilities()
     {
         return this.glRuntimeCaps;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setGLRuntimeCapabilities(GLRuntimeCapabilities capabilities)
     {
         if (capabilities == null)
@@ -411,6 +440,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         this.deferOrderedRendering = deferOrderedRendering;
     }
 
+    @Override
     public int repaint()
     {
         this.frameTime = System.currentTimeMillis();
@@ -635,8 +665,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
 
     protected void pickTerrain(DrawContext dc)
     {
-        if (dc.isPickingMode() && dc.getVisibleSector() != null && dc.getSurfaceGeometry() != null &&
-            dc.getSurfaceGeometry().size() > 0)
+        if (dc.isPickingMode() && dc.getVisibleSector() != null && dc.getSurfaceGeometry() != null
+            && dc.getSurfaceGeometry().size() > 0)
         {
             this.pickPoints.clear();
             if (dc.getPickPoint() != null)
@@ -757,7 +787,10 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
                 // used to cull the number of colors that the draw context must consider with identifying the unique
                 // pick colors in the specified screen rectangle.
                 if (minAndMaxColorCodes == null)
-                    minAndMaxColorCodes = new int[] {colorCode, colorCode};
+                    minAndMaxColorCodes = new int[]
+                    {
+                        colorCode, colorCode
+                    };
                 else
                 {
                     if (minAndMaxColorCodes[0] > colorCode)
@@ -809,8 +842,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             this.lastPickedObjects = new PickedObjectList(dc.getPickedObjects());
             this.lastObjectsInPickRect = new PickedObjectList(dc.getObjectsInPickRectangle());
 
-            if (this.isDeepPickEnabled() &&
-                (this.lastPickedObjects.hasNonTerrainObjects() || this.lastObjectsInPickRect.hasNonTerrainObjects()))
+            if (this.isDeepPickEnabled()
+                && (this.lastPickedObjects.hasNonTerrainObjects() || this.lastObjectsInPickRect.hasNonTerrainObjects()))
             {
                 this.doDeepPick(dc);
             }
@@ -957,8 +990,8 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
             dc.setOrderedRenderingMode(false);
 
             // Draw the diagnostic displays.
-            if (dc.getSurfaceGeometry() != null && dc.getModel() != null && (dc.getModel().isShowWireframeExterior() ||
-                dc.getModel().isShowWireframeInterior() || dc.getModel().isShowTessellationBoundingVolumes()))
+            if (dc.getSurfaceGeometry() != null && dc.getModel() != null && (dc.getModel().isShowWireframeExterior()
+                || dc.getModel().isShowWireframeInterior() || dc.getModel().isShowTessellationBoundingVolumes()))
             {
                 Model model = dc.getModel();
 
@@ -994,7 +1027,6 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
      *
      * @param dc the relevant <code>DrawContext</code>
      */
-    @SuppressWarnings({"UNUSED_SYMBOL", "UnusedDeclaration"})
     protected void checkGLErrors(DrawContext dc)
     {
         GL gl = dc.getGL();
@@ -1010,7 +1042,6 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     //**************************************************************//
     //********************  Ordered Surface Renderable  ************//
     //**************************************************************//
-
     protected void preRenderOrderedSurfaceRenderables(DrawContext dc)
     {
         if (dc.getOrderedSurfaceRenderables().isEmpty())
@@ -1125,9 +1156,9 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
         if (tileCount == 0)
             return;
 
-        int attributeMask =
-            GL2.GL_COLOR_BUFFER_BIT   // For alpha test enable, blend enable, alpha func, blend func, blend ref.
-                | GL2.GL_POLYGON_BIT; // For cull face enable, cull face, polygon mode.
+        int attributeMask
+            = GL2.GL_COLOR_BUFFER_BIT // For alpha test enable, blend enable, alpha func, blend func, blend ref.
+            | GL2.GL_POLYGON_BIT; // For cull face enable, cull face, polygon mode.
 
         GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         OGLStackHandler ogsh = new OGLStackHandler();

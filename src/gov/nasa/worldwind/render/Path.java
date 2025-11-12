@@ -569,7 +569,7 @@ public class Path extends AbstractShape {
          * AVKey.ORDINAL_LIST.
          *
          * @param dc the draw context which receives the picked objects.
-         * @param pickRect the rectangle in AWT screen coordinates.
+         * @param pickRect the rectangle in GL surface coordinates.
          * @param layer the layer associated with the picked objects.
          */
         @SuppressWarnings({"unchecked"})

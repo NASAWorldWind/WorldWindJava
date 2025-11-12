@@ -82,13 +82,15 @@ public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements Scre
     }
 
     /** {@inheritDoc} */
-    public Point getScreenLocation()
+    @Override
+	public Point getScreenLocation()
     {
         return this.screenLocation;
     }
 
     /** {@inheritDoc} */
-    public void setScreenLocation(Point point)
+    @Override
+	public void setScreenLocation(Point point)
     {
         if (point == null)
         {
@@ -111,7 +113,8 @@ public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements Scre
      *
      * @param dc the current draw context.
      */
-    protected void computeBalloonPoints(DrawContext dc, OrderedBrowserBalloon obb)
+    @Override
+	protected void computeBalloonPoints(DrawContext dc, OrderedBrowserBalloon obb)
     {
         this.screenOffset = null;
         obb.screenRect = null;
@@ -130,12 +133,11 @@ public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements Scre
         // bottom left). Note: The screen offset denotes how to place the screen reference point relative to the frame.
         // For example, an offset of (-10, -10) in pixels places the reference point below and to the left of the frame.
         // Since the screen reference point is fixed, the frame appears to move relative to the reference point.
-        int y = dc.getView().getViewport().height - this.screenLocation.y;
-        obb.screenRect = new Rectangle(this.screenLocation.x - this.screenOffset.x, y - this.screenOffset.y,
+        obb.screenRect = new Rectangle(this.screenLocation.x - this.screenOffset.x, this.screenLocation.y - this.screenOffset.y,
             size.width, size.height);
         // Compute the screen extent as the rectangle containing the balloon's screen rectangle and its screen point.
         obb.screenExtent = new Rectangle(obb.screenRect);
-        obb.screenExtent.add(this.screenLocation.x, y);
+        obb.screenExtent.add(this.screenLocation.x, this.screenLocation.y);
         // Compute the pickable screen extent as the screen extent, plus the width of the balloon's pickable outline.
         // This extent is used during picking to ensure that the balloon's outline is pickable when it exceeds the
         // balloon's screen extent.
@@ -147,7 +149,8 @@ public class ScreenBrowserBalloon extends AbstractBrowserBalloon implements Scre
     }
 
     /** {@inheritDoc} */
-    protected void setupDepthTest(DrawContext dc, OrderedBrowserBalloon obb)
+    @Override
+	protected void setupDepthTest(DrawContext dc, OrderedBrowserBalloon obb)
     {
         dc.getGL().glDisable(GL.GL_DEPTH_TEST);
     }

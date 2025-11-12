@@ -1731,7 +1731,7 @@ public abstract class AbstractBrowserBalloon extends AbstractBalloon implements 
 
         // Compute the screen rectangle in AWT coordinates (origin top left).
         Rectangle awtScreenRect = new Rectangle(obb.screenRect.x,
-            dc.getView().getViewport().height - obb.screenRect.y - obb.screenRect.height,
+            obb.screenRect.y - obb.screenRect.height,
             obb.screenRect.width, obb.screenRect.height);
 
         Color color = dc.getUniquePickColor();

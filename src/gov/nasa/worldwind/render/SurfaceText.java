@@ -36,6 +36,8 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.Arrays;

@@ -1272,6 +1272,7 @@ public class LatLon
         LatLon pos = null;
         for (LatLon posNext : locations)
         {
+        	if (posNext == null) break;
             if (pos != null)
             {
                 // A segment cross the line if end pos have different longitude signs

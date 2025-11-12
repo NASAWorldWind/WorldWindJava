@@ -34,6 +34,8 @@ import gov.nasa.worldwind.pick.PickSupport;
 import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import java.awt.*;
 
 /**
@@ -462,7 +464,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         }
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void applyScreenTransform(DrawContext dc, int x, int y, int width, int height, double scale)
     {
         double finalScale = scale * this.computeScale(dc);
@@ -475,7 +476,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         gl.glTranslated(-width / 2, 0, 0);
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected double computeScale(DrawContext dc)
     {
         double scale = this.attributes.getScale();
@@ -489,7 +489,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         return scale;
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected double computeOpacity(DrawContext dc)
     {
         double opacity = this.attributes.getOpacity();
@@ -616,7 +615,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         this.doDrawBackgroundTexture(dc, width, height, opacity, pickPosition, texture);
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void doDrawBackgroundTexture(DrawContext dc, int width, int height, double opacity, Position pickPosition,
         WWTexture texture)
     {
@@ -660,7 +658,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         }
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void applyBackgroundTextureState(DrawContext dc, int width, int height, double opacity,
         WWTexture texture)
     {
@@ -721,7 +718,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
      * @param texture the texture to transform from Annotation background image coordinates to Annotation geometry
      *                coordinates.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void transformBackgroundImageCoordsToAnnotationCoords(DrawContext dc, int width, int height,
         WWTexture texture)
     {
@@ -750,7 +746,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
     //********************  Border Rendering  **********************//
     //**************************************************************//
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void drawBorder(DrawContext dc, int width, int height, double opacity, Position pickPosition)
     {
         if (this.getAttributes().getBorderWidth() <= 0)
@@ -813,8 +808,7 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
                 return;
 
             java.awt.Rectangle screenInsetBounds = this.transformByModelview(dc, insetBounds);
-            java.awt.Point glPickPoint = this.glPointFromAWTPoint(dc, dc.getPickPoint());
-            if (!screenInsetBounds.contains(glPickPoint))
+            if (!screenInsetBounds.contains(dc.getPickPoint()))
                 return;
         }
 
@@ -897,7 +891,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         }
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void drawHTML(DrawContext dc, int x, int y, int lineHeight, double opacity, Object pickObject,
         Position pickPosition, String text)
     {
@@ -941,14 +934,12 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         }
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void doDrawChildren(DrawContext dc, java.awt.Rectangle bounds, double opacity, Position pickPosition)
     {
         this.layoutManager.setPickSupport(this.pickSupport);
         this.layoutManager.drawAnnotations(dc, bounds, this.childList, opacity, pickPosition);
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     protected void beginDrawChildren(DrawContext dc, java.awt.Rectangle bounds)
     {
         this.layoutManager.beginDrawAnnotations(dc, bounds);
@@ -1049,15 +1040,6 @@ public abstract class AbstractAnnotation extends AVListImpl implements Annotatio
         size = size.transformBy3(modelview);
 
         return new java.awt.Rectangle((int) origin.x, (int) origin.y, (int) size.x, (int) size.y);
-    }
-
-    protected java.awt.Point glPointFromAWTPoint(DrawContext dc, java.awt.Point awtPoint)
-    {
-        if (dc.getView() == null || dc.getView().getViewport() == null)
-            return null;
-
-        java.awt.Rectangle viewport = dc.getView().getViewport();
-        return new java.awt.Point(awtPoint.x, viewport.height - awtPoint.y - 1);
     }
 
     //**************************************************************//

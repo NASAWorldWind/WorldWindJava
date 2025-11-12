@@ -40,6 +40,8 @@ import gov.nasa.worldwind.terrain.SectorGeometryList;
 import gov.nasa.worldwind.util.*;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import java.awt.*;
 import java.nio.*;
 import java.util.*;

@@ -345,14 +345,14 @@ public interface DrawContext extends WWObject, Disposable
     Color getClearColor();
 
     /**
-     * Returns the framebuffer RGB color for a point in AWT screen coordinates, formatted as a pick color code. The red,
+     * Returns the framebuffer RGB color for a point in GL surface coordinates, formatted as a pick color code. The red,
      * green, and blue components are each stored as an 8-bit unsigned integer, and packed into bits 0-23 of the
      * returned integer as follows: bits 16-23 are red, bits 8-15 are green, and bits 0-7 are blue. This format is
      * consistent with the RGB integers used to create the pick colors in getUniquePickColor.
      * <p>
      * This returns 0 if the point contains the clear color, or is outside this draw context's drawable area.
      *
-     * @param point the point to return a color for, in AWT screen coordinates.
+     * @param point the point to return a color for, in GL surface coordinates.
      *
      * @return the RGB color corresponding to the specified point.
      *
@@ -361,7 +361,7 @@ public interface DrawContext extends WWObject, Disposable
     int getPickColorAtPoint(Point point);
 
     /**
-     * Returns an array of the unique framebuffer RGB colors within a rectangle in AWT screen coordinates, formatted as
+     * Returns an array of the unique framebuffer RGB colors within a rectangle in GL surface coordinates, formatted as
      * pick color codes. The red, green, and blue components are each stored as an 8-bit unsigned integer, and packed
      * into bits 0-23 of the returned integers as follows: bits 16-23 are red, bits 8-15 are green, and bits 0-7 are
      * blue. This format is consistent with the RGB integers used to create the pick colors in getUniquePickColor.
@@ -376,7 +376,7 @@ public interface DrawContext extends WWObject, Disposable
      * the colors that must be considered by this method and the caller. When specified, these integers must be
      * formatted exactly as the integers this method returns.
      *
-     * @param rectangle           the rectangle to return unique colors for, in AWT screen coordinates.
+     * @param rectangle           the rectangle to return unique colors for, in GL surface coordinates.
      * @param minAndMaxColorCodes an two element array representing the minimum and maximum RGB colors to return. May be
      *                            <code>null</code> to specify that all color codes must be returned.
      *
@@ -502,7 +502,7 @@ public interface DrawContext extends WWObject, Disposable
     SurfaceTileRenderer getGeographicSurfaceTileRenderer();
 
     /**
-     * Returns the current pick point in AWT screen coordinates.
+     * Returns the current pick point in GL surface coordinates.
      *
      * @return the current pick point, or <code>null</code> if no pick point is available.
      *
@@ -511,7 +511,7 @@ public interface DrawContext extends WWObject, Disposable
     Point getPickPoint();
 
     /**
-     * Specifies the current pick point in AWT screen coordinates, or <code>null</code> to indicate that there is no
+     * Specifies the current pick point in GL surface coordinates, or <code>null</code> to indicate that there is no
      * pick point. During each pick traversal, layers determine if their contents are drawn at the pick point. If so,
      * layers add each unique picked object to a PickedObjectList on this draw context by calling {@link
      * #addPickedObject(gov.nasa.worldwind.pick.PickedObject)}. This list can be accessed by calling {@link
@@ -525,7 +525,7 @@ public interface DrawContext extends WWObject, Disposable
     void setPickPoint(Point pickPoint);
 
     /**
-     * Returns the current pick rectangle in AWT screen coordinates.
+     * Returns the current pick rectangle in GL surface coordinates.
      *
      * @return the current pick rectangle, or <code>null</code> if no pick rectangle is current.
      *
@@ -534,7 +534,7 @@ public interface DrawContext extends WWObject, Disposable
     Rectangle getPickRectangle();
 
     /**
-     * Specifies the current pick rectangle in AWT screen coordinates, or <code>null</code> to indicate that there is no
+     * Specifies the current pick rectangle in GL surface coordinates, or <code>null</code> to indicate that there is no
      * pick rectangle. During each pick traversal, layers determine if their contents intersect the pick rectangle. If
      * so, layers add each unique picked object to a PickedObjectList on this draw context by calling {@link
      * #addObjectInPickRectangle(gov.nasa.worldwind.pick.PickedObject)}. This is list can be accessed by calling {@link
@@ -1046,4 +1046,16 @@ public interface DrawContext extends WWObject, Disposable
     boolean is2DGlobe();
 
     boolean isContinuous2DGlobe();
+    
+    /**
+     * Convert AWT effective screen location to GL surface location using DPI scaling.
+     */
+    int [] awtPointToGLpoint(Point pt);
+    
+    /**
+     * Convert GL surface coordinate point to AWT device point using DPI scaling.
+     * @param glPoint
+     * @return
+     */
+    public Point glPointToAwtPoint(Point glPoint);
 }

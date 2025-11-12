@@ -159,7 +159,6 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
         }
     }
 
-    @SuppressWarnings("UnusedParameters")
     protected void onMoveTo2D(Position focalPosition, ViewInputAttributes.DeviceAttributes deviceAttributes,
         ViewInputAttributes.ActionAttributes actionAttribs)
     {
@@ -314,7 +313,6 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
         }
     }
 
-    @SuppressWarnings("UnusedParameters")
     protected void onHorizontalTranslate2D(double forwardInput, double sideInput,
         double totalForwardInput, double totalSideInput,
         ViewInputAttributes.DeviceAttributes deviceAttributes,
@@ -335,9 +333,9 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
             Point p1 = constrainToSourceBounds(this.getMouseDownPoint(), this.getWorldWindow());
             Point p2 = constrainToSourceBounds(this.getMousePoint(), this.getWorldWindow());
             Line ray1 = ViewUtil.computeRayFromScreenPoint(orbitView, p1.x, p1.y, this.mouseDownModelview,
-                this.mouseDownProjection, this.mouseDownViewport);
+                this.mouseDownProjection);
             Line ray2 = ViewUtil.computeRayFromScreenPoint(orbitView, p2.x, p2.y, this.mouseDownModelview,
-                this.mouseDownProjection, this.mouseDownViewport);
+                this.mouseDownProjection);
 
             // Compute a model coordinate plane passing through the position under the cursor when the mouse button was
             // pressed. Fall back to a plane normal to the globe if the cursor was off the globe.
@@ -400,7 +398,6 @@ public class OrbitViewInputHandler extends BasicViewInputHandler
      *
      * @param actionAttribs input that caused the change.
      */
-    @SuppressWarnings("UnusedParameters")
     protected void onResetRoll(ViewInputAttributes.ActionAttributes actionAttribs)
     {
         View view = this.getView();

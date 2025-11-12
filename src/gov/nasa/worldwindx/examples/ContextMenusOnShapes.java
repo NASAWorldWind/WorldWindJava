@@ -72,7 +72,6 @@ public class ContextMenusOnShapes extends ApplicationTemplate {
             }
         }
 
-        @SuppressWarnings({"UnusedDeclaration"})
         protected void highlight(SelectEvent event, Object o) {
             if (this.lastPickedPlacemark == o) {
                 return; // same thing selected
@@ -110,7 +109,7 @@ public class ContextMenusOnShapes extends ApplicationTemplate {
                 }
 
                 ContextMenu menu = new ContextMenu((Component) event.getSource(), menuInfo);
-                menu.show(event.getMouseEvent());
+                menu.show(event.getAwtMousePt());
             }
         }
     }
@@ -145,7 +144,7 @@ public class ContextMenusOnShapes extends ApplicationTemplate {
             }
         }
 
-        public void show(final MouseEvent event) {
+        public void show(final Point screenPt) {
             JPopupMenu popup = new JPopupMenu();
 
             popup.add(this.menuTitleItem);
@@ -156,7 +155,7 @@ public class ContextMenusOnShapes extends ApplicationTemplate {
                 popup.add(subMenu);
             }
 
-            popup.show(sourceComponent, event.getX(), event.getY());
+            popup.show(sourceComponent, (int)screenPt.getX(), (int)screenPt.getY());
         }
     }
 

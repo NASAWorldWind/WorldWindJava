@@ -87,15 +87,15 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     protected boolean pickingMode = false;
     protected boolean deepPickingMode = false;
     /**
-     * Indicates the current pick point in AWT screen coordinates, or <code>null</code> to indicate that there is no
+     * Indicates the current pick point in GL screen coordinates, or <code>null</code> to indicate that there is no
      * pick point. Initially <code>null</code>.
      */
-    protected Point pickPoint = null;
+    private Point pickPoint = null;
     /**
-     * Indicates the current pick rectangle in AWT screen coordinates, or <code>null</code> to indicate that there is no
+     * Indicates the current pick rectangle in GL screen coordinates, or <code>null</code> to indicate that there is no
      * pick rectangle. Initially <code>null</code>.
      */
-    protected Rectangle pickRect = null;
+    private Rectangle pickRect = null;
     protected boolean isOrderedRenderingMode = false;
     protected boolean preRenderMode = false;
     protected Point viewportCenterScreenPoint = null;
@@ -154,7 +154,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     protected PriorityQueue<OrderedRenderableEntry> orderedRenderables =
         new PriorityQueue<OrderedRenderableEntry>(100, new Comparator<OrderedRenderableEntry>()
         {
-            public int compare(OrderedRenderableEntry orA, OrderedRenderableEntry orB)
+            @Override
+			public int compare(OrderedRenderableEntry orA, OrderedRenderableEntry orB)
             {
                 double eA = orA.distanceFromEye;
                 double eB = orB.distanceFromEye;
@@ -171,47 +172,56 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
      *
      * @throws com.jogamp.opengl.GLException - If an OpenGL context is not current when this method is called.
      */
-    public void dispose()
+    @Override
+	public void dispose()
     {
         this.geographicSurfaceTileRenderer.dispose();
     }
 
-    public final GL getGL()
+    @Override
+	public final GL getGL()
     {
         return this.getGLContext().getGL();
     }
 
-    public final GLU getGLU()
+    @Override
+	public final GLU getGLU()
     {
         return this.glu;
     }
 
-    public final GLContext getGLContext()
+    @Override
+	public final GLContext getGLContext()
     {
         return this.glContext;
     }
 
-    public final int getDrawableHeight()
+    @Override
+	public final int getDrawableHeight()
     {
         return this.getGLDrawable().getSurfaceHeight();
     }
 
-    public final int getDrawableWidth()
+    @Override
+	public final int getDrawableWidth()
     {
         return this.getGLDrawable().getSurfaceWidth();
     }
 
-    public final GLDrawable getGLDrawable()
+    @Override
+	public final GLDrawable getGLDrawable()
     {
         return this.getGLContext().getGLDrawable();
     }
 
-    public GLRuntimeCapabilities getGLRuntimeCapabilities()
+    @Override
+	public GLRuntimeCapabilities getGLRuntimeCapabilities()
     {
         return this.glRuntimeCaps;
     }
 
-    public void setGLRuntimeCapabilities(GLRuntimeCapabilities capabilities)
+    @Override
+	public void setGLRuntimeCapabilities(GLRuntimeCapabilities capabilities)
     {
         if (capabilities == null)
         {
@@ -223,7 +233,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.glRuntimeCaps = capabilities;
     }
 
-    public final void initialize(GLContext glContext)
+    @Override
+	public final void initialize(GLContext glContext)
     {
         if (glContext == null)
         {
@@ -252,7 +263,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.currentLayer = null;
     }
 
-    public final void setModel(Model model)
+    @Override
+	public final void setModel(Model model)
     {
         this.model = model;
         if (this.model == null)
@@ -263,53 +275,63 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             this.globe = g;
     }
 
-    public final Model getModel()
+    @Override
+	public final Model getModel()
     {
         return this.model;
     }
 
-    public final LayerList getLayers()
+    @Override
+	public final LayerList getLayers()
     {
         return this.model.getLayers();
     }
 
-    public final Sector getVisibleSector()
+    @Override
+	public final Sector getVisibleSector()
     {
         return this.visibleSector;
     }
 
-    public final void setVisibleSector(Sector s)
+    @Override
+	public final void setVisibleSector(Sector s)
     {
         // don't check for null - it is possible that no globe is active, no view is active, no sectors visible, etc.
         this.visibleSector = s;
     }
 
-    public void setSurfaceGeometry(SectorGeometryList surfaceGeometry)
+    @Override
+	public void setSurfaceGeometry(SectorGeometryList surfaceGeometry)
     {
         this.surfaceGeometry = surfaceGeometry;
     }
 
-    public SectorGeometryList getSurfaceGeometry()
+    @Override
+	public SectorGeometryList getSurfaceGeometry()
     {
         return surfaceGeometry;
     }
 
-    public final Globe getGlobe()
+    @Override
+	public final Globe getGlobe()
     {
         return this.globe != null ? this.globe : this.model.getGlobe();
     }
 
-    public final void setView(View view)
+    @Override
+	public final void setView(View view)
     {
         this.view = view;
     }
 
-    public final View getView()
+    @Override
+	public final View getView()
     {
         return this.view;
     }
 
-    public final void setGLContext(GLContext glContext)
+    @Override
+	public final void setGLContext(GLContext glContext)
     {
         if (glContext == null)
         {
@@ -321,27 +343,32 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.glContext = glContext;
     }
 
-    public final double getVerticalExaggeration()
+    @Override
+	public final double getVerticalExaggeration()
     {
         return verticalExaggeration;
     }
 
-    public final void setVerticalExaggeration(double verticalExaggeration)
+    @Override
+	public final void setVerticalExaggeration(double verticalExaggeration)
     {
         this.verticalExaggeration = verticalExaggeration;
     }
 
-    public GpuResourceCache getTextureCache()
+    @Override
+	public GpuResourceCache getTextureCache()
     {
         return this.gpuResourceCache;
     }
 
-    public GpuResourceCache getGpuResourceCache()
+    @Override
+	public GpuResourceCache getGpuResourceCache()
     {
         return this.gpuResourceCache;
     }
 
-    public void setGpuResourceCache(GpuResourceCache gpuResourceCache)
+    @Override
+	public void setGpuResourceCache(GpuResourceCache gpuResourceCache)
     {
         if (gpuResourceCache == null)
         {
@@ -353,12 +380,14 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.gpuResourceCache = gpuResourceCache;
     }
 
-    public TextRendererCache getTextRendererCache()
+    @Override
+	public TextRendererCache getTextRendererCache()
     {
         return textRendererCache;
     }
 
-    public void setTextRendererCache(TextRendererCache textRendererCache)
+    @Override
+	public void setTextRendererCache(TextRendererCache textRendererCache)
     {
         if (textRendererCache == null)
         {
@@ -370,12 +399,14 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.textRendererCache = textRendererCache;
     }
 
-    public AnnotationRenderer getAnnotationRenderer()
+    @Override
+	public AnnotationRenderer getAnnotationRenderer()
     {
         return annotationRenderer;
     }
 
-    public void setAnnotationRenderer(AnnotationRenderer ar)
+    @Override
+	public void setAnnotationRenderer(AnnotationRenderer ar)
     {
         if (ar == null)
         {
@@ -386,57 +417,68 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         annotationRenderer = ar;
     }
 
-    public LightingModel getStandardLightingModel()
+    @Override
+	public LightingModel getStandardLightingModel()
     {
         return standardLighting;
     }
 
-    public void setStandardLightingModel(LightingModel standardLighting)
+    @Override
+	public void setStandardLightingModel(LightingModel standardLighting)
     {
         this.standardLighting = standardLighting;
     }
 
-    public Point getPickPoint()
+    @Override
+	public Point getPickPoint()
     {
         return this.pickPoint;
     }
 
-    public void setPickPoint(Point pickPoint)
+    @Override
+	public void setPickPoint(Point pickPoint)
     {
-        this.pickPoint = pickPoint;
+    	this.pickPoint = pickPoint;
     }
 
-    public Rectangle getPickRectangle()
+    @Override
+	public Rectangle getPickRectangle()
     {
         return this.pickRect;
     }
 
-    public void setPickRectangle(Rectangle pickRect)
+    @Override
+	public void setPickRectangle(Rectangle pickRect)
     {
         this.pickRect = pickRect;
     }
 
-    public Point getViewportCenterScreenPoint()
+    @Override
+	public Point getViewportCenterScreenPoint()
     {
         return viewportCenterScreenPoint;
     }
 
-    public void setViewportCenterScreenPoint(Point viewportCenterScreenPoint)
+    @Override
+	public void setViewportCenterScreenPoint(Point viewportCenterScreenPoint)
     {
         this.viewportCenterScreenPoint = viewportCenterScreenPoint;
     }
 
-    public Position getViewportCenterPosition()
+    @Override
+	public Position getViewportCenterPosition()
     {
         return viewportCenterPosition;
     }
 
-    public void setViewportCenterPosition(Position viewportCenterPosition)
+    @Override
+	public void setViewportCenterPosition(Position viewportCenterPosition)
     {
         this.viewportCenterPosition = viewportCenterPosition;
     }
 
-    public void addPickedObjects(PickedObjectList pickedObjects)
+    @Override
+	public void addPickedObjects(PickedObjectList pickedObjects)
     {
         if (pickedObjects == null)
         {
@@ -457,7 +499,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
     }
 
-    public void addPickedObject(PickedObject pickedObject)
+    @Override
+	public void addPickedObject(PickedObject pickedObject)
     {
         if (null == pickedObject)
         {
@@ -472,17 +515,20 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.pickedObjects.add(pickedObject);
     }
 
-    public PickedObjectList getPickedObjects()
+    @Override
+	public PickedObjectList getPickedObjects()
     {
         return this.pickedObjects;
     }
 
-    public PickedObjectList getObjectsInPickRectangle()
+    @Override
+	public PickedObjectList getObjectsInPickRectangle()
     {
         return this.objectsInPickRect;
     }
 
-    public void addObjectInPickRectangle(PickedObject pickedObject)
+    @Override
+	public void addObjectInPickRectangle(PickedObject pickedObject)
     {
         if (pickedObject == null)
         {
@@ -494,7 +540,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.objectsInPickRect.add(pickedObject);
     }
 
-    public Color getUniquePickColor()
+    @Override
+	public Color getUniquePickColor()
     {
         this.uniquePickNumber++;
 
@@ -512,7 +559,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         return new Color(this.uniquePickNumber, true); // has alpha
     }
 
-    public Color getUniquePickColorRange(int count)
+    @Override
+	public Color getUniquePickColorRange(int count)
     {
         if (count < 1)
             return null;
@@ -532,13 +580,15 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         return new Color(range.location, true); // return a pointer to the beginning of the requested range
     }
 
-    public Color getClearColor()
+    @Override
+	public Color getClearColor()
     {
         return this.clearColor;
     }
 
     /** {@inheritDoc} */
-    public int getPickColorAtPoint(Point point)
+    @Override
+	public int getPickColorAtPoint(Point point)
     {
         if (point == null)
         {
@@ -547,10 +597,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             throw new IllegalArgumentException(msg);
         }
 
-        // Translate the point from AWT screen coordinates to OpenGL screen coordinates.
-        Rectangle viewport = this.getView().getViewport();
         int x = point.x;
-        int y = viewport.height - point.y - 1;
+        int y = point.y;
 
         // Read the framebuffer color at the specified point in OpenGL screen coordinates as a 24-bit RGB value.
         if (this.pixelColors == null || this.pixelColors.capacity() < 3)
@@ -566,7 +614,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     }
 
     /** {@inheritDoc} */
-    public int[] getPickColorsInRectangle(Rectangle rectangle, int[] minAndMaxColorCodes)
+    @Override
+	public int[] getPickColorsInRectangle(Rectangle rectangle, int[] minAndMaxColorCodes)
     {
         if (rectangle == null)
         {
@@ -577,10 +626,7 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
         Rectangle viewport = this.getView().getViewport();
 
-        // Transform the rectangle from AWT screen coordinates to OpenGL screen coordinates and compute its intersection
-        // with the viewport. Transformation to GL coordinates must be done prior to computing the intersection, because
-        // the viewport is in GL coordinates. The resultant rectangle represents the area that's valid to read from GL.
-        Rectangle r = new Rectangle(rectangle.x, viewport.height - rectangle.y - 1, rectangle.width, rectangle.height);
+        Rectangle r = new Rectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
         r = r.intersection(viewport);
 
         if (r.isEmpty()) // Return null if the rectangle is empty.
@@ -641,52 +687,62 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         return array;
     }
 
-    public boolean isPickingMode()
+    @Override
+	public boolean isPickingMode()
     {
         return this.pickingMode;
     }
 
-    public void enablePickingMode()
+    @Override
+	public void enablePickingMode()
     {
         this.pickingMode = true;
     }
 
-    public void disablePickingMode()
+    @Override
+	public void disablePickingMode()
     {
         this.pickingMode = false;
     }
 
-    public boolean isDeepPickingEnabled()
+    @Override
+	public boolean isDeepPickingEnabled()
     {
         return this.deepPickingMode;
     }
 
-    public void setDeepPickingEnabled(boolean tf)
+    @Override
+	public void setDeepPickingEnabled(boolean tf)
     {
         this.deepPickingMode = tf;
     }
 
-    public boolean isPreRenderMode()
+    @Override
+	public boolean isPreRenderMode()
     {
         return preRenderMode;
     }
 
-    public void setPreRenderMode(boolean preRenderMode)
+    @Override
+	public void setPreRenderMode(boolean preRenderMode)
     {
         this.preRenderMode = preRenderMode;
     }
 
-    public boolean isOrderedRenderingMode()
+    @Override
+	public boolean isOrderedRenderingMode()
     {
         return this.isOrderedRenderingMode;
     }
 
-    public void setOrderedRenderingMode(boolean tf)
+    @Override
+	public void setOrderedRenderingMode(boolean tf)
     {
         this.isOrderedRenderingMode = tf;
     }
 
-    public DeclutteringTextRenderer getDeclutteringTextRenderer()
+    @Override
+	public DeclutteringTextRenderer getDeclutteringTextRenderer()
     {
         return declutteringTextRenderer;
     }
@@ -703,7 +759,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         return this.globe instanceof Globe2D && ((Globe2D) this.getGlobe()).isContinuous();
     }
 
-    public void addOrderedRenderable(OrderedRenderable orderedRenderable)
+    @Override
+	public void addOrderedRenderable(OrderedRenderable orderedRenderable)
     {
         if (null == orderedRenderable)
         {
@@ -716,7 +773,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     }
 
     /** {@inheritDoc} */
-    public void addOrderedRenderable(OrderedRenderable orderedRenderable, boolean isBehind)
+    @Override
+	public void addOrderedRenderable(OrderedRenderable orderedRenderable, boolean isBehind)
     {
         if (null == orderedRenderable)
         {
@@ -734,14 +792,16 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             new OrderedRenderableEntry(orderedRenderable, eyeDistance, System.nanoTime(), this));
     }
 
-    public OrderedRenderable peekOrderedRenderables()
+    @Override
+	public OrderedRenderable peekOrderedRenderables()
     {
         OrderedRenderableEntry ore = this.orderedRenderables.peek();
 
         return ore != null ? ore.or : null;
     }
 
-    public OrderedRenderable pollOrderedRenderables()
+    @Override
+	public OrderedRenderable pollOrderedRenderables()
     {
         OrderedRenderableEntry ore = this.orderedRenderables.poll();
 
@@ -810,7 +870,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         return this.clutterFilter;
     }
 
-    public void applyClutterFilter()
+    @Override
+	public void applyClutterFilter()
     {
         if (this.getClutterFilter() == null)
             return;
@@ -826,7 +887,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         // Sort the declutterables front-to-back.
         Collections.sort(declutterableArray, new Comparator<OrderedRenderableEntry>()
         {
-            public int compare(OrderedRenderableEntry orA, OrderedRenderableEntry orB)
+            @Override
+			public int compare(OrderedRenderableEntry orA, OrderedRenderableEntry orB)
             {
                 double eA = orA.distanceFromEye;
                 double eB = orB.distanceFromEye;
@@ -854,7 +916,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     }
 
     /** {@inheritDoc} */
-    public void addOrderedSurfaceRenderable(OrderedRenderable orderedRenderable)
+    @Override
+	public void addOrderedSurfaceRenderable(OrderedRenderable orderedRenderable)
     {
         if (orderedRenderable == null)
         {
@@ -867,7 +930,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     }
 
     /** {@inheritDoc} */
-    public Queue<OrderedRenderable> getOrderedSurfaceRenderables()
+    @Override
+	public Queue<OrderedRenderable> getOrderedSurfaceRenderables()
     {
         return this.orderedSurfaceRenderables;
     }
@@ -903,7 +967,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 //        }
 //    }
 
-    public void drawUnitQuad()
+    @Override
+	public void drawUnitQuad()
     {
         GL2 gl = this.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
@@ -915,7 +980,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         gl.glEnd();
     }
 
-    public void drawUnitQuad(TextureCoords texCoords)
+    @Override
+	public void drawUnitQuad(TextureCoords texCoords)
     {
         GL2 gl = this.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
@@ -931,7 +997,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         gl.glEnd();
     }
 
-    public void drawUnitQuadOutline()
+    @Override
+	public void drawUnitQuadOutline()
     {
         GL2 gl = this.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
@@ -943,7 +1010,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         gl.glEnd();
     }
 
-    public void drawNormals(float length, FloatBuffer vBuf, FloatBuffer nBuf)
+    @Override
+	public void drawNormals(float length, FloatBuffer vBuf, FloatBuffer nBuf)
     {
         if (vBuf == null || nBuf == null)
             return;
@@ -971,7 +1039,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         gl.glEnd();
     }
 
-    public Vec4 getPointOnTerrain(Angle latitude, Angle longitude)
+    @Override
+	public Vec4 getPointOnTerrain(Angle latitude, Angle longitude)
     {
         if (latitude == null || longitude == null)
         {
@@ -997,28 +1066,33 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         return null;
     }
 
-    public SurfaceTileRenderer getGeographicSurfaceTileRenderer()
+    @Override
+	public SurfaceTileRenderer getGeographicSurfaceTileRenderer()
     {
         return this.geographicSurfaceTileRenderer;
     }
 
-    public Collection<PerformanceStatistic> getPerFrameStatistics()
+    @Override
+	public Collection<PerformanceStatistic> getPerFrameStatistics()
     {
         return this.perFrameStatistics;
     }
 
-    public void setPerFrameStatisticsKeys(Set<String> statKeys, Collection<PerformanceStatistic> stats)
+    @Override
+	public void setPerFrameStatisticsKeys(Set<String> statKeys, Collection<PerformanceStatistic> stats)
     {
         this.perFrameStatisticsKeys = statKeys;
         this.perFrameStatistics = stats;
     }
 
-    public Set<String> getPerFrameStatisticsKeys()
+    @Override
+	public Set<String> getPerFrameStatisticsKeys()
     {
         return perFrameStatisticsKeys;
     }
 
-    public void setPerFrameStatistic(String key, String displayName, Object value)
+    @Override
+	public void setPerFrameStatistic(String key, String displayName, Object value)
     {
         if (this.perFrameStatistics == null || this.perFrameStatisticsKeys == null)
             return;
@@ -1041,7 +1115,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             this.perFrameStatistics.add(new PerformanceStatistic(key, displayName, value));
     }
 
-    public void setPerFrameStatistics(Collection<PerformanceStatistic> stats)
+    @Override
+	public void setPerFrameStatistics(Collection<PerformanceStatistic> stats)
     {
         if (stats == null)
         {
@@ -1059,17 +1134,20 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
     }
 
-    public long getFrameTimeStamp()
+    @Override
+	public long getFrameTimeStamp()
     {
         return this.frameTimestamp;
     }
 
-    public void setFrameTimeStamp(long frameTimeStamp)
+    @Override
+	public void setFrameTimeStamp(long frameTimeStamp)
     {
         this.frameTimestamp = frameTimeStamp;
     }
 
-    public List<Sector> getVisibleSectors(double[] resolutions, long timeLimit, Sector sector)
+    @Override
+	public List<Sector> getVisibleSectors(double[] resolutions, long timeLimit, Sector sector)
     {
         if (resolutions == null)
         {
@@ -1106,19 +1184,22 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         return this.visibleSectors.getSectors();
     }
 
-    public void setCurrentLayer(Layer layer)
+    @Override
+	public void setCurrentLayer(Layer layer)
     {
         this.currentLayer = layer;
     }
 
-    public Layer getCurrentLayer()
+    @Override
+	public Layer getCurrentLayer()
     {
         return this.currentLayer;
     }
 
     protected LinkedHashMap<ScreenCredit, Long> credits = new LinkedHashMap<ScreenCredit, Long>();
 
-    public void addScreenCredit(ScreenCredit credit)
+    @Override
+	public void addScreenCredit(ScreenCredit credit)
     {
         if (credit == null)
         {
@@ -1130,27 +1211,32 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.credits.put(credit, this.frameTimestamp);
     }
 
-    public Map<ScreenCredit, Long> getScreenCredits()
+    @Override
+	public Map<ScreenCredit, Long> getScreenCredits()
     {
         return this.credits;
     }
 
-    public int getRedrawRequested()
+    @Override
+	public int getRedrawRequested()
     {
         return redrawRequested;
     }
 
-    public void setRedrawRequested(int redrawRequested)
+    @Override
+	public void setRedrawRequested(int redrawRequested)
     {
         this.redrawRequested = redrawRequested;
     }
 
-    public PickPointFrustumList getPickFrustums()
+    @Override
+	public PickPointFrustumList getPickFrustums()
     {
         return this.pickFrustumList;
     }
 
-    public void setPickPointFrustumDimension(Dimension dim)
+    @Override
+	public void setPickPointFrustumDimension(Dimension dim)
     {
         if (dim == null)
         {
@@ -1169,25 +1255,20 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.pickPointFrustumDimension = new Dimension(dim);
     }
 
-    public Dimension getPickPointFrustumDimension()
+    @Override
+	public Dimension getPickPointFrustumDimension()
     {
         return this.pickPointFrustumDimension;
     }
 
-    public void addPickPointFrustum()
+    @Override
+	public void addPickPointFrustum()
     {
         //Compute the current picking frustum
         if (getPickPoint() != null)
         {
-            Rectangle viewport = getView().getViewport();
-
-            double viewportWidth = viewport.getWidth() <= 0.0 ? 1.0 : viewport.getWidth();
-            double viewportHeight = viewport.getHeight() <= 0.0 ? 1.0 : viewport.getHeight();
-
-            //Get the pick point and translate screen center to zero
             Point ptCenter = new Point(getPickPoint());
-            ptCenter.y = (int) viewportHeight - ptCenter.y;
-            ptCenter.translate((int) (-viewportWidth / 2), (int) (-viewportHeight / 2));
+            ptCenter.translate(-viewportCenterScreenPoint.x, -viewportCenterScreenPoint.y);
 
             //Number of pixels around pick point to include in frustum
             int offsetX = pickPointFrustumDimension.width / 2;
@@ -1199,7 +1280,9 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
 
             //Compute the distance to the near plane in screen coordinates
             double width = getView().getFieldOfView().tanHalfAngle() * getView().getNearClipDistance();
-            double x = width / (viewportWidth / 2.0);
+            double viewportWidth = getView().getViewport().getWidth();
+            if (viewportWidth <= 0.0) viewportWidth = 1.0;
+            double x = width / (viewportWidth/2);
             double screenDist = getView().getNearClipDistance() / x;
 
             //Create the four vectors that define the top-left, top-right, bottom-left, and bottom-right vectors
@@ -1213,10 +1296,10 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
                 getView().getNearClipDistance(), getView().getFarClipDistance());
 
             //Create the screen rectangle associated with this frustum
-            Rectangle rectScreen = new Rectangle(getPickPoint().x - offsetX,
-                (int) viewportHeight - getPickPoint().y - offsetY,
-                pickPointFrustumDimension.width,
-                pickPointFrustumDimension.height);
+            Rectangle rectScreen = new Rectangle(getPickPoint().x - offsetX + 1,
+            									 getPickPoint().y - offsetY - 1,
+            									 pickPointFrustumDimension.width,
+            									 pickPointFrustumDimension.height);
 
             //Transform the frustum to Model Coordinates
             Matrix modelviewTranspose = getView().getModelviewMatrix().getTranspose();
@@ -1227,24 +1310,21 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
     }
 
-    public void addPickRectangleFrustum()
+    @Override
+	public void addPickRectangleFrustum()
     {
         // Do nothing if the pick rectangle is either null or has zero dimension.
         if (this.getPickRectangle() == null || this.getPickRectangle().isEmpty())
             return;
 
-        View view = this.getView();
-
-        Rectangle viewport = view.getViewport();
-        double viewportWidth = viewport.getWidth() <= 0.0 ? 1.0 : viewport.getWidth();
-        double viewportHeight = viewport.getHeight() <= 0.0 ? 1.0 : viewport.getHeight();
-
-        // Get the pick rectangle, transform it from AWT screen coordinates to OpenGL screen coordinates, then translate
+        // Get the pick rectangle, transform it from GL surface coordinates to OpenGL screen coordinates, then translate
         // it such that the screen's center is at the origin.
         Rectangle pr = new Rectangle(this.getPickRectangle());
-        pr.y = (int) viewportHeight - pr.y;
-        pr.translate((int) (-viewportWidth / 2), (int) (-viewportHeight / 2));
+        pr.translate(-viewportCenterScreenPoint.x, -viewportCenterScreenPoint.y);
 
+        double viewportWidth = view.getViewport().getWidth();
+        if (viewportWidth <= 0.0) viewportWidth = 1.0;
+      
         // Create the four vectors that define the top-left, top-right, bottom-left, and bottom-right corners of the
         // pick rectangle in screen coordinates.
         double screenDist = viewportWidth / (2 * view.getFieldOfView().tanHalfAngle());
@@ -1265,22 +1345,24 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         // Create the screen rectangle in OpenGL screen coordinates associated with this frustum. We translate the
         // specified pick rectangle from AWT coordinates to GL coordinates by inverting the y axis.
         Rectangle screenRect = new Rectangle(this.getPickRectangle());
-        screenRect.y = (int) viewportHeight - screenRect.y;
 
         this.pickFrustumList.add(new PickPointFrustum(frustum, screenRect));
     }
 
-    public Collection<Throwable> getRenderingExceptions()
+    @Override
+	public Collection<Throwable> getRenderingExceptions()
     {
         return this.renderingExceptions;
     }
 
-    public void setRenderingExceptions(Collection<Throwable> exceptions)
+    @Override
+	public void setRenderingExceptions(Collection<Throwable> exceptions)
     {
         this.renderingExceptions = exceptions;
     }
 
-    public void addRenderingException(Throwable t)
+    @Override
+	public void addRenderingException(Throwable t)
     {
         // If the renderingExceptions Collection is non-null, it's used as the data structure that accumulates rendering
         // exceptions. Otherwise this DrawContext ignores all rendering exceptions passed to this method.
@@ -1297,7 +1379,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         this.renderingExceptions.add(t);
     }
 
-    public void pushProjectionOffest(Double offset)
+    @Override
+	public void pushProjectionOffest(Double offset)
     {
         // Modify the projection transform to shift the depth values slightly toward the camera in order to
         // ensure the lines are selected during depth buffering.
@@ -1313,7 +1396,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         gl.glLoadMatrixf(pm, 0);
     }
 
-    public void popProjectionOffest()
+    @Override
+	public void popProjectionOffest()
     {
         GL2 gl = this.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
 
@@ -1325,7 +1409,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
     public static final float DEFAULT_DEPTH_OFFSET_FACTOR = 1f;
     public static final float DEFAULT_DEPTH_OFFSET_UNITS = 1f;
 
-    public void drawOutlinedShape(OutlinedShape renderer, Object shape)
+    @Override
+	public void drawOutlinedShape(OutlinedShape renderer, Object shape)
     {
         // Draw the outlined shape using a multiple pass algorithm. The motivation for this algorithm is twofold:
         //
@@ -1433,7 +1518,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
     }
 
-    public void beginStandardLighting()
+    @Override
+	public void beginStandardLighting()
     {
         if (this.standardLighting != null)
         {
@@ -1442,7 +1528,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
     }
 
-    public void endStandardLighting()
+    @Override
+	public void endStandardLighting()
     {
         if (this.standardLighting != null)
         {
@@ -1450,7 +1537,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
     }
 
-    public boolean isSmall(Extent extent, int numPixels)
+    @Override
+	public boolean isSmall(Extent extent, int numPixels)
     {
         return extent != null && extent.getDiameter() <= numPixels * this.getView().computePixelSizeAtDistance(
             // burkey couldnt we make this minimum dimension
@@ -1458,29 +1546,34 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
                 extent.getCenter()));                                                    // -- so box could return small when one dim is narrow?
     }                                                                                                                           // i see really skinny telephone poles that dont need to be rendered at distance but  are tall
 
-    public Terrain getTerrain()
+    @Override
+	public Terrain getTerrain()
     {
         return this.terrain;
     }
 
-    public Vec4 computeTerrainPoint(Angle lat, Angle lon, double offset)
+    @Override
+	public Vec4 computeTerrainPoint(Angle lat, Angle lon, double offset)
     {
         return this.getTerrain().getSurfacePoint(lat, lon, offset);
     }
 
     protected Terrain terrain = new Terrain()
     {
-        public Globe getGlobe()
+        @Override
+		public Globe getGlobe()
         {
             return DrawContextImpl.this.getGlobe();
         }
 
-        public double getVerticalExaggeration()
+        @Override
+		public double getVerticalExaggeration()
         {
             return DrawContextImpl.this.getVerticalExaggeration();
         }
 
-        public Vec4 getSurfacePoint(Position position)
+        @Override
+		public Vec4 getSurfacePoint(Position position)
         {
             if (position == null)
             {
@@ -1504,7 +1597,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             return pt;
         }
 
-        public Vec4 getSurfacePoint(Angle latitude, Angle longitude, double metersOffset)
+        @Override
+		public Vec4 getSurfacePoint(Angle latitude, Angle longitude, double metersOffset)
         {
             if (latitude == null || longitude == null)
             {
@@ -1529,7 +1623,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             return pt;
         }
 
-        public Intersection[] intersect(Position pA, Position pB)
+        @Override
+		public Intersection[] intersect(Position pA, Position pB)
         {
             SectorGeometryList sectorGeometry = DrawContextImpl.this.getSurfaceGeometry();
             if (sectorGeometry == null)
@@ -1544,7 +1639,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             return sectorGeometry.intersect(new Line(ptA, ptB.subtract3(ptA)));
         }
 
-        public Intersection[] intersect(Position pA, Position pB, int altitudeMode)
+        @Override
+		public Intersection[] intersect(Position pA, Position pB, int altitudeMode)
         {
             if (pA == null || pB == null)
             {
@@ -1570,7 +1666,8 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
             return this.intersect(new Position(pA, altitudeA), new Position(pB, altitudeB));
         }
 
-        public Double getElevation(LatLon location)
+        @Override
+		public Double getElevation(LatLon location)
         {
             if (location == null)
             {
@@ -1589,25 +1686,29 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
     };
 
-    public void restoreDefaultBlending()
+    @Override
+	public void restoreDefaultBlending()
     {
         this.getGL().glBlendFunc(GL.GL_ONE, GL.GL_ZERO);
         this.getGL().glDisable(GL.GL_BLEND);
     }
 
-    public void restoreDefaultCurrentColor()
+    @Override
+	public void restoreDefaultCurrentColor()
     {
         GL2 gl = this.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         gl.glColor4f(1, 1, 1, 1);
     }
 
-    public void restoreDefaultDepthTesting()
+    @Override
+	public void restoreDefaultDepthTesting()
     {
         this.getGL().glEnable(GL.GL_DEPTH_TEST);
         this.getGL().glDepthMask(true);
     }
 
-    public Vec4 computePointFromPosition(Position position, int altitudeMode)
+    @Override
+	public Vec4 computePointFromPosition(Position position, int altitudeMode)
     {
         if (position == null)
         {
@@ -1635,5 +1736,33 @@ public class DrawContextImpl extends WWObjectImpl implements DrawContext
         }
 
         return point;
+    }
+
+    /** {@inheritDoc} */
+	@Override
+	public int [] awtPointToGLpoint(Point pt) {
+		if (pt == null) return null;
+		
+		int [] awtPt = { pt.x, pt.y };
+		if (glContext == null) return awtPt;
+	
+		GLDrawable drawable = glContext.getGLDrawable();
+		if (drawable == null) return awtPt;
+
+		// Convert to GL surface coordinates
+		int [] glSurfacePt = drawable.getNativeSurface().convertToPixelUnits(awtPt);
+		int glSurfaceHeight = drawable.getSurfaceHeight();
+		glSurfacePt[1] = glSurfaceHeight-1 - glSurfacePt[1];
+		return glSurfacePt;
+	}
+	    
+    public Point glPointToAwtPoint(Point glPoint) {
+		GLDrawable drawable = glContext.getGLDrawable();
+		if (drawable == null) return glPoint;
+
+		final int viewportHeight = getView().getViewport().height;
+		int [] glPt = { glPoint.x, viewportHeight-1 - glPoint.y };
+        getGLDrawable().getNativeSurface().convertToWindowUnits(glPt);
+        return new Point(glPt[0], glPt[1]);    	
     }
 }

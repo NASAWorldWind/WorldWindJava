@@ -644,7 +644,7 @@ public class LayerManagerLayer extends RenderableLayer implements SelectListener
                 Point cursorOffset = new Point(event.getMouseEvent().getPoint().x - this.dragRefCursorPoint.x,
                     event.getMouseEvent().getPoint().y - this.dragRefCursorPoint.y);
                 Point targetPoint = new Point(this.dragRefPoint.x + cursorOffset.x,
-                    this.dragRefPoint.y - cursorOffset.y);
+                    this.dragRefPoint.y + cursorOffset.y);
                 this.moveTo(targetPoint);
                 event.consume();
             }

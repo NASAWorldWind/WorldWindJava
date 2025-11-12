@@ -163,8 +163,8 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
                 maxX = this.startPoint.x;
             }
 
-            // Compute the selection's extremes along the y axis. The selection is defined in AWT screen coordinates, so
-            // the origin is in the upper left corner and the y axis points down.
+            // Compute the selection's extremes along the y axis. The selection is defined in GL surface coordinates, so
+            // the origin is in the lower left corner and the y axis points up.
             double minY, maxY;
             if (this.startPoint.y < this.endPoint.y)
             {
@@ -185,7 +185,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
             if (minY == maxY && minX < maxX)
                 minY = maxY - 1;
 
-            this.rect.setRect(minX, maxY, maxX - minX, maxY - minY);
+            this.rect.setRect(minX, minY, maxX - minX, maxY - minY);
         }
 
         public void clearSelection()
@@ -215,17 +215,20 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
             this.borderColor = color;
         }
 
-        public double getDistanceFromEye()
+        @Override
+		public double getDistanceFromEye()
         {
             return 0; // Screen rectangle is drawn on top of other ordered renderables, except other screen objects.
         }
 
-        public void pick(DrawContext dc, Point pickPoint)
+        @Override
+		public void pick(DrawContext dc, Point pickPoint)
         {
             // Intentionally left blank. SelectionRectangle is not pickable.
         }
 
-        public void render(DrawContext dc)
+        @Override
+		public void render(DrawContext dc)
         {
             if (dc == null)
             {
@@ -270,7 +273,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
                 gl.glOrtho(0, viewport.getWidth(), 0, viewport.getHeight(), -1, 1); // l, r, b, t, n, f
                 this.BEogsh.pushModelviewIdentity(gl);
                 gl.glTranslated(0.5, 0.5, 0.0);
-                gl.glTranslated(selection.getX(), viewport.getHeight() - selection.getY(), 0);
+                gl.glTranslated(selection.getX(), selection.getY(), 0);
                 gl.glScaled(selection.getWidth() - 1, selection.getHeight() - 1, 1);
 
                 // Disable the depth test and enable blending so this screen rectangle appears on top of the existing
@@ -460,12 +463,14 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         }
     }
 
-    public void mouseClicked(MouseEvent mouseEvent)
+    @Override
+	public void mouseClicked(MouseEvent mouseEvent)
     {
         // Intentionally left blank. ScreenSelector does not respond to mouse clicked events.
     }
 
-    public void mousePressed(MouseEvent mouseEvent)
+    @Override
+	public void mousePressed(MouseEvent mouseEvent)
     {
         if (mouseEvent == null) // Ignore null events.
             return;
@@ -478,7 +483,8 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         mouseEvent.consume(); // Consume the mouse event to prevent the view from responding to it.
     }
 
-    public void mouseReleased(MouseEvent mouseEvent)
+    @Override
+	public void mouseReleased(MouseEvent mouseEvent)
     {
         if (mouseEvent == null) // Ignore null events.
             return;
@@ -491,17 +497,20 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         mouseEvent.consume(); // Consume the mouse event to prevent the view from responding to it.
     }
 
-    public void mouseEntered(MouseEvent mouseEvent)
+    @Override
+	public void mouseEntered(MouseEvent mouseEvent)
     {
         // Intentionally left blank. ScreenSelector does not respond to mouse entered events.
     }
 
-    public void mouseExited(MouseEvent mouseEvent)
+    @Override
+	public void mouseExited(MouseEvent mouseEvent)
     {
         // Intentionally left blank. ScreenSelector does not respond to mouse exited events.
     }
 
-    public void mouseDragged(MouseEvent mouseEvent)
+    @Override
+	public void mouseDragged(MouseEvent mouseEvent)
     {
         if (mouseEvent == null) // Ignore null events.
             return;
@@ -513,7 +522,8 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         mouseEvent.consume(); // Consume the mouse event to prevent the view from responding to it.
     }
 
-    public void mouseMoved(MouseEvent mouseEvent)
+    @Override
+	public void mouseMoved(MouseEvent mouseEvent)
     {
         // Intentionally left blank. ScreenSelector does not respond to mouse moved events.
     }
@@ -530,8 +540,7 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         this.sendMessage(new Message(SELECTION_STARTED, this));
     }
 
-    @SuppressWarnings({"UnusedParameters"})
-    protected void selectionEnded(MouseEvent mouseEvent)
+    protected void selectionEnded(@SuppressWarnings("unused") MouseEvent mouseEvent)
     {
         this.selectionRect.clearSelection();
         this.getWwd().getSceneController().setPickRectangle(null);
@@ -577,19 +586,20 @@ public class ScreenSelector extends WWObjectImpl implements MouseListener, Mouse
         int x = point.x;
         if (x < viewport.x)
             x = viewport.x;
-        if (x > viewport.x + viewport.width)
-            x = viewport.x + viewport.width;
+        if (x >= viewport.x + viewport.width)
+            x = viewport.x + viewport.width - 1;
 
         int y = point.y;
         if (y < viewport.y)
             y = viewport.y;
-        if (y > viewport.y + viewport.height)
-            y = viewport.y + viewport.height;
+        if (y >= viewport.y + viewport.height)
+            y = viewport.y + viewport.height - 1;
 
         return new Point(x, y);
     }
 
-    public void selected(SelectEvent event)
+    @Override
+	public void selected(SelectEvent event)
     {
         try
         {

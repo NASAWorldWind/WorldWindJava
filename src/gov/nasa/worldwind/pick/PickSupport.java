@@ -135,7 +135,7 @@ public class PickSupport
      * objects are currently registered with this PickSupport.
      *
      * @param dc        the draw context which receives the picked object.
-     * @param pickPoint the point in AWT screen coordinates.
+     * @param pickPoint the point in GL surface coordinates.
      * @param layer     the layer associated with the picked object.
      *
      * @return the picked object added to the draw context, or <code>null</code> if no picked object is drawn at the
@@ -166,11 +166,11 @@ public class PickSupport
     }
 
     /**
-     * Adds a picked object registered with this PickSupport that is drawn at the specified point in AWT screen
+     * Adds a picked object registered with this PickSupport that is drawn at the specified point in GL surface
      * coordinates (if one exists) to the draw context's list of picked objects.
      *
      * @param dc        the draw context which receives the picked object.
-     * @param pickPoint the point in AWT screen coordinates.
+     * @param pickPoint the point in GL surface coordinates.
      * @param layer     the layer associated with the picked object.
      *
      * @return the picked object added to the draw context, or <code>null</code> if no picked object is drawn at the
@@ -195,7 +195,7 @@ public class PickSupport
      * screen coordinates (if any) to the draw context's list of picked objects.
      *
      * @param dc       the draw context which receives the picked objects.
-     * @param pickRect the rectangle in AWT screen coordinates.
+     * @param pickRect the rectangle in GL surface coordinates.
      * @param layer    the layer associated with the picked objects.
      */
     protected void doResolvePick(DrawContext dc, Rectangle pickRect, Layer layer)
@@ -226,7 +226,7 @@ public class PickSupport
     }
 
     /**
-     * Returns the framebuffer RGB color for a point in AWT screen coordinates, formatted as a pick color code. The red,
+     * Returns the framebuffer RGB color for a point in GL surface coordinates, formatted as a pick color code. The red,
      * green, and blue components are each stored as an 8-bit unsigned integer, and packed into bits 0-23 of the
      * returned integer as follows: bits 16-23 are red, bits 8-15 are green, and bits 0-7 are blue. This format is
      * consistent with the RGB integers used to create the pick colors.
@@ -235,7 +235,7 @@ public class PickSupport
      * outside the draw context's drawable area.
      *
      * @param dc        the draw context to return a color for.
-     * @param pickPoint the point to return a color for, in AWT screen coordinates.
+     * @param pickPoint the point to return a color for, in GL surface coordinates.
      *
      * @return the RGB color corresponding to the specified point.
      */

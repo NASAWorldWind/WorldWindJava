@@ -37,6 +37,8 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 import com.jogamp.opengl.*;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
 import java.awt.*;
 import java.awt.geom.*;
 import java.beans.PropertyChangeEvent;
@@ -148,7 +150,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return true if the profile graph is minimized.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public boolean getIsMinimized() {
         return this.isMinimized;
     }
@@ -171,7 +172,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return true if the profile graph is maximized.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public boolean getIsMaximized() {
         return this.isMaximized;
     }
@@ -262,7 +262,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the graphic-to-viewport scale factor.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public double getToViewportScale() {
         return toViewportScale;
     }
@@ -275,7 +274,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @param toViewportScale the graphic to viewport scale factor.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public void setToViewportScale(double toViewportScale) {
         this.toViewportScale = toViewportScale;
     }
@@ -305,7 +303,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the screen location of the graph center if set (can be null).
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public Point getLocationCenter() {
         return this.locationCenter;
     }
@@ -325,7 +322,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the location offset. Will be null if no offset has been specified.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public Vec4 getLocationOffset() {
         return locationOffset;
     }
@@ -349,7 +345,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the layer's resize behavior.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public String getResizeBehavior() {
         return resizeBehavior;
     }
@@ -365,7 +360,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @param resizeBehavior the desired resize behavior
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public void setResizeBehavior(String resizeBehavior) {
         this.resizeBehavior = resizeBehavior;
     }
@@ -384,7 +378,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
         this.borderWidth = borderWidth;
     }
 
-    @SuppressWarnings({"UnusedDeclaration"})
     public String getUnit() {
         return this.unit;
     }
@@ -503,7 +496,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the profile start position lat/lon.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public LatLon getStartLatLon() {
         return this.startLatLon;
     }
@@ -527,7 +519,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the profile end position lat/lon.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public LatLon getEndLatLon() {
         return this.endLatLon;
     }
@@ -551,7 +542,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the number of elevation samples in the profile.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public int getSamples() {
         return this.samples;
     }
@@ -561,7 +551,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @param number the number of elevation samples in the profile.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public void setSamples(int number) {
         this.samples = Math.abs(number);
     }
@@ -589,7 +578,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the object position the graph follows.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public Position getObjectPosition() {
         return this.objectPosition;
     }
@@ -609,7 +597,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the object heading the graph follows.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public Angle getObjectHeading() {
         return this.objectHeading;
     }
@@ -629,7 +616,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the path positions that the profile follows.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public List<? extends LatLon> getPathPositions() {
         return this.pathPositions;
     }
@@ -708,7 +694,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the <code>Path</code> used to render the profile line on the ground.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public Path getProfileLine() {
         return this.selectionShape;
     }
@@ -718,7 +703,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return the <code>Path</code> used to render the picked position on the terrain.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public Path getPickedLine() {
         return this.selectionShape;
     }
@@ -728,7 +712,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return true is the profile line is displayed over the ground.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public boolean isShowProfileLine() {
         return this.showProfileLine;
     }
@@ -747,7 +730,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @return true if the picked line is displayed over the ground.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public boolean isShowPickedLine() {
         return this.showPickedLine;
     }
@@ -757,7 +739,6 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
      *
      * @param state if the picked line should be displayed over the ground.
      */
-    @SuppressWarnings({"UnusedDeclaration"})
     public void setShowPickedLine(boolean state) {
         this.showPickedLine = state;
     }
@@ -986,6 +967,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
                 (byte) this.color.getBlue(), (byte) 100);
         gl.glBegin(GL2.GL_TRIANGLE_STRIP);
         for (i = 0; i < this.samples; i++) {
+        	if (this.positions[i] == null) break;
             x = i * lengthStep * stepX;
             y = (this.positions[i].getElevation() - min) * stepY;
             gl.glVertex3d(x, 0, 0);
@@ -997,6 +979,7 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
         gl.glColor4d(colorRGB[0], colorRGB[1], colorRGB[2], this.getOpacity());
         gl.glBegin(GL2.GL_LINE_STRIP);
         for (i = 0; i < this.samples; i++) {
+        	if (this.positions[i] == null) break;
             x = i * lengthStep * stepX;
             y = (this.positions[i].getElevation() - min) * stepY;
             gl.glVertex3d(x, y, 0);
@@ -1274,12 +1257,11 @@ public class TerrainProfileLayer extends AbstractLayer implements PositionListen
         this.pickedSample = -1;
         Point pickPoint = dc.getPickPoint();
         if (pickPoint != null && this.positions != null && !this.follow.equals(FOLLOW_CURSOR)) {
-            Rectangle viewport = dc.getView().getViewport();
             // Check if pickpoint is inside the graph
             if (pickPoint.getX() >= locationSW.getX()
                     && pickPoint.getX() < locationSW.getX() + mapSize.width
-                    && viewport.height - pickPoint.getY() >= locationSW.getY()
-                    && viewport.height - pickPoint.getY() < locationSW.getY() + mapSize.height) {
+                    && pickPoint.getY() >= locationSW.getY()
+                    && pickPoint.getY() < locationSW.getY() + mapSize.height) {
                 // Find sample - Note: only works when graph expends over the full width
                 int sample = (int) (((double) (pickPoint.getX() - locationSW.getX()) / mapSize.width) * this.samples);
                 if (sample >= 0 && sample < this.samples) {

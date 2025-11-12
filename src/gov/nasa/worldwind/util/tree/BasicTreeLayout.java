@@ -28,6 +28,7 @@
 
 package gov.nasa.worldwind.util.tree;
 
+import com.jogamp.opengl.util.awt.TextRenderer;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import gov.nasa.worldwind.WWObjectImpl;
 import gov.nasa.worldwind.avlist.AVKey;
@@ -160,7 +161,7 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      */
     public BasicTreeLayout(Tree tree, int x, int y)
     {
-        this(tree, new Offset((double) x, (double) y, AVKey.PIXELS, AVKey.INSET_PIXELS));
+        this(tree, new Point(x, y));
     }
 
     /**
@@ -170,7 +171,7 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      * @param screenLocation The location of the upper left corner of the tree frame. The offset is interpreted relative
      *                       to the lower left corner of the screen.
      */
-    public BasicTreeLayout(Tree tree, Offset screenLocation)
+    public BasicTreeLayout(Tree tree, Point screenLocation)
     {
         this.tree = tree;
         this.frame = this.createFrame();
@@ -186,7 +187,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
         // events between TreeLayout and Tree.
         this.tree.addPropertyChangeListener(new PropertyChangeListener()
         {
-            public void propertyChange(PropertyChangeEvent propertyChangeEvent)
+            @Override
+			public void propertyChange(PropertyChangeEvent propertyChangeEvent)
             {
                 // Ignore events originated by this TreeLayout, and repaint events. There is no need to recompute the
                 // tree layout just because a repaint was triggered.
@@ -341,7 +343,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
     }
 
     /** {@inheritDoc} */
-    public long getUpdateTime()
+    @Override
+	public long getUpdateTime()
     {
         return this.updateTime;
     }
@@ -364,7 +367,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      *
      * @return Size of the rendered tree.
      */
-    public Dimension getSize(DrawContext dc, Dimension frameSize)
+    @Override
+	public Dimension getSize(DrawContext dc, Dimension frameSize)
     {
         this.updateAttributes(dc);
 
@@ -472,7 +476,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
     }
 
     /** {@inheritDoc} */
-    public void preRender(DrawContext dc)
+    @Override
+	public void preRender(DrawContext dc)
     {
         // Adjust scroll position if an application has requested that the layout scroll to make a node visible.
         this.scrollToNode(dc);
@@ -481,7 +486,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
     }
 
     /** {@inheritDoc} */
-    public void render(DrawContext dc)
+    @Override
+	public void render(DrawContext dc)
     {
         this.frame.render(dc);
     }
@@ -514,7 +520,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
     }
 
     /** {@inheritDoc} */
-    public void renderScrollable(DrawContext dc, Point location, Dimension frameSize, Rectangle clipBounds)
+    @Override
+	public void renderScrollable(DrawContext dc, Point location, Dimension frameSize, Rectangle clipBounds)
     {
         TreeModel model = this.tree.getModel();
         TreeNode root = model.getRoot();
@@ -1321,7 +1328,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
     }
 
     /** {@inheritDoc} */
-    public synchronized void makeVisible(TreePath path)
+    @Override
+	public synchronized void makeVisible(TreePath path)
     {
         TreeNode node = this.tree.getNode(path);
         if (node == null)
@@ -1345,7 +1353,7 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      *
      * @return Screen location, measured in pixels from the upper left corner of the screen.
      */
-    public Offset getScreenLocation()
+    public Point getScreenLocation()
     {
         return this.frame.getScreenLocation();
     }
@@ -1356,19 +1364,21 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      *
      * @param screenLocation New screen location.
      */
-    public void setScreenLocation(Offset screenLocation)
+    public void setScreenLocation(Point screenLocation)
     {
         frame.setScreenLocation(screenLocation);
     }
 
     /** {@inheritDoc} */
-    public TreeAttributes getAttributes()
+    @Override
+	public TreeAttributes getAttributes()
     {
         return this.normalAttributes;
     }
 
     /** {@inheritDoc} */
-    public void setAttributes(TreeAttributes attributes)
+    @Override
+	public void setAttributes(TreeAttributes attributes)
     {
         if (attributes == null)
         {
@@ -1464,7 +1474,8 @@ public class BasicTreeLayout extends WWObjectImpl implements TreeLayout, Scrolla
      *
      * @param highlighted True if the tree should be highlighted.
      */
-    public void setHighlighted(boolean highlighted)
+    @Override
+	public void setHighlighted(boolean highlighted)
     {
         this.highlighted = highlighted;
     }

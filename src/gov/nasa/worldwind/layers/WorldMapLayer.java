@@ -700,11 +700,11 @@ public class WorldMapLayer extends AbstractLayer
             // Check if pickpoint is inside the map
             if (pickPoint.getX() >= locationSW.getX()
                 && pickPoint.getX() < locationSW.getX() + mapSize.width
-                && viewport.height - pickPoint.getY() >= locationSW.getY()
-                && viewport.height - pickPoint.getY() < locationSW.getY() + mapSize.height)
+                && pickPoint.getY() >= locationSW.getY()
+                && pickPoint.getY() < locationSW.getY() + mapSize.height)
             {
                 double lon = (pickPoint.getX() - locationSW.getX()) / mapSize.width * 360 - 180;
-                double lat = (viewport.height - pickPoint.getY() - locationSW.getY()) / mapSize.height * 180 - 90;
+                double lat = (pickPoint.getY() - locationSW.getY()) / mapSize.height * 180 - 90;
                 double pickAltitude = 1000e3;
                 pickPosition = new Position(Angle.fromDegrees(lat), Angle.fromDegrees(lon), pickAltitude);
             }
