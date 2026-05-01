@@ -28,15 +28,11 @@
 package gov.nasa.worldwind.render.airspaces;
 
 import gov.nasa.worldwind.geom.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TrackAirspaceTest
 {
     @Test

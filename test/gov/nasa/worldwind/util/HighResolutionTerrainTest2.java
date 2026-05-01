@@ -31,19 +31,17 @@ package gov.nasa.worldwind.util;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.terrain.HighResolutionTerrain;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Checks for re-occurrence of WWJ-521.
  */
-@Ignore
-@RunWith(JUnit4.class)
+@Disabled
 public class HighResolutionTerrainTest2
 {
     /**

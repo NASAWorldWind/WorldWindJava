@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -33,9 +33,10 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwindx.examples.kml.KMLDocumentBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.xml.XMLConstants;
 import javax.xml.stream.XMLStreamException;
@@ -44,32 +45,20 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.*;
 import java.io.*;
 import java.util.*;
+import java.util.stream.Stream;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test export of KML by writing shapes to KML and validating the resulting document against the KML schema.
  */
-@RunWith(Parameterized.class)
 public class KMLExportTest
 {
     private static ShapeAttributes normalShapeAttributes;
     private static ShapeAttributes highlightShapeAttributes;
 
-    private List<Exportable> objectsToExport;
-
-    public KMLExportTest(List<Exportable> objectsToExport)
-    {
-        this.objectsToExport = objectsToExport;
-    }
-
-    /**
-     * Method to create parametrized data to drive the test.
-     *
-     * @return Collection of object[]. Each object[] holds parameters for one invocation of the test.
-     */
-    @Parameterized.Parameters
-    public static Collection<Object[]> data()
+    @BeforeAll
+    static void setupAttributes()
     {
         normalShapeAttributes = new BasicShapeAttributes();
         normalShapeAttributes.setInteriorMaterial(Material.BLUE);
@@ -78,21 +67,27 @@ public class KMLExportTest
         highlightShapeAttributes = new BasicShapeAttributes();
         highlightShapeAttributes.setInteriorMaterial(Material.RED);
         highlightShapeAttributes.setOutlineMaterial(Material.BLACK);
+    }
 
-        return Arrays.asList(new Object[][] {
+    /**
+     * Provides parameterised data: one {@code List<Exportable>} per test invocation.
+     */
+    static Stream<List<Exportable>> data()
+    {
+        return Stream.of(
             // Export a single instance of each type of shape to its own document to test the shape exporters in isolation.
-            {Collections.singletonList(makePointPlacemark())},
-            {Collections.singletonList(makePath())},
-            {Collections.singletonList(makePolygon())},
-            {Collections.singletonList(makeExtrudedPolygon())},
-            {Collections.singletonList(makeSurfacePolygon())},
-            {Collections.singletonList(makeScreenImage())},
-            {Collections.singletonList(makeSurfaceSector())},
-            {Collections.singletonList(makeSurfacePolyline())},
-            {Collections.singletonList(makeSurfaceImage())},
-            {Collections.singletonList(makeSurfaceImageWithLatLonQuad())},
+            Collections.singletonList(makePointPlacemark()),
+            Collections.singletonList(makePath()),
+            Collections.singletonList(makePolygon()),
+            Collections.singletonList(makeExtrudedPolygon()),
+            Collections.singletonList(makeSurfacePolygon()),
+            Collections.singletonList(makeScreenImage()),
+            Collections.singletonList(makeSurfaceSector()),
+            Collections.singletonList(makeSurfacePolyline()),
+            Collections.singletonList(makeSurfaceImage()),
+            Collections.singletonList(makeSurfaceImageWithLatLonQuad()),
             // Finally, test exporting all of the shapes to the same document.
-            {Arrays.asList(makePointPlacemark(),
+            Arrays.asList(makePointPlacemark(),
                 makePath(),
                 makePolygon(),
                 makeExtrudedPolygon(),
@@ -101,17 +96,18 @@ public class KMLExportTest
                 makeSurfaceSector(),
                 makeSurfacePolyline(),
                 makeSurfaceImage(),
-                makeSurfaceImageWithLatLonQuad())}
-        });
+                makeSurfaceImageWithLatLonQuad())
+        );
     }
 
-    @Test
-    public void testExport() throws XMLStreamException, IOException
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testExport(List<Exportable> objectsToExport) throws XMLStreamException, IOException
     {
         Writer stringWriter = new StringWriter();
         KMLDocumentBuilder kmlBuilder = new KMLDocumentBuilder(stringWriter);
 
-        for (Exportable e : this.objectsToExport)
+        for (Exportable e : objectsToExport)
         {
             kmlBuilder.writeObject(e);
         }
@@ -120,14 +116,16 @@ public class KMLExportTest
         String xmlString = stringWriter.toString();
         boolean docValid = validateDocument(xmlString);
 
-        assertTrue("Exported document failed to validate", docValid);
+        assertTrue(docValid, "Exported document failed to validate");
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testKmlNotSupported() throws XMLStreamException, IOException
+    @Test
+    public void testKmlNotSupported()
     {
-        Pyramid pyramid = new Pyramid(Position.ZERO, 100, 100);
-        pyramid.export(KMLConstants.KML_MIME_TYPE, new StringWriter());
+        assertThrows(UnsupportedOperationException.class, () -> {
+            Pyramid pyramid = new Pyramid(Position.ZERO, 100, 100);
+            pyramid.export(KMLConstants.KML_MIME_TYPE, new StringWriter());
+        });
     }
 
     private boolean validateDocument(String doc)

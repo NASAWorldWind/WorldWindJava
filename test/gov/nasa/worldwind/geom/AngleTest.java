@@ -28,13 +28,9 @@
 
 package gov.nasa.worldwind.geom;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class AngleTest
 {
     private static final double DELTA = 1e-9;
@@ -49,7 +45,7 @@ public class AngleTest
         }
         catch (Exception e)
         {
-            assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
+            assertTrue(e instanceof IllegalArgumentException, "Should raise an IllegalArgumentException");
         }
     }
 
@@ -63,7 +59,7 @@ public class AngleTest
         }
         catch (Exception e)
         {
-            assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
+            assertTrue(e instanceof IllegalArgumentException, "Should raise an IllegalArgumentException");
         }
     }
 
@@ -77,7 +73,7 @@ public class AngleTest
         }
         catch (Exception e)
         {
-            assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
+            assertTrue(e instanceof IllegalArgumentException, "Should raise an IllegalArgumentException");
         }
     }
 
@@ -91,7 +87,7 @@ public class AngleTest
 
         Angle angle = Angle.fromDMS(degrees, minutes, seconds);
 
-        assertEquals("test with zero degrees", expectedDegrees, angle.degrees, DELTA);
+        assertEquals(expectedDegrees, angle.degrees, DELTA, "test with zero degrees");
     }
 
     @Test
@@ -104,7 +100,7 @@ public class AngleTest
 
         Angle angle = Angle.fromDMS(degrees, minutes, seconds);
 
-        assertEquals("test with zero degrees", expectedDegrees, angle.degrees, DELTA);
+        assertEquals(expectedDegrees, angle.degrees, DELTA, "test with zero degrees");
     }
 
     @Test
@@ -117,7 +113,7 @@ public class AngleTest
         }
         catch (Exception e)
         {
-            assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
+            assertTrue(e instanceof IllegalArgumentException, "Should raise an IllegalArgumentException");
         }
     }
 
@@ -131,7 +127,7 @@ public class AngleTest
         }
         catch (Exception e)
         {
-            assertTrue("Should raise an IllegalArgumentException", e instanceof IllegalArgumentException);
+            assertTrue(e instanceof IllegalArgumentException, "Should raise an IllegalArgumentException");
         }
     }
 
@@ -145,7 +141,7 @@ public class AngleTest
 
         Angle angle = Angle.fromDMdS(degrees, minutes + seconds / 60d);
 
-        assertEquals("test with zero degrees", expectedDegrees, angle.degrees, DELTA);
+        assertEquals(expectedDegrees, angle.degrees, DELTA, "test with zero degrees");
     }
 
     @Test
@@ -158,7 +154,7 @@ public class AngleTest
 
         Angle angle = Angle.fromDMdS(degrees, minutes + seconds / 60d);
 
-        assertEquals("test with zero degrees", expectedDegrees, angle.degrees, DELTA);
+        assertEquals(expectedDegrees, angle.degrees, DELTA, "test with zero degrees");
     }
 
     @Test
@@ -172,7 +168,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("standard positive format", expectedValue, actualValue, 0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "standard positive format");
     }
 
     @Test
@@ -186,7 +182,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("positive prefix format", expectedValue, actualValue, 0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "positive prefix format");
     }
 
     @Test
@@ -200,7 +196,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("positive direction format", expectedValue, actualValue, 0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "positive direction format");
     }
 
     @Test
@@ -214,7 +210,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("negative prefix format", expectedValue, actualValue, 0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "negative prefix format");
     }
 
     @Test
@@ -228,7 +224,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("negative direction format", expectedValue, actualValue, 0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "negative direction format");
     }
 
     @Test
@@ -242,8 +238,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("conflicting string format, positive sign and negative direction", expectedValue, actualValue,
-            0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "conflicting string format, positive sign and negative direction");
     }
 
     @Test
@@ -257,8 +252,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("conflicting string format, negative sign and positive direction", expectedValue, actualValue,
-            0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "conflicting string format, negative sign and positive direction");
     }
 
     @Test
@@ -272,8 +266,7 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("conflicting string format, negative sign and negative direction", expectedValue, actualValue,
-            0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "conflicting string format, negative sign and negative direction");
     }
 
     @Test
@@ -287,6 +280,6 @@ public class AngleTest
 
         double actualValue = Angle.fromDMS(angleString).degrees;
 
-        assertEquals("conflicting string format, positive sign and direction", expectedValue, actualValue, 0.0);
+        assertEquals(expectedValue, actualValue, 0.0, "conflicting string format, positive sign and direction");
     }
 }

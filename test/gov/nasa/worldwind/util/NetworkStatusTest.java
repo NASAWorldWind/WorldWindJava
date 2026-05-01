@@ -27,26 +27,25 @@
  */
 package gov.nasa.worldwind.util;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.net.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class NetworkStatusTest
 {
     private BasicNetworkStatus netStat;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.netStat = new BasicNetworkStatus();
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
     }
@@ -57,7 +56,7 @@ public class NetworkStatusTest
         int limit = 5;
         this.netStat.setAttemptLimit(limit);
         int ai = this.netStat.getAttemptLimit();
-        assertEquals("Set attempt limit test ", ai, limit);
+        assertEquals(ai, limit, "Set attempt limit test ");
     }
 
     @Test
@@ -66,23 +65,23 @@ public class NetworkStatusTest
         long interval = 200;
         this.netStat.setTryAgainInterval(interval);
         long tai = this.netStat.getTryAgainInterval();
-        assertEquals("Set try again interval test ", tai, interval);
+        assertEquals(tai, interval, "Set try again interval test ");
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void testNetworkAvailable()
     {
         boolean tf = this.netStat.isNetworkUnavailable();
-        assertFalse("Network unavailable test ", tf);
+        assertFalse(tf, "Network unavailable test ");
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void testWorldWindAvailable()
     {
         boolean tf = this.netStat.isWorldWindServerUnavailable();
-        assertFalse("WorldWind server unavailable test ", tf);
+        assertFalse(tf, "WorldWind server unavailable test ");
     }
 
     @Test
@@ -91,7 +90,7 @@ public class NetworkStatusTest
         String hostName = "nasa.gov";
 
         boolean tf = this.netStat.isHostUnavailable(new URL("https://" + hostName + "/path?abc=123"));
-        assertFalse("Host unavailable test ", tf);
+        assertFalse(tf, "Host unavailable test ");
     }
 
     @Test
@@ -102,7 +101,7 @@ public class NetworkStatusTest
 
         this.makeHostUnavailable(url);
         boolean tf = this.netStat.isHostUnavailable(url);
-        assertTrue("Host limit reached test ", tf);
+        assertTrue(tf, "Host limit reached test ");
     }
 
     @Test
@@ -117,7 +116,7 @@ public class NetworkStatusTest
         }
 
         boolean tf = this.netStat.isHostUnavailable(url);
-        assertFalse("Host limit not reached test ", tf);
+        assertFalse(tf, "Host limit not reached test ");
     }
 
     @Test
@@ -129,7 +128,7 @@ public class NetworkStatusTest
         this.makeHostUnavailable(url);
         this.netStat.logAvailableHost(url);
         boolean tf = this.netStat.isHostUnavailable(url);
-        assertFalse("Host reavailable test ", tf);
+        assertFalse(tf, "Host reavailable test ");
     }
 
     @Test
@@ -141,11 +140,11 @@ public class NetworkStatusTest
         this.netStat.setTryAgainInterval(100);
         this.makeHostUnavailable(url);
         boolean tf = this.netStat.isHostUnavailable(url);
-        assertTrue("Host try again test A", tf);
+        assertTrue(tf, "Host try again test A");
 
         Thread.sleep(netStat.getTryAgainInterval());
         tf = this.netStat.isHostUnavailable(url);
-        assertFalse("Host try again test B", tf);
+        assertFalse(tf, "Host try again test B");
     }
 
     @Test
@@ -157,7 +156,7 @@ public class NetworkStatusTest
         this.makeHostUnavailable(url);
         this.netStat.logAvailableHost(url);
         boolean tf = this.netStat.isHostUnavailable(url);
-        assertFalse("Network available after success test ", tf);
+        assertFalse(tf, "Network available after success test ");
     }
 
     private void makeHostUnavailable(URL url)

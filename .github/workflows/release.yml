@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'   # e.g. v2.3.0
+
+jobs:
+  release:
+    name: Build & publish release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to create GitHub Release and upload assets
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      # Compile, test, package, and generate Javadoc in one Maven invocation.
+      # Tests run before packaging — refuse to release a broken build.
+      - name: Build, test, and package
+        run: xvfb-run --auto-servernum mvn --batch-mode --no-transfer-progress verify javadoc:javadoc
+
+      # Zip the Javadoc tree so it can be attached as a single release asset.
+      - name: Zip Javadoc
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          cd target/site
+          zip -r "../../worldwind-java-${VERSION}-javadoc.zip" apidocs/
+          echo "RELEASE_VERSION=${VERSION}" >> "$GITHUB_ENV"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "WorldWind Java ${{ env.RELEASE_VERSION }}"
+          body: |
+            See [RELEASE_NOTES.txt](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/RELEASE_NOTES.txt) for details.
+          files: |
+            target/worldwind-java-${{ env.RELEASE_VERSION }}.jar
+            worldwind-java-${{ env.RELEASE_VERSION }}-javadoc.zip
+          draft: false
+          prerelease: false

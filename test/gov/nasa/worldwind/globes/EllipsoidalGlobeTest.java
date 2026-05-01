@@ -28,13 +28,11 @@
 package gov.nasa.worldwind.globes;
 
 import gov.nasa.worldwind.geom.*;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EllipsoidalGlobeTest
 {
     private static final double THRESHOLD = 1.0e-1;
@@ -42,13 +40,13 @@ public class EllipsoidalGlobeTest
 
     private Globe globe;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.globe = new Earth();
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.globe = null;
@@ -59,7 +57,7 @@ public class EllipsoidalGlobeTest
     {
         double radius = this.globe.getEquatorialRadius();
 
-        assertEquals("Equatorial radius", radius, 6378137d, 0.0);
+        assertEquals(radius, 6378137d, 0.0, "Equatorial radius");
     }
 
     @Test
@@ -69,16 +67,15 @@ public class EllipsoidalGlobeTest
 
         Vec4 vec = globe.computePointFromPosition(orig);
 
-        assertEquals("X comparision", vec.getX(), -5457021.181d, THRESHOLD);
-        assertEquals("Y comparision", vec.getY(), 3211203.627d, THRESHOLD);
-        assertEquals("Z comparision", vec.getZ(), -723039.434d, THRESHOLD);
+        assertEquals(vec.getX(), -5457021.181d, THRESHOLD, "X comparision");
+        assertEquals(vec.getY(), 3211203.627d, THRESHOLD, "Y comparision");
+        assertEquals(vec.getZ(), -723039.434d, THRESHOLD, "Z comparision");
 
         //now convert back and compare to original
         Position p = globe.computePositionFromPoint(vec);
-        assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
-        assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
-        assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
+        assertEquals(orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD, "Latitude comparision");
+        assertEquals(orig.getLongitude().degrees, p.getLongitude().degrees, THRESHOLD, "Longitude comparision");
+        assertEquals(orig.getElevation(), p.getElevation(), THRESHOLD, "Height comparision");
     }
 
     @Test
@@ -88,16 +85,15 @@ public class EllipsoidalGlobeTest
 
         Vec4 vec = globe.computePointFromPosition(orig);
 
-        assertEquals("X comparision", vec.getX(), 137419.7051d, THRESHOLD);
-        assertEquals("Y comparision", vec.getY(), 6354995.0149d, THRESHOLD);
-        assertEquals("Z comparision", vec.getZ(), 78555.6486d, THRESHOLD);
+        assertEquals(vec.getX(), 137419.7051d, THRESHOLD, "X comparision");
+        assertEquals(vec.getY(), 6354995.0149d, THRESHOLD, "Y comparision");
+        assertEquals(vec.getZ(), 78555.6486d, THRESHOLD, "Z comparision");
 
         //now convert back and compare to original
         Position p = globe.computePositionFromPoint(vec);
-        assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
-        assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
-        assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
+        assertEquals(orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD, "Latitude comparision");
+        assertEquals(orig.getLongitude().degrees, p.getLongitude().degrees, THRESHOLD, "Longitude comparision");
+        assertEquals(orig.getElevation(), p.getElevation(), THRESHOLD, "Height comparision");
     }
 
     @Test
@@ -107,16 +103,15 @@ public class EllipsoidalGlobeTest
 
         Vec4 vec = globe.computePointFromPosition(orig);
 
-        assertEquals("X comparision", vec.getX(), 1681968.3306d, THRESHOLD);
-        assertEquals("Y comparision", vec.getY(), -3537721.6660d, THRESHOLD);
-        assertEquals("Z comparision", vec.getZ(), 5025370.8202d, THRESHOLD);
+        assertEquals(vec.getX(), 1681968.3306d, THRESHOLD, "X comparision");
+        assertEquals(vec.getY(), -3537721.6660d, THRESHOLD, "Y comparision");
+        assertEquals(vec.getZ(), 5025370.8202d, THRESHOLD, "Z comparision");
 
         //now convert back and compare to original
         Position p = globe.computePositionFromPoint(vec);
-        assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
-        assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
-        assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
+        assertEquals(orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD, "Latitude comparision");
+        assertEquals(orig.getLongitude().degrees, p.getLongitude().degrees, THRESHOLD, "Longitude comparision");
+        assertEquals(orig.getElevation(), p.getElevation(), THRESHOLD, "Height comparision");
     }
 
     @Test
@@ -126,16 +121,15 @@ public class EllipsoidalGlobeTest
 
         Vec4 vec = globe.computePointFromPosition(orig);
 
-        assertEquals("X comparision", vec.getX(), 137419.705d, THRESHOLD);
-        assertEquals("Y comparision", vec.getY(), 6354995.001d, THRESHOLD);
-        assertEquals("Z comparision", vec.getZ(), 78555.649d, THRESHOLD);
+        assertEquals(vec.getX(), 137419.705d, THRESHOLD, "X comparision");
+        assertEquals(vec.getY(), 6354995.001d, THRESHOLD, "Y comparision");
+        assertEquals(vec.getZ(), 78555.649d, THRESHOLD, "Z comparision");
 
         //now convert back and compare to original
         Position p = globe.computePositionFromPoint(vec);
-        assertEquals("Latitude comparision", orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD);
-        assertEquals("Longitude comparision", orig.getLongitude().degrees, p.getLongitude().degrees,
-            THRESHOLD);
-        assertEquals("Height comparision", orig.getElevation(), p.getElevation(), THRESHOLD);
+        assertEquals(orig.getLatitude().degrees, p.getLatitude().degrees, THRESHOLD, "Latitude comparision");
+        assertEquals(orig.getLongitude().degrees, p.getLongitude().degrees, THRESHOLD, "Longitude comparision");
+        assertEquals(orig.getElevation(), p.getElevation(), THRESHOLD, "Height comparision");
     }
 
     @Test
@@ -162,16 +156,16 @@ public class EllipsoidalGlobeTest
                 // and elevation are based on standard polar (circular)
                 // coordinates.
                 String msg = "At x " + x + ", and z " + z;
-                assertEquals(msg, Math.sqrt(x * x + z * z) - a, p.elevation, THRESHOLD);
+                assertEquals(Math.sqrt(x * x + z * z) - a, p.elevation, THRESHOLD, msg);
                 //noinspection SuspiciousNameCombination
-                assertEquals(msg, Math.atan2(x, z), p.longitude.radians, THRESHOLD);
-                assertEquals(msg, 0, p.latitude.radians, THRESHOLD);
+                assertEquals(Math.atan2(x, z), p.longitude.radians, THRESHOLD, msg);
+                assertEquals(0, p.latitude.radians, THRESHOLD, msg);
 
                 // Make sure round trip works
                 Vec4 w = earth.computePointFromPosition(p);
-                assertEquals(msg, v.x, w.x, THRESHOLD);
-                assertEquals(msg, v.y, w.y, THRESHOLD);
-                assertEquals(msg, v.z, w.z, THRESHOLD);
+                assertEquals(v.x, w.x, THRESHOLD, msg);
+                assertEquals(v.y, w.y, THRESHOLD, msg);
+                assertEquals(v.z, w.z, THRESHOLD, msg);
             }
         }
 
@@ -195,15 +189,15 @@ public class EllipsoidalGlobeTest
                 Vec4 v = earth.computePointFromPosition(p);
                 String msg = "At longitude " + lon + ", radius " + r;
 
-                assertEquals(msg, 0, v.y, THRESHOLD);
-                assertEquals(msg, r * Math.sin(lon), v.x, THRESHOLD);
-                assertEquals(msg, r * Math.cos(lon), v.z, THRESHOLD);
+                assertEquals(0, v.y, THRESHOLD, msg);
+                assertEquals(r * Math.sin(lon), v.x, THRESHOLD, msg);
+                assertEquals(r * Math.cos(lon), v.z, THRESHOLD, msg);
 
                 // Make sure round trip works
                 Position q = earth.computePositionFromPoint(v);
-                assertEquals(msg, p.latitude.radians, q.latitude.radians, THRESHOLD);
-                assertEquals(msg, p.longitude.radians, q.longitude.radians, THRESHOLD);
-                assertEquals(msg, p.elevation, q.elevation, THRESHOLD);
+                assertEquals(p.latitude.radians, q.latitude.radians, THRESHOLD, msg);
+                assertEquals(p.longitude.radians, q.longitude.radians, THRESHOLD, msg);
+                assertEquals(p.elevation, q.elevation, THRESHOLD, msg);
             }
         }
     }
@@ -228,15 +222,15 @@ public class EllipsoidalGlobeTest
             Position p = earth.computePositionFromPoint(v);
 
             // Longitude is unspecifiable along the axis
-            assertEquals(msg, Math.PI / 2 * Math.signum(y), p.latitude.radians, THRESHOLD);
+            assertEquals(Math.PI / 2 * Math.signum(y), p.latitude.radians, THRESHOLD, msg);
             // System.out.println("Relative error at y=\t"+y+"\t"+((Math.abs(y)-b)/(p.elevation)));
-            assertEquals(msg, Math.abs(y) - b, p.elevation, THRESHOLD);
+            assertEquals(Math.abs(y) - b, p.elevation, THRESHOLD, msg);
 
             // Check geodetic->cartesian
             Vec4 w = earth.computePointFromPosition(p);
-            assertEquals(msg, v.x, w.x, THRESHOLD);
-            assertEquals(msg, v.y, w.y, THRESHOLD);
-            assertEquals(msg, v.z, w.z, THRESHOLD);
+            assertEquals(v.x, w.x, THRESHOLD, msg);
+            assertEquals(v.y, w.y, THRESHOLD, msg);
+            assertEquals(v.z, w.z, THRESHOLD, msg);
         }
     }
 
@@ -257,7 +251,7 @@ public class EllipsoidalGlobeTest
         // assertEquals(-earth.getEquatorialRadius(), p.elevation, THRESHOLD);
         // assertEquals(0, p.latitude.radians, THRESHOLD);
         // case b: center considered as part of the axis
-        assertEquals("At center", -earth.getPolarRadius(), p.elevation, THRESHOLD);
+        assertEquals(-earth.getPolarRadius(), p.elevation, THRESHOLD, "At center");
         // case b1: part of northern axis
         // assertEquals(Math.PI/2, p.latitude.radians, THRESHOLD);
         // case b2: part of southern axis
@@ -293,13 +287,13 @@ public class EllipsoidalGlobeTest
                     Position p = earth.computePositionFromPoint(new Vec4(x, y, z));
                     String msg = "At [x, y, z]=[" + x + ", " + y + ", " + z + "]";
                     // Check continuity
-                    assertEquals(msg, Math.signum(y), Math.signum(p.latitude.degrees), THRESHOLD);
+                    assertEquals(Math.signum(y), Math.signum(p.latitude.degrees), THRESHOLD, msg);
 
                     Vec4 v = earth.computePointFromPosition(p);
                     // Check consistency
-                    assertEquals(msg, x, v.x, THRESHOLD);
-                    assertEquals(msg, y, v.y, THRESHOLD);
-                    assertEquals(msg, z, v.z, THRESHOLD);
+                    assertEquals(x, v.x, THRESHOLD, msg);
+                    assertEquals(y, v.y, THRESHOLD, msg);
+                    assertEquals(z, v.z, THRESHOLD, msg);
                 }
             }
         }
@@ -331,13 +325,13 @@ public class EllipsoidalGlobeTest
 
             Position pos = earth.computePositionFromPoint(new Vec4(x, y, 0));
             // Check continuity
-            assertEquals(msg, Math.signum(y), Math.signum(pos.latitude.degrees), THRESHOLD);
+            assertEquals(Math.signum(y), Math.signum(pos.latitude.degrees), THRESHOLD, msg);
 
             Vec4 w = earth.computePointFromPosition(pos);
             // Check consistency
-            assertEquals(msg, x, w.x, THRESHOLD);
-            assertEquals(msg, y, w.y, THRESHOLD);
-            assertEquals(msg, 0, w.z, THRESHOLD);
+            assertEquals(x, w.x, THRESHOLD, msg);
+            assertEquals(y, w.y, THRESHOLD, msg);
+            assertEquals(0, w.z, THRESHOLD, msg);
         }
     }
 }

@@ -28,15 +28,11 @@
 
 package gov.nasa.worldwind.util;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class WWUtilTest
 {
     /** Test parsing time strings. */

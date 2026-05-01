@@ -28,13 +28,9 @@
 
 package gov.nasa.worldwind.util;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EntityMapTest
 {
     /** Test basic entity replacement. */
@@ -56,7 +52,7 @@ public class EntityMapTest
             String expected = EntityMap.entityReplacements[i];
             String actual = EntityMap.replaceAll(EntityMap.entityKeys[i]);
 
-            assertEquals("Failed entity replacement: " + EntityMap.entityKeys[i], expected, actual);
+            assertEquals(expected, actual, "Failed entity replacement: " + EntityMap.entityKeys[i]);
         }
     }
 

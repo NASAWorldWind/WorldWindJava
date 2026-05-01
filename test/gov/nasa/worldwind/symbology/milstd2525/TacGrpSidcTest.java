@@ -29,19 +29,16 @@
 package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.symbology.milstd2525.graphics.TacGrpSidc;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test parsing of all SIDC constants declared in {@link TacGrpSidc}.
  */
 @SuppressWarnings("WeakerAccess")
-@RunWith(JUnit4.class)
 public class TacGrpSidcTest
 {
     /** Valid standard identity characters for MIL-STD-2525C tactical graphics (see Table B-I, pg. 305). */

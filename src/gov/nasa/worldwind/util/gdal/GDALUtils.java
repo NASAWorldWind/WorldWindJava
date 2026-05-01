@@ -152,13 +152,8 @@ public class GDALUtils {
     }
 
     protected static boolean is32bitArchitecture() {
-        String arch = System.getProperty("sun.arch.data.model");
-        if (!WWUtil.isEmpty(arch)) {
-            return ("32".equals(arch));
-        }
-
-        // GNU JAVA does not return "sun.arch.data.model"
-        return "x86".equals(System.getProperty("os.arch"));
+        String arch = System.getProperty("os.arch");
+        return arch != null && (arch.equals("x86") || arch.equals("i386") || arch.equals("i686"));
     }
 
     protected static boolean gdalPreLoadNativeLibrary(String folder, boolean allowLogErrors) {

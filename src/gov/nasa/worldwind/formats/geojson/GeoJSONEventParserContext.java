@@ -27,7 +27,7 @@
  */
 package gov.nasa.worldwind.formats.geojson;
 
-import org.codehaus.jackson.JsonParser;
+import com.fasterxml.jackson.core.JsonParser;
 import gov.nasa.worldwind.formats.json.*;
 
 import java.io.IOException;

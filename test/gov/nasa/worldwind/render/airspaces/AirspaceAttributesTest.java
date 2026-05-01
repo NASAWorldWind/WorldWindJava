@@ -29,13 +29,9 @@ package gov.nasa.worldwind.render.airspaces;
 
 import gov.nasa.worldwind.render.Material;
 import gov.nasa.worldwind.util.RestorableSupport;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AirspaceAttributesTest
 {
     @Test

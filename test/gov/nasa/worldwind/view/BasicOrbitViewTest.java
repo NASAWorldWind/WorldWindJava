@@ -29,13 +29,9 @@ package gov.nasa.worldwind.view;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.view.orbit.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class BasicOrbitViewTest
 {
     //////////////////////////////////////////////////////////
@@ -235,36 +231,35 @@ public class BasicOrbitViewTest
 
     private static void assertOrbitViewEquals(OrbitView expected, OrbitView actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Actual is null", actual);
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Actual is null");
 
-        assertEquals("center", expected.getCenterPosition(), actual.getCenterPosition());
-        assertEquals("heading", expected.getHeading(), actual.getHeading());
-        assertEquals("pitch", expected.getPitch(), actual.getPitch());
-        assertEquals("zoom", expected.getZoom(), actual.getZoom(), 0.0);
-        assertEquals("fieldOfView", expected.getFieldOfView(), actual.getFieldOfView());
+        assertEquals(expected.getCenterPosition(), actual.getCenterPosition(), "center");
+        assertEquals(expected.getHeading(), actual.getHeading(), "heading");
+        assertEquals(expected.getPitch(), actual.getPitch(), "pitch");
+        assertEquals(expected.getZoom(), actual.getZoom(), 0.0, "zoom");
+        assertEquals(expected.getFieldOfView(), actual.getFieldOfView(), "fieldOfView");
 
-        assertEquals("detectCollisions", expected.isDetectCollisions(), actual.isDetectCollisions());
-        assertEquals("nearClipDistance", expected.getNearClipDistance(), actual.getNearClipDistance(), 0.0);
-        assertEquals("farClipDistance", expected.getFarClipDistance(), actual.getFarClipDistance(), 0.0);
+        assertEquals(expected.isDetectCollisions(), actual.isDetectCollisions(), "detectCollisions");
+        assertEquals(expected.getNearClipDistance(), actual.getNearClipDistance(), 0.0, "nearClipDistance");
+        assertEquals(expected.getFarClipDistance(), actual.getFarClipDistance(), 0.0, "farClipDistance");
 
         assertOrbitViewLimitsEquals(expected.getOrbitViewLimits(), actual.getOrbitViewLimits());
     }
 
     private static void assertOrbitViewLimitsEquals(OrbitViewLimits expected, OrbitViewLimits actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Actual is null", actual);
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Actual is null");
 
-        assertEquals("centerLocationLimits", expected.getCenterLocationLimits(), actual.getCenterLocationLimits());
+        assertEquals(expected.getCenterLocationLimits(), actual.getCenterLocationLimits(), "centerLocationLimits");
 
         for (int i = 0; i < 2; i++)
         {
-            assertEquals("centerElevationLimits[" + i + "]", expected.getCenterElevationLimits()[i],
-                actual.getCenterElevationLimits()[i], 0.0);
-            assertEquals("headingLimits[" + i + "]", expected.getHeadingLimits()[i], actual.getHeadingLimits()[i]);
-            assertEquals("pitchLimits[" + i + "]", expected.getPitchLimits()[i], actual.getPitchLimits()[i]);
-            assertEquals("zoomLimits[" + i + "]", expected.getZoomLimits()[i], actual.getZoomLimits()[i], 0.0);
+            assertEquals(expected.getCenterElevationLimits()[i], actual.getCenterElevationLimits()[i], 0.0, "centerElevationLimits[" + i + "]");
+            assertEquals(expected.getHeadingLimits()[i], actual.getHeadingLimits()[i], "headingLimits[" + i + "]");
+            assertEquals(expected.getPitchLimits()[i], actual.getPitchLimits()[i], "pitchLimits[" + i + "]");
+            assertEquals(expected.getZoomLimits()[i], actual.getZoomLimits()[i], 0.0, "zoomLimits[" + i + "]");
         }
     }
 }

@@ -30,15 +30,11 @@ package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.symbology.IconRetriever;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.awt.image.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class MilStd2525PointGraphicRetrieverTest
 {
     // This path should correspond to the location of the appropriate symbology source icons on your system
@@ -179,7 +175,7 @@ public class MilStd2525PointGraphicRetrieverTest
                 sidc.setCharAt(3, status);
 
                 BufferedImage img = symGen.createIcon(sidc.toString(), null);
-                assertNotNull("Icon " + s.toLowerCase() + "-----.png not found.", img);
+                assertNotNull(img, "Icon " + s.toLowerCase() + "-----.png not found.");
             }
         }
     }
@@ -197,7 +193,7 @@ public class MilStd2525PointGraphicRetrieverTest
         for (String s : MilStd2525PointGraphic.getMetocGraphics())
         {
             img = symGen.createIcon(s, params);
-            assertNotNull("Icon " + s.toLowerCase() + ".png not found.", img);
+            assertNotNull(img, "Icon " + s.toLowerCase() + ".png not found.");
         }
     }
 }

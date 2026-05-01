@@ -35,17 +35,13 @@ import gov.nasa.worldwind.util.WWIO;
 import gov.nasa.worldwind.util.xml.*;
 import gov.nasa.worldwind.util.xml.atom.AtomConstants;
 import gov.nasa.worldwind.util.xml.xal.XALConstants;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.net.URL;
 import java.util.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class KMLTest
 {
     @Test
@@ -56,8 +52,8 @@ public class KMLTest
 
         KMLRoot root = this.newParsedRoot(sb);
 
-        assertNotNull("KML root is null", root);
-        assertNull("KML root hint is not null", root.getHint());
+        assertNotNull(root, "KML root is null");
+        assertNull(root.getHint(), "KML root hint is not null");
     }
 
     @Test
@@ -69,8 +65,8 @@ public class KMLTest
 
         KMLRoot root = this.newParsedRoot(sb);
 
-        assertNotNull("KML root is null", root);
-        assertNotNull("KML root hint is null", root.getHint());
+        assertNotNull(root, "KML root is null");
+        assertNotNull(root.getHint(), "KML root hint is null");
     }
 
     @Test
@@ -84,12 +80,12 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLDocument);
-        assertEquals("Object ID not as expected", feature.getId(), ID);
-        assertEquals("Target ID not as expected", feature.getTargetId(), targetID);
+        assertTrue(feature instanceof KMLDocument, "Root feature is not as expected");
+        assertEquals(feature.getId(), ID, "Object ID not as expected");
+        assertEquals(feature.getTargetId(), targetID, "Target ID not as expected");
     }
 
     @Test
@@ -101,13 +97,13 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLDocument);
+        assertTrue(feature instanceof KMLDocument, "Root feature is not as expected");
 
-        assertNull("ID not null", feature.getId());
-        assertNull("Target ID not null", feature.getTargetId());
+        assertNull(feature.getId(), "ID not null");
+        assertNull(feature.getTargetId(), "Target ID not null");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -175,32 +171,32 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLDocument);
+        assertTrue(feature instanceof KMLDocument, "Root feature is not as expected");
 
-        assertEquals("Name not as expected", feature.getName(), name);
-        assertEquals("Visibility not as expected", feature.getVisibility(), visibility);
-        assertEquals("Open not as expected", feature.getOpen(), open);
-        assertEquals("Address not as expected", feature.getAddress(), address);
-        assertEquals("Phone number not as expected", feature.getPhoneNumber(), phoneNumber);
-        assertEquals("Snippet not as expected", feature.getSnippet(), snippet);
-        assertEquals("Description not as expected", feature.getDescription(), description);
-        assertEquals("Style URL not as expected", feature.getStyleUrl().getCharacters(), styleUrl);
+        assertEquals(feature.getName(), name, "Name not as expected");
+        assertEquals(feature.getVisibility(), visibility, "Visibility not as expected");
+        assertEquals(feature.getOpen(), open, "Open not as expected");
+        assertEquals(feature.getAddress(), address, "Address not as expected");
+        assertEquals(feature.getPhoneNumber(), phoneNumber, "Phone number not as expected");
+        assertEquals(feature.getSnippet(), snippet, "Snippet not as expected");
+        assertEquals(feature.getDescription(), description, "Description not as expected");
+        assertEquals(feature.getStyleUrl().getCharacters(), styleUrl, "Style URL not as expected");
 
-        assertEquals("Link href not as expected", feature.getLink().getHref(), linkHref);
-        assertEquals("Link rel not as expected", feature.getLink().getRel(), linkRel);
-        assertEquals("Link type not as expected", feature.getLink().getType(), linkType);
-        assertEquals("Link hreflang not as expected", feature.getLink().getHreflang(), linkHreflang);
-        assertEquals("Link title not as expected", feature.getLink().getTitle(), linkTitle);
-        assertEquals("Link length not as expected", feature.getLink().getLength().intValue(), linkLength);
-        assertEquals("Link base not as expected", feature.getLink().getBase(), linkBase);
-        assertEquals("Link lang not as expected", feature.getLink().getLang(), linkLang);
+        assertEquals(feature.getLink().getHref(), linkHref, "Link href not as expected");
+        assertEquals(feature.getLink().getRel(), linkRel, "Link rel not as expected");
+        assertEquals(feature.getLink().getType(), linkType, "Link type not as expected");
+        assertEquals(feature.getLink().getHreflang(), linkHreflang, "Link hreflang not as expected");
+        assertEquals(feature.getLink().getTitle(), linkTitle, "Link title not as expected");
+        assertEquals(feature.getLink().getLength().intValue(), linkLength, "Link length not as expected");
+        assertEquals(feature.getLink().getBase(), linkBase, "Link base not as expected");
+        assertEquals(feature.getLink().getLang(), linkLang, "Link lang not as expected");
 
-        assertEquals("Author name not as expected", feature.getAuthor().getName(), authorName);
-        assertEquals("Author email not as expected", feature.getAuthor().getEmail(), authorEmail);
-        assertEquals("Author URI not as expected", feature.getAuthor().getUri(), authorUri);
+        assertEquals(feature.getAuthor().getName(), authorName, "Author name not as expected");
+        assertEquals(feature.getAuthor().getEmail(), authorEmail, "Author email not as expected");
+        assertEquals(feature.getAuthor().getUri(), authorUri, "Author URI not as expected");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -213,27 +209,27 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLDocument);
+        assertTrue(feature instanceof KMLDocument, "Root feature is not as expected");
 
-        assertNull("Name not null", feature.getName());
-        assertNull("Visibility not null", feature.getVisibility());
-        assertNull("Open not null", feature.getOpen());
-        assertNull("Address not null", feature.getAddress());
-        assertNull("Phone number not null", feature.getPhoneNumber());
-        assertNull("Snippet not null", feature.getSnippet());
-        assertNull("Description not null", feature.getDescription());
-        assertNull("Style URL not null", feature.getStyleUrl());
-        assertNull("View not null", feature.getView());
-        assertNull("Region not null", feature.getRegion());
-        assertNull("Author not null", feature.getAuthor());
-        assertNull("Link not null", feature.getLink());
-        assertNull("Address details not null", feature.getAddressDetails());
-        assertEquals("Style selectors not empty", 0, feature.getStyleSelectors().size());
-        assertNull("Time not null", feature.getTimePrimitive());
-        assertNull("Extended data not null", feature.getExtendedData());
+        assertNull(feature.getName(), "Name not null");
+        assertNull(feature.getVisibility(), "Visibility not null");
+        assertNull(feature.getOpen(), "Open not null");
+        assertNull(feature.getAddress(), "Address not null");
+        assertNull(feature.getPhoneNumber(), "Phone number not null");
+        assertNull(feature.getSnippet(), "Snippet not null");
+        assertNull(feature.getDescription(), "Description not null");
+        assertNull(feature.getStyleUrl(), "Style URL not null");
+        assertNull(feature.getView(), "View not null");
+        assertNull(feature.getRegion(), "Region not null");
+        assertNull(feature.getAuthor(), "Author not null");
+        assertNull(feature.getLink(), "Link not null");
+        assertNull(feature.getAddressDetails(), "Address details not null");
+        assertEquals(0, feature.getStyleSelectors().size(), "Style selectors not empty");
+        assertNull(feature.getTimePrimitive(), "Time not null");
+        assertNull(feature.getExtendedData(), "Extended data not null");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -259,18 +255,18 @@ public class KMLTest
         this.endPrefixedDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Placemark geometry is not as expected", geometry instanceof KMLPoint);
+        assertTrue(geometry instanceof KMLPoint, "Placemark geometry is not as expected");
 
         KMLPoint point = (KMLPoint) geometry;
-        assertEquals("Altitude mode not as expected", point.getAltitudeMode(), altitudeMode);
-        assertEquals("Extrude not as expected", point.isExtrude(), extrude);
-        assertEquals("Coordinates not as expected", point.getCoordinates(), coords);
+        assertEquals(point.getAltitudeMode(), altitudeMode, "Altitude mode not as expected");
+        assertEquals(point.isExtrude(), extrude, "Extrude not as expected");
+        assertEquals(point.getCoordinates(), coords, "Coordinates not as expected");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -297,18 +293,18 @@ public class KMLTest
         sb.append("</kml>");
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Placemark geometry is not as expected", geometry instanceof KMLPoint);
+        assertTrue(geometry instanceof KMLPoint, "Placemark geometry is not as expected");
 
         KMLPoint point = (KMLPoint) geometry;
-        assertEquals("Altitude mode not as expected", point.getAltitudeMode(), altitudeMode);
-        assertEquals("Extrude not as expected", point.isExtrude(), extrude);
-        assertEquals("Coordinates not as expected", point.getCoordinates(), coords);
+        assertEquals(point.getAltitudeMode(), altitudeMode, "Altitude mode not as expected");
+        assertEquals(point.isExtrude(), extrude, "Extrude not as expected");
+        assertEquals(point.getCoordinates(), coords, "Coordinates not as expected");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -334,18 +330,18 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Placemark geometry is not as expected", geometry instanceof KMLPoint);
+        assertTrue(geometry instanceof KMLPoint, "Placemark geometry is not as expected");
 
         KMLPoint point = (KMLPoint) geometry;
-        assertEquals("Altitude mode not as expected", point.getAltitudeMode(), altitudeMode);
-        assertEquals("Extrude not as expected", point.isExtrude(), extrude);
-        assertEquals("Coordinates not as expected", point.getCoordinates(), coords);
+        assertEquals(point.getAltitudeMode(), altitudeMode, "Altitude mode not as expected");
+        assertEquals(point.isExtrude(), extrude, "Extrude not as expected");
+        assertEquals(point.getCoordinates(), coords, "Coordinates not as expected");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -380,19 +376,19 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Placemark geometry is not as expected", geometry instanceof KMLLinearRing);
+        assertTrue(geometry instanceof KMLLinearRing, "Placemark geometry is not as expected");
 
         KMLLinearRing ring = (KMLLinearRing) geometry;
-        assertEquals("Altitude mode not as expected", ring.getAltitudeMode(), altitudeMode);
-        assertEquals("Extrude not as expected", ring.isExtrude(), extrude);
-        assertEquals("Tessellate not as expected", ring.getTessellate(), tessellate);
-        assertEquals("Coordinates not as expected", ring.getCoordinates().list, coords);
+        assertEquals(ring.getAltitudeMode(), altitudeMode, "Altitude mode not as expected");
+        assertEquals(ring.isExtrude(), extrude, "Extrude not as expected");
+        assertEquals(ring.getTessellate(), tessellate, "Tessellate not as expected");
+        assertEquals(ring.getCoordinates().list, coords, "Coordinates not as expected");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -427,19 +423,19 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Placemark geometry is not as expected", geometry instanceof KMLLineString);
+        assertTrue(geometry instanceof KMLLineString, "Placemark geometry is not as expected");
 
         KMLLineString ring = (KMLLineString) geometry;
-        assertEquals("Altitude mode not as expected", ring.getAltitudeMode(), altitudeMode);
-        assertEquals("Extrude not as expected", ring.isExtrude(), extrude);
-        assertEquals("Tessellate not as expected", ring.getTessellate(), tessellate);
-        assertEquals("Coordinates not as expected", ring.getCoordinates().list, coords);
+        assertEquals(ring.getAltitudeMode(), altitudeMode, "Altitude mode not as expected");
+        assertEquals(ring.isExtrude(), extrude, "Extrude not as expected");
+        assertEquals(ring.getTessellate(), tessellate, "Tessellate not as expected");
+        assertEquals(ring.getCoordinates().list, coords, "Coordinates not as expected");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -512,39 +508,33 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Placemark geometry is not as expected", geometry instanceof KMLPolygon);
+        assertTrue(geometry instanceof KMLPolygon, "Placemark geometry is not as expected");
 
         KMLPolygon pgon = (KMLPolygon) geometry;
-        assertEquals("Altitude mode not as expected", pgon.getAltitudeMode(), altitudeMode);
-        assertEquals("Extrude not as expected", pgon.isExtrude(), extrude);
-        assertEquals("Tessellate not as expected", pgon.getTessellate(), tessellate);
+        assertEquals(pgon.getAltitudeMode(), altitudeMode, "Altitude mode not as expected");
+        assertEquals(pgon.isExtrude(), extrude, "Extrude not as expected");
+        assertEquals(pgon.getTessellate(), tessellate, "Tessellate not as expected");
 
-        assertEquals("Outer coordinates not as expected", pgon.getOuterBoundary().getCoordinates().list,
-            outerCoords);
-        assertEquals("Outer altitude mode not as expected", pgon.getOuterBoundary().getAltitudeMode(),
-            outerAltitudeMode);
-        assertEquals("Outer extrude not as expected", pgon.getOuterBoundary().isExtrude(),
-            outerExtrude);
-        assertEquals("Outer tessellate not as expected", pgon.getOuterBoundary().getTessellate(), outerTessellate);
+        assertEquals(pgon.getOuterBoundary().getCoordinates().list, outerCoords, "Outer coordinates not as expected");
+        assertEquals(pgon.getOuterBoundary().getAltitudeMode(), outerAltitudeMode, "Outer altitude mode not as expected");
+        assertEquals(pgon.getOuterBoundary().isExtrude(), outerExtrude, "Outer extrude not as expected");
+        assertEquals(pgon.getOuterBoundary().getTessellate(), outerTessellate, "Outer tessellate not as expected");
 
         Iterable<? extends KMLLinearRing> innerBoundaries = pgon.getInnerBoundaries();
         assertNotNull(innerBoundaries);
         assertTrue(innerBoundaries.iterator().hasNext());
         KMLLinearRing innerBoundary = innerBoundaries.iterator().next();
         assertNotNull(innerBoundary);
-        assertEquals("Inner coordinates not as expected", innerBoundary.getCoordinates().list,
-            innerCoords);
-        assertEquals("Inner altitude mode not as expected", innerBoundary.getAltitudeMode(),
-            innerAltitudeMode);
-        assertEquals("Inner extrude not as expected", innerBoundary.isExtrude(),
-            innerExtrude);
-        assertEquals("Inner tessellate not as expected", innerBoundary.getTessellate(), innerTessellate);
+        assertEquals(innerBoundary.getCoordinates().list, innerCoords, "Inner coordinates not as expected");
+        assertEquals(innerBoundary.getAltitudeMode(), innerAltitudeMode, "Inner altitude mode not as expected");
+        assertEquals(innerBoundary.isExtrude(), innerExtrude, "Inner extrude not as expected");
+        assertEquals(innerBoundary.getTessellate(), innerTessellate, "Inner tessellate not as expected");
     }
 
     @Test
@@ -560,15 +550,15 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLSimpleData dataItem = ((KMLPlacemark) feature).getSimpleData();
-        assertNotNull("No SimpleData", dataItem);
-        assertEquals("SimpleData name not as expected", dataItem.getName(), name);
-        assertEquals("SimpleData string not as expected", dataItem.getCharacters(), item);
+        assertNotNull(dataItem, "No SimpleData");
+        assertEquals(dataItem.getName(), name, "SimpleData name not as expected");
+        assertEquals(dataItem.getCharacters(), item, "SimpleData string not as expected");
     }
 
     @Test
@@ -586,7 +576,7 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb, true);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         for (Map.Entry<String, Object> field : root.getFields().getEntries())
         {
@@ -594,18 +584,18 @@ public class KMLTest
             {
                 UnrecognizedXMLEventParser uField = (UnrecognizedXMLEventParser) field.getValue();
                 Object o = uField.getField("Placemark");
-                assertNotNull("No SimpleData", o);
-                assertTrue("Unrecognized object not as expected", o instanceof KMLPlacemark);
+                assertNotNull(o, "No SimpleData");
+                assertTrue(o instanceof KMLPlacemark, "Unrecognized object not as expected");
 
                 KMLSimpleData dataItem = ((KMLPlacemark) o).getSimpleData();
-                assertNotNull("No SimpleData", dataItem);
-                assertEquals("SimpleData name not as expected", dataItem.getName(), name);
-                assertEquals("SimpleData string not as expected", dataItem.getCharacters(), item);
+                assertNotNull(dataItem, "No SimpleData");
+                assertEquals(dataItem.getName(), name, "SimpleData name not as expected");
+                assertEquals(dataItem.getCharacters(), item, "SimpleData string not as expected");
 
                 return;
             }
         }
-        assertTrue("Unrecognized element not found", true);
+        assertTrue(true, "Unrecognized element not found");
     }
 
     @SuppressWarnings({"ConstantConditions"})
@@ -639,16 +629,16 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Placemark geometry is not as expected", geometry instanceof KMLLinearRing);
+        assertTrue(geometry instanceof KMLLinearRing, "Placemark geometry is not as expected");
 
         KMLLinearRing ring = (KMLLinearRing) geometry;
-        assertEquals("Coordinates not as expected", ring.getCoordinates().list, coords);
+        assertEquals(ring.getCoordinates().list, coords, "Coordinates not as expected");
     }
 
     /** Test coordinate tokenizer with a mix of well formed and not so well formed input. */
@@ -677,7 +667,7 @@ public class KMLTest
             positions.add(tokenizer.nextPosition());
         }
 
-        assertEquals("Coordinates not as expected", coords, positions);
+        assertEquals(coords, positions, "Coordinates not as expected");
     }
 
     @Test
@@ -697,11 +687,11 @@ public class KMLTest
         this.endDocument(sb);
 
         KMLRoot root = this.newParsedRoot(sb, true);
-        assertNotNull("KML root is null", root);
+        assertNotNull(root, "KML root is null");
 
         KMLAbstractFeature doc = root.getFeature();
-        assertNotNull("Document is null", doc);
-        assertTrue("Unrecognized object not as expected", doc instanceof KMLDocument);
+        assertNotNull(doc, "Document is null");
+        assertTrue(doc instanceof KMLDocument, "Unrecognized object not as expected");
 
         for (Map.Entry<String, Object> field : doc.getFields().getEntries())
         {
@@ -709,18 +699,18 @@ public class KMLTest
             {
                 UnrecognizedXMLEventParser uField = (UnrecognizedXMLEventParser) field.getValue();
                 Object o = uField.getField("Placemark");
-                assertNotNull("No SimpleData", o);
-                assertTrue("Unrecognized object not as expected", o instanceof KMLPlacemark);
+                assertNotNull(o, "No SimpleData");
+                assertTrue(o instanceof KMLPlacemark, "Unrecognized object not as expected");
 
                 KMLSimpleData dataItem = ((KMLPlacemark) o).getSimpleData();
-                assertNotNull("No SimpleData", dataItem);
-                assertEquals("SimpleData name not as expected", dataItem.getName(), name);
-                assertEquals("SimpleData string not as expected", dataItem.getCharacters(), item);
+                assertNotNull(dataItem, "No SimpleData");
+                assertEquals(dataItem.getName(), name, "SimpleData name not as expected");
+                assertEquals(dataItem.getCharacters(), item, "SimpleData string not as expected");
 
                 return;
             }
         }
-        assertTrue("Unrecognized element not found", true);
+        assertTrue(true, "Unrecognized element not found");
     }
 
     @Test
@@ -729,20 +719,18 @@ public class KMLTest
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample01.kml");
 
         KMLAbstractFeature feature = root.getFeature();
-        assertTrue("Root feature is not as expected", feature instanceof KMLPlacemark);
-        assertEquals("Incorrect name", "Simple placemark", feature.getName());
-        assertEquals("Incorrect description",
-            "Attached to the ground. Intelligently places itself\n"
-                + "            at the height of the underlying terrain.",
-            feature.getDescription());
+        assertTrue(feature instanceof KMLPlacemark, "Root feature is not as expected");
+        assertEquals("Simple placemark", feature.getName(), "Incorrect name");
+        assertEquals("Attached to the ground. Intelligently places itself\n"
+                + "            at the height of the underlying terrain.", feature.getDescription(), "Incorrect description");
 
         KMLAbstractGeometry geometry = ((KMLPlacemark) feature).getGeometry();
-        assertTrue("Geometry not a Point", geometry instanceof KMLPoint);
+        assertTrue(geometry instanceof KMLPoint, "Geometry not a Point");
 
         Position coords = ((KMLPoint) geometry).getCoordinates();
-        assertEquals("Incorrect latitude", Angle.fromDegrees(37.42228990140251), coords.getLatitude());
-        assertEquals("Incorrect longitude", Angle.fromDegrees(-122.0822035425683), coords.getLongitude());
-        assertEquals("Incorrect altitude", 0d, coords.getAltitude(), 0.0);
+        assertEquals(Angle.fromDegrees(37.42228990140251), coords.getLatitude(), "Incorrect latitude");
+        assertEquals(Angle.fromDegrees(-122.0822035425683), coords.getLongitude(), "Incorrect longitude");
+        assertEquals(0d, coords.getAltitude(), 0.0, "Incorrect altitude");
     }
 
     @Test
@@ -751,14 +739,14 @@ public class KMLTest
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample02.kml");
 
         KMLAbstractFeature document = root.getFeature();
-        assertTrue("Root feature is not as expected", document instanceof KMLDocument);
+        assertTrue(document instanceof KMLDocument, "Root feature is not as expected");
 
         List<KMLAbstractFeature> features = ((KMLDocument) document).getFeatures();
-        assertEquals("Incorrect number of features", 1, features.size());
-        assertTrue("Root feature is not as expected", features.get(0) instanceof KMLPlacemark);
+        assertEquals(1, features.size(), "Incorrect number of features");
+        assertTrue(features.get(0) instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLPlacemark placemark = (KMLPlacemark) features.get(0);
-        assertEquals("Incorrect name", "CDATA example", placemark.getName());
+        assertEquals("CDATA example", placemark.getName(), "Incorrect name");
         String s =
             "\n"
                 + "          <h1>CDATA Tags are useful!</h1>\n"
@@ -766,16 +754,16 @@ public class KMLTest
                 + "          <b>easier to write</b> when you can avoid using entity\n"
                 + "          references.</font></p>\n"
                 + "        ";
-        assertFalse("Description string not trimmed", s.equals(placemark.getDescription()));
-        assertEquals("Incorrect description", s.trim(), placemark.getDescription());
+        assertFalse(s.equals(placemark.getDescription()), "Description string not trimmed");
+        assertEquals(s.trim(), placemark.getDescription(), "Incorrect description");
 
         KMLAbstractGeometry geometry = placemark.getGeometry();
-        assertTrue("Geometry not a Point", geometry instanceof KMLPoint);
+        assertTrue(geometry instanceof KMLPoint, "Geometry not a Point");
 
         Position coords = ((KMLPoint) geometry).getCoordinates();
-        assertEquals("Incorrect latitude", Angle.fromDegrees(14.996729), coords.getLatitude());
-        assertEquals("Incorrect longitude", Angle.fromDegrees(102.595626), coords.getLongitude());
-        assertEquals("Incorrect altitude", 0d, coords.getAltitude(), 0.0);
+        assertEquals(Angle.fromDegrees(14.996729), coords.getLatitude(), "Incorrect latitude");
+        assertEquals(Angle.fromDegrees(102.595626), coords.getLongitude(), "Incorrect longitude");
+        assertEquals(0d, coords.getAltitude(), 0.0, "Incorrect altitude");
     }
 
     @Test
@@ -784,27 +772,25 @@ public class KMLTest
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample03.kml");
 
         KMLAbstractFeature document = root.getFeature();
-        assertTrue("Root feature is not as expected", document instanceof KMLDocument);
+        assertTrue(document instanceof KMLDocument, "Root feature is not as expected");
 
         List<KMLAbstractFeature> features = ((KMLDocument) document).getFeatures();
-        assertEquals("Incorrect number of features", 1, features.size());
-        assertTrue("Root feature is not as expected", features.get(0) instanceof KMLPlacemark);
+        assertEquals(1, features.size(), "Incorrect number of features");
+        assertTrue(features.get(0) instanceof KMLPlacemark, "Root feature is not as expected");
 
         KMLPlacemark placemark = (KMLPlacemark) features.get(0);
-        assertEquals("Incorrect name", "Entity references example", placemark.getName());
-        assertEquals("Incorrect description",
-            "<h1>Entity references are hard to type!</h1><p><font color=\"green\">Text\n                "
+        assertEquals("Entity references example", placemark.getName(), "Incorrect name");
+        assertEquals("<h1>Entity references are hard to type!</h1><p><font color=\"green\">Text\n                "
                 + "is <i>more readable</i> and <b>easier to write</b> when you can avoid using\n                "
-                + "entity references.</font></p>",
-            placemark.getDescription());
+                + "entity references.</font></p>", placemark.getDescription(), "Incorrect description");
 
         KMLAbstractGeometry geometry = placemark.getGeometry();
-        assertTrue("Geometry not a Point", geometry instanceof KMLPoint);
+        assertTrue(geometry instanceof KMLPoint, "Geometry not a Point");
 
         Position coords = ((KMLPoint) geometry).getCoordinates();
-        assertEquals("Incorrect latitude", Angle.fromDegrees(14.998518), coords.getLatitude());
-        assertEquals("Incorrect longitude", Angle.fromDegrees(102.594411), coords.getLongitude());
-        assertEquals("Incorrect altitude", 0d, coords.getAltitude(), 0.0);
+        assertEquals(Angle.fromDegrees(14.998518), coords.getLatitude(), "Incorrect latitude");
+        assertEquals(Angle.fromDegrees(102.594411), coords.getLongitude(), "Incorrect longitude");
+        assertEquals(0d, coords.getAltitude(), 0.0, "Incorrect altitude");
     }
 
     @Test
@@ -813,31 +799,29 @@ public class KMLTest
         KMLRoot root = this.openAndParseFile("testData/KML/GoogleTutorialExample04.kml");
 
         KMLAbstractFeature document = root.getFeature();
-        assertTrue("Root feature is not as expected", document instanceof KMLFolder);
-        assertEquals("Incorrect name", "Ground Overlays", document.getName());
-        assertEquals("Incorrect description", "Examples of ground overlays", document.getDescription());
+        assertTrue(document instanceof KMLFolder, "Root feature is not as expected");
+        assertEquals("Ground Overlays", document.getName(), "Incorrect name");
+        assertEquals("Examples of ground overlays", document.getDescription(), "Incorrect description");
 
         List<KMLAbstractFeature> features = ((KMLFolder) document).getFeatures();
-        assertEquals("Incorrect number of features", 1, features.size());
-        assertTrue("Root feature is not as expected", features.get(0) instanceof KMLGroundOverlay);
+        assertEquals(1, features.size(), "Incorrect number of features");
+        assertTrue(features.get(0) instanceof KMLGroundOverlay, "Root feature is not as expected");
 
         KMLGroundOverlay overlay = (KMLGroundOverlay) features.get(0);
-        assertEquals("Incorrect name", "Large-scale overlay on terrain", overlay.getName());
-        assertEquals("Incorrect description",
-            "Overlay shows Mount Etna erupting\n"
-                + "                on July 13th, 2001.", overlay.getDescription());
+        assertEquals("Large-scale overlay on terrain", overlay.getName(), "Incorrect name");
+        assertEquals("Overlay shows Mount Etna erupting\n"
+                + "                on July 13th, 2001.", overlay.getDescription(), "Incorrect description");
 
         KMLIcon icon = overlay.getIcon();
-        assertNotNull("Overlay icon is null", icon);
-        assertEquals("Incorrect icon href", "https://developers.google.com/kml/documentation/images/etna.jpg",
-            icon.getHref());
+        assertNotNull(icon, "Overlay icon is null");
+        assertEquals("https://developers.google.com/kml/documentation/images/etna.jpg", icon.getHref(), "Incorrect icon href");
 
         KMLLatLonBox box = overlay.getLatLonBox();
-        assertNotNull("Overlay LatLonBox is null", box);
-        assertEquals("Incorrect box north", 37.91904192681665, box.getNorth(), 0.0);
-        assertEquals("Incorrect box south", 37.46543388598137, box.getSouth(), 0.0);
-        assertEquals("Incorrect box east", 15.35832653742206, box.getEast(), 0.0);
-        assertEquals("Incorrect box west", 14.60128369746704, box.getWest(), 0.0);
+        assertNotNull(box, "Overlay LatLonBox is null");
+        assertEquals(37.91904192681665, box.getNorth(), 0.0, "Incorrect box north");
+        assertEquals(37.46543388598137, box.getSouth(), 0.0, "Incorrect box south");
+        assertEquals(15.35832653742206, box.getEast(), 0.0, "Incorrect box east");
+        assertEquals(14.60128369746704, box.getWest(), 0.0, "Incorrect box west");
     }
 
     @Test
@@ -846,33 +830,33 @@ public class KMLTest
         KMLRoot root = this.openAndParseFile("testData/KML/StyleReferences.kml");
 
         KMLAbstractFeature document = root.getFeature();
-        assertTrue("Root feature is not as expected", document instanceof KMLDocument);
+        assertTrue(document instanceof KMLDocument, "Root feature is not as expected");
 
         List<KMLAbstractFeature> features = ((KMLDocument) document).getFeatures();
-        assertEquals("Incorrect number of features", 1, features.size());
-        assertTrue("Document feature is not as expected", features.get(0) instanceof KMLPlacemark);
+        assertEquals(1, features.size(), "Incorrect number of features");
+        assertTrue(features.get(0) instanceof KMLPlacemark, "Document feature is not as expected");
 
         List<KMLAbstractStyleSelector> styles = document.getStyleSelectors();
-        assertEquals("Incorrect number of styles", 1, styles.size());
+        assertEquals(1, styles.size(), "Incorrect number of styles");
 // // TODO: re-enable w/o relying on getStyleUrlResolved
 //            KMLPlacemark placemark = (KMLPlacemark) features.get(0);
-//            assertEquals("Incorrect name", "Building 41", placemark.getName());
-//            assertEquals("Incorrect styleUrl", "#transBluePoly", placemark.getStyleUrl().getCharacters());
-//            assertNotNull("Style is  null", placemark.getStyleUrlResolved());
+//            assertEquals("Building 41", placemark.getName(), "Incorrect name");
+//            assertEquals("#transBluePoly", placemark.getStyleUrl().getCharacters(), "Incorrect styleUrl");
+//            assertNotNull(placemark.getStyleUrlResolved(), "Style is  null");
 //
-//            assertTrue("Placemark feature is not as expected", placemark.getGeometry() instanceof KMLPolygon);
+//            assertTrue(placemark.getGeometry() instanceof KMLPolygon, "Placemark feature is not as expected");
 //            KMLPolygon pgon = (KMLPolygon) placemark.getGeometry();
-//            assertEquals("Incorrect extrude value", (Boolean) true, pgon.getExtrude());
-//            assertEquals("Incorrect altitude mode", "relativeToGround", pgon.getAltitudeMode());
+//            assertEquals((Boolean) true, pgon.getExtrude(), "Incorrect extrude value");
+//            assertEquals("relativeToGround", pgon.getAltitudeMode(), "Incorrect altitude mode");
 //
 //            KMLStyle style = placemark.getStyleUrlResolved();
 //            KMLLineStyle lineStyle = style.getLineStyle();
-//            assertNotNull("LineStyle is  null", lineStyle);
-//            assertEquals("Line style width is not as expected", 1.5, lineStyle.getWidth());
+//            assertNotNull(lineStyle, "LineStyle is  null");
+//            assertEquals(1.5, lineStyle.getWidth(), "Line style width is not as expected");
 //
 //            KMLPolyStyle polyStyle = style.getPolyStyle();
-//            assertNotNull("PolyStyle is  null", polyStyle);
-//            assertEquals("Poly style color is not as expected", "7dff0000", polyStyle.getColor());
+//            assertNotNull(polyStyle, "PolyStyle is  null");
+//            assertEquals("7dff0000", polyStyle.getColor(), "Poly style color is not as expected");
     }
 
     @Test
@@ -902,7 +886,7 @@ public class KMLTest
             for (String name : fileNames)
             {
                 InputStream is = root.getKMLDoc().getSupportFileStream(name);
-                assertNotNull("Support file not found in KMZ: " + name, is);
+                assertNotNull(is, "Support file not found in KMZ: " + name);
             }
         }
         catch (Exception e)
@@ -1010,9 +994,9 @@ public class KMLTest
             });
             root.parse();
 
-            assertNotNull("KML root is null", root);
-            assertTrue("Parser notification occurred\n" + sourceDoc + ":" + parserMessage,
-                parserMessage.length() == 0);
+            assertNotNull(root, "KML root is null");
+            assertTrue(parserMessage.length() == 0,
+                "Parser notification occurred\n" + sourceDoc + ":" + parserMessage);
         }
         catch (Exception e)
         {

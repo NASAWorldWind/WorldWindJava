@@ -30,17 +30,15 @@ package gov.nasa.worldwind.util;
 
 import com.jogamp.opengl.util.texture.TextureData;
 import gov.nasa.worldwind.Configuration;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.jogamp.opengl.*;
 import java.io.*;
 import java.net.URL;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OGLUtilTest
 {
     private static final String PNG_FILE = "./src/images/earth-map-512x256.png";
@@ -49,13 +47,13 @@ public class OGLUtilTest
 
     private GLProfile glProfile;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.glProfile = Configuration.getMaxCompatibleGLProfile();
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.glProfile = null;

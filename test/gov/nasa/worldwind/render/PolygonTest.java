@@ -31,15 +31,13 @@ package gov.nasa.worldwind.render;
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PolygonTest
 {
     private Globe globe;
@@ -47,7 +45,7 @@ public class PolygonTest
     private List<Position> positions;
     private Sector sector;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.globe = new Earth();
@@ -60,7 +58,7 @@ public class PolygonTest
         this.sector = Sector.boundingSector(this.positions);
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.globe = null;

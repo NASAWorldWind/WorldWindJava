@@ -28,15 +28,11 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class UserFacingIconTest
 {
     //////////////////////////////////////////////////////////
@@ -170,30 +166,28 @@ public class UserFacingIconTest
 
     private static void assertIconEquals(WWIcon expected, WWIcon actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Actual is null", actual);
-        assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Actual is null");
+        assertEquals(expected.getImageSource(), actual.getImageSource(), "imageSource");
         if (expected.getPosition() != null && actual.getPosition() != null)
         {
-            assertEquals("position.latitude", expected.getPosition().getLatitude(), actual.getPosition().getLatitude());
-            assertEquals("position.longitude", expected.getPosition().getLongitude(),
-                actual.getPosition().getLongitude());
-            assertEquals("position.elevation", expected.getPosition().getElevation(),
-                actual.getPosition().getElevation(), 0.0);
+            assertEquals(expected.getPosition().getLatitude(), actual.getPosition().getLatitude(), "position.latitude");
+            assertEquals(expected.getPosition().getLongitude(), actual.getPosition().getLongitude(), "position.longitude");
+            assertEquals(expected.getPosition().getElevation(), actual.getPosition().getElevation(), 0.0, "position.elevation");
         }
         else
         {
-            assertNull("Expected position is not null", expected.getPosition());
-            assertNull("Actual position is not null", actual.getPosition());
+            assertNull(expected.getPosition(), "Expected position is not null");
+            assertNull(actual.getPosition(), "Actual position is not null");
         }
-        assertEquals("highlighted", expected.isHighlighted(), actual.isHighlighted());
-        assertEquals("size", expected.getSize(), actual.getSize());
-        assertEquals("visible", expected.isVisible(), actual.isVisible());
-        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale(), 0.0);
-        assertEquals("toolTipText", expected.getToolTipText(), actual.getToolTipText());
-        assertEquals("toolTipFont", expected.getToolTipFont(), actual.getToolTipFont());
-        assertEquals("showToolTip", expected.isShowToolTip(), actual.isShowToolTip());
-        assertEquals("toolTipTextColor", expected.getToolTipTextColor(), actual.getToolTipTextColor());
-        assertEquals("alwaysOnTop", expected.isAlwaysOnTop(), actual.isAlwaysOnTop());
+        assertEquals(expected.isHighlighted(), actual.isHighlighted(), "highlighted");
+        assertEquals(expected.getSize(), actual.getSize(), "size");
+        assertEquals(expected.isVisible(), actual.isVisible(), "visible");
+        assertEquals(expected.getHighlightScale(), actual.getHighlightScale(), 0.0, "highlightScale");
+        assertEquals(expected.getToolTipText(), actual.getToolTipText(), "toolTipText");
+        assertEquals(expected.getToolTipFont(), actual.getToolTipFont(), "toolTipFont");
+        assertEquals(expected.isShowToolTip(), actual.isShowToolTip(), "showToolTip");
+        assertEquals(expected.getToolTipTextColor(), actual.getToolTipTextColor(), "toolTipTextColor");
+        assertEquals(expected.isAlwaysOnTop(), actual.isAlwaysOnTop(), "alwaysOnTop");
     }
 }

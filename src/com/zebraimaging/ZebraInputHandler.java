@@ -22,18 +22,16 @@ public class ZebraInputHandler extends AWTInputHandler
     
     final static TimerTask repaintContextsTask = new TimerTask()
 	{
+                @Override
 		public void run()        	
 		{
-			Iterator<ZebraInputHandler> itr = instances.iterator();
-	        while (itr.hasNext())
-	        {
-	            ZebraInputHandler h = itr.next();	           
-	            if (h.NeedsRefresh() == true)
-	            {
-	            	h.SetRefresh(false);
-	            	h.getWorldWindow().redraw();
-	            }        		            	
-	        }
+                    for (ZebraInputHandler h : instances) {
+                        if (h.NeedsRefresh() == true)
+                        {
+                            h.SetRefresh(false);
+                            h.getWorldWindow().redraw();
+                        }
+                    }
 		}
 	};
 	
@@ -77,6 +75,7 @@ public class ZebraInputHandler extends AWTInputHandler
     	return refresh;
 	}
     
+    @Override
     public void keyPressed(KeyEvent e)
     {
         boolean consumed = false;
@@ -88,6 +87,7 @@ public class ZebraInputHandler extends AWTInputHandler
             super.keyPressed(e);
     }
 
+    @Override
     public void keyReleased(KeyEvent e)
     {
         boolean consumed = false;
@@ -99,6 +99,7 @@ public class ZebraInputHandler extends AWTInputHandler
             super.keyReleased(e);
     }
 
+    @Override
     public void mouseClicked(MouseEvent e)
     {
         boolean consumed = false;
@@ -110,6 +111,7 @@ public class ZebraInputHandler extends AWTInputHandler
             super.mouseClicked(e);
     }
 
+    @Override
     public void mousePressed(MouseEvent e)
     {
         boolean consumed = false;
@@ -121,6 +123,7 @@ public class ZebraInputHandler extends AWTInputHandler
             super.mousePressed(e);
     }
 
+    @Override
     public void mouseReleased(MouseEvent e)
     {
         boolean consumed = false;

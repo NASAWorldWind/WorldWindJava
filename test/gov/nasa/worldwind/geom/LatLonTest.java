@@ -29,13 +29,11 @@
 package gov.nasa.worldwind.geom;
 
 import gov.nasa.worldwind.globes.*;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LatLonTest
 {
     private final static double DISTANCE_THRESHOLD = 1e-10;
@@ -44,13 +42,13 @@ public class LatLonTest
 
     private Globe globe;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.globe = new Earth();
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.globe = null;
@@ -66,7 +64,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 0.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Trivial equivalent points A", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Trivial equivalent points A");
     }
 
     @Test
@@ -75,7 +73,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, -180.0);
         LatLon end = LatLon.fromDegrees(0.0, 180.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Trivial equivalent points B", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Trivial equivalent points B");
     }
 
     @Test
@@ -84,7 +82,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 360.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Trivial equivalent points C", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Trivial equivalent points C");
     }
 
     @Test
@@ -93,7 +91,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(53.0902505, 112.8935442);
         LatLon end = LatLon.fromDegrees(53.0902505, 112.8935442);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Equivalent points", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Equivalent points");
     }
 
     //////////////////////////////////////////////////////////
@@ -106,7 +104,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 180.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Trivial antipodal points A", 180.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(180.0, distance, DISTANCE_THRESHOLD, "Trivial antipodal points A");
     }
 
     @Test
@@ -115,7 +113,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-90.0, 0.0);
         LatLon end = LatLon.fromDegrees(90.0, 0.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Trivial antipodal points B", 180.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(180.0, distance, DISTANCE_THRESHOLD, "Trivial antipodal points B");
     }
 
     @Test
@@ -124,7 +122,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-90.0, -180.0);
         LatLon end = LatLon.fromDegrees(90.0, 180.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Trivial antipodal points C", 180.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(180.0, distance, DISTANCE_THRESHOLD, "Trivial antipodal points C");
     }
 
     @Test
@@ -133,7 +131,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(53.0902505, 112.8935442);
         LatLon end = LatLon.fromDegrees(-53.0902505, -67.1064558);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Antipodal points A", 180.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(180.0, distance, DISTANCE_THRESHOLD, "Antipodal points A");
     }
 
     @Test
@@ -142,7 +140,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(12.0, -93.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Antipodal points B", 180.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(180.0, distance, DISTANCE_THRESHOLD, "Antipodal points B");
     }
 
     //////////////////////////////////////////////////////////
@@ -155,7 +153,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(90.0, 45.0);
         LatLon end = LatLon.fromDegrees(36.0, 180.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Known spherical distance", 54.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(54.0, distance, DISTANCE_THRESHOLD, "Known spherical distance");
     }
 
     @Test
@@ -164,8 +162,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(-12.0000001, 86.9999999);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Known spherical distance (close to zero)", 1.3988468832247915e-7, distance,
-            DISTANCE_THRESHOLD);
+        assertEquals(1.3988468832247915e-7, distance, DISTANCE_THRESHOLD, "Known spherical distance (close to zero)");
     }
 
     @Test
@@ -174,7 +171,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(11.9999999, -93.0000001);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Known spherical distance (close to 180)", 180.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(180.0, distance, DISTANCE_THRESHOLD, "Known spherical distance (close to 180)");
     }
 
     //////////////////////////////////////////////////////////
@@ -187,7 +184,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(36.0, -118.0);
         LatLon end = LatLon.fromDegrees(36.0, -117.0);
         double distance = LatLon.greatCircleDistance(begin, end).degrees;
-        assertEquals("Problem points A", 0.8090134466773318, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.8090134466773318, distance, DISTANCE_THRESHOLD, "Problem points A");
     }
 
     //////////////////////////////////////////////////////////
@@ -200,7 +197,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(90, 0.0);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Trivial North greatCircleAzimuth", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Trivial North greatCircleAzimuth");
     }
 
     @Test
@@ -209,7 +206,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 90.0);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Trivial East greatCircleAzimuth", 90.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(90.0, azimuth, AZIMUTH_THRESHOLD, "Trivial East greatCircleAzimuth");
     }
 
     @Test
@@ -218,7 +215,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(-90.0, 0.0);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Trivial South greatCircleAzimuth", 180.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(180.0, azimuth, AZIMUTH_THRESHOLD, "Trivial South greatCircleAzimuth");
     }
 
     @Test
@@ -227,7 +224,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, -90.0);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Trivial West greatCircleAzimuth", -90.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-90.0, azimuth, AZIMUTH_THRESHOLD, "Trivial West greatCircleAzimuth");
     }
 
     //////////////////////////////////////////////////////////
@@ -241,7 +238,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 0.0);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Trivial equivalent points A", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Trivial equivalent points A");
     }
 
     //@Test
@@ -250,7 +247,7 @@ public class LatLonTest
     //    LatLon begin = LatLon.fromDegrees(0.0, -180.0);
     //    LatLon end   = LatLon.fromDegrees(0.0, 180.0);
     //    double greatCircleAzimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-    //    assertEquals("Trivial equivalent points B", 0.0, greatCircleAzimuth, THRESHOLD);
+    //    assertEquals(0.0, greatCircleAzimuth, THRESHOLD, "Trivial equivalent points B");
     //}
 
     @Test
@@ -259,7 +256,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(90.0, 0.0);
         LatLon end = LatLon.fromDegrees(90.0, 0.0);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Trivial equivalent points C", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Trivial equivalent points C");
     }
 
     //@Test
@@ -268,7 +265,7 @@ public class LatLonTest
     //    LatLon begin = LatLon.fromDegrees(90.0, 0.0);
     //    LatLon end   = LatLon.fromDegrees(90.0, 45.0);
     //    double greatCircleAzimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-    //    assertEquals("Trivial equivalent points D", 0.0, greatCircleAzimuth, THRESHOLD);
+    //    assertEquals(0.0, greatCircleAzimuth, THRESHOLD, "Trivial equivalent points D");
     //}
 
     @Test
@@ -277,7 +274,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(53.0902505, 112.8935442);
         LatLon end = LatLon.fromDegrees(53.0902505, 112.8935442);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Equivalent points", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Equivalent points");
     }
 
     //////////////////////////////////////////////////////////
@@ -290,7 +287,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-90.0, -180.0);
         LatLon end = LatLon.fromDegrees(90.0, 180.0);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth A", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth A");
     }
 
     @Test
@@ -299,7 +296,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(53.0902505, 112.8935442);
         LatLon end = LatLon.fromDegrees(-53.0902505, -67.1064558);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth B", -90.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-90.0, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth B");
     }
 
     @Test
@@ -308,7 +305,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(-12.0000001, 86.9999999);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth C", -135.6329170237546, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-135.6329170237546, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth C");
     }
 
     @Test
@@ -317,7 +314,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(11.9999999, -93.0000001);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth D", 135.6329170162944, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(135.6329170162944, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth D");
     }
 
     @Test
@@ -326,7 +323,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(53.0902505, -67.1064558);
         double azimuth = LatLon.greatCircleAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth E", -21.38356223882703, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-21.38356223882703, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth E");
     }
 
     //////////////////////////////////////////////////////////
@@ -341,8 +338,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(0.0);
         double distanceRadians = Math.toRadians(0.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial distance A (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial distance A (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial distance A (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial distance A (lon)");
     }
 
     @Test
@@ -352,8 +349,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(0.0);
         double distanceRadians = Math.toRadians(360.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial distance B (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial distance B (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial distance B (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial distance B (lon)");
     }
 
     @Test
@@ -363,8 +360,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(90.0);
         double distanceRadians = Math.toRadians(0.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial Azimuth A (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial Azimuth A (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial Azimuth A (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial Azimuth A (lon)");
     }
 
     @Test
@@ -374,8 +371,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(90.0);
         double distanceRadians = Math.toRadians(360.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial Azimuth B (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial Azimuth B (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial Azimuth B (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial Azimuth B (lon)");
     }
 
     //////////////////////////////////////////////////////////
@@ -390,8 +387,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(0.0);
         double distanceRadians = Math.toRadians(180.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial antipodal points A (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial antipodal points A (lon)", 180.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial antipodal points A (lat)");
+        assertEquals(180.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial antipodal points A (lon)");
     }
 
     @Test
@@ -401,8 +398,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(90.0);
         double distanceRadians = Math.toRadians(180.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial antipodal points B (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial antipodal points B (lon)", 180.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial antipodal points B (lat)");
+        assertEquals(180.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial antipodal points B (lon)");
     }
 
     @Test
@@ -412,8 +409,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(0.0);
         double distanceRadians = Math.toRadians(180.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial antipodal points C (lat)", 90.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial antipodal points C (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(90.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial antipodal points C (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial antipodal points C (lon)");
     }
 
     @Test
@@ -423,8 +420,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(-90.0);
         double distanceRadians = Math.toRadians(180.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Antipodal points A (lat)", -53.0902505, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Antipodal points A (lon)", -67.1064558, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(-53.0902505, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Antipodal points A (lat)");
+        assertEquals(-67.1064558, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Antipodal points A (lon)");
     }
 
     @Test
@@ -434,8 +431,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(-90.0);
         double distanceRadians = Math.toRadians(180.0);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Antipodal points B (lat)", 12.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Antipodal points B (lon)", -93.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(12.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Antipodal points B (lat)");
+        assertEquals(-93.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Antipodal points B (lon)");
     }
 
     //////////////////////////////////////////////////////////
@@ -449,8 +446,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(15.2204311);
         double distanceRadians = Math.toRadians(-88.7560694);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Known points A (lat)", -36.63477988750917, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Known points A (lon)", 131.98550742812412, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(-36.63477988750917, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Known points A (lat)");
+        assertEquals(131.98550742812412, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Known points A (lon)");
     }
 
     @Test
@@ -460,8 +457,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(-68.4055227);
         double distanceRadians = Math.toRadians(10.53630354);
         LatLon end = LatLon.greatCircleEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Known points B (lat)", 55.7426290038835, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Known points B (lon)", 95.313127193979270, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(55.7426290038835, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Known points B (lat)");
+        assertEquals(95.313127193979270, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Known points B (lon)");
     }
 
     //////////////////////////////////////////////////////////
@@ -474,7 +471,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 0.0);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Trivial equivalent points A", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Trivial equivalent points A");
     }
 
     @Test
@@ -483,7 +480,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, -180.0);
         LatLon end = LatLon.fromDegrees(0.0, 180.0);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Trivial equivalent points B", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Trivial equivalent points B");
     }
 
     @Test
@@ -492,7 +489,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 360.0);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Trivial equivalent points C", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Trivial equivalent points C");
     }
 
     @Test
@@ -501,7 +498,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(53.0902505, 112.8935442);
         LatLon end = LatLon.fromDegrees(53.0902505, 112.8935442);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Equivalent points", 0.0, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.0, distance, DISTANCE_THRESHOLD, "Equivalent points");
     }
 
     //////////////////////////////////////////////////////////
@@ -514,7 +511,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(90.0, 45.0);
         LatLon end = LatLon.fromDegrees(36.0, 180.0);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Known spherical distance", 54.11143196539475, distance, 1e-5); // Custom threshold
+        assertEquals(54.11143196539475, distance, 1e-5, "Known spherical distance"); // Custom threshold
     }
 
     @Test
@@ -523,7 +520,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(-12.0000001, 86.9999999);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Known spherical distance (close to zero)", 1.398846933590201e-7, distance, DISTANCE_THRESHOLD);
+        assertEquals(1.398846933590201e-7, distance, DISTANCE_THRESHOLD, "Known spherical distance (close to zero)");
     }
 
     @Test
@@ -532,7 +529,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(11.9999999, -93.0000001);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Known spherical distance (close to 180)", 180.28382072652187, distance, DISTANCE_THRESHOLD);
+        assertEquals(180.28382072652187, distance, DISTANCE_THRESHOLD, "Known spherical distance (close to 180)");
     }
 
     //////////////////////////////////////////////////////////
@@ -545,7 +542,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(36.0, -118.0);
         LatLon end = LatLon.fromDegrees(36.0, -117.0);
         double distance = LatLon.rhumbDistance(begin, end).degrees;
-        assertEquals("Problem points A", 0.8090169943749475, distance, DISTANCE_THRESHOLD);
+        assertEquals(0.8090169943749475, distance, DISTANCE_THRESHOLD, "Problem points A");
     }
 
     //////////////////////////////////////////////////////////
@@ -558,7 +555,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(90, 0.0);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Trivial North rhumbAzimuth", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Trivial North rhumbAzimuth");
     }
 
     @Test
@@ -567,7 +564,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 90.0);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Trivial East rhumbAzimuth", 90.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(90.0, azimuth, AZIMUTH_THRESHOLD, "Trivial East rhumbAzimuth");
     }
 
     @Test
@@ -576,7 +573,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(-90.0, 0.0);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Trivial South rhumbAzimuth", 180.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(180.0, azimuth, AZIMUTH_THRESHOLD, "Trivial South rhumbAzimuth");
     }
 
     @Test
@@ -585,7 +582,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, -90.0);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Trivial West rhumbAzimuth", -90.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-90.0, azimuth, AZIMUTH_THRESHOLD, "Trivial West rhumbAzimuth");
     }
 
     //////////////////////////////////////////////////////////
@@ -599,7 +596,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(0.0, 0.0);
         LatLon end = LatLon.fromDegrees(0.0, 0.0);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Trivial equivalent points A", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Trivial equivalent points A");
     }
 
     //@Test
@@ -608,7 +605,7 @@ public class LatLonTest
     //    LatLon begin = LatLon.fromDegrees(0.0, -180.0);
     //    LatLon end   = LatLon.fromDegrees(0.0, 180.0);
     //    double rhumbAzimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-    //    assertEquals("Trivial equivalent points B", 0.0, rhumbAzimuth, THRESHOLD);
+    //    assertEquals(0.0, rhumbAzimuth, THRESHOLD, "Trivial equivalent points B");
     //}
 
     @Test
@@ -617,7 +614,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(90.0, 0.0);
         LatLon end = LatLon.fromDegrees(90.0, 0.0);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Trivial equivalent points C", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Trivial equivalent points C");
     }
 
     //@Test
@@ -626,7 +623,7 @@ public class LatLonTest
     //    LatLon begin = LatLon.fromDegrees(90.0, 0.0);
     //    LatLon end   = LatLon.fromDegrees(90.0, 45.0);
     //    double rhumbAzimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-    //    assertEquals("Trivial equivalent points D", 0.0, rhumbAzimuth, THRESHOLD);
+    //    assertEquals(0.0, rhumbAzimuth, THRESHOLD, "Trivial equivalent points D");
     //}
 
     @Test
@@ -635,7 +632,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(53.0902505, 112.8935442);
         LatLon end = LatLon.fromDegrees(53.0902505, 112.8935442);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Equivalent points", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Equivalent points");
     }
 
     //////////////////////////////////////////////////////////
@@ -648,7 +645,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-90.0, -180.0);
         LatLon end = LatLon.fromDegrees(90.0, 180.0);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth A", 0.0, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(0.0, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth A");
     }
 
     @Test
@@ -657,7 +654,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(53.0902505, 112.8935442);
         LatLon end = LatLon.fromDegrees(-53.0902505, -67.1064558);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth B", -124.94048502315054, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-124.94048502315054, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth B");
     }
 
     @Test
@@ -666,7 +663,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(-12.0000001, 86.9999999);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth C", -135.63291443992495, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-135.63291443992495, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth C");
     }
 
     @Test
@@ -675,7 +672,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(11.9999999, -93.0000001);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth D", 82.34987931207793, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(82.34987931207793, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth D");
     }
 
     @Test
@@ -684,7 +681,7 @@ public class LatLonTest
         LatLon begin = LatLon.fromDegrees(-12.0, 87.0);
         LatLon end = LatLon.fromDegrees(53.0902505, -67.1064558);
         double azimuth = LatLon.rhumbAzimuth(begin, end).degrees;
-        assertEquals("Known Azimuth E", -64.05846977747626, azimuth, AZIMUTH_THRESHOLD);
+        assertEquals(-64.05846977747626, azimuth, AZIMUTH_THRESHOLD, "Known Azimuth E");
     }
 
     //////////////////////////////////////////////////////////
@@ -699,8 +696,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(0.0);
         double distanceRadians = Math.toRadians(0.0);
         LatLon end = LatLon.rhumbEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial distance A (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial distance A (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial distance A (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial distance A (lon)");
     }
 
     @Test
@@ -710,8 +707,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(0.0);
         double distanceRadians = Math.toRadians(360.0);
         LatLon end = LatLon.rhumbEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial distance B (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial distance B (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial distance B (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial distance B (lon)");
     }
 
     @Test
@@ -721,8 +718,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(90.0);
         double distanceRadians = Math.toRadians(0.0);
         LatLon end = LatLon.rhumbEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial Azimuth A (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial Azimuth A (lon)", 0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial Azimuth A (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Trivial Azimuth A (lon)");
     }
 
     @Test
@@ -732,9 +729,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(90.0);
         double distanceRadians = Math.toRadians(360.0);
         LatLon end = LatLon.rhumbEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Trivial Azimuth B (lat)", 0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Trivial Azimuth B (lon)", 0.0, end.getLongitude().degrees,
-            1e-1); // Custom threshold
+        assertEquals(0.0, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Trivial Azimuth B (lat)");
+        assertEquals(0.0, end.getLongitude().degrees, 1e-1, "Trivial Azimuth B (lon)"); // Custom threshold
     }
 
     //////////////////////////////////////////////////////////
@@ -748,8 +744,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(15.2204311);
         double distanceRadians = Math.toRadians(88.7560694);
         LatLon end = LatLon.rhumbEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Known points A (lat)", 32.55251684755035, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Known points A (lon)", -40.62266365697857, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(32.55251684755035, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Known points A (lat)");
+        assertEquals(-40.62266365697857, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Known points A (lon)");
     }
 
     @Test
@@ -759,8 +755,8 @@ public class LatLonTest
         double azimuthRadians = Math.toRadians(-68.4055227);
         double distanceRadians = Math.toRadians(10.53630354);
         LatLon end = LatLon.rhumbEndPosition(begin, azimuthRadians, distanceRadians);
-        assertEquals("Known points B (lat)", 56.9679782407693, end.getLatitude().degrees, DISTANCE_THRESHOLD);
-        assertEquals("Known points B (lon)", 95.78434282105843, end.getLongitude().degrees, DISTANCE_THRESHOLD);
+        assertEquals(56.9679782407693, end.getLatitude().degrees, DISTANCE_THRESHOLD, "Known points B (lat)");
+        assertEquals(95.78434282105843, end.getLongitude().degrees, DISTANCE_THRESHOLD, "Known points B (lon)");
     }
 
     //////////////////////////////////////////////////////////
@@ -777,10 +773,8 @@ public class LatLonTest
         Angle distance = Angle.fromDegrees(8.963656110719409);
         LatLon begin = LatLon.fromRadians(initialLat.getRadians(), initialLon.getRadians());
         LatLon end = LatLon.rhumbEndPosition(begin, azimuth, distance);
-        assertEquals("Problem points A (lat)", initialLat.getDegrees(), end.getLatitude().getDegrees(),
-            DISTANCE_THRESHOLD);
-        assertEquals("Problem points A (lon)", -12.391252821313167, end.getLongitude().getDegrees(),
-            DISTANCE_THRESHOLD);
+        assertEquals(initialLat.getDegrees(), end.getLatitude().getDegrees(), DISTANCE_THRESHOLD, "Problem points A (lat)");
+        assertEquals(-12.391252821313167, end.getLongitude().getDegrees(), DISTANCE_THRESHOLD, "Problem points A (lon)");
     }
 
     @Test
@@ -790,7 +784,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(34.413929, -97.022765);
         double distance = LatLon.ellipsoidalDistance(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal distance A", 638027.750, distance, TOLERANCE);
+        assertEquals(638027.750, distance, TOLERANCE, "Known ellipsoidal distance A");
     }
 
     @Test
@@ -800,7 +794,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(48.4216, -122.3352);
         double distance = LatLon.ellipsoidalDistance(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal distance B", 5900926.896, distance, TOLERANCE);
+        assertEquals(5900926.896, distance, TOLERANCE, "Known ellipsoidal distance B");
     }
 
     @Test
@@ -810,7 +804,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(23.6937, 121.9831);
         double distance = LatLon.ellipsoidalDistance(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal distance C", 6186281.864, distance, TOLERANCE);
+        assertEquals(6186281.864, distance, TOLERANCE, "Known ellipsoidal distance C");
     }
 
     @Test
@@ -820,7 +814,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(42.3232, -71.0974);
         double distance = LatLon.ellipsoidalDistance(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal distance D", 5296396.967, distance, TOLERANCE);
+        assertEquals(5296396.967, distance, TOLERANCE, "Known ellipsoidal distance D");
     }
 
     @Test
@@ -831,7 +825,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(12.186856600402097, -121.90490684689753);
         double distance = LatLon.ellipsoidalDistance(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Antipodal", 1.9937004080007866E7, distance, TOLERANCE);
+        assertEquals(1.9937004080007866E7, distance, TOLERANCE, "Antipodal");
     }
 
     @Test
@@ -841,7 +835,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(34.000000, -97.000000);
         Angle theta = LatLon.ellipsoidalForwardAzimuth(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal Azimuth A", 45.50583, theta.degrees, TOLERANCE);
+        assertEquals(45.50583, theta.degrees, TOLERANCE, "Known ellipsoidal Azimuth A");
     }
 
     @Test
@@ -851,8 +845,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(48.0000, -122.0000);
         Angle theta = LatLon.ellipsoidalForwardAzimuth(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal Azimuth B", Angle.normalizedLongitude(Angle.fromDegrees(325.10111)).degrees,
-            theta.degrees, TOLERANCE);
+        assertEquals(Angle.normalizedLongitude(Angle.fromDegrees(325.10111)).degrees, theta.degrees, TOLERANCE, "Known ellipsoidal Azimuth B");
     }
 
     @Test
@@ -862,7 +855,7 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(23.0000, 122.0000);
         Angle theta = LatLon.ellipsoidalForwardAzimuth(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal Azimuth C", 6.75777, theta.degrees, TOLERANCE);
+        assertEquals(6.75777, theta.degrees, TOLERANCE, "Known ellipsoidal Azimuth C");
     }
 
     @Test
@@ -872,7 +865,6 @@ public class LatLonTest
         LatLon end = LatLon.fromDegrees(42.0000, -71.0000);
         Angle theta = LatLon.ellipsoidalForwardAzimuth(begin, end, globe.getEquatorialRadius(),
             globe.getPolarRadius());
-        assertEquals("Known ellipsoidal Azimuth D", Angle.normalizedLongitude(Angle.fromDegrees(287.95372)).degrees,
-            theta.degrees, TOLERANCE);
+        assertEquals(Angle.normalizedLongitude(Angle.fromDegrees(287.95372)).degrees, theta.degrees, TOLERANCE, "Known ellipsoidal Azimuth D");
     }
 }

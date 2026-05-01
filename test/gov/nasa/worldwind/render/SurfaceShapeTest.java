@@ -30,16 +30,13 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("deprecation")
-@RunWith(JUnit4.class)
 public class SurfaceShapeTest
 {
     private static final ArrayList<LatLon> emptyLocations = new ArrayList<LatLon>();
@@ -332,20 +329,19 @@ public class SurfaceShapeTest
 
     private static void assertSurfaceShapeEquals(AbstractSurfaceShape expected, AbstractSurfaceShape actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Actual is null", actual);
-        assertEquals("class", expected.getClass(), actual.getClass());
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Actual is null");
+        assertEquals(expected.getClass(), actual.getClass(), "class");
 
         int[] expectedEdgeIntervals = expected.getMinAndMaxEdgeIntervals();
         int[] actualEdgeIntervals = actual.getMinAndMaxEdgeIntervals();
 
-        assertEquals("isVisible", expected.isVisible(), actual.isVisible());
-        assertEquals("attributes", expected.getAttributes(), actual.getAttributes());
-        assertEquals("pathType", expected.getPathType(), actual.getPathType());
-        assertEquals("texelsPerEdgeInterval", expected.getTexelsPerEdgeInterval(), actual.getTexelsPerEdgeInterval(),
-            0.0);
-        assertEquals("minEdgeIntervals", expectedEdgeIntervals[0], actualEdgeIntervals[0]);
-        assertEquals("maxEdgeIntervals", expectedEdgeIntervals[1], actualEdgeIntervals[1]);
+        assertEquals(expected.isVisible(), actual.isVisible(), "isVisible");
+        assertEquals(expected.getAttributes(), actual.getAttributes(), "attributes");
+        assertEquals(expected.getPathType(), actual.getPathType(), "pathType");
+        assertEquals(expected.getTexelsPerEdgeInterval(), actual.getTexelsPerEdgeInterval(), 0.0, "texelsPerEdgeInterval");
+        assertEquals(expectedEdgeIntervals[0], actualEdgeIntervals[0], "minEdgeIntervals");
+        assertEquals(expectedEdgeIntervals[1], actualEdgeIntervals[1], "maxEdgeIntervals");
 
         if (expected instanceof SurfacePolyline)
         {
@@ -354,27 +350,25 @@ public class SurfaceShapeTest
         }
         else if (expected instanceof SurfacePolygon)
         {
-            assertEquals("boundaries", ((SurfacePolygon) expected).boundaries, ((SurfacePolygon) actual).boundaries);
+            assertEquals(((SurfacePolygon) expected).boundaries, ((SurfacePolygon) actual).boundaries, "boundaries");
         }
         else if (expected instanceof SurfaceSector)
         {
-            assertEquals("sector", ((SurfaceSector) expected).getSector(), ((SurfaceSector) actual).getSector());
+            assertEquals(((SurfaceSector) expected).getSector(), ((SurfaceSector) actual).getSector(), "sector");
         }
         else if (expected instanceof SurfaceEllipse)
         {
-            assertEquals("center", ((SurfaceEllipse) expected).getCenter(), ((SurfaceEllipse) actual).getCenter());
-            assertEquals("majorRadius", ((SurfaceEllipse) expected).getMajorRadius(),
-                ((SurfaceEllipse) actual).getMajorRadius(), 0.0);
-            assertEquals("minorRadius", ((SurfaceEllipse) expected).getMinorRadius(),
-                ((SurfaceEllipse) actual).getMinorRadius(), 0.0);
-            assertEquals("heading", ((SurfaceEllipse) expected).getHeading(), ((SurfaceEllipse) actual).getHeading());
+            assertEquals(((SurfaceEllipse) expected).getCenter(), ((SurfaceEllipse) actual).getCenter(), "center");
+            assertEquals(((SurfaceEllipse) expected).getMajorRadius(), ((SurfaceEllipse) actual).getMajorRadius(), 0.0, "majorRadius");
+            assertEquals(((SurfaceEllipse) expected).getMinorRadius(), ((SurfaceEllipse) actual).getMinorRadius(), 0.0, "minorRadius");
+            assertEquals(((SurfaceEllipse) expected).getHeading(), ((SurfaceEllipse) actual).getHeading(), "heading");
         }
         else if (expected instanceof SurfaceQuad)
         {
-            assertEquals("center", ((SurfaceQuad) expected).getCenter(), ((SurfaceQuad) actual).getCenter());
-            assertEquals("width", ((SurfaceQuad) expected).getWidth(), ((SurfaceQuad) actual).getWidth(), 0.0);
-            assertEquals("height", ((SurfaceQuad) expected).getHeight(), ((SurfaceQuad) actual).getHeight(), 0.0);
-            assertEquals("heading", ((SurfaceQuad) expected).getHeading(), ((SurfaceQuad) actual).getHeading());
+            assertEquals(((SurfaceQuad) expected).getCenter(), ((SurfaceQuad) actual).getCenter(), "center");
+            assertEquals(((SurfaceQuad) expected).getWidth(), ((SurfaceQuad) actual).getWidth(), 0.0, "width");
+            assertEquals(((SurfaceQuad) expected).getHeight(), ((SurfaceQuad) actual).getHeight(), 0.0, "height");
+            assertEquals(((SurfaceQuad) expected).getHeading(), ((SurfaceQuad) actual).getHeading(), "heading");
         }
     }
 
@@ -386,7 +380,7 @@ public class SurfaceShapeTest
 
         while (a.hasNext() && b.hasNext())
         {
-            assertEquals(message, a.next(), b.next());
+            assertEquals(a.next(), b.next(), message);
         }
 
         if (a.hasNext() || b.hasNext())

@@ -31,15 +31,11 @@ import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.view.orbit.BasicOrbitView;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class AnnotationLayerTest
 {
     //////////////////////////////////////////////////////////
@@ -53,7 +49,7 @@ public class AnnotationLayerTest
 
         // Test the parameterless constructor.
         layer = new AnnotationLayer();
-        assertNotNull("", layer);
+        assertNotNull(layer, "");
     }
 
     @Test
@@ -68,7 +64,7 @@ public class AnnotationLayerTest
         }
 
         // Test that the layer contains the annotations.
-        assertEquals("", annotations, layer.getAnnotations());
+        assertIterablesEqual(annotations, layer.getAnnotations(), "");
     }
 
     @Test
@@ -80,7 +76,7 @@ public class AnnotationLayerTest
         layer.addAnnotations(annotations);
 
         // Test that the layer contains the annotations.
-        assertEquals("", annotations, layer.getAnnotations());
+        assertIterablesEqual(annotations, layer.getAnnotations(), "");
     }
 
     @Test
@@ -99,7 +95,7 @@ public class AnnotationLayerTest
         }
 
         // Test that the layer contains no annotations.
-        assertFalse("", layer.getAnnotations().iterator().hasNext());
+        assertFalse(layer.getAnnotations().iterator().hasNext(), "");
     }
 
     @Test
@@ -112,7 +108,7 @@ public class AnnotationLayerTest
         layer.removeAllAnnotations();
 
         // Test that the layer contains no annotations.
-        assertFalse("", layer.getAnnotations().iterator().hasNext());
+        assertFalse(layer.getAnnotations().iterator().hasNext(), "");
     }
 
     @Test
@@ -124,7 +120,7 @@ public class AnnotationLayerTest
         layer.setAnnotations(annotations);
 
         // Test that the layer points to the Iterable.
-        assertSame("", annotations, layer.getAnnotations());
+        assertSame(annotations, layer.getAnnotations(), "");
     }
 
     //////////////////////////////////////////////////////////
@@ -142,9 +138,9 @@ public class AnnotationLayerTest
         layer.setAnnotations(null);
 
         // Test that the layer does not point to the Iterable.
-        assertNotSame("", annotations, layer.getAnnotations());
+        assertNotSame(annotations, layer.getAnnotations(), "");
         // Test that the layer contains no annotations.
-        assertFalse("", layer.getAnnotations().iterator().hasNext());
+        assertFalse(layer.getAnnotations().iterator().hasNext(), "");
     }
 
     @Test
@@ -158,9 +154,9 @@ public class AnnotationLayerTest
         layer.addAnnotations(annotations);
 
         // Test that the layer does not point to the Iterable.
-        assertNotSame("", annotations, layer.getAnnotations());
+        assertNotSame(annotations, layer.getAnnotations(), "");
         // Test that the layer contains the annotations.
-        assertEquals("", annotations, layer.getAnnotations());
+        assertIterablesEqual(annotations, layer.getAnnotations(), "");
     }
 
     @Test
@@ -191,13 +187,13 @@ public class AnnotationLayerTest
                 }
             }
         }
-        catch (UnsupportedOperationException e)
+        catch (UnsupportedOperationException ignored)
         {
-            e.printStackTrace();
+            // An immutable view is acceptable — what matters is that layer state is unchanged below.
         }
 
         // Test that the layer contents do not change, even if the returned list can be modified.
-        assertEquals("", annotations, layerAnnotations);
+        assertIterablesEqual(annotations, layerAnnotations, "");
     }
 
     @Test
@@ -237,16 +233,8 @@ public class AnnotationLayerTest
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.addAnnotation(new GlobeAnnotation("", Position.ZERO));
-            fail("");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class,
+            () -> layer.addAnnotation(new GlobeAnnotation("", Position.ZERO)));
     }
 
     @Test
@@ -257,16 +245,7 @@ public class AnnotationLayerTest
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.addAnnotations(annotations);
-            fail("");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.addAnnotations(annotations));
     }
 
     @Test
@@ -277,16 +256,8 @@ public class AnnotationLayerTest
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.removeAnnotation(new GlobeAnnotation("", Position.ZERO));
-            fail("");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class,
+            () -> layer.removeAnnotation(new GlobeAnnotation("", Position.ZERO)));
     }
 
     @Test
@@ -297,16 +268,7 @@ public class AnnotationLayerTest
         AnnotationLayer layer = new AnnotationLayer();
         layer.setAnnotations(annotations);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.removeAllAnnotations();
-            fail("");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.removeAllAnnotations());
     }
 
     //////////////////////////////////////////////////////////
@@ -314,11 +276,11 @@ public class AnnotationLayerTest
     //////////////////////////////////////////////////////////
 
     @SuppressWarnings({"JavaDoc"})
-    private static void assertEquals(String message, Iterable<Annotation> expected, Iterable<Annotation> actual)
+    private static void assertIterablesEqual(Iterable<Annotation> expected, Iterable<Annotation> actual, String message)
     {
         if (expected == null)
         {
-            assertNull(message, actual);
+            assertNull(actual, message);
         }
         else
         {
@@ -326,10 +288,10 @@ public class AnnotationLayerTest
             // Compare the elements in each iterator, as long as they both have elements.
             while (expectedIter.hasNext() && actualIter.hasNext())
             {
-                Assert.assertEquals(message, expectedIter.next(), actualIter.next());
+                assertEquals(expectedIter.next(), actualIter.next(), message);
             }
             // If either iterator has more elements, then their lengths are different.
-            assertFalse(message, expectedIter.hasNext() || actualIter.hasNext());
+            assertFalse(expectedIter.hasNext() || actualIter.hasNext(), message);
         }
     }
 

@@ -30,16 +30,12 @@ package gov.nasa.worldwind.ogc.wcs;
 
 import gov.nasa.worldwind.ogc.ows.*;
 import gov.nasa.worldwind.ogc.wcs.wcs100.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import javax.xml.stream.XMLStreamException;
 import java.util.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class WCSCapabilitiesParsingTest
 {
     @Test
@@ -56,132 +52,129 @@ public class WCSCapabilitiesParsingTest
             e.printStackTrace();
         }
 
-        assertNotNull("Version is null", caps.getVersion());
-        assertEquals("Incorrect version number", "1.0.0", caps.getVersion());
-        assertEquals("Incorrect update sequence", "2013-06-28T16:26:00Z", caps.getUpdateSequence());
+        assertNotNull(caps.getVersion(), "Version is null");
+        assertEquals("1.0.0", caps.getVersion(), "Incorrect version number");
+        assertEquals("2013-06-28T16:26:00Z", caps.getUpdateSequence(), "Incorrect update sequence");
 
         WCS100Service service = caps.getService();
-        assertNotNull("Service is null", service);
+        assertNotNull(service, "Service is null");
 
         WCS100MetadataLink metadataLink = service.getMetadataLink();
-        assertNotNull("MetadataLink is null", metadataLink);
-        assertEquals("Incorrect metadataLink href", "http://worldwind26.arc.nasa.gov", metadataLink.getHref());
-        assertEquals("Incorrect type value", "simple", metadataLink.getType());
-        assertEquals("Incorrect metadataType value", "TC211", metadataLink.getMetadataType());
+        assertNotNull(metadataLink, "MetadataLink is null");
+        assertEquals("http://worldwind26.arc.nasa.gov", metadataLink.getHref(), "Incorrect metadataLink href");
+        assertEquals("simple", metadataLink.getType(), "Incorrect type value");
+        assertEquals("TC211", metadataLink.getMetadataType(), "Incorrect metadataType value");
 
         String description = service.getDescription();
-        assertNotNull("Service description is null", description);
-        assertTrue("Incorrect description", description.startsWith("WorldWind MapServer Elevation test"));
+        assertNotNull(description, "Service description is null");
+        assertTrue(description.startsWith("WorldWind MapServer Elevation test"), "Incorrect description");
 
-        assertNotNull("Service name is null", service.getName());
-        assertEquals("Incorrect service name", "MapServer WCS", service.getName());
+        assertNotNull(service.getName(), "Service name is null");
+        assertEquals("MapServer WCS", service.getName(), "Incorrect service name");
 
-        assertNotNull("Service label is null", service.getLabel());
-        assertEquals("Incorrect service label", "WorldWind MapServer Elevation", service.getLabel());
+        assertNotNull(service.getLabel(), "Service label is null");
+        assertEquals("WorldWind MapServer Elevation", service.getLabel(), "Incorrect service label");
 
         List<String> keywords = service.getKeywords();
-        assertTrue("Keywords is null", keywords != null);
-        assertEquals("Incorrect keyword count", 5, keywords.size());
-        assertTrue("Missing keyword", keywords.contains("wcs"));
-        assertTrue("Missing keyword", keywords.contains("test"));
-        assertTrue("Missing keyword", keywords.contains("FAA"));
-        assertTrue("Missing keyword", keywords.contains("charts"));
-        assertTrue("Missing keyword", keywords.contains("aeronautical"));
+        assertTrue(keywords != null, "Keywords is null");
+        assertEquals(5, keywords.size(), "Incorrect keyword count");
+        assertTrue(keywords.contains("wcs"), "Missing keyword");
+        assertTrue(keywords.contains("test"), "Missing keyword");
+        assertTrue(keywords.contains("FAA"), "Missing keyword");
+        assertTrue(keywords.contains("charts"), "Missing keyword");
+        assertTrue(keywords.contains("aeronautical"), "Missing keyword");
 
         WCS100ResponsibleParty responsibleParty = service.getResponsibleParty();
-        assertNotNull("ResponsibleParty is null", responsibleParty);
-        assertNotNull("IndividualName is null", responsibleParty.getIndividualName());
-        assertEquals("Incorrect individualName", "Randolph Kim", responsibleParty.getIndividualName());
-        assertNotNull("OrganisationName is null", responsibleParty.getOrganisationName());
-        assertEquals("Incorrect organisationName", "NASA", responsibleParty.getOrganisationName());
-        assertNotNull("PostionName is null", responsibleParty.getPositionName());
-        assertEquals("Incorrect positionName", "manager", responsibleParty.getPositionName());
+        assertNotNull(responsibleParty, "ResponsibleParty is null");
+        assertNotNull(responsibleParty.getIndividualName(), "IndividualName is null");
+        assertEquals("Randolph Kim", responsibleParty.getIndividualName(), "Incorrect individualName");
+        assertNotNull(responsibleParty.getOrganisationName(), "OrganisationName is null");
+        assertEquals("NASA", responsibleParty.getOrganisationName(), "Incorrect organisationName");
+        assertNotNull(responsibleParty.getPositionName(), "PostionName is null");
+        assertEquals("manager", responsibleParty.getPositionName(), "Incorrect positionName");
         OWSContactInfo contactInfo = responsibleParty.getContactInfo();
-        assertNotNull("ContactInfo is null", contactInfo);
+        assertNotNull(contactInfo, "ContactInfo is null");
         OWSAddress address = contactInfo.getAddress();
-        assertNotNull("Address is null", address);
-        assertNotNull("City is null", address.getCity());
-        assertEquals("Incorrect city", "Moffett Field", address.getCity());
-        assertNotNull("Country is null", address.getCountries().get(0));
-        assertEquals("Incorrect country", "USA", address.getCountries().get(0));
-        assertNotNull("ElectronicMailAddress is null", address.getElectronicMailAddresses().get(0));
-        assertEquals("Incorrect electronicMailAddress", "none@nasa.gov", address.getElectronicMailAddresses().get(0));
-        assertNotNull("DeliveryPoint is null", address.getDeliveryPoints().get(0));
-        assertEquals("Incorrect deliveryPoint", "NASA Ames Research Center", address.getDeliveryPoints().get(0));
-        assertNotNull("AdministrativeArea is null", address.getAdministrativeArea());
-        assertEquals("Incorrect deliveryPoint", "CA", address.getAdministrativeArea());
+        assertNotNull(address, "Address is null");
+        assertNotNull(address.getCity(), "City is null");
+        assertEquals("Moffett Field", address.getCity(), "Incorrect city");
+        assertNotNull(address.getCountries().get(0), "Country is null");
+        assertEquals("USA", address.getCountries().get(0), "Incorrect country");
+        assertNotNull(address.getElectronicMailAddresses().get(0), "ElectronicMailAddress is null");
+        assertEquals("none@nasa.gov", address.getElectronicMailAddresses().get(0), "Incorrect electronicMailAddress");
+        assertNotNull(address.getDeliveryPoints().get(0), "DeliveryPoint is null");
+        assertEquals("NASA Ames Research Center", address.getDeliveryPoints().get(0), "Incorrect deliveryPoint");
+        assertNotNull(address.getAdministrativeArea(), "AdministrativeArea is null");
+        assertEquals("CA", address.getAdministrativeArea(), "Incorrect deliveryPoint");
         OWSPhone phone = contactInfo.getPhone();
-        assertNotNull("Phone is null", phone);
-        assertNotNull("Voice is null", phone.getVoices().get(0));
-        assertEquals("Incorrect voice", "000-000-0000", phone.getVoices().get(0));
-        assertNotNull("Facsimile is null", phone.getFacsimiles().get(0));
-        assertEquals("Incorrect facsimile", "000-000-0000", phone.getFacsimiles().get(0));
-        assertEquals("Incorrect contactInfo onlineResource href", "http://worldwind26.arc.nasa.gov/wms2?",
-            contactInfo.getOnlineResource());
+        assertNotNull(phone, "Phone is null");
+        assertNotNull(phone.getVoices().get(0), "Voice is null");
+        assertEquals("000-000-0000", phone.getVoices().get(0), "Incorrect voice");
+        assertNotNull(phone.getFacsimiles().get(0), "Facsimile is null");
+        assertEquals("000-000-0000", phone.getFacsimiles().get(0), "Incorrect facsimile");
+        assertEquals("http://worldwind26.arc.nasa.gov/wms2?", contactInfo.getOnlineResource(), "Incorrect contactInfo onlineResource href");
 
-        assertNotNull("Fees is null", service.getFees());
-        assertEquals("Incorrect country", "none", service.getFees());
+        assertNotNull(service.getFees(), "Fees is null");
+        assertEquals("none", service.getFees(), "Incorrect country");
 
         List<String> accessConstraints = service.getAccessConstraints();
-        assertNotNull("AccessConstraints is null", accessConstraints);
-        assertEquals("Incorrect number of access constraints", 1, accessConstraints.size());
-        assertEquals("Incorrect accessConstraint", "none", accessConstraints.iterator().next());
+        assertNotNull(accessConstraints, "AccessConstraints is null");
+        assertEquals(1, accessConstraints.size(), "Incorrect number of access constraints");
+        assertEquals("none", accessConstraints.iterator().next(), "Incorrect accessConstraint");
 
         WCS100Capability capability = caps.getCapability();
-        assertNotNull("Capability is null", capability);
+        assertNotNull(capability, "Capability is null");
 
         WCS100Request request = capability.getRequest();
-        assertNotNull("Request is null", request);
-        assertNotNull("Request descriptions is null", request.getRequests());
-        assertEquals("Incorrect request description count", 3, request.getRequests().size());
-        assertNotNull("GetCapabilities request description is null", request.getRequest("GetCapabilities"));
-        assertNotNull("DescribeCoverage request description is null", request.getRequest("DescribeCoverage"));
-        assertNotNull("GetCoverage request description is null", request.getRequest("GetCoverage"));
+        assertNotNull(request, "Request is null");
+        assertNotNull(request.getRequests(), "Request descriptions is null");
+        assertEquals(3, request.getRequests().size(), "Incorrect request description count");
+        assertNotNull(request.getRequest("GetCapabilities"), "GetCapabilities request description is null");
+        assertNotNull(request.getRequest("DescribeCoverage"), "DescribeCoverage request description is null");
+        assertNotNull(request.getRequest("GetCoverage"), "GetCoverage request description is null");
         checkRequestDescription(request.getRequest("GetCapabilities"), "http://worldwind26.arc.nasa.gov/wms2?");
         checkRequestDescription(request.getRequest("DescribeCoverage"), "http://worldwind26.arc.nasa.gov/wms2?");
         checkRequestDescription(request.getRequest("GetCoverage"), "http://worldwind26.arc.nasa.gov/wms2?");
 
         WCS100Exception exception = capability.getException();
-        assertNotNull("Exception is null", exception);
-        assertNotNull("Exception Formats is null", exception.getFormats());
-        assertEquals("Incorrect exception format count", 1, exception.getFormats().size());
+        assertNotNull(exception, "Exception is null");
+        assertNotNull(exception.getFormats(), "Exception Formats is null");
+        assertEquals(1, exception.getFormats().size(), "Incorrect exception format count");
         Iterator<String> iterator = exception.getFormats().iterator();
-        assertEquals("Incorrect exception format", "application/vnd.ogc.se_xml", iterator.next());
+        assertEquals("application/vnd.ogc.se_xml", iterator.next(), "Incorrect exception format");
 
-        assertNotNull("ContentMetadata is null", caps.getContentMetadata());
+        assertNotNull(caps.getContentMetadata(), "ContentMetadata is null");
         List<WCS100CoverageOfferingBrief> coverages = caps.getContentMetadata().getCoverageOfferings();
-        assertNotNull("CoverageOfferingBriefs is null", coverages);
-        assertEquals("Incorrect CoverageOfferingBrief description count", 6, coverages.size());
+        assertNotNull(coverages, "CoverageOfferingBriefs is null");
+        assertEquals(6, coverages.size(), "Incorrect CoverageOfferingBrief description count");
 
         WCS100CoverageOfferingBrief coverage = coverages.get(0);
-        assertNotNull("CoverageOfferingBrief 0 is null", coverage);
-        assertNotNull("CoverageOfferingBrief 0 name is null", coverage.getName());
-        assertEquals("Incorrect CoverageOfferingBrief 0 name", "aster_v2", coverage.getName());
-        assertNotNull("CoverageOfferingBrief 0 label is null", coverage.getLabel());
-        assertEquals("Incorrect CoverageOfferingBrief 0 label", "ASTER version 2", coverage.getLabel());
+        assertNotNull(coverage, "CoverageOfferingBrief 0 is null");
+        assertNotNull(coverage.getName(), "CoverageOfferingBrief 0 name is null");
+        assertEquals("aster_v2", coverage.getName(), "Incorrect CoverageOfferingBrief 0 name");
+        assertNotNull(coverage.getLabel(), "CoverageOfferingBrief 0 label is null");
+        assertEquals("ASTER version 2", coverage.getLabel(), "Incorrect CoverageOfferingBrief 0 label");
         WCS100LonLatEnvelope envelope = coverage.getLonLatEnvelope();
-        assertNotNull("LonLatEnvelope 0 is null", envelope);
-        assertNotNull("LonLatEnvelope 0 positions is null", envelope.getPositions());
-        assertEquals("Incorrect LonLatEnvelope 0 SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName());
-        assertEquals("Incorrect LonLatEnvelope 0 position count", 2, envelope.getPositions().size());
-        assertEquals("Incorrect LonLatEnvelope 0 position 0", "-180 -83",
-            envelope.getPositions().get(0).getPosString());
-        assertEquals("Incorrect LonLatEnvelope 0 position 1", "180 83", envelope.getPositions().get(1).getPosString());
+        assertNotNull(envelope, "LonLatEnvelope 0 is null");
+        assertNotNull(envelope.getPositions(), "LonLatEnvelope 0 positions is null");
+        assertEquals("urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName(), "Incorrect LonLatEnvelope 0 SRS");
+        assertEquals(2, envelope.getPositions().size(), "Incorrect LonLatEnvelope 0 position count");
+        assertEquals("-180 -83", envelope.getPositions().get(0).getPosString(), "Incorrect LonLatEnvelope 0 position 0");
+        assertEquals("180 83", envelope.getPositions().get(1).getPosString(), "Incorrect LonLatEnvelope 0 position 1");
 
         coverage = coverages.get(1);
-        assertNotNull("CoverageOfferingBrief 1 is null", coverage);
-        assertNotNull("CoverageOfferingBrief 1 name is null", coverage.getName());
-        assertEquals("Incorrect CoverageOfferingBrief 1 name", "USGS-NED", coverage.getName());
-        assertNotNull("CoverageOfferingBrief 1 label is null", coverage.getLabel());
-        assertEquals("Incorrect CoverageOfferingBrief 1 label", "USGS NED", coverage.getLabel());
+        assertNotNull(coverage, "CoverageOfferingBrief 1 is null");
+        assertNotNull(coverage.getName(), "CoverageOfferingBrief 1 name is null");
+        assertEquals("USGS-NED", coverage.getName(), "Incorrect CoverageOfferingBrief 1 name");
+        assertNotNull(coverage.getLabel(), "CoverageOfferingBrief 1 label is null");
+        assertEquals("USGS NED", coverage.getLabel(), "Incorrect CoverageOfferingBrief 1 label");
         envelope = coverage.getLonLatEnvelope();
-        assertNotNull("LonLatEnvelope 1 is null", envelope);
-        assertNotNull("LonLatEnvelope 1 positions is null", envelope.getPositions());
-        assertEquals("Incorrect LonLatEnvelope 1 SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName());
-        assertEquals("Incorrect LonLatEnvelope 1 position count", 2, envelope.getPositions().size());
-        assertEquals("Incorrect LonLatEnvelope 1 position 0", "-125 25", envelope.getPositions().get(0).getPosString());
-        assertEquals("Incorrect LonLatEnvelope 1 position 1", "-65.5 50",
-            envelope.getPositions().get(1).getPosString());
+        assertNotNull(envelope, "LonLatEnvelope 1 is null");
+        assertNotNull(envelope.getPositions(), "LonLatEnvelope 1 positions is null");
+        assertEquals("urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName(), "Incorrect LonLatEnvelope 1 SRS");
+        assertEquals(2, envelope.getPositions().size(), "Incorrect LonLatEnvelope 1 position count");
+        assertEquals("-125 25", envelope.getPositions().get(0).getPosString(), "Incorrect LonLatEnvelope 1 position 0");
+        assertEquals("-65.5 50", envelope.getPositions().get(1).getPosString(), "Incorrect LonLatEnvelope 1 position 1");
 
         // There are more CoverageOfferingBrief elements in the file, but testing the two above is adequate.
     }
@@ -200,146 +193,132 @@ public class WCSCapabilitiesParsingTest
             e.printStackTrace();
         }
 
-        assertNotNull("Version is null", caps.getVersion());
-        assertEquals("Incorrect version number", "1.0.0", caps.getVersion());
-        assertEquals("Incorrect update sequence", "105", caps.getUpdateSequence());
+        assertNotNull(caps.getVersion(), "Version is null");
+        assertEquals("1.0.0", caps.getVersion(), "Incorrect version number");
+        assertEquals("105", caps.getUpdateSequence(), "Incorrect update sequence");
 
         WCS100Service service = caps.getService();
-        assertNotNull("Service is null", service);
+        assertNotNull(service, "Service is null");
 
         WCS100MetadataLink metadataLink = service.getMetadataLink();
-        assertNotNull("MetadataLink is null", metadataLink);
-        assertEquals("Incorrect metadataLink about value", "http://geoserver.sourceforge.net/html/index.php",
-            metadataLink.getField("about"));
-        assertEquals("Incorrect metadataLink type value", "simple", metadataLink.getField("type"));
-        assertEquals("Incorrect metadataLink metadataType value", "other", metadataLink.getField("metadataType"));
+        assertNotNull(metadataLink, "MetadataLink is null");
+        assertEquals("http://geoserver.sourceforge.net/html/index.php", metadataLink.getField("about"), "Incorrect metadataLink about value");
+        assertEquals("simple", metadataLink.getField("type"), "Incorrect metadataLink type value");
+        assertEquals("other", metadataLink.getField("metadataType"), "Incorrect metadataLink metadataType value");
 
         String description = service.getDescription();
-        assertNotNull("Service description is null", description);
-        assertTrue("Incorrect description",
-            description.startsWith("This server implements the WCS specification 1.0"));
+        assertNotNull(description, "Service description is null");
+        assertTrue(description.startsWith("This server implements the WCS specification 1.0"), "Incorrect description");
 
-        assertNotNull("Service name is null", service.getName());
-        assertEquals("Incorrect service name", "WCS", service.getName());
+        assertNotNull(service.getName(), "Service name is null");
+        assertEquals("WCS", service.getName(), "Incorrect service name");
 
-        assertNotNull("Service label is null", service.getLabel());
-        assertEquals("Incorrect service label", "Web Coverage Service", service.getLabel());
+        assertNotNull(service.getLabel(), "Service label is null");
+        assertEquals("Web Coverage Service", service.getLabel(), "Incorrect service label");
 
         List<String> keywords = service.getKeywords();
-        assertTrue("Keywords is null", keywords != null);
-        assertEquals("Incorrect keyword count", 3, keywords.size());
-        assertTrue("Missing keyword", keywords.contains("WCS"));
-        assertTrue("Missing keyword", keywords.contains("WMS"));
-        assertTrue("Missing keyword", keywords.contains("GEOSERVER"));
+        assertTrue(keywords != null, "Keywords is null");
+        assertEquals(3, keywords.size(), "Incorrect keyword count");
+        assertTrue(keywords.contains("WCS"), "Missing keyword");
+        assertTrue(keywords.contains("WMS"), "Missing keyword");
+        assertTrue(keywords.contains("GEOSERVER"), "Missing keyword");
 
         WCS100ResponsibleParty responsibleParty = service.getResponsibleParty();
-        assertNotNull("ResponsibleParty is null", responsibleParty);
-        assertNotNull("IndividualName is null", responsibleParty.getIndividualName());
-        assertEquals("Incorrect individualName", "Claudius Ptolomaeus", responsibleParty.getIndividualName());
-        assertNotNull("OrganisationName is null", responsibleParty.getOrganisationName());
-        assertEquals("Incorrect organisationName", "The ancient geographes INC",
-            responsibleParty.getOrganisationName());
-        assertNotNull("PostionName is null", responsibleParty.getPositionName());
-        assertEquals("Incorrect positionName", "Chief geographer", responsibleParty.getPositionName());
+        assertNotNull(responsibleParty, "ResponsibleParty is null");
+        assertNotNull(responsibleParty.getIndividualName(), "IndividualName is null");
+        assertEquals("Claudius Ptolomaeus", responsibleParty.getIndividualName(), "Incorrect individualName");
+        assertNotNull(responsibleParty.getOrganisationName(), "OrganisationName is null");
+        assertEquals("The ancient geographes INC", responsibleParty.getOrganisationName(), "Incorrect organisationName");
+        assertNotNull(responsibleParty.getPositionName(), "PostionName is null");
+        assertEquals("Chief geographer", responsibleParty.getPositionName(), "Incorrect positionName");
         OWSContactInfo contactInfo = responsibleParty.getContactInfo();
-        assertNotNull("ContactInfo is null", contactInfo);
+        assertNotNull(contactInfo, "ContactInfo is null");
         OWSAddress address = contactInfo.getAddress();
-        assertNotNull("Address is null", address);
-        assertNotNull("City is null", address.getCity());
-        assertEquals("Incorrect city", "Alexandria", address.getCity());
-        assertNotNull("Country is null", address.getCountries());
-        assertEquals("Incorrect country", "Egypt", address.getCountries().get(0));
-        assertNotNull("ElectronicMailAddress is null", address.getElectronicMailAddresses());
-        assertEquals("Incorrect electronicMailAddress", "claudius.ptolomaeus@gmail.com",
-            address.getElectronicMailAddresses().get(0));
+        assertNotNull(address, "Address is null");
+        assertNotNull(address.getCity(), "City is null");
+        assertEquals("Alexandria", address.getCity(), "Incorrect city");
+        assertNotNull(address.getCountries(), "Country is null");
+        assertEquals("Egypt", address.getCountries().get(0), "Incorrect country");
+        assertNotNull(address.getElectronicMailAddresses(), "ElectronicMailAddress is null");
+        assertEquals("claudius.ptolomaeus@gmail.com", address.getElectronicMailAddresses().get(0), "Incorrect electronicMailAddress");
 
-        assertNotNull("Fees is null", service.getFees());
-        assertEquals("Incorrect country", "NONE", service.getFees());
+        assertNotNull(service.getFees(), "Fees is null");
+        assertEquals("NONE", service.getFees(), "Incorrect country");
 
         List<String> accessConstraints = service.getAccessConstraints();
-        assertNotNull("AccessConstraints is null", accessConstraints);
-        assertEquals("Incorrect number of access constraints", 1, accessConstraints.size());
-        assertEquals("Incorrect accessConstraint", "NONE", accessConstraints.iterator().next());
+        assertNotNull(accessConstraints, "AccessConstraints is null");
+        assertEquals(1, accessConstraints.size(), "Incorrect number of access constraints");
+        assertEquals("NONE", accessConstraints.iterator().next(), "Incorrect accessConstraint");
 
         WCS100Capability capability = caps.getCapability();
-        assertNotNull("Capability is null", capability);
+        assertNotNull(capability, "Capability is null");
 
         WCS100Request request = capability.getRequest();
-        assertNotNull("Request is null", request);
-        assertNotNull("Request descriptions is null", request.getRequests());
-        assertEquals("Incorrect request description count", 3, request.getRequests().size());
-        assertNotNull("GetCapabilities request description is null", request.getRequest("GetCapabilities"));
-        assertNotNull("DescribeCoverage request description is null", request.getRequest("DescribeCoverage"));
-        assertNotNull("GetCoverage request description is null", request.getRequest("GetCoverage"));
+        assertNotNull(request, "Request is null");
+        assertNotNull(request.getRequests(), "Request descriptions is null");
+        assertEquals(3, request.getRequests().size(), "Incorrect request description count");
+        assertNotNull(request.getRequest("GetCapabilities"), "GetCapabilities request description is null");
+        assertNotNull(request.getRequest("DescribeCoverage"), "DescribeCoverage request description is null");
+        assertNotNull(request.getRequest("GetCoverage"), "GetCoverage request description is null");
         checkRequestDescription(request.getRequest("GetCapabilities"), "http://10.0.1.198:8080/geoserver/wcs?");
         checkRequestDescription(request.getRequest("DescribeCoverage"), "http://10.0.1.198:8080/geoserver/wcs?");
         checkRequestDescription(request.getRequest("GetCoverage"), "http://10.0.1.198:8080/geoserver/wcs?");
 
         WCS100Exception exception = capability.getException();
-        assertNotNull("Exception is null", exception);
-        assertNotNull("Exception Formats is null", exception.getFormats());
-        assertEquals("Incorrect exception format count", 1, exception.getFormats().size());
+        assertNotNull(exception, "Exception is null");
+        assertNotNull(exception.getFormats(), "Exception Formats is null");
+        assertEquals(1, exception.getFormats().size(), "Incorrect exception format count");
         Iterator<String> iterator = exception.getFormats().iterator();
-        assertEquals("Incorrect exception format", "application/vnd.ogc.se_xml", iterator.next());
+        assertEquals("application/vnd.ogc.se_xml", iterator.next(), "Incorrect exception format");
 
-        assertNotNull("ContentMetadata is null", caps.getContentMetadata());
+        assertNotNull(caps.getContentMetadata(), "ContentMetadata is null");
         List<WCS100CoverageOfferingBrief> coverages = caps.getContentMetadata().getCoverageOfferings();
-        assertNotNull("CoverageOfferingBriefs is null", coverages);
-        assertEquals("Incorrect CoverageOfferingBrief description count", 7, coverages.size());
+        assertNotNull(coverages, "CoverageOfferingBriefs is null");
+        assertEquals(7, coverages.size(), "Incorrect CoverageOfferingBrief description count");
 
         WCS100CoverageOfferingBrief coverage = coverages.get(0);
-        assertNotNull("CoverageOfferingBrief 0 is null", coverage);
-        assertNotNull("CoverageOfferingBrief 0 description is null", coverage.getDescription());
-        assertEquals("Incorrect CoverageOfferingBrief 0 description", "Generated from arcGridSample",
-            coverage.getDescription());
-        assertNotNull("CoverageOfferingBrief 0 name is null", coverage.getName());
-        assertEquals("Incorrect CoverageOfferingBrief 0 name", "nurc:Arc_Sample",
-            coverage.getName());
-        assertNotNull("CoverageOfferingBrief 0 label is null", coverage.getLabel());
-        assertEquals("Incorrect CoverageOfferingBrief 0 label", "A sample ArcGrid file",
-            coverage.getLabel());
+        assertNotNull(coverage, "CoverageOfferingBrief 0 is null");
+        assertNotNull(coverage.getDescription(), "CoverageOfferingBrief 0 description is null");
+        assertEquals("Generated from arcGridSample", coverage.getDescription(), "Incorrect CoverageOfferingBrief 0 description");
+        assertNotNull(coverage.getName(), "CoverageOfferingBrief 0 name is null");
+        assertEquals("nurc:Arc_Sample", coverage.getName(), "Incorrect CoverageOfferingBrief 0 name");
+        assertNotNull(coverage.getLabel(), "CoverageOfferingBrief 0 label is null");
+        assertEquals("A sample ArcGrid file", coverage.getLabel(), "Incorrect CoverageOfferingBrief 0 label");
         WCS100LonLatEnvelope envelope = coverage.getLonLatEnvelope();
-        assertNotNull("LonLatEnvelope 0 is null", envelope);
-        assertNotNull("LonLatEnvelope 0 positions is null", envelope.getPositions());
-        assertEquals("Incorrect LonLatEnvelope 0 SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName());
-        assertEquals("Incorrect LonLatEnvelope 0 position count", 2, envelope.getPositions().size());
-        assertEquals("Incorrect LonLatEnvelope 0 position 0", "-180.0 -90.0",
-            envelope.getPositions().get(0).getPosString());
-        assertEquals("Incorrect LonLatEnvelope 0 position 1", "180.0 90.0",
-            envelope.getPositions().get(1).getPosString());
+        assertNotNull(envelope, "LonLatEnvelope 0 is null");
+        assertNotNull(envelope.getPositions(), "LonLatEnvelope 0 positions is null");
+        assertEquals("urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName(), "Incorrect LonLatEnvelope 0 SRS");
+        assertEquals(2, envelope.getPositions().size(), "Incorrect LonLatEnvelope 0 position count");
+        assertEquals("-180.0 -90.0", envelope.getPositions().get(0).getPosString(), "Incorrect LonLatEnvelope 0 position 0");
+        assertEquals("180.0 90.0", envelope.getPositions().get(1).getPosString(), "Incorrect LonLatEnvelope 0 position 1");
         keywords = coverage.getKeywords();
-        assertTrue("Keywords is null for CoverageOfferingBrief 0", keywords != null);
-        assertEquals("Incorrect keyword count for CoverageOfferingBrief 0", 3, keywords.size());
-        assertTrue("Missing keyword for CoverageOfferingBrief 0", keywords.contains("WCS"));
-        assertTrue("Missing keyword for CoverageOfferingBrief 0", keywords.contains("arcGridSample"));
-        assertTrue("Missing keyword for CoverageOfferingBrief 0", keywords.contains("arcGridSample_Coverage"));
+        assertTrue(keywords != null, "Keywords is null for CoverageOfferingBrief 0");
+        assertEquals(3, keywords.size(), "Incorrect keyword count for CoverageOfferingBrief 0");
+        assertTrue(keywords.contains("WCS"), "Missing keyword for CoverageOfferingBrief 0");
+        assertTrue(keywords.contains("arcGridSample"), "Missing keyword for CoverageOfferingBrief 0");
+        assertTrue(keywords.contains("arcGridSample_Coverage"), "Missing keyword for CoverageOfferingBrief 0");
 
         coverage = coverages.get(1);
-        assertNotNull("CoverageOfferingBrief 1 is null", coverage);
-        assertNotNull("CoverageOfferingBrief 1 description is null", coverage.getDescription());
-        assertEquals("Incorrect CoverageOfferingBrief 1 description", "Generated from ImageMosaic",
-            coverage.getDescription());
-        assertNotNull("CoverageOfferingBrief 1 name is null", coverage.getName());
-        assertEquals("Incorrect CoverageOfferingBrief 1 name", "WW:aster_v2",
-            coverage.getName());
-        assertNotNull("CoverageOfferingBrief 1 label is null", coverage.getLabel());
-        assertEquals("Incorrect CoverageOfferingBrief 1 label", "ASTER",
-            coverage.getLabel());
+        assertNotNull(coverage, "CoverageOfferingBrief 1 is null");
+        assertNotNull(coverage.getDescription(), "CoverageOfferingBrief 1 description is null");
+        assertEquals("Generated from ImageMosaic", coverage.getDescription(), "Incorrect CoverageOfferingBrief 1 description");
+        assertNotNull(coverage.getName(), "CoverageOfferingBrief 1 name is null");
+        assertEquals("WW:aster_v2", coverage.getName(), "Incorrect CoverageOfferingBrief 1 name");
+        assertNotNull(coverage.getLabel(), "CoverageOfferingBrief 1 label is null");
+        assertEquals("ASTER", coverage.getLabel(), "Incorrect CoverageOfferingBrief 1 label");
         envelope = coverage.getLonLatEnvelope();
-        assertNotNull("LonLatEnvelope 1 is null", envelope);
-        assertNotNull("LonLatEnvelope 1 positions is null", envelope.getPositions());
-        assertEquals("Incorrect LonLatEnvelope 1 SRS", "urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName());
-        assertEquals("Incorrect LonLatEnvelope 1 position count", 2, envelope.getPositions().size());
-        assertEquals("Incorrect LonLatEnvelope 1 position 0", "-180.0001388888889 -83.0001388888889",
-            envelope.getPositions().get(0).getPosString());
-        assertEquals("Incorrect LonLatEnvelope 1 position 1", "180.00013888888887 83.00013888888888",
-            envelope.getPositions().get(1).getPosString());
+        assertNotNull(envelope, "LonLatEnvelope 1 is null");
+        assertNotNull(envelope.getPositions(), "LonLatEnvelope 1 positions is null");
+        assertEquals("urn:ogc:def:crs:OGC:1.3:CRS84", envelope.getSRSName(), "Incorrect LonLatEnvelope 1 SRS");
+        assertEquals(2, envelope.getPositions().size(), "Incorrect LonLatEnvelope 1 position count");
+        assertEquals("-180.0001388888889 -83.0001388888889", envelope.getPositions().get(0).getPosString(), "Incorrect LonLatEnvelope 1 position 0");
+        assertEquals("180.00013888888887 83.00013888888888", envelope.getPositions().get(1).getPosString(), "Incorrect LonLatEnvelope 1 position 1");
         keywords = coverage.getKeywords();
-        assertTrue("Keywords is null for CoverageOfferingBrief 1", keywords != null);
-        assertEquals("Incorrect keyword count for CoverageOfferingBrief 1", 3, keywords.size());
-        assertTrue("Missing keyword for CoverageOfferingBrief 1", keywords.contains("WCS"));
-        assertTrue("Missing keyword for CoverageOfferingBrief 1", keywords.contains("ImageMosaic"));
-        assertTrue("Missing keyword for CoverageOfferingBrief 1", keywords.contains("ASTER"));
+        assertTrue(keywords != null, "Keywords is null for CoverageOfferingBrief 1");
+        assertEquals(3, keywords.size(), "Incorrect keyword count for CoverageOfferingBrief 1");
+        assertTrue(keywords.contains("WCS"), "Missing keyword for CoverageOfferingBrief 1");
+        assertTrue(keywords.contains("ImageMosaic"), "Missing keyword for CoverageOfferingBrief 1");
+        assertTrue(keywords.contains("ASTER"), "Missing keyword for CoverageOfferingBrief 1");
 
         // There are more CoverageOfferingBrief elements in the file, but testing the two above is adequate.
     }
@@ -358,338 +337,322 @@ public class WCSCapabilitiesParsingTest
             e.printStackTrace();
         }
 
-        assertNotNull("Version is null", caps.getVersion());
-        assertEquals("Incorrect version number", "1.1.1", caps.getVersion());
-        assertEquals("Incorrect update sequence", "99", caps.getUpdateSequence());
+        assertNotNull(caps.getVersion(), "Version is null");
+        assertEquals("1.1.1", caps.getVersion(), "Incorrect version number");
+        assertEquals("99", caps.getUpdateSequence(), "Incorrect update sequence");
 
         OWSServiceIdentification serviceIdentification = caps.getServiceIdentification();
-        assertNotNull("Service Identification is null", serviceIdentification);
-        assertEquals("Incorrect Fees", "NONE", serviceIdentification.getFees());
-        assertEquals("Incorrect ServiceType", "WCS", serviceIdentification.getServiceType());
+        assertNotNull(serviceIdentification, "Service Identification is null");
+        assertEquals("NONE", serviceIdentification.getFees(), "Incorrect Fees");
+        assertEquals("WCS", serviceIdentification.getServiceType(), "Incorrect ServiceType");
 
         List<String> titles = serviceIdentification.getTitles();
-        assertTrue("Titles is null", titles != null);
-        assertEquals("Incorrect Title count", 1, titles.size());
+        assertTrue(titles != null, "Titles is null");
+        assertEquals(1, titles.size(), "Incorrect Title count");
         for (String title : titles)
         {
-            assertEquals("Incorrect Title", "Web Coverage Service", title);
+            assertEquals("Web Coverage Service", title, "Incorrect Title");
         }
 
         List<String> abstracts = serviceIdentification.getAbstracts();
-        assertTrue("Abstracts is null", abstracts != null);
-        assertEquals("Incorrect Abstract count", 1, abstracts.size());
+        assertTrue(abstracts != null, "Abstracts is null");
+        assertEquals(1, abstracts.size(), "Incorrect Abstract count");
         for (String abs : abstracts)
         {
-            assertTrue("Incorrect Abstract start", abs.startsWith("This server implements"));
-            assertTrue("Incorrect Abstract end", abs.endsWith("available on WMS also."));
+            assertTrue(abs.startsWith("This server implements"), "Incorrect Abstract start");
+            assertTrue(abs.endsWith("available on WMS also."), "Incorrect Abstract end");
         }
 
         List<String> keywords = serviceIdentification.getKeywords();
-        assertTrue("Keywords is null", keywords != null);
-        assertEquals("Incorrect Keyword count", 3, keywords.size());
-        assertTrue("Missing Keyword", keywords.contains("WCS"));
-        assertTrue("Missing Keyword", keywords.contains("WMS"));
-        assertTrue("Missing Keyword", keywords.contains("GEOSERVER"));
+        assertTrue(keywords != null, "Keywords is null");
+        assertEquals(3, keywords.size(), "Incorrect Keyword count");
+        assertTrue(keywords.contains("WCS"), "Missing Keyword");
+        assertTrue(keywords.contains("WMS"), "Missing Keyword");
+        assertTrue(keywords.contains("GEOSERVER"), "Missing Keyword");
 
         List<String> serviceTypeVersions = serviceIdentification.getServiceTypeVersions();
-        assertTrue("ServiceTypeVersions is null", serviceTypeVersions != null);
-        assertEquals("Incorrect ServiceTypeVersion count", 2, serviceTypeVersions.size());
-        assertTrue("Missing Keyword", serviceTypeVersions.contains("1.1.0"));
-        assertTrue("Missing Keyword", serviceTypeVersions.contains("1.1.1"));
+        assertTrue(serviceTypeVersions != null, "ServiceTypeVersions is null");
+        assertEquals(2, serviceTypeVersions.size(), "Incorrect ServiceTypeVersion count");
+        assertTrue(serviceTypeVersions.contains("1.1.0"), "Missing Keyword");
+        assertTrue(serviceTypeVersions.contains("1.1.1"), "Missing Keyword");
 
         List<String> accessConstraints = serviceIdentification.getAccessConstraints();
-        assertTrue("AccessConstraints is null", accessConstraints != null);
-        assertEquals("Incorrect AccessConstraints count", 1, abstracts.size());
+        assertTrue(accessConstraints != null, "AccessConstraints is null");
+        assertEquals(1, abstracts.size(), "Incorrect AccessConstraints count");
         for (String abs : accessConstraints)
         {
-            assertEquals("Incorrect AccessConstraint", "NONE", abs);
+            assertEquals("NONE", abs, "Incorrect AccessConstraint");
         }
 
         OWSServiceProvider serviceProvider = caps.getServiceProvider();
-        assertTrue("ServiceProvider is null", serviceProvider != null);
-        assertEquals("ProviderName is incorrect", "The ancient geographes INC", serviceProvider.getProviderName());
-        assertEquals("ProviderSite is incorrect", "http://geoserver.org", serviceProvider.getProviderSite());
+        assertTrue(serviceProvider != null, "ServiceProvider is null");
+        assertEquals("The ancient geographes INC", serviceProvider.getProviderName(), "ProviderName is incorrect");
+        assertEquals("http://geoserver.org", serviceProvider.getProviderSite(), "ProviderSite is incorrect");
 
         OWSServiceContact serviceContact = serviceProvider.getServiceContact();
-        assertTrue("ServiceContact is null", serviceContact != null);
-        assertEquals("IndividualName is incorrect", "Claudius Ptolomaeus", serviceContact.getIndividualName());
-        assertEquals("PositionName is incorrect", "Chief geographer", serviceContact.getPositionName());
+        assertTrue(serviceContact != null, "ServiceContact is null");
+        assertEquals("Claudius Ptolomaeus", serviceContact.getIndividualName(), "IndividualName is incorrect");
+        assertEquals("Chief geographer", serviceContact.getPositionName(), "PositionName is incorrect");
 
         OWSContactInfo contactInfo = serviceContact.getContactInfo();
-        assertTrue("ContactInfo is null", contactInfo != null);
-        assertEquals("OnlineResource is incorrect", "http://geoserver.org", contactInfo.getOnlineResource());
+        assertTrue(contactInfo != null, "ContactInfo is null");
+        assertEquals("http://geoserver.org", contactInfo.getOnlineResource(), "OnlineResource is incorrect");
 
         OWSPhone phone = contactInfo.getPhone();
-        assertTrue("Phone is null", phone != null);
+        assertTrue(phone != null, "Phone is null");
 
         OWSAddress address = contactInfo.getAddress();
-        assertTrue("Address is null", address != null);
-        assertEquals("City is incorrect", "Alexandria", address.getCity());
+        assertTrue(address != null, "Address is null");
+        assertEquals("Alexandria", address.getCity(), "City is incorrect");
 
         List<String> countries = address.getCountries();
-        assertTrue("Countries is null", countries != null);
-        assertEquals("Incorrect Country count", 1, countries.size());
+        assertTrue(countries != null, "Countries is null");
+        assertEquals(1, countries.size(), "Incorrect Country count");
         for (String country : countries)
         {
-            assertEquals("Incorrect Country", "Egypt", country);
+            assertEquals("Egypt", country, "Incorrect Country");
         }
 
         List<String> emails = address.getElectronicMailAddresses();
-        assertTrue("ElectronicMailAddress is null", emails != null);
-        assertEquals("Incorrect ElectronicMailAddress count", 1, emails.size());
+        assertTrue(emails != null, "ElectronicMailAddress is null");
+        assertEquals(1, emails.size(), "Incorrect ElectronicMailAddress count");
         for (String email : emails)
         {
-            assertEquals("Incorrect ElectronicMailAddress", "claudius.ptolomaeus@gmail.com", email);
+            assertEquals("claudius.ptolomaeus@gmail.com", email, "Incorrect ElectronicMailAddress");
         }
 
         OWSOperationsMetadata operationsMetadata = caps.getOperationsMetadata();
-        assertTrue("OperationsMetadata is null", operationsMetadata != null);
+        assertTrue(operationsMetadata != null, "OperationsMetadata is null");
 
         List<OWSOperation> operations = operationsMetadata.getOperations();
-        assertTrue("Operations is null", operations != null);
-        assertEquals("Incorrect Operation count", 3, operations.size());
+        assertTrue(operations != null, "Operations is null");
+        assertEquals(3, operations.size(), "Incorrect Operation count");
         Set<String> operationNames = new HashSet<String>(3);
         for (OWSOperation operation : operations)
         {
             operationNames.add(operation.getName());
         }
-        assertTrue("Missing Operation", operationNames.contains("GetCapabilities"));
-        assertTrue("Missing Operation", operationNames.contains("DescribeCoverage"));
-        assertTrue("Missing Operation", operationNames.contains("GetCoverage"));
+        assertTrue(operationNames.contains("GetCapabilities"), "Missing Operation");
+        assertTrue(operationNames.contains("DescribeCoverage"), "Missing Operation");
+        assertTrue(operationNames.contains("GetCoverage"), "Missing Operation");
 
         for (OWSOperation operation : operations)
         {
             List<OWSDCP> dcps = operation.getDCPs();
-            assertTrue("DCPs is null", dcps != null);
-            assertEquals("Incorrect DCP count", 2, dcps.size());
+            assertTrue(dcps != null, "DCPs is null");
+            assertEquals(2, dcps.size(), "Incorrect DCP count");
 
             for (OWSDCP dcp : dcps)
             {
-                assertTrue("DCP HTTP is null", dcp.getHTTP() != null);
+                assertTrue(dcp.getHTTP() != null, "DCP HTTP is null");
             }
         }
 
         String url = operationsMetadata.getGetOperationAddress("Get", "GetCapabilities");
-        assertTrue("Get operation address is null", url != null);
-        assertEquals("Incorrect HTTP address", "http://10.0.1.198:8080/geoserver/wcs?", url);
+        assertTrue(url != null, "Get operation address is null");
+        assertEquals("http://10.0.1.198:8080/geoserver/wcs?", url, "Incorrect HTTP address");
         url = operationsMetadata.getGetOperationAddress("Post", "GetCapabilities");
-        assertTrue("Get operation address is null", url != null);
-        assertEquals("Incorrect HTTP address", "http://10.0.1.198:8080/geoserver/wcs?", url);
+        assertTrue(url != null, "Get operation address is null");
+        assertEquals("http://10.0.1.198:8080/geoserver/wcs?", url, "Incorrect HTTP address");
 
         url = operationsMetadata.getGetOperationAddress("Get", "DescribeCoverage");
-        assertTrue("Get operation address is null", url != null);
-        assertEquals("Incorrect HTTP address", "http://10.0.1.198:8080/geoserver/wcs?", url);
+        assertTrue(url != null, "Get operation address is null");
+        assertEquals("http://10.0.1.198:8080/geoserver/wcs?", url, "Incorrect HTTP address");
         url = operationsMetadata.getGetOperationAddress("Post", "DescribeCoverage");
-        assertTrue("Get operation address is null", url != null);
-        assertEquals("Incorrect HTTP address", "http://10.0.1.198:8080/geoserver/wcs?", url);
+        assertTrue(url != null, "Get operation address is null");
+        assertEquals("http://10.0.1.198:8080/geoserver/wcs?", url, "Incorrect HTTP address");
 
         url = operationsMetadata.getGetOperationAddress("Get", "GetCoverage");
-        assertTrue("Get operation address is null", url != null);
-        assertEquals("Incorrect HTTP address", "http://10.0.1.198:8080/geoserver/wcs?", url);
+        assertTrue(url != null, "Get operation address is null");
+        assertEquals("http://10.0.1.198:8080/geoserver/wcs?", url, "Incorrect HTTP address");
         url = operationsMetadata.getGetOperationAddress("Post", "GetCoverage");
-        assertTrue("Get operation address is null", url != null);
-        assertEquals("Incorrect HTTP address", "http://10.0.1.198:8080/geoserver/wcs?", url);
+        assertTrue(url != null, "Get operation address is null");
+        assertEquals("http://10.0.1.198:8080/geoserver/wcs?", url, "Incorrect HTTP address");
 
         OWSOperation coverageOp = operationsMetadata.getOperation("GetCoverage");
         List<OWSParameter> parameters = coverageOp.getParameters();
-        assertTrue("Operation Parameters is null", parameters != null);
-        assertEquals("Operation Parameter count is incorrect", 1, parameters.size());
+        assertTrue(parameters != null, "Operation Parameters is null");
+        assertEquals(1, parameters.size(), "Operation Parameter count is incorrect");
         for (OWSParameter parameter : parameters)
         {
-            assertTrue("Store parameter is missing", parameter.getName() != null);
-            assertEquals("Incorrect store value", "store", parameter.getName());
+            assertTrue(parameter.getName() != null, "Store parameter is missing");
+            assertEquals("store", parameter.getName(), "Incorrect store value");
 
             List<OWSAllowedValues> allowedValues = parameter.getAllowedValues();
-            assertTrue("AllowedValues is null", allowedValues != null);
-            assertEquals("AllowedValues count is incorrect", 1, allowedValues.size());
+            assertTrue(allowedValues != null, "AllowedValues is null");
+            assertEquals(1, allowedValues.size(), "AllowedValues count is incorrect");
             for (OWSAllowedValues avs : allowedValues)
             {
                 List<String> avals = avs.getValues();
-                assertTrue("AllowedValues values is null", avals != null);
-                assertEquals("Allowed Values values count is incorrect", 2, avals.size());
-                assertTrue("Missing allowed value", avals.contains("True"));
-                assertTrue("Missing allowed value", avals.contains("False"));
+                assertTrue(avals != null, "AllowedValues values is null");
+                assertEquals(2, avals.size(), "Allowed Values values count is incorrect");
+                assertTrue(avals.contains("True"), "Missing allowed value");
+                assertTrue(avals.contains("False"), "Missing allowed value");
             }
         }
 
         List<OWSConstraint> constraints = operationsMetadata.getConstraints();
-        assertTrue("Constraints is null", constraints != null);
-        assertEquals("Incorrect Constraint count", 1, constraints.size());
+        assertTrue(constraints != null, "Constraints is null");
+        assertEquals(1, constraints.size(), "Incorrect Constraint count");
         for (OWSConstraint constraint : constraints)
         {
-            assertEquals("Incorrect Constraint", "PostEncoding", constraint.getName());
+            assertEquals("PostEncoding", constraint.getName(), "Incorrect Constraint");
 
             List<OWSAllowedValues> allowedValues = constraint.getAllowedValues();
-            assertTrue("AllowedValues is null", allowedValues != null);
-            assertEquals("AllowedValues count is incorrect", 1, allowedValues.size());
+            assertTrue(allowedValues != null, "AllowedValues is null");
+            assertEquals(1, allowedValues.size(), "AllowedValues count is incorrect");
             for (OWSAllowedValues avs : allowedValues)
             {
                 List<String> avals = avs.getValues();
-                assertTrue("AllowedValues values is null", avals != null);
-                assertEquals("Allowed Values values count is incorrect", 1, avals.size());
-                assertTrue("Missing allowed value", avals.contains("XML"));
+                assertTrue(avals != null, "AllowedValues values is null");
+                assertEquals(1, avals.size(), "Allowed Values values count is incorrect");
+                assertTrue(avals.contains("XML"), "Missing allowed value");
             }
         }
 
         WCSContents contents = caps.getContents();
-        assertTrue("WCS Contents is missing", contents != null);
+        assertTrue(contents != null, "WCS Contents is missing");
 
         List<WCSCoverageSummary> coverageSummaries = contents.getCoverageSummaries();
-        assertTrue("WCS CoverageSummarys are missing", coverageSummaries != null);
-        assertEquals("WCS CoverageSummarys count is incorrect", 7, coverageSummaries.size());
+        assertTrue(coverageSummaries != null, "WCS CoverageSummarys are missing");
+        assertEquals(7, coverageSummaries.size(), "WCS CoverageSummarys count is incorrect");
 
         Set<String> identifiers = new HashSet<String>(coverageSummaries.size());
         for (WCSCoverageSummary summary : coverageSummaries)
         {
             identifiers.add(summary.getIdentifier());
         }
-        assertTrue("Missing CoverageSummary Identifier", identifiers.contains("Arc_Sample"));
-        assertTrue("Missing CoverageSummary Identifier", identifiers.contains("aster_v2"));
-        assertTrue("Missing CoverageSummary Identifier", identifiers.contains("FAAChartsCroppedReprojected"));
-        assertTrue("Missing CoverageSummary Identifier", identifiers.contains("NASA_SRTM30_900m_Tiled"));
-        assertTrue("Missing CoverageSummary Identifier", identifiers.contains("Img_Sample"));
-        assertTrue("Missing CoverageSummary Identifier", identifiers.contains("mosaic"));
-        assertTrue("Missing CoverageSummary Identifier", identifiers.contains("sfdem"));
+        assertTrue(identifiers.contains("Arc_Sample"), "Missing CoverageSummary Identifier");
+        assertTrue(identifiers.contains("aster_v2"), "Missing CoverageSummary Identifier");
+        assertTrue(identifiers.contains("FAAChartsCroppedReprojected"), "Missing CoverageSummary Identifier");
+        assertTrue(identifiers.contains("NASA_SRTM30_900m_Tiled"), "Missing CoverageSummary Identifier");
+        assertTrue(identifiers.contains("Img_Sample"), "Missing CoverageSummary Identifier");
+        assertTrue(identifiers.contains("mosaic"), "Missing CoverageSummary Identifier");
+        assertTrue(identifiers.contains("sfdem"), "Missing CoverageSummary Identifier");
 
         for (WCSCoverageSummary summary : coverageSummaries)
         {
             if (summary.getIdentifier().equals("Arc_Sample"))
             {
-                assertEquals("CoverageSummary Title is incorrect", "A sample ArcGrid file", summary.getTitle());
-                assertEquals("CoverageSummary Abstract is incorrect", "Generated from arcGridSample",
-                    summary.getAbstract());
+                assertEquals("A sample ArcGrid file", summary.getTitle(), "CoverageSummary Title is incorrect");
+                assertEquals("Generated from arcGridSample", summary.getAbstract(), "CoverageSummary Abstract is incorrect");
 
                 keywords = summary.getKeywords();
-                assertTrue("Keywords is null", keywords != null);
-                assertEquals("Incorrect Keyword count", 3, keywords.size());
-                assertTrue("Missing Keyword", keywords.contains("WCS"));
-                assertTrue("Missing Keyword", keywords.contains("arcGridSample"));
-                assertTrue("Missing Keyword", keywords.contains("arcGridSample_Coverage"));
+                assertTrue(keywords != null, "Keywords is null");
+                assertEquals(3, keywords.size(), "Incorrect Keyword count");
+                assertTrue(keywords.contains("WCS"), "Missing Keyword");
+                assertTrue(keywords.contains("arcGridSample"), "Missing Keyword");
+                assertTrue(keywords.contains("arcGridSample_Coverage"), "Missing Keyword");
 
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
-                assertTrue("BoundingBox is null", bbox != null);
-                assertEquals("LowerCorner is incorrect", "-180.0 -90.0", bbox.getLowerCorner());
-                assertEquals("UpperCorner is incorrect", "180.0 90.0", bbox.getUpperCorner());
+                assertTrue(bbox != null, "BoundingBox is null");
+                assertEquals("-180.0 -90.0", bbox.getLowerCorner(), "LowerCorner is incorrect");
+                assertEquals("180.0 90.0", bbox.getUpperCorner(), "UpperCorner is incorrect");
             }
             else if (summary.getIdentifier().equals("aster_v2"))
             {
-                assertEquals("CoverageSummary Title is incorrect", "ASTER", summary.getTitle());
-                assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                    summary.getAbstract());
+                assertEquals("ASTER", summary.getTitle(), "CoverageSummary Title is incorrect");
+                assertEquals("Generated from ImageMosaic", summary.getAbstract(), "CoverageSummary Abstract is incorrect");
 
                 keywords = summary.getKeywords();
-                assertTrue("Keywords is null", keywords != null);
-                assertEquals("Incorrect Keyword count", 3, keywords.size());
-                assertTrue("Missing Keyword", keywords.contains("WCS"));
-                assertTrue("Missing Keyword", keywords.contains("ImageMosaic"));
-                assertTrue("Missing Keyword", keywords.contains("ASTER"));
+                assertTrue(keywords != null, "Keywords is null");
+                assertEquals(3, keywords.size(), "Incorrect Keyword count");
+                assertTrue(keywords.contains("WCS"), "Missing Keyword");
+                assertTrue(keywords.contains("ImageMosaic"), "Missing Keyword");
+                assertTrue(keywords.contains("ASTER"), "Missing Keyword");
 
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
-                assertTrue("BoundingBox is null", bbox != null);
-                assertEquals("LowerCorner is incorrect", "-180.0001388888889 -83.0001388888889",
-                    bbox.getLowerCorner());
-                assertEquals("UpperCorner is incorrect", "180.00013888888887 83.00013888888888",
-                    bbox.getUpperCorner());
+                assertTrue(bbox != null, "BoundingBox is null");
+                assertEquals("-180.0001388888889 -83.0001388888889", bbox.getLowerCorner(), "LowerCorner is incorrect");
+                assertEquals("180.00013888888887 83.00013888888888", bbox.getUpperCorner(), "UpperCorner is incorrect");
             }
             else if (summary.getIdentifier().equals("FAAChartsCroppedReprojected"))
             {
-                assertEquals("CoverageSummary Title is incorrect", "FAAChartsCroppedReprojected",
-                    summary.getTitle());
-                assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                    summary.getAbstract());
+                assertEquals("FAAChartsCroppedReprojected", summary.getTitle(), "CoverageSummary Title is incorrect");
+                assertEquals("Generated from ImageMosaic", summary.getAbstract(), "CoverageSummary Abstract is incorrect");
 
                 keywords = summary.getKeywords();
-                assertTrue("Keywords is null", keywords != null);
-                assertEquals("Incorrect Keyword count", 3, keywords.size());
-                assertTrue("Missing Keyword", keywords.contains("WCS"));
-                assertTrue("Missing Keyword", keywords.contains("ImageMosaic"));
-                assertTrue("Missing Keyword", keywords.contains("FAAChartsCroppedReprojected"));
+                assertTrue(keywords != null, "Keywords is null");
+                assertEquals(3, keywords.size(), "Incorrect Keyword count");
+                assertTrue(keywords.contains("WCS"), "Missing Keyword");
+                assertTrue(keywords.contains("ImageMosaic"), "Missing Keyword");
+                assertTrue(keywords.contains("FAAChartsCroppedReprojected"), "Missing Keyword");
 
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
-                assertTrue("BoundingBox is null", bbox != null);
-                assertEquals("LowerCorner is incorrect", "-173.4897609604564 50.896520942672375",
-                    bbox.getLowerCorner());
-                assertEquals("UpperCorner is incorrect", "178.65474058869506 72.33574978977076",
-                    bbox.getUpperCorner());
+                assertTrue(bbox != null, "BoundingBox is null");
+                assertEquals("-173.4897609604564 50.896520942672375", bbox.getLowerCorner(), "LowerCorner is incorrect");
+                assertEquals("178.65474058869506 72.33574978977076", bbox.getUpperCorner(), "UpperCorner is incorrect");
             }
             else if (summary.getIdentifier().equals("NASA_SRTM30_900m_Tiled"))
             {
-                assertEquals("CoverageSummary Title is incorrect", "NASA_SRTM30_900m_Tiled", summary.getTitle());
-                assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                    summary.getAbstract());
+                assertEquals("NASA_SRTM30_900m_Tiled", summary.getTitle(), "CoverageSummary Title is incorrect");
+                assertEquals("Generated from ImageMosaic", summary.getAbstract(), "CoverageSummary Abstract is incorrect");
 
                 keywords = summary.getKeywords();
-                assertTrue("Keywords is null", keywords != null);
-                assertEquals("Incorrect Keyword count", 3, keywords.size());
-                assertTrue("Missing Keyword", keywords.contains("WCS"));
-                assertTrue("Missing Keyword", keywords.contains("ImageMosaic"));
-                assertTrue("Missing Keyword", keywords.contains("NASA_SRTM30_900m_Tiled"));
+                assertTrue(keywords != null, "Keywords is null");
+                assertEquals(3, keywords.size(), "Incorrect Keyword count");
+                assertTrue(keywords.contains("WCS"), "Missing Keyword");
+                assertTrue(keywords.contains("ImageMosaic"), "Missing Keyword");
+                assertTrue(keywords.contains("NASA_SRTM30_900m_Tiled"), "Missing Keyword");
 
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
-                assertTrue("BoundingBox is null", bbox != null);
-                assertEquals("LowerCorner is incorrect", "-180.0 -90.0", bbox.getLowerCorner());
-                assertEquals("UpperCorner is incorrect", "180.0 90.0", bbox.getUpperCorner());
+                assertTrue(bbox != null, "BoundingBox is null");
+                assertEquals("-180.0 -90.0", bbox.getLowerCorner(), "LowerCorner is incorrect");
+                assertEquals("180.0 90.0", bbox.getUpperCorner(), "UpperCorner is incorrect");
             }
             else if (summary.getIdentifier().equals("Img_Sample"))
             {
-                assertEquals("CoverageSummary Title is incorrect", "North America sample imagery",
-                    summary.getTitle());
-                assertEquals("CoverageSummary Abstract is incorrect", "A very rough imagery of North America",
-                    summary.getAbstract());
+                assertEquals("North America sample imagery", summary.getTitle(), "CoverageSummary Title is incorrect");
+                assertEquals("A very rough imagery of North America", summary.getAbstract(), "CoverageSummary Abstract is incorrect");
 
                 keywords = summary.getKeywords();
-                assertTrue("Keywords is null", keywords != null);
-                assertEquals("Incorrect Keyword count", 3, keywords.size());
-                assertTrue("Missing Keyword", keywords.contains("WCS"));
-                assertTrue("Missing Keyword", keywords.contains("worldImageSample"));
-                assertTrue("Missing Keyword", keywords.contains("worldImageSample_Coverage"));
+                assertTrue(keywords != null, "Keywords is null");
+                assertEquals(3, keywords.size(), "Incorrect Keyword count");
+                assertTrue(keywords.contains("WCS"), "Missing Keyword");
+                assertTrue(keywords.contains("worldImageSample"), "Missing Keyword");
+                assertTrue(keywords.contains("worldImageSample_Coverage"), "Missing Keyword");
 
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
-                assertTrue("BoundingBox is null", bbox != null);
-                assertEquals("LowerCorner is incorrect", "-130.85168 20.7052", bbox.getLowerCorner());
-                assertEquals("UpperCorner is incorrect", "-62.0054 54.1141", bbox.getUpperCorner());
+                assertTrue(bbox != null, "BoundingBox is null");
+                assertEquals("-130.85168 20.7052", bbox.getLowerCorner(), "LowerCorner is incorrect");
+                assertEquals("-62.0054 54.1141", bbox.getUpperCorner(), "UpperCorner is incorrect");
             }
             else if (summary.getIdentifier().equals("mosaic"))
             {
-                assertEquals("CoverageSummary Title is incorrect", "mosaic", summary.getTitle());
-                assertEquals("CoverageSummary Abstract is incorrect", "Generated from ImageMosaic",
-                    summary.getAbstract());
+                assertEquals("mosaic", summary.getTitle(), "CoverageSummary Title is incorrect");
+                assertEquals("Generated from ImageMosaic", summary.getAbstract(), "CoverageSummary Abstract is incorrect");
 
                 keywords = summary.getKeywords();
-                assertTrue("Keywords is null", keywords != null);
-                assertEquals("Incorrect Keyword count", 3, keywords.size());
-                assertTrue("Missing Keyword", keywords.contains("WCS"));
-                assertTrue("Missing Keyword", keywords.contains("ImageMosaic"));
-                assertTrue("Missing Keyword", keywords.contains("mosaic"));
+                assertTrue(keywords != null, "Keywords is null");
+                assertEquals(3, keywords.size(), "Incorrect Keyword count");
+                assertTrue(keywords.contains("WCS"), "Missing Keyword");
+                assertTrue(keywords.contains("ImageMosaic"), "Missing Keyword");
+                assertTrue(keywords.contains("mosaic"), "Missing Keyword");
 
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
-                assertTrue("BoundingBox is null", bbox != null);
-                assertEquals("LowerCorner is incorrect", "6.346 36.492", bbox.getLowerCorner());
-                assertEquals("UpperCorner is incorrect", "20.83 46.591", bbox.getUpperCorner());
+                assertTrue(bbox != null, "BoundingBox is null");
+                assertEquals("6.346 36.492", bbox.getLowerCorner(), "LowerCorner is incorrect");
+                assertEquals("20.83 46.591", bbox.getUpperCorner(), "UpperCorner is incorrect");
             }
             else if (summary.getIdentifier().equals("sfdem"))
             {
-                assertEquals("CoverageSummary Title is incorrect",
-                    "sfdem is a Tagged Image File Format with Geographic information", summary.getTitle());
-                assertEquals("CoverageSummary Abstract is incorrect", "Generated from sfdem",
-                    summary.getAbstract());
+                assertEquals("sfdem is a Tagged Image File Format with Geographic information", summary.getTitle(), "CoverageSummary Title is incorrect");
+                assertEquals("Generated from sfdem", summary.getAbstract(), "CoverageSummary Abstract is incorrect");
 
                 keywords = summary.getKeywords();
-                assertTrue("Keywords is null", keywords != null);
-                assertEquals("Incorrect Keyword count", 3, keywords.size());
-                assertTrue("Missing Keyword", keywords.contains("WCS"));
-                assertTrue("Missing Keyword", keywords.contains("sfdem"));
+                assertTrue(keywords != null, "Keywords is null");
+                assertEquals(3, keywords.size(), "Incorrect Keyword count");
+                assertTrue(keywords.contains("WCS"), "Missing Keyword");
+                assertTrue(keywords.contains("sfdem"), "Missing Keyword");
 
                 OWSWGS84BoundingBox bbox = summary.getBoundingBox();
-                assertTrue("BoundingBox is null", bbox != null);
-                assertEquals("LowerCorner is incorrect", "-103.87108701853181 44.370187074132616",
-                    bbox.getLowerCorner());
-                assertEquals("UpperCorner is incorrect", "-103.62940739432703 44.5016011535299",
-                    bbox.getUpperCorner());
+                assertTrue(bbox != null, "BoundingBox is null");
+                assertEquals("-103.87108701853181 44.370187074132616", bbox.getLowerCorner(), "LowerCorner is incorrect");
+                assertEquals("-103.62940739432703 44.5016011535299", bbox.getUpperCorner(), "UpperCorner is incorrect");
             }
             else
             {
-                assertTrue("Unrecognized WCS CoverageSummary", false);
+                assertTrue(false, "Unrecognized WCS CoverageSummary");
             }
         }
     }
@@ -698,25 +661,25 @@ public class WCSCapabilitiesParsingTest
     {
         List<WCS100DCPType> dcpTypes = requestDescription.getDCPTypes();
 
-        assertNotNull("DCPTypes is null for " + requestDescription.getRequestName(), dcpTypes);
-        assertEquals("Incorrect DCPTypes count for " + requestDescription.getRequestName(), 2, dcpTypes.size());
+        assertNotNull(dcpTypes, "DCPTypes is null for " + requestDescription.getRequestName());
+        assertEquals(2, dcpTypes.size(), "Incorrect DCPTypes count for " + requestDescription.getRequestName());
 
         String get = null;
         String post = null;
         for (WCS100DCPType dcpType : dcpTypes)
         {
             WCS100HTTP http = dcpType.getHTTP();
-            assertNotNull("HTTP is null for request name " + requestDescription.getRequestName(), http);
+            assertNotNull(http, "HTTP is null for request name " + requestDescription.getRequestName());
             if (http.getGetAddress() != null)
                 get = http.getGetAddress();
             if (http.getPostAddress() != null)
                 post = http.getPostAddress();
         }
 
-        assertNotNull("Get address is null for request name " + requestDescription.getRequestName(), get);
-        assertNotNull("Post address is null for request name " + requestDescription.getRequestName(), post);
+        assertNotNull(get, "Get address is null for request name " + requestDescription.getRequestName());
+        assertNotNull(post, "Post address is null for request name " + requestDescription.getRequestName());
 
-        assertEquals("Get address is incorrect for " + requestDescription.getRequestName(), url, get);
-        assertEquals("Post address is incorrect for " + requestDescription.getRequestName(), url, post);
+        assertEquals(url, get, "Get address is incorrect for " + requestDescription.getRequestName());
+        assertEquals(url, post, "Post address is incorrect for " + requestDescription.getRequestName());
     }
 }

@@ -28,13 +28,9 @@
 
 package gov.nasa.worldwind.util;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AbsentResourceListTest
 {
     /** Tests addition of resources to the list. */
@@ -136,7 +132,7 @@ public class AbsentResourceListTest
         AbsentResourceList list = new AbsentResourceList(maxListSize, 2, 250, 60000);
 
         markResourcesAbsent(list, maxListSize + 1); // should eject first resource, 0, from list
-        assertTrue("Oldest resource not considered absent ", !list.isResourceAbsent(0));
+        assertTrue(!list.isResourceAbsent(0), "Oldest resource not considered absent ");
     }
 
     private static void addResources(AbsentResourceList list, int numResources)
@@ -156,7 +152,7 @@ public class AbsentResourceListTest
     {
         for (int i = 0; i < numResources; i++)
         {
-            assertTrue("Resource " + i + " not considered absent ", list.isResourceAbsent(i));
+            assertTrue(list.isResourceAbsent(i), "Resource " + i + " not considered absent ");
         }
     }
 
@@ -164,7 +160,7 @@ public class AbsentResourceListTest
     {
         for (int i = 0; i < numResources; i++)
         {
-            assertTrue("Resource " + i + " considered absent ", !list.isResourceAbsent(i));
+            assertTrue(!list.isResourceAbsent(i), "Resource " + i + " considered absent ");
         }
     }
 }

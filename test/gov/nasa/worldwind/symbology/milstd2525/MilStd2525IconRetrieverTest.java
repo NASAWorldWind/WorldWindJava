@@ -30,15 +30,11 @@ package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.symbology.IconRetriever;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.awt.image.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class MilStd2525IconRetrieverTest
 {
     // TODO: test all possible values for Standard Identity and Status
@@ -224,16 +220,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : WarfightingUnknownFunctionIDs)
         {
             img = symGen.createIcon("SUZP" + s + "-----", params);
-            assertNotNull("Icon " + "suzp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "suzp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SFZP" + s + "-----", params);
-            assertNotNull("Icon " + "sfzp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "sfzp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SNZP" + s + "-----", params);
-            assertNotNull("Icon " + "snzp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "snzp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SHZP" + s + "-----", params);
-            assertNotNull("Icon " + "shzp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "shzp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -247,16 +243,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : WarfightingSpaceFunctionIDs)
         {
             img = symGen.createIcon("SUPP" + s + "-----", params);
-            assertNotNull("Icon " + "supp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "supp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SFPP" + s + "-----", params);
-            assertNotNull("Icon " + "sfpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "sfpp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SNPP" + s + "-----", params);
-            assertNotNull("Icon " + "snpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "snpp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SHPP" + s + "-----", params);
-            assertNotNull("Icon " + "shpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "shpp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -270,16 +266,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : WarfightingAirFunctionIDs)
         {
             img = symGen.createIcon("SUAP" + s + "-----", params);
-            assertNotNull("Icon " + "suap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "suap" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SFAP" + s + "-----", params);
-            assertNotNull("Icon " + "sfap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "sfap" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SNAP" + s + "-----", params);
-            assertNotNull("Icon " + "snap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "snap" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SHAP" + s + "-----", params);
-            assertNotNull("Icon " + "shap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "shap" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -297,16 +293,16 @@ public class MilStd2525IconRetrieverTest
                 padding = "H----";
 
             img = symGen.createIcon("SUGP" + s + padding, params);
-            assertNotNull("Icon " + "sugp" + s.toLowerCase() + padding + " not found.", img);
+            assertNotNull(img, "Icon " + "sugp" + s.toLowerCase() + padding + " not found.");
 
             img = symGen.createIcon("SFGP" + s + padding, params);
-            assertNotNull("Icon " + "sfgp" + s.toLowerCase() + padding + " not found.", img);
+            assertNotNull(img, "Icon " + "sfgp" + s.toLowerCase() + padding + " not found.");
 
             img = symGen.createIcon("SNGP" + s + padding, params);
-            assertNotNull("Icon " + "sngp" + s.toLowerCase() + padding + " not found.", img);
+            assertNotNull(img, "Icon " + "sngp" + s.toLowerCase() + padding + " not found.");
 
             img = symGen.createIcon("SHGP" + s + padding, params);
-            assertNotNull("Icon " + "shgp" + s.toLowerCase() + padding + " not found.", img);
+            assertNotNull(img, "Icon " + "shgp" + s.toLowerCase() + padding + " not found.");
         }
     }
 
@@ -320,16 +316,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : WarfightingSeaSurfaceFunctionIDs)
         {
             img = symGen.createIcon("SUSP" + s + "-----", params);
-            assertNotNull("Icon " + "susp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "susp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SFSP" + s + "-----", params);
-            assertNotNull("Icon " + "sfsp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "sfsp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SNSP" + s + "-----", params);
-            assertNotNull("Icon " + "snsp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "snsp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SHSP" + s + "-----", params);
-            assertNotNull("Icon " + "shsp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "shsp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -343,16 +339,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : WarfightingSubsurfaceFunctionIDs)
         {
             img = symGen.createIcon("SUUP" + s + "-----", params);
-            assertNotNull("Icon " + "suup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "suup" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SFUP" + s + "-----", params);
-            assertNotNull("Icon " + "sfup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "sfup" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SNUP" + s + "-----", params);
-            assertNotNull("Icon " + "snup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "snup" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SHUP" + s + "-----", params);
-            assertNotNull("Icon " + "shup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "shup" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -366,16 +362,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : WarfightingSOFFunctionIDs)
         {
             img = symGen.createIcon("SUFP" + s + "-----", params);
-            assertNotNull("Icon " + "sufp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "sufp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SFFP" + s + "-----", params);
-            assertNotNull("Icon " + "sffp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "sffp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SNFP" + s + "-----", params);
-            assertNotNull("Icon " + "snfp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "snfp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("SHFP" + s + "-----", params);
-            assertNotNull("Icon " + "shfp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "shfp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -395,16 +391,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : SignalsIntelligenceSpaceFunctionIDs)
         {
             img = symGen.createIcon("IUPP" + s + "-----", params);
-            assertNotNull("Icon " + "iupp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "iupp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IFPP" + s + "-----", params);
-            assertNotNull("Icon " + "ifpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ifpp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("INPP" + s + "-----", params);
-            assertNotNull("Icon " + "inpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "inpp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IHPP" + s + "-----", params);
-            assertNotNull("Icon " + "ihpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ihpp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -418,16 +414,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : SignalsIntelligenceAirFunctionIDs)
         {
             img = symGen.createIcon("IUAP" + s + "-----", params);
-            assertNotNull("Icon " + "iuap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "iuap" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IFAP" + s + "-----", params);
-            assertNotNull("Icon " + "ifap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ifap" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("INAP" + s + "-----", params);
-            assertNotNull("Icon " + "inap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "inap" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IHAP" + s + "-----", params);
-            assertNotNull("Icon " + "ihap" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ihap" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -441,16 +437,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : SignalsIntelligenceGroundFunctionIDs)
         {
             img = symGen.createIcon("IUGP" + s + "-----", params);
-            assertNotNull("Icon " + "iugp" + s.toLowerCase() + "-----" + " not found.", img);
+            assertNotNull(img, "Icon " + "iugp" + s.toLowerCase() + "-----" + " not found.");
 
             img = symGen.createIcon("IFGP" + s + "-----", params);
-            assertNotNull("Icon " + "ifgp" + s.toLowerCase() + "-----" + " not found.", img);
+            assertNotNull(img, "Icon " + "ifgp" + s.toLowerCase() + "-----" + " not found.");
 
             img = symGen.createIcon("INGP" + s + "-----", params);
-            assertNotNull("Icon " + "ingp" + s.toLowerCase() + "-----" + " not found.", img);
+            assertNotNull(img, "Icon " + "ingp" + s.toLowerCase() + "-----" + " not found.");
 
             img = symGen.createIcon("IHGP" + s + "-----", params);
-            assertNotNull("Icon " + "ihgp" + s.toLowerCase() + "-----" + " not found.", img);
+            assertNotNull(img, "Icon " + "ihgp" + s.toLowerCase() + "-----" + " not found.");
         }
     }
 
@@ -464,16 +460,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : SignalsIntelligenceSeaSurfaceFunctionIDs)
         {
             img = symGen.createIcon("IUSP" + s + "-----", params);
-            assertNotNull("Icon " + "iusp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "iusp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IFSP" + s + "-----", params);
-            assertNotNull("Icon " + "ifsp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ifsp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("INSP" + s + "-----", params);
-            assertNotNull("Icon " + "insp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "insp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IHSP" + s + "-----", params);
-            assertNotNull("Icon " + "ihsp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ihsp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -487,16 +483,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : SignalsIntelligenceSubsurfaceFunctionIDs)
         {
             img = symGen.createIcon("IUUP" + s + "-----", params);
-            assertNotNull("Icon " + "iuup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "iuup" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IFUP" + s + "-----", params);
-            assertNotNull("Icon " + "ifup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ifup" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("INUP" + s + "-----", params);
-            assertNotNull("Icon " + "inup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "inup" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("IHUP" + s + "-----", params);
-            assertNotNull("Icon " + "ihup" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ihup" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -516,16 +512,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : StabilityOperationsViolentActivitiesFunctionIDs)
         {
             img = symGen.createIcon("OUVP" + s + "-----", params);
-            assertNotNull("Icon " + "ouvp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ouvp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OFVP" + s + "-----", params);
-            assertNotNull("Icon " + "ofvp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ofvp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ONVP" + s + "-----", params);
-            assertNotNull("Icon " + "onvp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "onvp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OHVP" + s + "-----", params);
-            assertNotNull("Icon " + "ohvp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ohvp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -539,16 +535,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : StabilityOperationsLocationsFunctionIDs)
         {
             img = symGen.createIcon("OULP" + s + "-----", params);
-            assertNotNull("Icon " + "oulp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "oulp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OFLP" + s + "-----", params);
-            assertNotNull("Icon " + "oflp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "oflp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ONLP" + s + "-----", params);
-            assertNotNull("Icon " + "onlp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "onlp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OHLP" + s + "-----", params);
-            assertNotNull("Icon " + "ohlp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ohlp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -562,16 +558,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : StabilityOperationsOperationsFunctionIDs)
         {
             img = symGen.createIcon("OUOP" + s + "-----", params);
-            assertNotNull("Icon " + "ouop" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ouop" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OFOP" + s + "-----", params);
-            assertNotNull("Icon " + "ofop" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ofop" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ONOP" + s + "-----", params);
-            assertNotNull("Icon " + "onop" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "onop" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OHOP" + s + "-----", params);
-            assertNotNull("Icon " + "ohop" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ohop" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -585,16 +581,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : StabilityOperationsItemsFunctionIDs)
         {
             img = symGen.createIcon("OUIP" + s + "-----", params);
-            assertNotNull("Icon " + "ouip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ouip" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OFIP" + s + "-----", params);
-            assertNotNull("Icon " + "ofip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ofip" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ONIP" + s + "-----", params);
-            assertNotNull("Icon " + "onip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "onip" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OHIP" + s + "-----", params);
-            assertNotNull("Icon " + "ohip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ohip" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -608,16 +604,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : StabilityOperationsIndividualFunctionIDs)
         {
             img = symGen.createIcon("OUPP" + s + "-----", params);
-            assertNotNull("Icon " + "oupp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "oupp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OFPP" + s + "-----", params);
-            assertNotNull("Icon " + "ofpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ofpp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ONPP" + s + "-----", params);
-            assertNotNull("Icon " + "onpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "onpp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OHPP" + s + "-----", params);
-            assertNotNull("Icon " + "ohpp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ohpp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -631,16 +627,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : StabilityOperationsNonmilitaryFunctionIDs)
         {
             img = symGen.createIcon("OUGP" + s + "-----", params);
-            assertNotNull("Icon " + "ougp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ougp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OFGP" + s + "-----", params);
-            assertNotNull("Icon " + "ofgp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ofgp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ONGP" + s + "-----", params);
-            assertNotNull("Icon " + "ongp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ongp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OHGP" + s + "-----", params);
-            assertNotNull("Icon " + "ohgp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ohgp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -654,16 +650,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : StabilityOperationsRapeFunctionIDs)
         {
             img = symGen.createIcon("OURP" + s + "-----", params);
-            assertNotNull("Icon " + "ourp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ourp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OFRP" + s + "-----", params);
-            assertNotNull("Icon " + "ofrp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ofrp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ONRP" + s + "-----", params);
-            assertNotNull("Icon " + "onrp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "onrp" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("OHRP" + s + "-----", params);
-            assertNotNull("Icon " + "ohrp" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ohrp" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -683,16 +679,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : EmergencyManagementIncidentsFunctionIDs)
         {
             img = symGen.createIcon("EUIP" + s + "-----", params);
-            assertNotNull("Icon " + "euip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "euip" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("EFIP" + s + "-----", params);
-            assertNotNull("Icon " + "efip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "efip" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("ENIP" + s + "-----", params);
-            assertNotNull("Icon " + "enip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "enip" + s.toLowerCase() + "----- not found.");
 
             img = symGen.createIcon("EHIP" + s + "-----", params);
-            assertNotNull("Icon " + "ehip" + s.toLowerCase() + "----- not found.", img);
+            assertNotNull(img, "Icon " + "ehip" + s.toLowerCase() + "----- not found.");
         }
     }
 
@@ -706,16 +702,16 @@ public class MilStd2525IconRetrieverTest
 //            for (String s : EmergencyManagementNaturalEventsFunctionIDs)
 //            {
 //                img = symGen.createIcon("EUNP" + s + "-----", params);
-//                assertNotNull("Icon " + "eunp" + s.toLowerCase() + "----- not found.", img);
+//                assertNotNull(img, "Icon " + "eunp" + s.toLowerCase() + "----- not found.");
 //
 //                img = symGen.createIcon("EFNP" + s + "-----", params);
-//                assertNotNull("Icon " + "efnp" + s.toLowerCase() + "----- not found.", img);
+//                assertNotNull(img, "Icon " + "efnp" + s.toLowerCase() + "----- not found.");
 //
 //                img = symGen.createIcon("ENNP" + s + "-----", params);
-//                assertNotNull("Icon " + "ennp" + s.toLowerCase() + "----- not found.", img);
+//                assertNotNull(img, "Icon " + "ennp" + s.toLowerCase() + "----- not found.");
 //
 //                img = symGen.createIcon("EHNP" + s + "-----", params);
-//                assertNotNull("Icon " + "ehnp" + s.toLowerCase() + "----- not found.", img);
+//                assertNotNull(img, "Icon " + "ehnp" + s.toLowerCase() + "----- not found.");
 //            }
 //        }
 
@@ -729,16 +725,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : EmergencyManagementOperationsFunctionIDs)
         {
             img = symGen.createIcon("EUOP" + s, params);
-            assertNotNull("Icon " + "euop" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "euop" + s.toLowerCase() + " not found.");
 
             img = symGen.createIcon("EFOP" + s, params);
-            assertNotNull("Icon " + "efop" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "efop" + s.toLowerCase() + " not found.");
 
             img = symGen.createIcon("ENOP" + s, params);
-            assertNotNull("Icon " + "enop" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "enop" + s.toLowerCase() + " not found.");
 
             img = symGen.createIcon("EHOP" + s, params);
-            assertNotNull("Icon " + "ehop" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "ehop" + s.toLowerCase() + " not found.");
         }
     }
 
@@ -752,16 +748,16 @@ public class MilStd2525IconRetrieverTest
         for (String s : EmergencyManagementInfrastructureFunctionIDs)
         {
             img = symGen.createIcon("EUFP" + s, params);
-            assertNotNull("Icon " + "eufp" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "eufp" + s.toLowerCase() + " not found.");
 
             img = symGen.createIcon("EFFP" + s, params);
-            assertNotNull("Icon " + "effp" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "effp" + s.toLowerCase() + " not found.");
 
             img = symGen.createIcon("ENFP" + s, params);
-            assertNotNull("Icon " + "enfp" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "enfp" + s.toLowerCase() + " not found.");
 
             img = symGen.createIcon("EHFP" + s, params);
-            assertNotNull("Icon " + "ehfp" + s.toLowerCase() + " not found.", img);
+            assertNotNull(img, "Icon " + "ehfp" + s.toLowerCase() + " not found.");
         }
     }
 

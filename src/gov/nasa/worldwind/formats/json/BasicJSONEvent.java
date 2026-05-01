@@ -28,7 +28,7 @@
 package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.util.Logging;
-import org.codehaus.jackson.*;
+import com.fasterxml.jackson.core.*;
 
 import java.io.IOException;
 

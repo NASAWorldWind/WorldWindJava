@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>gov.nasa.worldwind</groupId>
+    <artifactId>worldwind-java</artifactId>
+    <version>2.2.1</version>
+    <packaging>jar</packaging>
+    <name>NASA WorldWind Java</name>
+    <description>NASA WorldWind Java 3D geospatial visualization SDK</description>
+    <url>https://worldwind.arc.nasa.gov/java/</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <jogl.version>2.6.0</jogl.version>
+        <gluegen.version>2.6.0</gluegen.version>
+
+        <!--
+            JOGL 2.6.0 on Java 17+ requires deep reflection into AWT internals
+            that are strongly encapsulated by the module system.  These flags
+            must be present at both test-time (surefire) and application
+            runtime (run-demo scripts, exec-maven-plugin).
+            See: MIGRATION_JAVA25.md §2 — JOGL / GlueGen upgrade
+        -->
+        <jogl.jvm.args>
+            --add-opens java.base/java.lang=ALL-UNNAMED
+            --add-opens java.desktop/sun.awt=ALL-UNNAMED
+            --add-opens java.desktop/sun.java2d=ALL-UNNAMED
+            --add-opens java.desktop/sun.awt.image=ALL-UNNAMED
+        </jogl.jvm.args>
+    </properties>
+
+    <dependencies>
+
+        <!-- ── JOGL 2.6.0 (upgraded from 2.4.0-rc-20200306) ─────────── -->
+        <!--
+            The jogl-all artifact contains the full JOGL API and
+            implementation classes.  The natives-macosx-universal classifier
+            JAR contains the .jnilib / .dylib shared libraries for both
+            Apple Silicon (aarch64) and Intel (x86_64) in a single fat binary.
+
+            To add other platforms, duplicate the natives dependency with:
+              natives-linux-amd64   (Linux x86-64)
+              natives-windows-amd64 (Windows x86-64)
+            See MIGRATION_JAVA25.md §2 for platform notes.
+        -->
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>${jogl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>${jogl.version}</version>
+            <classifier>natives-macosx-universal</classifier>
+        </dependency>
+
+        <!-- ── GlueGen 2.6.0 (upgraded from 2.4.0-rc-20200306) ───────── -->
+        <!--
+            GlueGen provides the JNI binding machinery that JOGL relies on
+            at runtime.  Must be kept version-matched with JOGL.
+        -->
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt</artifactId>
+            <version>${gluegen.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt</artifactId>
+            <version>${gluegen.version}</version>
+            <classifier>natives-macosx-universal</classifier>
+        </dependency>
+
+        <!-- ── GDAL Java bindings (local JAR — system scope) ─────────── -->
+        <!--
+            gdal.jar is the Java binding for the GDAL C++ library.  The
+            matching native libraries (.jnilib) live in lib-external/gdal/
+            and must be on java.library.path at runtime.
+
+            system scope is deprecated in Maven 3.x and absent in Maven 4.x.
+            TODO (MIGRATION_JAVA25.md §10): Validate GDAL against Java 25,
+            then either:
+              (a) install to local repo: mvn install:install-file \
+                    -Dfile=gdal.jar -DgroupId=org.gdal \
+                    -DartifactId=gdal -Dversion=local-wwj \
+                    -Dpackaging=jar
+                  and change scope to compile, or
+              (b) upgrade to a versioned GDAL Maven artifact once native
+                  binaries are rebuilt.
+        -->
+        <dependency>
+            <groupId>org.gdal</groupId>
+            <artifactId>gdal</artifactId>
+            <version>local-wwj</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/gdal.jar</systemPath>
+        </dependency>
+
+        <!-- ── VPF symbol resources (local JAR — system scope) ───────── -->
+        <!--
+            vpf-symbols.jar is a resources-only JAR (PNG images and ASCII
+            data in geosym/).  It contains no Java classes; it is on the
+            classpath so the classloader can resolve geosym/* resource paths
+            used by VPFSymbolSupport.
+
+            TODO: Unpack this JAR into src/main/resources so it becomes a
+            normal project resource and this system-scope dependency can be
+            removed.
+        -->
+        <dependency>
+            <groupId>gov.nasa.worldwind</groupId>
+            <artifactId>vpf-symbols</artifactId>
+            <version>local</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/vpf-symbols.jar</systemPath>
+        </dependency>
+
+        <!-- ── Jackson 2.x streaming parser (replaces vendored 1.x source) ── -->
+        <!--
+            Only jackson-core is needed; WorldWind uses the streaming API
+            (JsonFactory, JsonParser, JsonToken) exclusively — no ObjectMapper.
+            Replaces src/org/codehaus/jackson/ which was Jackson 1.x source
+            vendored ca. 2009.  See MIGRATION_JAVA25.md section 6.
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.18.2</version>
+        </dependency>
+
+        <!-- ── Test dependencies ─────────────────────────────────────── -->
+        <!--
+            JUnit Jupiter 5.11.4 — migrated from JUnit 4.13.2 (TD-03).
+            All 49 test files have been updated to JUnit 5 annotations.
+            maven-surefire-plugin 3.x auto-discovers @Test methods via the
+            junit-platform-launcher on the test classpath.
+        -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.11.4</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <!--
+            The project uses a flat source layout rather than Maven's
+            conventional src/main/java and src/test/java.  These elements
+            override the defaults so Maven finds sources in the right place.
+        -->
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+
+        <resources>
+            <!--
+                Non-Java files under src/ (XML configuration documents,
+                images, .properties files) must be included in the output
+                JAR.  Exclude *.java to avoid duplicating source files.
+            -->
+            <resource>
+                <directory>src</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+
+            <!-- ── Java compiler ──────────────────────────────────────── -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <!--
+                        The "release" flag enforces the Java 25 API surface at
+                        compile time; it replaces both -source and -target.
+                    -->
+                    <release>25</release>
+                    <encoding>UTF-8</encoding>
+                    <!--
+                        Emit deprecation warnings during compilation.
+                        The 74 deprecated boxed-type constructors
+                        (new Integer(x), new Long(x), etc.) are not yet
+                        fixed; keeping this flag ON ensures they remain
+                        visible as warnings until that task is completed.
+                        See MIGRATION_JAVA25.md §3.
+                    -->
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+
+            <!-- ── Unit test runner ───────────────────────────────────── -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <!--
+                        Pass the JOGL add-opens flags into the forked JVM
+                        that surefire starts for each test run.
+                    -->
+                    <argLine>${jogl.jvm.args}</argLine>
+                    <systemPropertyVariables>
+                        <!--
+                            Run AWT in headless mode so tests do not attempt
+                            to open a display connection in CI environments.
+                        -->
+                        <java.awt.headless>true</java.awt.headless>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+            <!-- ── Run WorldWind examples ─────────────────────────────── -->
+            <!--
+                Use:  mvn exec:exec -Dexec.mainClass=<fully.qualified.ClassName>
+                e.g.: mvn exec:exec \
+                        -Dexec.mainClass=gov.nasa.worldwindx.examples.ApplicationTemplate
+
+                The exec:exec goal forks a new JVM (unlike exec:java which
+                reuses Maven's JVM), which is necessary for AWT / JOGL
+                applications.
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Xmx1024m</argument>
+                        <!-- JOGL strong-encapsulation flags -->
+                        <argument>--add-opens</argument>
+                        <argument>java.base/java.lang=ALL-UNNAMED</argument>
+                        <argument>--add-opens</argument>
+                        <argument>java.desktop/sun.awt=ALL-UNNAMED</argument>
+                        <argument>--add-opens</argument>
+                        <argument>java.desktop/sun.java2d=ALL-UNNAMED</argument>
+                        <argument>--add-opens</argument>
+                        <argument>java.desktop/sun.awt.image=ALL-UNNAMED</argument>
+                        <!-- Classpath populated from Maven dependencies -->
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <!-- Supply the class to run via -Dexec.mainClass -->
+                        <argument>${exec.mainClass}</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+
+            <!-- ── Add testFunctional as an additional test source root ── -->
+            <!--
+                testFunctional/ contains interactive visual tests that require
+                a display and are not suitable for automated CI runs.  They
+                are compiled as test sources (so compile errors surface in
+                mvn test-compile) but are excluded from surefire execution
+                by the naming convention: none of them end in *Test or start
+                with Test* except BrowserBalloonTest and BrowserBalloonSizeTest,
+                which are excluded explicitly below.
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>add-functional-test-sources</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>testFunctional</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- ── JAR plugin — manifest metadata ────────────────────── -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Title>NASA WorldWind Java</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                    <!--
+                        Exclude test data that may accidentally end up on the
+                        compile classpath but must not ship in the library JAR.
+                    -->
+                    <excludes>
+                        <exclude>testData/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!--
+        MIL-STD-2525 symbol rasterisation profile
+        ==========================================
+        Converts the 21,520 SVG source files in milstd2525/ into 128×128 PNG
+        images and packages them as milstd2525-symbols.zip.
+
+        This step is NOT part of the normal build — the generated PNGs are
+        release artifacts produced on demand.  Activate with:
+
+            mvn -Prasterize-milstd2525 generate-resources
+            mvn -Prasterize-milstd2525 package          (also zips the PNGs)
+
+        Replaces the Ant release-build.xml compileMilStd2525 target, which
+        previously used lib-external/batik/batik-rasterizer.jar (Batik 1.7,
+        circa 2008).  See MIGRATION_JAVA25.md section 7.
+    -->
+    <profiles>
+        <profile>
+            <id>rasterize-milstd2525</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+
+                            <!-- Phase 1: SVG → PNG -->
+                            <execution>
+                                <id>rasterize-milstd2525-symbols</id>
+                                <phase>generate-resources</phase>
+                                <goals><goal>run</goal></goals>
+                                <configuration>
+                                    <target>
+                                        <mkdir dir="${project.build.directory}/milstd2525/png"/>
+
+                                        <!--
+                                            Main rasterisation pass: 128×128 px.
+                                            Batik recurses into milstd2525/ subdirectories.
+                                            The fills/, frames/, and icons/ dirs are empty;
+                                            Batik may log a warning for each — this is harmless.
+                                        -->
+                                        <java classname="org.apache.batik.apps.rasterizer.Main"
+                                              fork="true" failonerror="true" maxmemory="512m">
+                                            <classpath refid="maven.plugin.classpath"/>
+                                            <arg value="-m"/><arg value="image/png"/>
+                                            <arg value="-maxw"/><arg value="128"/>
+                                            <arg value="-h"/><arg value="128"/>
+                                            <arg value="-d"/>
+                                            <arg value="${project.build.directory}/milstd2525/png"/>
+                                            <arg value="${project.basedir}/milstd2525"/>
+                                        </java>
+
+                                        <!--
+                                            FEBA (Forward Edge of Battle, 2.X.2.4.2.1) override:
+                                            this symbol uses a custom height of 16 px.
+                                            pathconvert builds a space-delimited list of matching
+                                            SVG files so they can all be passed as a single arg line.
+                                        -->
+                                        <pathconvert property="feba.svg.files" pathsep=" ">
+                                            <fileset dir="${project.basedir}/milstd2525">
+                                                <include name="**/g-g?dlf--------.svg"/>
+                                            </fileset>
+                                        </pathconvert>
+                                        <java classname="org.apache.batik.apps.rasterizer.Main"
+                                              fork="true" failonerror="false" maxmemory="64m">
+                                            <classpath refid="maven.plugin.classpath"/>
+                                            <arg line="-m image/png -maxw 128 -h 16 -d ${project.build.directory}/milstd2525/png ${feba.svg.files}"/>
+                                        </java>
+                                    </target>
+                                </configuration>
+                            </execution>
+
+                            <!-- Phase 2: zip the PNGs -->
+                            <execution>
+                                <id>zip-milstd2525-symbols</id>
+                                <phase>package</phase>
+                                <goals><goal>run</goal></goals>
+                                <configuration>
+                                    <target>
+                                        <zip destfile="${project.build.directory}/milstd2525/milstd2525-symbols.zip">
+                                            <fileset dir="${project.build.directory}/milstd2525/png"/>
+                                        </zip>
+                                    </target>
+                                </configuration>
+                            </execution>
+
+                        </executions>
+                        <dependencies>
+                            <!--
+                                batik-all is the all-modules aggregate JAR for Batik 1.17.
+                                It provides org.apache.batik.apps.rasterizer.Main and all
+                                renderer, transcoder, CSS, DOM, and codec classes it needs.
+                                Replaces the vendored batik-rasterizer-1.7.jar from 2008.
+                            -->
+                            <dependency>
+                                <groupId>org.apache.xmlgraphics</groupId>
+                                <artifactId>batik-all</artifactId>
+                                <version>1.17</version>
+                            </dependency>
+                            <!--
+                                xml-apis-ext provides the SVG / SMIL extended XML API classes
+                                that Batik's DOM implementation requires at runtime.
+                            -->
+                            <dependency>
+                                <groupId>xml-apis</groupId>
+                                <artifactId>xml-apis-ext</artifactId>
+                                <version>1.3.04</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

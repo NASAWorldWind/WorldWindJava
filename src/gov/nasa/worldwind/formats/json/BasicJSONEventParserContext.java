@@ -28,7 +28,7 @@
 package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.util.Logging;
-import org.codehaus.jackson.*;
+import com.fasterxml.jackson.core.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -132,11 +132,11 @@ public class BasicJSONEventParserContext implements JSONEventParserContext
     {
         if (token == JsonToken.VALUE_NUMBER_INT || token == JsonToken.VALUE_NUMBER_FLOAT)
         {
-            return new NumericValueJSONEvent(this.parser.getCurrentName(), this.parser.getDoubleValue());
+            return new NumericValueJSONEvent(this.parser.currentName(), this.parser.getDoubleValue());
         }
         else
         {
-            return new BasicJSONEvent(this.parser, token, this.parser.getCurrentName());
+            return new BasicJSONEvent(this.parser, token, this.parser.currentName());
         }
     }
 }

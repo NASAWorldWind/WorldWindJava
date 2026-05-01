@@ -30,15 +30,11 @@ package gov.nasa.worldwind.layers;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.view.orbit.BasicOrbitView;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class RenderableLayerTest
 {
     //////////////////////////////////////////////////////////
@@ -52,7 +48,7 @@ public class RenderableLayerTest
 
         // Test the parameterless constructor.
         layer = new RenderableLayer();
-        assertNotNull("", layer);
+        assertNotNull(layer, "");
     }
 
     @Test
@@ -67,7 +63,7 @@ public class RenderableLayerTest
         }
 
         // Test that the layer contains the renderables.
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -79,7 +75,7 @@ public class RenderableLayerTest
         layer.addRenderables(renderables);
 
         // Test that the layer contains the renderables.
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -96,7 +92,7 @@ public class RenderableLayerTest
             layer.addRenderable(layer.getNumRenderables(), renderable);
         }
 
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -113,7 +109,7 @@ public class RenderableLayerTest
         renderables.add(0, inserted);
         layer.addRenderable(0, inserted);
 
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -130,7 +126,7 @@ public class RenderableLayerTest
         renderables.add(1, inserted);
         layer.addRenderable(1, inserted);
 
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -147,7 +143,7 @@ public class RenderableLayerTest
         renderables.add(renderables.size(), inserted);
         layer.addRenderable(layer.getNumRenderables(), inserted);
 
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -166,7 +162,7 @@ public class RenderableLayerTest
         }
 
         // Test that the layer contains no renderables.
-        assertFalse("", layer.getRenderables().iterator().hasNext());
+        assertFalse(layer.getRenderables().iterator().hasNext(), "");
     }
 
     @Test
@@ -179,7 +175,7 @@ public class RenderableLayerTest
         layer.removeAllRenderables();
 
         // Test that the layer contains no renderables.
-        assertFalse("", layer.getRenderables().iterator().hasNext());
+        assertFalse(layer.getRenderables().iterator().hasNext(), "");
     }
 
     @Test
@@ -191,7 +187,7 @@ public class RenderableLayerTest
         layer.setRenderables(renderables);
 
         // Test that the layer points to the Iterable.
-        assertSame("", renderables, layer.getRenderables());
+        assertSame(renderables, layer.getRenderables(), "");
     }
 
     //////////////////////////////////////////////////////////
@@ -209,9 +205,9 @@ public class RenderableLayerTest
         layer.setRenderables(null);
 
         // Test that the layer does not point to the Iterable.
-        assertNotSame("", renderables, layer.getRenderables());
+        assertNotSame(renderables, layer.getRenderables(), "");
         // Test that the layer contains no renderables.
-        assertFalse("", layer.getRenderables().iterator().hasNext());
+        assertFalse(layer.getRenderables().iterator().hasNext(), "");
     }
 
     @Test
@@ -225,9 +221,9 @@ public class RenderableLayerTest
         layer.addRenderables(renderables);
 
         // Test that the layer does not point to the Iterable.
-        assertNotSame("", renderables, layer.getRenderables());
+        assertNotSame(renderables, layer.getRenderables(), "");
         // Test that the layer contains the renderables.
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -258,13 +254,13 @@ public class RenderableLayerTest
                 }
             }
         }
-        catch (UnsupportedOperationException e)
+        catch (UnsupportedOperationException ignored)
         {
-            e.printStackTrace();
+            // An immutable view is acceptable — what matters is that layer state is unchanged below.
         }
 
         // Test that the layer contents do not change, even if the returned list can be modified.
-        assertEquals("", renderables, layer.getRenderables());
+        assertIterablesEqual(renderables, layer.getRenderables(), "");
     }
 
     @Test
@@ -303,7 +299,7 @@ public class RenderableLayerTest
         layer.dispose();
 
         // Test that the layer contains the renderables.
-        assertEquals("", emptyRenderables, layer.getRenderables());
+        assertIterablesEqual(emptyRenderables, layer.getRenderables(), "");
     }
 
     //////////////////////////////////////////////////////////
@@ -318,16 +314,7 @@ public class RenderableLayerTest
         RenderableLayer layer = new RenderableLayer();
         layer.setRenderables(renderables);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.addRenderable(new Path());
-            fail("Should raise an IllegalStateException");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.addRenderable(new Path()));
     }
 
     @Test
@@ -338,16 +325,7 @@ public class RenderableLayerTest
         RenderableLayer layer = new RenderableLayer();
         layer.setRenderables(renderables);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.addRenderables(renderables);
-            fail("Should raise an IllegalStateException");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.addRenderables(renderables));
     }
 
     @Test
@@ -358,16 +336,7 @@ public class RenderableLayerTest
         RenderableLayer layer = new RenderableLayer();
         layer.setRenderables(renderables);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.addRenderable(0, new Path());
-            fail("Should raise an IllegalStateException");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.addRenderable(0, new Path()));
     }
 
     @Test
@@ -378,16 +347,7 @@ public class RenderableLayerTest
         RenderableLayer layer = new RenderableLayer();
         layer.setRenderables(renderables);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.removeRenderable(new Path());
-            fail("Should raise an IllegalStateException");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.removeRenderable(new Path()));
     }
 
     @Test
@@ -398,16 +358,7 @@ public class RenderableLayerTest
         RenderableLayer layer = new RenderableLayer();
         layer.setRenderables(renderables);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.removeAllRenderables();
-            fail("Should raise an IllegalStateException");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.removeAllRenderables());
     }
 
     @Test
@@ -418,27 +369,18 @@ public class RenderableLayerTest
         RenderableLayer layer = new RenderableLayer();
         layer.setRenderables(renderables);
 
-        try
-        {
-            // Expecting an IllegalStateException here.
-            layer.dispose();
-            fail("Should raise an IllegalStateException");
-        }
-        catch (IllegalStateException e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalStateException.class, () -> layer.dispose());
     }
 
     //////////////////////////////////////////////////////////
     // Helper Methods
     //////////////////////////////////////////////////////////
 
-    private static void assertEquals(String message, Iterable<Renderable> expected, Iterable<Renderable> actual)
+    private static void assertIterablesEqual(Iterable<Renderable> expected, Iterable<Renderable> actual, String message)
     {
         if (expected == null)
         {
-            assertNull(message, actual);
+            assertNull(actual, message);
         }
         else
         {
@@ -446,10 +388,10 @@ public class RenderableLayerTest
             // Compare the elements in each iterator, as long as they both have elements.
             while (expectedIter.hasNext() && actualIter.hasNext())
             {
-                Assert.assertEquals(message, expectedIter.next(), actualIter.next());
+                assertEquals(expectedIter.next(), actualIter.next(), message);
             }
             // If either iterator has more elements, then their lengths are different.
-            assertFalse(message, expectedIter.hasNext() || actualIter.hasNext());
+            assertFalse(expectedIter.hasNext() || actualIter.hasNext(), message);
         }
     }
 

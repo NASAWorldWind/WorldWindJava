@@ -68,7 +68,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
      * #doResolveTopPick(gov.nasa.worldwind.render.DrawContext, java.awt.Rectangle)}. This map is used only when a pick
      * rectangle is specified. Initialized to a new HashMap.
      */
-    protected Map<Integer, PickedObject> pickableObjects = new HashMap<Integer, PickedObject>();
+    protected Map<Integer, PickedObject> pickableObjects = new HashMap<>();
     protected long frame = 0;
     protected long timebase = System.currentTimeMillis();
     protected double framesPerSecond;
@@ -87,7 +87,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
     protected boolean deepPick = false;
     protected GpuResourceCache gpuResourceCache;
     protected TextRendererCache textRendererCache = new TextRendererCache();
-    protected Set<String> perFrameStatisticsKeys = new HashSet<String>();
+    protected Set<String> perFrameStatisticsKeys = new HashSet<>();
     protected Collection<PerformanceStatistic> perFrameStatistics = new ArrayList<PerformanceStatistic>();
     protected Collection<Throwable> renderingExceptions = new ArrayList<Throwable>();
     protected ScreenCreditController screenCreditController;

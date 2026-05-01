@@ -28,15 +28,12 @@
 
 package gov.nasa.worldwind.geom;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class MatrixTest
 {
     private static final double EQUALITY_TOLERANCE = 1.0e-9;
@@ -45,7 +42,7 @@ public class MatrixTest
 
     private Random random;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception
     {
         // Use a random initialized with a constant seed to ensure that subsequent test executes get the same
@@ -66,10 +63,10 @@ public class MatrixTest
         m = m.multiply(Matrix.fromRotationXYZ(Angle.fromDegrees(10), Angle.fromDegrees(20), Angle.fromDegrees(30)));
 
         Matrix mInv = m.getInverse();
-        assertNotNull("Matrix inverse is null", mInv);
+        assertNotNull(mInv, "Matrix inverse is null");
 
         Matrix identity = m.multiply(mInv);
-        assertTrue("Matrix inverse is incorrect", equals(identity, Matrix.IDENTITY, EQUALITY_TOLERANCE));
+        assertTrue(equals(identity, Matrix.IDENTITY, EQUALITY_TOLERANCE), "Matrix inverse is incorrect");
     }
 
     @Test
@@ -82,10 +79,10 @@ public class MatrixTest
             random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble());
 
         Matrix mInv = m.getInverse();
-        assertNotNull("Matrix inverse is null", mInv);
+        assertNotNull(mInv, "Matrix inverse is null");
 
         Matrix identity = m.multiply(mInv);
-        assertTrue("Matrix inverse is incorrect", equals(identity, Matrix.IDENTITY, EQUALITY_TOLERANCE));
+        assertTrue(equals(identity, Matrix.IDENTITY, EQUALITY_TOLERANCE), "Matrix inverse is incorrect");
     }
 
     @Test
@@ -111,7 +108,7 @@ public class MatrixTest
             m41, m42, m43, m44);
 
         Matrix mInv = m.getInverse();
-        assertNull("Singular matrix should not have an inverse", mInv);
+        assertNull(mInv, "Singular matrix should not have an inverse");
     }
 
     @Test
@@ -124,7 +121,7 @@ public class MatrixTest
             random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble());
 
         Matrix mInv = m.getInverse();
-        assertNull("Singular matrix should not have an inverse", mInv);
+        assertNull(mInv, "Singular matrix should not have an inverse");
     }
 
     @Test
@@ -153,10 +150,10 @@ public class MatrixTest
             m41, m42, m43, m44);
 
         Matrix mInv = m.getInverse();
-        assertNotNull("Matrix inverse is null", mInv);
+        assertNotNull(mInv, "Matrix inverse is null");
 
         Matrix identity = m.multiply(mInv);
-        assertTrue("Matrix inverse is incorrect", equals(identity, Matrix.IDENTITY, NEAR_SINGULAR_EQUALITY_TOLERANCE));
+        assertTrue(equals(identity, Matrix.IDENTITY, NEAR_SINGULAR_EQUALITY_TOLERANCE), "Matrix inverse is incorrect");
     }
 
     //**************************************************************//

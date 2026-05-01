@@ -31,17 +31,13 @@ import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.util.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.net.*;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class ShapefileTest
 {
     private static final String STATE_BOUNDS_PATH = "testData/shapefiles/state_bounds.shp";
@@ -56,7 +52,7 @@ public class ShapefileTest
     public void testOpenFile()
     {
         Shapefile shapefile = new Shapefile(new File(STATE_BOUNDS_PATH));
-        assertEquals("Shape type is not as expected", Shapefile.SHAPE_POLYLINE, shapefile.getShapeType());
+        assertEquals(Shapefile.SHAPE_POLYLINE, shapefile.getShapeType(), "Shape type is not as expected");
 
         while (shapefile.hasNext())
         {
@@ -70,7 +66,7 @@ public class ShapefileTest
     public void testOpenPath()
     {
         Shapefile shapefile = new Shapefile(STATE_BOUNDS_PATH);
-        assertEquals("Shape type is not as expected", Shapefile.SHAPE_POLYLINE, shapefile.getShapeType());
+        assertEquals(Shapefile.SHAPE_POLYLINE, shapefile.getShapeType(), "Shape type is not as expected");
 
         while (shapefile.hasNext())
         {
@@ -84,7 +80,7 @@ public class ShapefileTest
 //    public void testOpenURL() throws MalformedURLException
 //    {
 //        Shapefile shapefile = new Shapefile(new URL(SPRINGFIELD_URBAN_GROWTH_URL));
-//        assertEquals("Shape type is not as expected", Shapefile.SHAPE_POLYGON, shapefile.getShapeType());
+//        assertEquals(Shapefile.SHAPE_POLYGON, shapefile.getShapeType(), "Shape type is not as expected");
 //
 //        while (shapefile.hasNext())
 //        {
@@ -98,7 +94,7 @@ public class ShapefileTest
 //    public void testOpenURLString()
 //    {
 //        Shapefile shapefile = new Shapefile(SPRINGFIELD_URBAN_GROWTH_URL);
-//        assertEquals("Shape type is not as expected", Shapefile.SHAPE_POLYGON, shapefile.getShapeType());
+//        assertEquals(Shapefile.SHAPE_POLYGON, shapefile.getShapeType(), "Shape type is not as expected");
 //
 //        while (shapefile.hasNext())
 //        {
@@ -112,7 +108,7 @@ public class ShapefileTest
     public void testOpenSingleInputStream() throws Exception
     {
         Shapefile shapefile = new Shapefile(WWIO.openStream(STATE_BOUNDS_PATH));
-        assertEquals("Shape type is not as expected", Shapefile.SHAPE_POLYLINE, shapefile.getShapeType());
+        assertEquals(Shapefile.SHAPE_POLYLINE, shapefile.getShapeType(), "Shape type is not as expected");
 
         while (shapefile.hasNext())
         {
@@ -130,7 +126,7 @@ public class ShapefileTest
             WWIO.openStream(WWIO.replaceSuffix(STATE_BOUNDS_PATH, ".shx")),
             WWIO.openStream(WWIO.replaceSuffix(STATE_BOUNDS_PATH, ".dbf")),
             WWIO.openStream(WWIO.replaceSuffix(STATE_BOUNDS_PATH, ".prj")));
-        assertEquals("Shape type is not as expected", shapefile.getShapeType(), Shapefile.SHAPE_POLYLINE);
+        assertEquals(shapefile.getShapeType(), Shapefile.SHAPE_POLYLINE, "Shape type is not as expected");
 
         while (shapefile.hasNext())
         {
@@ -148,7 +144,7 @@ public class ShapefileTest
     public void testUTMCoordinates()
     {
         Shapefile shapefile = new Shapefile(SPRINGFIELD_URBAN_GROWTH_PATH);
-        assertEquals("Shape type is not as expected", Shapefile.SHAPE_POLYGON, shapefile.getShapeType());
+        assertEquals(Shapefile.SHAPE_POLYGON, shapefile.getShapeType(), "Shape type is not as expected");
         assertShapefileAppearsNormal(shapefile);
         shapefile.close();
     }
@@ -157,7 +153,7 @@ public class ShapefileTest
     public void testGeographicCoordinates()
     {
         Shapefile shapefile = new Shapefile(WORLD_BORDERS_PATH);
-        assertEquals("Shape type is not as expected", Shapefile.SHAPE_POLYGON, shapefile.getShapeType());
+        assertEquals(Shapefile.SHAPE_POLYGON, shapefile.getShapeType(), "Shape type is not as expected");
         assertShapefileAppearsNormal(shapefile);
         shapefile.close();
     }
@@ -188,13 +184,13 @@ public class ShapefileTest
     public void testExpectedValuesForStateBounds()
     {
         Shapefile shapefile = new Shapefile(STATE_BOUNDS_PATH);
-        assertEquals("Version not as expected", 1000, shapefile.getVersion());
-        assertEquals("Length not as expected", 2750692, shapefile.getLength());
-        assertEquals("Shape type not as expected", Shapefile.SHAPE_POLYLINE, shapefile.getShapeType());
-        assertEquals("Number of records not as expected", 19, shapefile.getNumberOfRecords());
-        assertTrue("Bounds not as expected", Arrays.equals(
+        assertEquals(1000, shapefile.getVersion(), "Version not as expected");
+        assertEquals(2750692, shapefile.getLength(), "Length not as expected");
+        assertEquals(Shapefile.SHAPE_POLYLINE, shapefile.getShapeType(), "Shape type not as expected");
+        assertEquals(19, shapefile.getNumberOfRecords(), "Number of records not as expected");
+        assertTrue(Arrays.equals(
             new double[] {25.837377, 49.384359, -124.211606, -67.158958},
-            shapefile.getBoundingRectangle()));
+            shapefile.getBoundingRectangle()), "Bounds not as expected");
 
         while (shapefile.hasNext())
         {
@@ -204,20 +200,19 @@ public class ShapefileTest
             if (record.getRecordNumber() != 19)
                 continue;
 
-            assertTrue("Record type not as expected", Shapefile.isPolylineType(record.getShapeType()));
-            assertEquals("Record number of parts not as expected", 1, record.getNumberOfParts());
-            assertEquals("Record number of points not as expected", 10, record.getNumberOfPoints());
-            assertEquals("Record first part number not as expected", 64, record.getFirstPartNumber());
-            assertTrue("Record bounds not as expected", Arrays.equals(
+            assertTrue(Shapefile.isPolylineType(record.getShapeType()), "Record type not as expected");
+            assertEquals(1, record.getNumberOfParts(), "Record number of parts not as expected");
+            assertEquals(10, record.getNumberOfPoints(), "Record number of points not as expected");
+            assertEquals(64, record.getFirstPartNumber(), "Record first part number not as expected");
+            assertTrue(Arrays.equals(
                 new double[] {39.5345, 39.53649, -75.530616, -75.527447},
-                record.getBoundingRectangle()));
+                record.getBoundingRectangle()), "Record bounds not as expected");
 
-            assertEquals("Record point not as expected", LatLon.fromDegrees(39.53649, -75.530616),
-                record.getPointBuffer(0).getLocation(0));
+            assertEquals(LatLon.fromDegrees(39.53649, -75.530616), record.getPointBuffer(0).getLocation(0), "Record point not as expected");
 
-            assertNotNull("Record attributes is null", record.getAttributes());
-            assertEquals("Record attribute not as expected", 912L, record.getAttributes().getValue("ID"));
-            assertEquals("Record attribute not as expected", 0.004, record.getAttributes().getValue("LENGTH"));
+            assertNotNull(record.getAttributes(), "Record attributes is null");
+            assertEquals(912L, record.getAttributes().getValue("ID"), "Record attribute not as expected");
+            assertEquals(0.004, record.getAttributes().getValue("LENGTH"), "Record attribute not as expected");
         }
 
         shapefile.close();
@@ -236,7 +231,7 @@ public class ShapefileTest
         {
             ShapefileRecord record = shapefile.nextRecord();
             assertRecordAppearsNormal(shapefile, record);
-            assertTrue("Record type not Polygon", Shapefile.isPolygonType(record.getShapeType()));
+            assertTrue(Shapefile.isPolygonType(record.getShapeType()), "Record type not Polygon");
 
             rect = record.getBoundingRectangle();
             assertCoordAppearsGeographic("Record bounds not geographic", rect[2], rect[0]);
@@ -251,51 +246,51 @@ public class ShapefileTest
 
     public static void assertRecordAppearsNormal(Shapefile shapefile, ShapefileRecord record)
     {
-        assertNotNull("Record is null", record);
-        assertSame("Record shapefile is not as expected", shapefile, record.getShapeFile());
-        assertTrue("Record has no parts", record.getNumberOfParts() > 0);
-        assertTrue("Record has no points", record.getNumberOfPoints() > 0);
-        assertFalse("Record has no type", WWUtil.isEmpty(record.getShapeType()));
+        assertNotNull(record, "Record is null");
+        assertSame(shapefile, record.getShapeFile(), "Record shapefile is not as expected");
+        assertTrue(record.getNumberOfParts() > 0, "Record has no parts");
+        assertTrue(record.getNumberOfPoints() > 0, "Record has no points");
+        assertFalse(WWUtil.isEmpty(record.getShapeType()), "Record has no type");
 
         if (Shapefile.isNullType(record.getShapeType()))
-            assertTrue("Record type is not as expected", record instanceof ShapefileRecordNull);
+            assertTrue(record instanceof ShapefileRecordNull, "Record type is not as expected");
 
         else if (Shapefile.isPointType(record.getShapeType()))
-            assertTrue("Record type is not as expected", record instanceof ShapefileRecordPoint);
+            assertTrue(record instanceof ShapefileRecordPoint, "Record type is not as expected");
 
         else if (Shapefile.isMultiPointType(record.getShapeType()))
-            assertTrue("Record type is not as expected", record instanceof ShapefileRecordMultiPoint);
+            assertTrue(record instanceof ShapefileRecordMultiPoint, "Record type is not as expected");
 
         else if (Shapefile.isPolylineType(record.getShapeType()))
-            assertTrue("Record type is not as expected", record instanceof ShapefileRecordPolyline);
+            assertTrue(record instanceof ShapefileRecordPolyline, "Record type is not as expected");
 
         else if (Shapefile.isPolygonType(record.getShapeType()))
-            assertTrue("Record type is not as expected", record instanceof ShapefileRecordPolygon);
+            assertTrue(record instanceof ShapefileRecordPolygon, "Record type is not as expected");
 
         int expectedNumPoints = record.getNumberOfPoints();
         int actualNumPoints = 0; // Accumulated in the loop below.
 
         for (int i = 0; i < record.getNumberOfParts(); i++)
         {
-            assertNotNull("Record point buffer is null", record.getPointBuffer(i));
+            assertNotNull(record.getPointBuffer(i), "Record point buffer is null");
             actualNumPoints += record.getPointBuffer(i).getSize();
         }
 
-        assertEquals("Record num points is not as expected", expectedNumPoints, actualNumPoints);
-        assertNotNull("Record compound point buffer is null", record.getCompoundPointBuffer());
+        assertEquals(expectedNumPoints, actualNumPoints, "Record num points is not as expected");
+        assertNotNull(record.getCompoundPointBuffer(), "Record compound point buffer is null");
     }
 
     public static void assertBoundingRectangleAppearsGeographic(String message, double[] coords)
     {
-        assertTrue(message, Angle.isValidLatitude(coords[0]));
-        assertTrue(message, Angle.isValidLatitude(coords[1]));
-        assertTrue(message, Angle.isValidLongitude(coords[2]));
-        assertTrue(message, Angle.isValidLongitude(coords[3]));
+        assertTrue(Angle.isValidLatitude(coords[0]), message);
+        assertTrue(Angle.isValidLatitude(coords[1]), message);
+        assertTrue(Angle.isValidLongitude(coords[2]), message);
+        assertTrue(Angle.isValidLongitude(coords[3]), message);
     }
 
     public static void assertCoordAppearsGeographic(String message, double x, double y)
     {
-        assertTrue(message, Angle.isValidLongitude(x));
-        assertTrue(message, Angle.isValidLatitude(y));
+        assertTrue(Angle.isValidLongitude(x), message);
+        assertTrue(Angle.isValidLatitude(y), message);
     }
 }

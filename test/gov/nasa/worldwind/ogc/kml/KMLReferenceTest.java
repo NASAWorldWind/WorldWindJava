@@ -28,24 +28,24 @@
 
 package gov.nasa.worldwind.ogc.kml;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test resolution of local and remote references using {@link KMLRoot#resolveReference(String)}.
  */
-@RunWith(JUnit4.class)
 public class KMLReferenceTest
 {
     private KMLRoot root;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         try
@@ -58,7 +58,7 @@ public class KMLReferenceTest
         }
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.root = null;
@@ -68,20 +68,20 @@ public class KMLReferenceTest
     public void testReferenceToLocalKMLFile()
     {
         Object o = this.root.resolveReference("testData/KML/PointPlacemark.kml");
-        assertTrue("Cannot resolve reference to local KML file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to local KML file");
 
         o = this.root.resolveLocalReference("testData/KML/PointPlacemark.kml", null);
-        assertTrue("Cannot resolve reference to local KML file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to local KML file");
     }
 
     @Test
     public void testReferenceToLocalKMZFile()
     {
         Object o = this.root.resolveReference("testData/KML/PointPlacemarkLocalImage.kmz");
-        assertTrue("Cannot resolve reference to local KML file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to local KML file");
 
         o = this.root.resolveLocalReference("testData/KML/PointPlacemarkLocalImage.kmz", null);
-        assertTrue("Cannot resolve reference to local KML file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to local KML file");
     }
 
     @Test
@@ -89,32 +89,32 @@ public class KMLReferenceTest
     {
         String path = "testData/KML/etna.jpg";
         Object o = this.root.resolveReference(path);
-        assertEquals("Cannot resolve reference to local image file", path, o);
+        assertEquals(path, o, "Cannot resolve reference to local image file");
 
         o = this.root.resolveLocalReference(path, null);
-        assertEquals("Cannot resolve reference to local image file", path, o);
+        assertEquals(path, o, "Cannot resolve reference to local image file");
     }
 
     @Test
     public void testReferenceToLocalElement()
     {
         Object o = this.root.resolveReference("#normalPlacemark");
-        assertTrue("Cannot resolve reference to local style", o instanceof KMLStyle);
+        assertTrue(o instanceof KMLStyle, "Cannot resolve reference to local style");
 
         // Local references should start with #, but many files do not include the #. Test that resolution works even
         // if the reference is malformed.
         o = this.root.resolveReference("normalPlacemark");
-        assertTrue("Cannot resolve reference to local style (without leading #)", o instanceof KMLStyle);
+        assertTrue(o instanceof KMLStyle, "Cannot resolve reference to local style (without leading #)");
     }
 
     @Test
     public void testReferenceToElementInLocalFile()
     {
         Object o = this.root.resolveReference("testData/KML/StyleReferences.kml#transBluePoly");
-        assertTrue("Cannot resolve reference to element in local KML file", o instanceof KMLStyle);
+        assertTrue(o instanceof KMLStyle, "Cannot resolve reference to element in local KML file");
 
         o = this.root.resolveLocalReference("testData/KML/StyleReferences.kml", "transBluePoly");
-        assertTrue("Cannot resolve reference to element in local KML file", o instanceof KMLStyle);
+        assertTrue(o instanceof KMLStyle, "Cannot resolve reference to element in local KML file");
     }
 
     @Test
@@ -123,47 +123,47 @@ public class KMLReferenceTest
         KMLRoot root = KMLRoot.createAndParse("testData/KML/PointPlacemarkLocalImage.kmz");
 
         Object o = root.resolveReference("icon21.png");
-        assertNotNull("Cannot resolve reference to file KMZ archive", o);
+        assertNotNull(o, "Cannot resolve reference to file KMZ archive");
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void testReferenceToRemoteKML()
     {
         String url
             = "https://worldwind.arc.nasa.gov/kml-samples/morekml/Network_Links/Targets/Network_Links.Targets.Simple.kml";
         Object o = this.resolveReferenceBlocking(this.root, url);
-        assertTrue("Cannot resolve reference to remote KML file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to remote KML file");
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void testReferenceToRemoteKMZ()
     {
         String url = "https://worldwind.arc.nasa.gov/kml-samples/kml/kmz/simple/mimetype.kmz";
         Object o = this.resolveReferenceBlocking(this.root, url);
-        assertTrue("Cannot resolve reference to remote KMZ file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to remote KMZ file");
 
         o = this.resolveRemoteReferenceBlocking(this.root, url, null);
-        assertTrue("Cannot resolve reference to remote KMZ file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to remote KMZ file");
 
         o = this.resolveNetworkLinkBlocking(this.root, url);
-        assertTrue("Cannot resolve reference to remote KMZ file", o instanceof KMLRoot);
+        assertTrue(o instanceof KMLRoot, "Cannot resolve reference to remote KMZ file");
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void testReferenceToRemoteElement()
     {
         String url
             = "https://worldwind.arc.nasa.gov/kml-samples/morekml/Network_Links/Targets/Network_Links.Targets.Simple.kml#networkLinkPlacemark";
         Object o = this.resolveReferenceBlocking(this.root, url);
-        assertTrue("Cannot resolve reference to remote KML file", o instanceof KMLPlacemark);
+        assertTrue(o instanceof KMLPlacemark, "Cannot resolve reference to remote KML file");
 
         o = this.resolveRemoteReferenceBlocking(this.root,
             "https://worldwind.arc.nasa.gov/kml-samples/morekml/Network_Links/Targets/Network_Links.Targets.Simple.kml",
             "networkLinkPlacemark");
-        assertTrue("Cannot resolve reference to remote KML file", o instanceof KMLPlacemark);
+        assertTrue(o instanceof KMLPlacemark, "Cannot resolve reference to remote KML file");
     }
 
     /**

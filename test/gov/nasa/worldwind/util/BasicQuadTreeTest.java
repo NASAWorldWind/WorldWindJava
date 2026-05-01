@@ -29,15 +29,11 @@
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.Sector;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class BasicQuadTreeTest
 {
     /** Tests incremental removal of all items from the tree. */
@@ -51,13 +47,13 @@ public class BasicQuadTreeTest
         {
             tree.add(i, new double[] {i % 90, i % 180}, Integer.toString(i));
         }
-        assertEquals("Item count incorrect at start ", countItemsInTree(tree), numItems);
+        assertEquals(countItemsInTree(tree), numItems, "Item count incorrect at start ");
 
         // Remove icons one at a time then verify the count.
         for (int i = numItems; i > 0; i--)
         {
             tree.remove(i);
-            assertEquals("Item count incorrect ", countItemsInTree(tree), i - 1);
+            assertEquals(countItemsInTree(tree), i - 1, "Item count incorrect ");
         }
     }
 
@@ -78,7 +74,7 @@ public class BasicQuadTreeTest
         {
             tree.removeByName(Integer.toString(i));
             Integer item = tree.getByName(Integer.toString(i));
-            assertNull("Item not fully removed from tree ", item);
+            assertNull(item, "Item not fully removed from tree ");
         }
     }
 

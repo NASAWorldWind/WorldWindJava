@@ -29,7 +29,7 @@ package gov.nasa.worldwind.formats.json;
 
 import gov.nasa.worldwind.exception.WWRuntimeException;
 import gov.nasa.worldwind.util.*;
-import org.codehaus.jackson.*;
+import com.fasterxml.jackson.core.*;
 
 import java.io.*;
 
@@ -68,7 +68,7 @@ public class JSONDoc implements Closeable
     protected void initialize(Object source) throws Exception
     {
         JsonFactory factory = new JsonFactory();
-        this.jsonParser = factory.createJsonParser(WWIO.openStream(source));
+        this.jsonParser = factory.createParser(WWIO.openStream(source));
     }
 
     public Object getRootObject()

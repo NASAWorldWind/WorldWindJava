@@ -2,25 +2,25 @@
  * Copyright 2006-2009, 2017, 2020 United States Government, as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All rights reserved.
- * 
+ *
  * The NASA World Wind Java (WWJ) platform is licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- * 
+ *
  * NASA World Wind Java (WWJ) also contains the following 3rd party Open Source
  * software:
- * 
+ *
  *     Jackson Parser – Licensed under Apache 2.0
  *     GDAL – Licensed under MIT
  *     JOGL – Licensed under  Berkeley Software Distribution (BSD)
  *     Gluegen – Licensed under Berkeley Software Distribution (BSD)
- * 
+ *
  * A complete listing of 3rd Party software notices and licenses included in
  * NASA World Wind Java (WWJ)  can be found in the WorldWindJava-v2.2 3rd-party
  * notices and licenses PDF found in code directory.
@@ -29,20 +29,22 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.util.RestorableSupport;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.awt.*;
-import java.util.*;
+import java.util.stream.Stream;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(Parameterized.class)
 public class ShapeAttributesTest
 {
-    @Parameterized.Parameters
-    public static Collection<Object[]> data()
+    /**
+     * Provides pairs of (defaultAttributes, exampleAttributes) — one pair per test invocation.
+     */
+    @SuppressWarnings("unused")
+    static Stream<Arguments> data()
     {
         BasicShapeAttributes defaultBasicAttrs = new BasicShapeAttributes();
         BasicShapeAttributes exampleBasicAttrs = new BasicShapeAttributes();
@@ -91,72 +93,58 @@ public class ShapeAttributesTest
         exampleBalloonAttrs.setImageOpacity(0.5);
         exampleBalloonAttrs.setImageRepeat(AVKey.REPEAT_NONE);
 
-        return Arrays.asList(new Object[][] {
-            {defaultBasicAttrs, exampleBasicAttrs},
-            {defaultBalloonAttrs, exampleBalloonAttrs}
-        });
+        return Stream.of(
+            Arguments.of(defaultBasicAttrs, exampleBasicAttrs),
+            Arguments.of(defaultBalloonAttrs, exampleBalloonAttrs)
+        );
     }
 
-    private ShapeAttributes defaultAttributes;
-    private ShapeAttributes exampleAttributes;
-
-    public ShapeAttributesTest(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes)
-    {
-        this.defaultAttributes = defaultAttributes;
-        this.exampleAttributes = exampleAttributes;
-    }
-
-    @Test
-    public void testBasicSaveRestore()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testBasicSaveRestore(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes)
     {
         RestorableSupport rs = RestorableSupport.newRestorableSupport();
 
-        ShapeAttributes expected = this.exampleAttributes.copy();
+        ShapeAttributes expected = exampleAttributes.copy();
         expected.getRestorableState(rs, null);
 
-        ShapeAttributes actual = this.defaultAttributes.copy();
+        ShapeAttributes actual = defaultAttributes.copy();
         actual.restoreState(rs, null);
 
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testRestoreSameInstance()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testRestoreSameInstance(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes)
     {
         RestorableSupport rs = RestorableSupport.newRestorableSupport();
 
-        ShapeAttributes expected = this.exampleAttributes.copy();
+        ShapeAttributes expected = exampleAttributes.copy();
 
-        ShapeAttributes actual = this.exampleAttributes.copy();
+        ShapeAttributes actual = exampleAttributes.copy();
         actual.getRestorableState(rs, null);
-        actual.copy(this.defaultAttributes.copy());
+        actual.copy(defaultAttributes.copy());
         actual.restoreState(rs, null);
 
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testRestoreNullDocument()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testRestoreNullDocument(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes)
     {
-        try
-        {
-            ShapeAttributes attrs = this.defaultAttributes.copy();
-            attrs.restoreState(null, null);
-            fail("Expected an IllegalArgumentException");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        assertThrows(IllegalArgumentException.class, () -> defaultAttributes.copy().restoreState(null, null));
     }
 
-    @Test
-    public void testRestoreEmptyDocument()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testRestoreEmptyDocument(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes)
     {
-        ShapeAttributes expected = this.exampleAttributes.copy();
+        ShapeAttributes expected = exampleAttributes.copy();
 
         // Restoring an empty state document should not change any attributes.
-        ShapeAttributes actual = this.exampleAttributes.copy();
+        ShapeAttributes actual = exampleAttributes.copy();
         String emptyStateInXml =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                 "<emptyDocumentRoot/>";
@@ -166,13 +154,14 @@ public class ShapeAttributesTest
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testRestoreOneAttribute()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testRestoreOneAttribute(ShapeAttributes defaultAttributes, ShapeAttributes exampleAttributes)
     {
-        ShapeAttributes expected = this.exampleAttributes.copy();
+        ShapeAttributes expected = exampleAttributes.copy();
         expected.setOutlineWidth(11);
 
-        ShapeAttributes actual = this.exampleAttributes.copy();
+        ShapeAttributes actual = exampleAttributes.copy();
         String partialStateInXml =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                 "<restorableState>" +

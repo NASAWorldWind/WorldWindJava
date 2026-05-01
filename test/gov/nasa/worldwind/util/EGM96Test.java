@@ -29,15 +29,11 @@
 package gov.nasa.worldwind.util;
 
 import gov.nasa.worldwind.geom.Angle;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EGM96Test
 {
     /**
@@ -92,7 +88,7 @@ public class EGM96Test
         // Ensure the top latitude matches our expected latitude
         // This shows that the method has determined a row and column to query the dataset that corresponds with our
         // latitude value
-        assertEquals("latitude matches after index conversion", latitude.degrees, latTop, DELTA);
+        assertEquals(latitude.degrees, latTop, DELTA, "latitude matches after index conversion");
 
         // Using the confirmed latitude value from above (via the topRow and leftCol values), find the actual node value
         double latGridPointOffset = egm96.gePostOffset(topRow, leftCol) / 100d; // the other method converts to meters
@@ -100,7 +96,7 @@ public class EGM96Test
         double latOffset = egm96.getOffset(latitude, longitude);
 
         // Ensure that they are equal
-        assertEquals("interpolated matches actual latitude", latGridPointOffset, latOffset, DELTA);
+        assertEquals(latGridPointOffset, latOffset, DELTA, "interpolated matches actual latitude");
     }
 
     /**
@@ -153,8 +149,8 @@ public class EGM96Test
         // Ensure the top latitude matches our expected latitude
         // This shows that the method has determined a row and column to query the dataset that corresponds with our
         // latitude value
-        assertEquals("top latitude matches after index conversion", 38.75, latTop, DELTA);
-        assertEquals("bottom latitude matches after index conversion", 38.5, latBottom, DELTA);
+        assertEquals(38.75, latTop, DELTA, "top latitude matches after index conversion");
+        assertEquals(38.5, latBottom, DELTA, "bottom latitude matches after index conversion");
 
         // The calculated EGM96 offset
         double latOffset = egm96.getOffset(latitude, longitude);
@@ -163,7 +159,7 @@ public class EGM96Test
             + bottomOffsetValue;
 
         // Ensure that they are equal
-        assertEquals("interpolated matches actual latitude", manuallyCalculatedInterpolationValue, latOffset, DELTA);
+        assertEquals(manuallyCalculatedInterpolationValue, latOffset, DELTA, "interpolated matches actual latitude");
     }
 
     /**
@@ -208,7 +204,7 @@ public class EGM96Test
         // Ensure the top latitude matches our expected latitude
         // This shows that the method has determined a row and column to query the dataset that corresponds with our
         // latitude value
-        assertEquals("longitude matches after index conversion", longitude.degrees + 360d, lonLeft, DELTA);
+        assertEquals(longitude.degrees + 360d, lonLeft, DELTA, "longitude matches after index conversion");
 
         // Using the confirmed longitude value from above (via the topRow and leftCol values), find the actual node
         // value
@@ -217,7 +213,7 @@ public class EGM96Test
         double lonOffset = egm96.getOffset(latitude, longitude);
 
         // Ensure that they are equal
-        assertEquals("interpolated matches actual longitude", lonGridPointOffset, lonOffset, DELTA);
+        assertEquals(lonGridPointOffset, lonOffset, DELTA, "interpolated matches actual longitude");
     }
 
     /**
@@ -270,8 +266,8 @@ public class EGM96Test
         // Ensure the left longitude matches our expected longitude
         // This shows that the method has determined a row and column to query the dataset that corresponds with our
         // longitude value
-        assertEquals("left longitude matches after index conversion", -105d + 360d, lonLeft, DELTA);
-        assertEquals("right longitude matches after index conversion", -104.75 + 360d, lonRight, DELTA);
+        assertEquals(-105d + 360d, lonLeft, DELTA, "left longitude matches after index conversion");
+        assertEquals(-104.75 + 360d, lonRight, DELTA, "right longitude matches after index conversion");
 
         // The calculated EGM96 offset
         double lonOffset = egm96.getOffset(latitude, longitude);
@@ -280,6 +276,6 @@ public class EGM96Test
             + leftOffsetValue;
 
         // Ensure that they are equal
-        assertEquals("interpolated matches actual longitude", manuallyCalculatedInterpolationValue, lonOffset, DELTA);
+        assertEquals(manuallyCalculatedInterpolationValue, lonOffset, DELTA, "interpolated matches actual longitude");
     }
 }

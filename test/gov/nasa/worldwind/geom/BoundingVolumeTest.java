@@ -29,13 +29,11 @@
 package gov.nasa.worldwind.geom;
 
 import gov.nasa.worldwind.globes.*;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class BoundingVolumeTest
 {
     private Sector sector;
@@ -45,14 +43,14 @@ public class BoundingVolumeTest
     private double maxElevation = 1e3;
     private int numIterations = (int) 1e6;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.globe = new Earth();
         this.sector = Sector.fromDegrees(-20, -10, -15, -10);
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.globe = null;
@@ -72,7 +70,7 @@ public class BoundingVolumeTest
             1, 2, -1, 1, -1, 1);
 
         boolean tf = box.intersects(frustum);
-        assertTrue("Box/Frustum intersection not detected", tf);
+        assertTrue(tf, "Box/Frustum intersection not detected");
     }
 
     @Test
@@ -87,14 +85,14 @@ public class BoundingVolumeTest
         Sphere sphere = new Sphere(new Vec4(0, 0, 0, 1), 1);
 
         boolean tf = sphere.intersects(frustum);
-        assertTrue("sphere.intersects(frustum) intersection not detected", tf);
+        assertTrue(tf, "sphere.intersects(frustum) intersection not detected");
         tf = frustum.intersects(sphere);
-        assertTrue("frustum.intersects(sphere) intersection not detected", tf);
+        assertTrue(tf, "frustum.intersects(sphere) intersection not detected");
 
         sphere = new Sphere(new Vec4(3, 3, 3, 1), 1);
 
         tf = sphere.intersects(frustum);
-        assertFalse("sphere.intersects(frustum) erroneously detects intersection", tf);
+        assertFalse(tf, "sphere.intersects(frustum) erroneously detects intersection");
     }
 
     @SuppressWarnings("UnusedAssignment")
@@ -105,7 +103,7 @@ public class BoundingVolumeTest
         Box box = new Box(new Vec4(0, 0, 0));
 
         boolean tf = box.intersects(frustum);
-        assertTrue("Box/Frustum intersection not detected", tf);
+        assertTrue(tf, "Box/Frustum intersection not detected");
 
         for (int j = 0; j < 3; j++)
         {
@@ -128,7 +126,7 @@ public class BoundingVolumeTest
         Cylinder cyl = new Cylinder(new Vec4(0, 0.5, 0.5), new Vec4(1, 0.5, 0.5), 0.5);
 
         boolean tf = cyl.intersects(frustum);
-        assertTrue("Box/Frustum intersection not detected", tf);
+        assertTrue(tf, "Box/Frustum intersection not detected");
 
         for (int j = 0; j < 3; j++)
         {

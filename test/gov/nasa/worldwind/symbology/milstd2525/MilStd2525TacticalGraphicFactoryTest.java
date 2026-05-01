@@ -29,17 +29,14 @@
 package gov.nasa.worldwind.symbology.milstd2525;
 
 import gov.nasa.worldwind.symbology.milstd2525.graphics.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit test for {@link MilStd2525GraphicFactory}. Tests that the factory supports all of the graphics that should be
  * supported. Update this list when new graphics are implemented.
  */
-@RunWith(JUnit4.class)
 public class MilStd2525TacticalGraphicFactoryTest
 {
     @Test
@@ -75,8 +72,7 @@ public class MilStd2525TacticalGraphicFactoryTest
                         sidc.setCharAt(3, status);
                         sidc.setCharAt(11, echelon);
 
-                        assertTrue("Missing graphic: " + sidc.toString(),
-                            factory.isSupported(sidc.toString()));
+                        assertTrue(factory.isSupported(sidc.toString()), "Missing graphic: " + sidc.toString());
                     }
                 }
             }
@@ -99,7 +95,7 @@ public class MilStd2525TacticalGraphicFactoryTest
                     sidc.setCharAt(1, stdId);
                     sidc.setCharAt(3, status);
 
-                    assertTrue("Missing graphic: " + sidc.toString(), factory.isSupported(sidc.toString()));
+                    assertTrue(factory.isSupported(sidc.toString()), "Missing graphic: " + sidc.toString());
                 }
             }
         }
@@ -112,7 +108,7 @@ public class MilStd2525TacticalGraphicFactoryTest
 
         for (String id : ALL_SUPPORTED_METOC)
         {
-            assertTrue("Missing graphic: " + id, factory.isSupported(id));
+            assertTrue(factory.isSupported(id), "Missing graphic: " + id);
         }
     }
 

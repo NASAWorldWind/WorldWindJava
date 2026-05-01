@@ -29,14 +29,11 @@ package gov.nasa.worldwind.formats.georss;
 
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.render.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("deprecation")
-@RunWith(JUnit4.class)
 public class GeoRSSParserTest {
     //////////////////////////////////////////////////////////
     // GeoRSS-Simple Parsing Tests
@@ -49,7 +46,7 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // <georss:point> is not translated to any renderable shape.
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -60,7 +57,7 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // <georss:point> is not translated to any renderable shape.
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -70,19 +67,19 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:line> is translated to a WWJ Path.
-        assertTrue("", shapes.get(0) instanceof Path);
+        assertTrue(shapes.get(0) instanceof Path, "");
 
         Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
-        assertNotNull("", positions);
-        assertEquals("", 3, positions.size());
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0));
-        assertEquals("", Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1));
-        assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
+        assertNotNull(positions, "");
+        assertEquals(3, positions.size(), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0), "");
+        assertEquals(Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1), "");
+        assertEquals(Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2), "");
     }
 
     @Test
@@ -93,19 +90,19 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:line> is translated to a WWJ Path.
-        assertTrue("", shapes.get(0) instanceof Path);
+        assertTrue(shapes.get(0) instanceof Path, "");
 
         Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
-        assertNotNull("", positions);
-        assertEquals("", 3, positions.size());
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 313.0), positions.get(0));
-        assertEquals("", Position.fromDegrees(46.46, -109.48, 313.0), positions.get(1));
-        assertEquals("", Position.fromDegrees(43.84, -109.86, 313.0), positions.get(2));
+        assertNotNull(positions, "");
+        assertEquals(3, positions.size(), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 313.0), positions.get(0), "");
+        assertEquals(Position.fromDegrees(46.46, -109.48, 313.0), positions.get(1), "");
+        assertEquals(Position.fromDegrees(43.84, -109.86, 313.0), positions.get(2), "");
     }
 
     @Test
@@ -115,20 +112,20 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:polygon> is translated to a WWJ SurfacePolygon when no elevation is specified.
-        assertTrue("", shapes.get(0) instanceof SurfacePolygon);
+        assertTrue(shapes.get(0) instanceof SurfacePolygon, "");
 
         SurfacePolygon shape = (SurfacePolygon) shapes.get(0);
         java.util.List positions = (java.util.List) shape.getLocations();
-        assertNotNull("", positions);
-        assertEquals("", 4, positions.size());
-        assertEquals("", LatLon.fromDegrees(45.256, -110.45), positions.get(0));
-        assertEquals("", LatLon.fromDegrees(46.46, -109.48), positions.get(1));
-        assertEquals("", LatLon.fromDegrees(43.84, -109.86), positions.get(2));
-        assertEquals("", LatLon.fromDegrees(45.256, -110.45), positions.get(3));
+        assertNotNull(positions, "");
+        assertEquals(4, positions.size(), "");
+        assertEquals(LatLon.fromDegrees(45.256, -110.45), positions.get(0), "");
+        assertEquals(LatLon.fromDegrees(46.46, -109.48), positions.get(1), "");
+        assertEquals(LatLon.fromDegrees(43.84, -109.86), positions.get(2), "");
+        assertEquals(LatLon.fromDegrees(45.256, -110.45), positions.get(3), "");
     }
 
     @Test
@@ -139,20 +136,20 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:polygon> is translated to a WWJ Path when an elevation is specified.
-        assertTrue("", shapes.get(0) instanceof Path);
+        assertTrue(shapes.get(0) instanceof Path, "");
 
         Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
-        assertNotNull("", positions);
-        assertEquals("", 4, positions.size());
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 313.0), positions.get(0));
-        assertEquals("", Position.fromDegrees(46.46, -109.48, 313.0), positions.get(1));
-        assertEquals("", Position.fromDegrees(43.84, -109.86, 313.0), positions.get(2));
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 313.0), positions.get(3));
+        assertNotNull(positions, "");
+        assertEquals(4, positions.size(), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 313.0), positions.get(0), "");
+        assertEquals(Position.fromDegrees(46.46, -109.48, 313.0), positions.get(1), "");
+        assertEquals(Position.fromDegrees(43.84, -109.86, 313.0), positions.get(2), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 313.0), positions.get(3), "");
     }
 
     @Test
@@ -162,20 +159,20 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:box> is translated to a WWJ SurfaceSector when no elevation is specified.
-        assertTrue("", shapes.get(0) instanceof SurfaceSector);
+        assertTrue(shapes.get(0) instanceof SurfaceSector, "");
 
         SurfaceSector shape = (SurfaceSector) shapes.get(0);
         java.util.List<LatLon> positions = shape.getSector().asList();
-        assertNotNull("", positions);
-        assertEquals("", 4, positions.size());
-        assertEquals("", LatLon.fromDegrees(42.943, -71.032), positions.get(0));
-        assertEquals("", LatLon.fromDegrees(42.943, -69.856), positions.get(1));
-        assertEquals("", LatLon.fromDegrees(43.039, -69.856), positions.get(2));
-        assertEquals("", LatLon.fromDegrees(43.039, -71.032), positions.get(3));
+        assertNotNull(positions, "");
+        assertEquals(4, positions.size(), "");
+        assertEquals(LatLon.fromDegrees(42.943, -71.032), positions.get(0), "");
+        assertEquals(LatLon.fromDegrees(42.943, -69.856), positions.get(1), "");
+        assertEquals(LatLon.fromDegrees(43.039, -69.856), positions.get(2), "");
+        assertEquals(LatLon.fromDegrees(43.039, -71.032), positions.get(3), "");
     }
 
     @Test
@@ -186,19 +183,19 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:box> is translated to a WWJ Quadrilateral when an elevation is specified.
-        assertTrue("", shapes.get(0) instanceof Quadrilateral);
+        assertTrue(shapes.get(0) instanceof Quadrilateral, "");
 
         Quadrilateral shape = (Quadrilateral) shapes.get(0);
         LatLon[] positions = shape.getCorners();
-        assertNotNull("", positions);
-        assertEquals("", 2, positions.length);
-        assertEquals("", LatLon.fromDegrees(42.943, -71.032), positions[0]);
-        assertEquals("", LatLon.fromDegrees(43.039, -69.856), positions[1]);
-        assertEquals("", 313.0, shape.getElevation(), 0.0);
+        assertNotNull(positions, "");
+        assertEquals(2, positions.length, "");
+        assertEquals(LatLon.fromDegrees(42.943, -71.032), positions[0], "");
+        assertEquals(LatLon.fromDegrees(43.039, -69.856), positions[1], "");
+        assertEquals(313.0, shape.getElevation(), 0.0, "");
     }
 
     //////////////////////////////////////////////////////////
@@ -215,7 +212,7 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // <gml:Point> is not translated to any renderable shape.
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -231,19 +228,19 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <gml:LineString> is translated to a WWJ Path.
-        assertTrue("", shapes.get(0) instanceof Path);
+        assertTrue(shapes.get(0) instanceof Path, "");
 
         Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
-        assertNotNull("", positions);
-        assertEquals("", 3, positions.size());
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0));
-        assertEquals("", Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1));
-        assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
+        assertNotNull(positions, "");
+        assertEquals(3, positions.size(), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0), "");
+        assertEquals(Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1), "");
+        assertEquals(Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2), "");
     }
 
     @Test
@@ -263,20 +260,20 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <gml:Polygon> is translated to a WWJ SurfacePolygon.
-        assertTrue("", shapes.get(0) instanceof SurfacePolygon);
+        assertTrue(shapes.get(0) instanceof SurfacePolygon, "");
 
         SurfacePolygon shape = (SurfacePolygon) shapes.get(0);
         java.util.List positions = (java.util.List) shape.getLocations();
-        assertNotNull("", positions);
-        assertEquals("", 4, positions.size());
-        assertEquals("", LatLon.fromDegrees(45.256, -110.45), positions.get(0));
-        assertEquals("", LatLon.fromDegrees(46.46, -109.48), positions.get(1));
-        assertEquals("", LatLon.fromDegrees(43.84, -109.86), positions.get(2));
-        assertEquals("", LatLon.fromDegrees(45.256, -110.45), positions.get(3));
+        assertNotNull(positions, "");
+        assertEquals(4, positions.size(), "");
+        assertEquals(LatLon.fromDegrees(45.256, -110.45), positions.get(0), "");
+        assertEquals(LatLon.fromDegrees(46.46, -109.48), positions.get(1), "");
+        assertEquals(LatLon.fromDegrees(43.84, -109.86), positions.get(2), "");
+        assertEquals(LatLon.fromDegrees(45.256, -110.45), positions.get(3), "");
     }
 
     @Test
@@ -291,20 +288,20 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:box> is translated to a WWJ SurfaceSector when no elevation is specified.
-        assertTrue("", shapes.get(0) instanceof SurfaceSector);
+        assertTrue(shapes.get(0) instanceof SurfaceSector, "");
 
         SurfaceSector shape = (SurfaceSector) shapes.get(0);
         java.util.List<LatLon> positions = shape.getSector().asList();
-        assertNotNull("", positions);
-        assertEquals("", 4, positions.size());
-        assertEquals("", LatLon.fromDegrees(42.943, -71.032), positions.get(0));
-        assertEquals("", LatLon.fromDegrees(42.943, -69.856), positions.get(1));
-        assertEquals("", LatLon.fromDegrees(43.039, -69.856), positions.get(2));
-        assertEquals("", LatLon.fromDegrees(43.039, -71.032), positions.get(3));
+        assertNotNull(positions, "");
+        assertEquals(4, positions.size(), "");
+        assertEquals(LatLon.fromDegrees(42.943, -71.032), positions.get(0), "");
+        assertEquals(LatLon.fromDegrees(42.943, -69.856), positions.get(1), "");
+        assertEquals(LatLon.fromDegrees(43.039, -69.856), positions.get(2), "");
+        assertEquals(LatLon.fromDegrees(43.039, -71.032), positions.get(3), "");
     }
 
     //////////////////////////////////////////////////////////
@@ -316,7 +313,7 @@ public class GeoRSSParserTest {
                 "<georss:point></georss:point>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -325,7 +322,7 @@ public class GeoRSSParserTest {
                 "<georss:line>45.256 -110.45</georss:line>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -334,7 +331,7 @@ public class GeoRSSParserTest {
                 "<georss:polygon>45.256 -110.45 46.46 -109.48 43.84 -109.86</georss:polygon>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -343,7 +340,7 @@ public class GeoRSSParserTest {
                 "<georss:box>42.943 -71.032</georss:box>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -356,7 +353,7 @@ public class GeoRSSParserTest {
                 + "</georss:where>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -371,7 +368,7 @@ public class GeoRSSParserTest {
                 + "</georss:where>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -390,7 +387,7 @@ public class GeoRSSParserTest {
                 + "</georss:where>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -405,7 +402,7 @@ public class GeoRSSParserTest {
                 + "</georss:where>");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -413,7 +410,7 @@ public class GeoRSSParserTest {
         String xmlString = createExampleGeoRSS("");
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
-        assertNull("", shapes);
+        assertNull(shapes, "");
     }
 
     @Test
@@ -430,33 +427,33 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() >= 2);
-        assertNotNull("", shapes.get(0));
-        assertNotNull("", shapes.get(1));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() >= 2, "");
+        assertNotNull(shapes.get(0), "");
+        assertNotNull(shapes.get(1), "");
         // <georss:line> is translated to a WWJ Path.
-        assertTrue("", shapes.get(0) instanceof Path);
+        assertTrue(shapes.get(0) instanceof Path, "");
         // <georss:polygon> is translated to a WWJ Path when an elevation is specified.
-        assertTrue("", shapes.get(1) instanceof Path);
+        assertTrue(shapes.get(1) instanceof Path, "");
 
         Path shape;
         java.util.List<Position> positions;
 
         shape = (Path) shapes.get(0);
         positions = (java.util.List<Position>) shape.getPositions();
-        assertNotNull("", positions);
-        assertEquals("", 3, positions.size());
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0));
-        assertEquals("", Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1));
-        assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
+        assertNotNull(positions, "");
+        assertEquals(3, positions.size(), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0), "");
+        assertEquals(Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1), "");
+        assertEquals(Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2), "");
 
         shape = (Path) shapes.get(1);
         positions = (java.util.List<Position>) shape.getPositions();
-        assertNotNull("", positions);
-        assertEquals("", 3, positions.size());
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0));
-        assertEquals("", Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1));
-        assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
+        assertNotNull(positions, "");
+        assertEquals(3, positions.size(), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0), "");
+        assertEquals(Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1), "");
+        assertEquals(Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2), "");
     }
 
     @Test
@@ -466,19 +463,19 @@ public class GeoRSSParserTest {
         java.util.List<Renderable> shapes = GeoRSSParser.parseShapes(xmlString);
 
         // Parsed shapes list should have at least one non-null element.
-        assertNotNull("", shapes);
-        assertTrue("", shapes.size() != 0);
-        assertNotNull("", shapes.get(0));
+        assertNotNull(shapes, "");
+        assertTrue(shapes.size() != 0, "");
+        assertNotNull(shapes.get(0), "");
         // <georss:line> is translated to a WWJ Path.
-        assertTrue("", shapes.get(0) instanceof Path);
+        assertTrue(shapes.get(0) instanceof Path, "");
 
         Path shape = (Path) shapes.get(0);
         java.util.List<Position> positions = (java.util.List<Position>) shape.getPositions();
-        assertNotNull("", positions);
-        assertEquals("", 3, positions.size());
-        assertEquals("", Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0));
-        assertEquals("", Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1));
-        assertEquals("", Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2));
+        assertNotNull(positions, "");
+        assertEquals(3, positions.size(), "");
+        assertEquals(Position.fromDegrees(45.256, -110.45, 0.0), positions.get(0), "");
+        assertEquals(Position.fromDegrees(46.46, -109.48, 0.0), positions.get(1), "");
+        assertEquals(Position.fromDegrees(43.84, -109.86, 0.0), positions.get(2), "");
     }
 
     //////////////////////////////////////////////////////////

@@ -28,17 +28,14 @@
 package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.geom.Position;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("deprecation")
-@RunWith(JUnit4.class)
 public class PolylineTest
 {
     //////////////////////////////////////////////////////////
@@ -181,34 +178,34 @@ public class PolylineTest
 
     private static void assertPolylineEquals(Polyline expected, Polyline actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Actual is null", actual);
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Actual is null");
 
-        assertEquals("color", expected.getColor(), actual.getColor());
-        assertEquals("highlightColor", expected.getColor(), actual.getColor());
-        assertEquals("antiAliasHint", expected.getAntiAliasHint(), actual.getAntiAliasHint());
-        assertEquals("filled", expected.isFilled(), actual.isFilled());
-        assertEquals("closed", expected.isClosed(), actual.isClosed());
-        assertEquals("highlighted", expected.isFilled(), actual.isFilled());
-        assertEquals("pathType", expected.getPathType(), actual.getPathType());
-        assertEquals("followTerrain", expected.isFollowTerrain(), actual.isFollowTerrain());
-        assertEquals("offset", expected.getOffset(), actual.getOffset(), 0.0);
-        assertEquals("terrainConformance", expected.getTerrainConformance(), actual.getTerrainConformance(), 0.0);
-        assertEquals("lineWidth", expected.getLineWidth(), actual.getLineWidth(), 0.0);
-        assertEquals("stipplePattern", expected.getStipplePattern(), actual.getStipplePattern());
-        assertEquals("stippleFactor", expected.getStippleFactor(), actual.getStippleFactor());
-        assertEquals("numSubsegments", expected.getNumSubsegments(), actual.getNumSubsegments());
+        assertEquals(expected.getColor(), actual.getColor(), "color");
+        assertEquals(expected.getColor(), actual.getColor(), "highlightColor");
+        assertEquals(expected.getAntiAliasHint(), actual.getAntiAliasHint(), "antiAliasHint");
+        assertEquals(expected.isFilled(), actual.isFilled(), "filled");
+        assertEquals(expected.isClosed(), actual.isClosed(), "closed");
+        assertEquals(expected.isFilled(), actual.isFilled(), "highlighted");
+        assertEquals(expected.getPathType(), actual.getPathType(), "pathType");
+        assertEquals(expected.isFollowTerrain(), actual.isFollowTerrain(), "followTerrain");
+        assertEquals(expected.getOffset(), actual.getOffset(), 0.0, "offset");
+        assertEquals(expected.getTerrainConformance(), actual.getTerrainConformance(), 0.0, "terrainConformance");
+        assertEquals(expected.getLineWidth(), actual.getLineWidth(), 0.0, "lineWidth");
+        assertEquals(expected.getStipplePattern(), actual.getStipplePattern(), "stipplePattern");
+        assertEquals(expected.getStippleFactor(), actual.getStippleFactor(), "stippleFactor");
+        assertEquals(expected.getNumSubsegments(), actual.getNumSubsegments(), "numSubsegments");
         // Position does not override equals(), so we must compare the contents of "positions" ourselves.
         Iterator<Position> expectedPositions = expected.getPositions().iterator();
         Iterator<Position> actualPositions = actual.getPositions().iterator();
         while (expectedPositions.hasNext() && actualPositions.hasNext())
         {
             Position expectedPos = expectedPositions.next(), actualPos = actualPositions.next();
-            assertEquals("positions.i.latitude", expectedPos.getLatitude(), actualPos.getLatitude());
-            assertEquals("positions.i.longitude", expectedPos.getLongitude(), actualPos.getLongitude());
-            assertEquals("positions.i.elevation", expectedPos.getElevation(), actualPos.getElevation(), 0.0);
+            assertEquals(expectedPos.getLatitude(), actualPos.getLatitude(), "positions.i.latitude");
+            assertEquals(expectedPos.getLongitude(), actualPos.getLongitude(), "positions.i.longitude");
+            assertEquals(expectedPos.getElevation(), actualPos.getElevation(), 0.0, "positions.i.elevation");
         }
         // If either iterator has more elements, then their lengths are different.
-        assertFalse("positions.length", expectedPositions.hasNext() || actualPositions.hasNext());
+        assertFalse(expectedPositions.hasNext() || actualPositions.hasNext(), "positions.length");
     }
 }

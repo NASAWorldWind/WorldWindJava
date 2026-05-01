@@ -2,6 +2,12 @@
 <project xmlns="http://www.netbeans.org/ns/project/1">
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
+        <buildExtensions xmlns="http://www.netbeans.org/ns/ant-build-extender/1">
+            <extension file="jnlp-impl.xml" id="jws">
+                <dependency dependsOn="jnlp" target="-post-jar"/>
+                <dependency dependsOn="jnlp" target="jar"/>
+            </extension>
+        </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>WorldWindJava</name>
             <source-roots>

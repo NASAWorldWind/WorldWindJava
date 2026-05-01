@@ -39,7 +39,14 @@ else
 fi
 
 #
-# Run a WorldWind Demo
+# Run a WorldWind Demo via Maven.
 #
-echo Running ${WWDEMO}
-java -Xmx1024m -classpath ./worldwind.jar:./worldwindx.jar:./gdal.jar:./jogl-all.jar:./gluegen-rt.jar ${WWDEMO}
+# Maven resolves the full classpath (JOGL 2.6.0, GlueGen 2.6.0, GDAL, etc.)
+# from the project dependencies declared in pom.xml, so no manual classpath
+# management is required here.
+#
+# The --add-opens flags are declared in the exec-maven-plugin configuration
+# in pom.xml and are forwarded automatically to the forked JVM.
+#
+echo "Running ${WWDEMO}"
+mvn --quiet exec:exec -Dexec.mainClass="${WWDEMO}"

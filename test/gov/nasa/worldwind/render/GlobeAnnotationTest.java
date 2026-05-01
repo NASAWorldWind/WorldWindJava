@@ -29,13 +29,9 @@ package gov.nasa.worldwind.render;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-@RunWith(JUnit4.class)
+import static org.junit.jupiter.api.Assertions.*;
 public class GlobeAnnotationTest
 {
     //////////////////////////////////////////////////////////
@@ -144,7 +140,7 @@ public class GlobeAnnotationTest
         assignNullValues(annotation1);
         annotation1.restoreState(stateInXml);
 
-        assertSame("Attributes are shared", annotation1.getAttributes(), annotation2.getAttributes());
+        assertSame(annotation1.getAttributes(), annotation2.getAttributes(), "Attributes are shared");
         AnnotationAttributes expected = new AnnotationAttributes();
         assignExampleValues(expected);
         assertAnnotationAttributesEquals(expected, annotation2.getAttributes());
@@ -252,66 +248,64 @@ public class GlobeAnnotationTest
 
     private static void assertAnnotationEquals(Annotation expected, Annotation actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Acutal is null", actual);
-        assertEquals("text", expected.getText(), actual.getText());
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Acutal is null");
+        assertEquals(expected.getText(), actual.getText(), "text");
         assertAnnotationAttributesEquals(expected.getAttributes(), actual.getAttributes());
     }
 
     private static void assertGlobeAnnotationEquals(GlobeAnnotation expected, GlobeAnnotation actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Acutal is null", actual);
-        assertEquals("text", expected.getText(), actual.getText());
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Acutal is null");
+        assertEquals(expected.getText(), actual.getText(), "text");
         if (expected.getPosition() != null && actual.getPosition() != null)
         {
-            assertEquals("position.latitude", expected.getPosition().getLatitude(), actual.getPosition().getLatitude());
-            assertEquals("position.longitude", expected.getPosition().getLongitude(),
-                actual.getPosition().getLongitude());
-            assertEquals("position.elevation", expected.getPosition().getElevation(),
-                actual.getPosition().getElevation(), 0.0);
+            assertEquals(expected.getPosition().getLatitude(), actual.getPosition().getLatitude(), "position.latitude");
+            assertEquals(expected.getPosition().getLongitude(), actual.getPosition().getLongitude(), "position.longitude");
+            assertEquals(expected.getPosition().getElevation(), actual.getPosition().getElevation(), 0.0, "position.elevation");
         }
         else
         {
-            assertNull("Expected position is not null", expected.getPosition());
-            assertNull("Actual position is not null", actual.getPosition());
+            assertNull(expected.getPosition(), "Expected position is not null");
+            assertNull(actual.getPosition(), "Actual position is not null");
         }
         assertAnnotationAttributesEquals(expected.getAttributes(), actual.getAttributes());
     }
 
     private static void assertAnnotationAttributesEquals(AnnotationAttributes expected, AnnotationAttributes actual)
     {
-        assertNotNull("Expected is null", expected);
-        assertNotNull("Acutal is null", actual);
-        assertEquals("frameShape", expected.getFrameShape(), actual.getFrameShape());
-        assertEquals("highlighted", expected.isHighlighted(), actual.isHighlighted());
-        assertEquals("highlightScale", expected.getHighlightScale(), actual.getHighlightScale(), 0.0);
-        assertEquals("size", expected.getSize(), actual.getSize());
-        assertEquals("scale", expected.getScale(), actual.getScale(), 0.0);
-        assertEquals("opacity", expected.getOpacity(), actual.getOpacity(), 0.0);
-        assertEquals("leader", expected.getLeader(), actual.getLeader());
-        assertEquals("cornerRadius", expected.getCornerRadius(), actual.getCornerRadius());
-        assertEquals("adjustWidthToText", expected.getAdjustWidthToText(), actual.getAdjustWidthToText());
-        assertEquals("drawOffset", expected.getDrawOffset(), actual.getDrawOffset());
-        assertEquals("insets", expected.getInsets(), actual.getInsets());
-        assertEquals("borderWidth", expected.getBorderWidth(), actual.getBorderWidth(), 0.0);
-        assertEquals("borderStippleFactor", expected.getBorderStippleFactor(), actual.getBorderStippleFactor());
-        assertEquals("borderStipplePattern", expected.getBorderStipplePattern(), actual.getBorderStipplePattern());
-        assertEquals("antiAliasHint", expected.getAntiAliasHint(), actual.getAntiAliasHint());
-        assertEquals("visible", expected.isVisible(), actual.isVisible());
-        assertEquals("font", expected.getFont(), actual.getFont());
-        assertEquals("textAlign", expected.getTextAlign(), actual.getTextAlign());
-        assertEquals("textColor", expected.getTextColor(), actual.getTextColor());
-        assertEquals("backgroundColor", expected.getBackgroundColor(), actual.getBackgroundColor());
-        assertEquals("borderColor", expected.getBorderColor(), actual.getBorderColor());
-        assertEquals("imageSource", expected.getImageSource(), actual.getImageSource());
-        assertEquals("imageScale", expected.getImageScale(), actual.getImageScale(), 0.0);
-        assertEquals("imageOffset", expected.getImageOffset(), actual.getImageOffset());
-        assertEquals("imageOpacity", expected.getImageOpacity(), actual.getImageOpacity(), 0.0);
-        assertEquals("imageRepeat", expected.getImageRepeat(), actual.getImageRepeat());
-        assertEquals("distanceMinScale", expected.getDistanceMinScale(), actual.getDistanceMinScale(), 0.0);
-        assertEquals("distanceMaxScale", expected.getDistanceMaxScale(), actual.getDistanceMaxScale(), 0.0);
-        assertEquals("distanceMinOpacity", expected.getDistanceMinOpacity(), actual.getDistanceMinOpacity(), 0.0);
-        assertEquals("effect", expected.getEffect(), actual.getEffect());
+        assertNotNull(expected, "Expected is null");
+        assertNotNull(actual, "Acutal is null");
+        assertEquals(expected.getFrameShape(), actual.getFrameShape(), "frameShape");
+        assertEquals(expected.isHighlighted(), actual.isHighlighted(), "highlighted");
+        assertEquals(expected.getHighlightScale(), actual.getHighlightScale(), 0.0, "highlightScale");
+        assertEquals(expected.getSize(), actual.getSize(), "size");
+        assertEquals(expected.getScale(), actual.getScale(), 0.0, "scale");
+        assertEquals(expected.getOpacity(), actual.getOpacity(), 0.0, "opacity");
+        assertEquals(expected.getLeader(), actual.getLeader(), "leader");
+        assertEquals(expected.getCornerRadius(), actual.getCornerRadius(), "cornerRadius");
+        assertEquals(expected.getAdjustWidthToText(), actual.getAdjustWidthToText(), "adjustWidthToText");
+        assertEquals(expected.getDrawOffset(), actual.getDrawOffset(), "drawOffset");
+        assertEquals(expected.getInsets(), actual.getInsets(), "insets");
+        assertEquals(expected.getBorderWidth(), actual.getBorderWidth(), 0.0, "borderWidth");
+        assertEquals(expected.getBorderStippleFactor(), actual.getBorderStippleFactor(), "borderStippleFactor");
+        assertEquals(expected.getBorderStipplePattern(), actual.getBorderStipplePattern(), "borderStipplePattern");
+        assertEquals(expected.getAntiAliasHint(), actual.getAntiAliasHint(), "antiAliasHint");
+        assertEquals(expected.isVisible(), actual.isVisible(), "visible");
+        assertEquals(expected.getFont(), actual.getFont(), "font");
+        assertEquals(expected.getTextAlign(), actual.getTextAlign(), "textAlign");
+        assertEquals(expected.getTextColor(), actual.getTextColor(), "textColor");
+        assertEquals(expected.getBackgroundColor(), actual.getBackgroundColor(), "backgroundColor");
+        assertEquals(expected.getBorderColor(), actual.getBorderColor(), "borderColor");
+        assertEquals(expected.getImageSource(), actual.getImageSource(), "imageSource");
+        assertEquals(expected.getImageScale(), actual.getImageScale(), 0.0, "imageScale");
+        assertEquals(expected.getImageOffset(), actual.getImageOffset(), "imageOffset");
+        assertEquals(expected.getImageOpacity(), actual.getImageOpacity(), 0.0, "imageOpacity");
+        assertEquals(expected.getImageRepeat(), actual.getImageRepeat(), "imageRepeat");
+        assertEquals(expected.getDistanceMinScale(), actual.getDistanceMinScale(), 0.0, "distanceMinScale");
+        assertEquals(expected.getDistanceMaxScale(), actual.getDistanceMaxScale(), 0.0, "distanceMaxScale");
+        assertEquals(expected.getDistanceMinOpacity(), actual.getDistanceMinOpacity(), 0.0, "distanceMinOpacity");
+        assertEquals(expected.getEffect(), actual.getEffect(), "effect");
     }
 }

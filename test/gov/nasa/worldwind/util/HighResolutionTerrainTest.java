@@ -31,17 +31,15 @@ package gov.nasa.worldwind.util;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.terrain.*;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.concurrent.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@Ignore
-@RunWith(JUnit4.class)
+@Disabled
 public class HighResolutionTerrainTest
 {
     private int GRID_SIZE = 50;
@@ -92,7 +90,7 @@ public class HighResolutionTerrainTest
                 if (currentIntersections.size() != previousIntersections.size())
                 {
                     String msg = "Different intersection counts: current %d, previous %d\n";
-                    assertTrue(msg, currentIntersections.size() == previousIntersections.size());
+                    assertTrue(currentIntersections.size() == previousIntersections.size(), msg);
                 }
 
                 int item = -1;
@@ -119,7 +117,7 @@ public class HighResolutionTerrainTest
                         {
                             String msg = "Different intersection points: " + j + ", "
                                 + currentIntersection[j] + ", " + previousIntersection[j] + ", " + position;
-                            assertTrue(msg, currentIntersection[j].equals(previousIntersection[j]));
+                            assertTrue(currentIntersection[j].equals(previousIntersection[j]), msg);
                         }
                     }
                 }
@@ -191,7 +189,7 @@ public class HighResolutionTerrainTest
                 if (currentIntersections.size() != previousIntersections.size())
                 {
                     String msg = "Different intersection counts: current %d, previous %d\n";
-                    assertTrue(msg, currentIntersections.size() == previousIntersections.size());
+                    assertTrue(currentIntersections.size() == previousIntersections.size(), msg);
                 }
 
                 int item = -1;
@@ -218,7 +216,7 @@ public class HighResolutionTerrainTest
                         {
                             String msg = "Different intersection points: " + j + ", "
                                 + currentIntersection[j] + ", " + previousIntersection[j] + ", " + position;
-                            assertTrue(msg, currentIntersection[j].equals(previousIntersection[j]));
+                            assertTrue(currentIntersection[j].equals(previousIntersection[j]), msg);
                         }
                     }
                 }
