@@ -989,7 +989,7 @@ public abstract class AbstractAirspace extends WWObjectImpl
     @Override
     public void setDragEnabled(boolean enabled)
     {
-        this.dragEnabled = true;
+        this.dragEnabled = enabled;
     }
 
     @Override
