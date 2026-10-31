@@ -29,6 +29,7 @@
 package gov.nasa.worldwind.cache;
 
 import com.jogamp.opengl.util.texture.Texture;
+import gov.nasa.worldwind.render.GLSLProgram;
 import gov.nasa.worldwind.util.Logging;
 
 import com.jogamp.opengl.*;
@@ -107,23 +108,31 @@ public class BasicGpuResourceCache implements GpuResourceCache
             return;
 
         CacheEntry entry = (CacheEntry) clientObject;
-        GL2 gl = context.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
-
         if (entry.resourceType == TEXTURE)
         {
             // Unbind a tile's texture when the tile leaves the cache.
-            ((Texture) entry.resource).destroy(gl);
+            ((Texture) entry.resource).destroy(context.getGL());
         }
         else if (entry.resourceType == VBO_BUFFERS)
         {
             int[] ids = (int[]) entry.resource;
-            gl.glDeleteBuffers(ids.length, ids, 0);
+            context.getGL().glDeleteBuffers(ids.length, ids, 0);
         }
         else if (entry.resourceType == DISPLAY_LISTS)
         {
             // Delete display list ids. They're in a two-element int array, with the id at 0 and the count at 1
             int[] ids = (int[]) entry.resource;
-            gl.glDeleteLists(ids[0], ids[1]);
+            context.getGL().getGL2().glDeleteLists(ids[0], ids[1]);
+        }
+        else if (entry.resourceType == GLSL_PROGRAM)
+        {
+            ((GLSLProgram) entry.resource).dispose(context.getGL().getGL2ES2());
+        }
+        else if (entry.resourceType == VERTEX_ARRAYS)
+        {
+            int[] ids = (int[]) entry.resource;
+            context.getGL().getGL2ES3().glDeleteVertexArrays(1, ids, 0);
+            context.getGL().glDeleteBuffers(1, ids, 1);
         }
     }
 

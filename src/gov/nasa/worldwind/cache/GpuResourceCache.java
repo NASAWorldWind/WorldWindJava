@@ -32,8 +32,8 @@ import com.jogamp.opengl.util.texture.Texture;
 
 /**
  * Implements a cache of OpenGL resources that are stored on the GPU or registered with it. This includes texture,
- * vertex buffer and display list resource IDs returned by the corresponding OpenGL functions. The cache holds the most
- * recently used resources that fit within its capacity.
+ * vertex buffer, display list, and GLSL program resources returned by the corresponding OpenGL functions. The cache
+ * holds the most recently used resources that fit within its capacity.
  *
  * @author tag
  * @version $Id: GpuResourceCache.java 1171 2013-02-11 21:45:02Z dcollins $
@@ -53,6 +53,10 @@ public interface GpuResourceCache
      * resource IDs.
      */
     public static final String DISPLAY_LISTS = "gov.nasa.worldwind.cache.GpuResourceCache.DisplayList";
+    /** Identifies a linked GLSL program. Corresponding object must be a {@link gov.nasa.worldwind.render.GLSLProgram}. */
+    public static final String GLSL_PROGRAM = "gov.nasa.worldwind.cache.GpuResourceCache.GLSLProgram";
+    /** Identifies a vertex array object. Corresponding object must be an int array of vertex array and buffer IDs. */
+    public static final String VERTEX_ARRAYS = "gov.nasa.worldwind.cache.GpuResourceCache.VertexArrays";
 
     /**
      * Adds a new resource to this cache.

@@ -53,6 +53,7 @@ public class CrosshairLayer extends AbstractLayer
     private int iconWidth;
     private int iconHeight;
     private Vec4 locationCenter = null;
+    private final GLSLTextureQuadRenderer shaderQuadRenderer = new GLSLTextureQuadRenderer();
 
     // Draw it as ordered with an eye distance of 0 so that it shows up in front of most other things.
     private OrderedIcon orderedImage = new OrderedIcon();
@@ -219,8 +220,32 @@ public class CrosshairLayer extends AbstractLayer
         if (this.getIconFilePath() == null)
             return;
 
-        GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
+        if (dc.getGL().isGL2ES3())
+        {
+            Texture iconTexture = dc.getTextureCache().getTexture(this.getIconFilePath());
+            if (iconTexture == null)
+            {
+                this.initializeTexture(dc);
+                iconTexture = dc.getTextureCache().getTexture(this.getIconFilePath());
+                if (iconTexture == null)
+                {
+                    String msg = Logging.getMessage("generic.ImageReadFailed");
+                    Logging.logger().finer(msg);
+                    return;
+                }
+            }
 
+            this.iconWidth = iconTexture.getWidth();
+            this.iconHeight = iconTexture.getHeight();
+            Rectangle viewport = dc.getView().getViewport();
+            double scale = this.computeScale(viewport);
+            Vec4 locationSW = this.computeLocation(viewport, scale);
+            this.shaderQuadRenderer.render(dc, iconTexture, locationSW.x, locationSW.y,
+                this.getScaledIconWidth() * scale, this.getScaledIconHeight() * scale, (float) this.getOpacity());
+            return;
+        }
+
+        GL2 gl = dc.getGL().getGL2(); // GL initialization checks for GL2 compatibility.
         boolean attribsPushed = false;
         boolean modelviewPushed = false;
         boolean projectionPushed = false;
